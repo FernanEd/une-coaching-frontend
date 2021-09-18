@@ -1,7 +1,6 @@
 <script lang="ts">
 	import Sexer from '$lib/components/sexer.svelte';
 	import { diplomados } from '$lib/stores/diplomados';
-	import { genID } from '$lib/utils/genID';
 	import { onMount } from 'svelte';
 	import { writable } from 'svelte/store';
 
@@ -11,55 +10,6 @@
 	}
 
 	let text;
-
-	const serverURL = 'http://localhost:8000';
-
-	onMount(async () => {
-		if ($diplomados.length == 0) {
-			try {
-				let res = await fetch(`${serverURL}/diplomados`);
-				let data = await res.json();
-				diplomados.set(data);
-			} catch (e) {}
-		}
-	});
-
-	const handleSubmit = async () => {
-		let newItem = {
-			id: genID(),
-			nombre: text
-		};
-		let oldDiplomados = $diplomados;
-		diplomados.update((prev) => [...prev, newItem]);
-
-		try {
-			let res = await fetch(`${serverURL}/diplomados`, {
-				method: 'POST',
-				body: JSON.stringify({ nombre: text }),
-				headers: {
-					'Content-type': 'application/json'
-				}
-			});
-			let data = await res.json();
-			diplomados.update((prev) => prev.map((elem) => (elem.id === newItem.id ? data : elem)));
-		} catch (e) {
-			diplomados.set(oldDiplomados);
-		}
-	};
-
-	const removeItem = async (id: Number) => {
-		let oldDiplomados = $diplomados;
-		diplomados.update((prev) => prev.filter((d) => d.id != id));
-		try {
-			let res = await fetch(`${serverURL}/diplomados/${id}`, {
-				method: 'DELETE'
-			});
-			let data = await res.json();
-		} catch (e) {
-			diplomados.set(oldDiplomados);
-		}
-	};
-
 	let display = false;
 
 	const toogleThisMF = () => {
@@ -68,25 +18,22 @@
 
 	let updating;
 
-	const updateItem = async (id: number, newElement: any) => {
-		let oldDiplomados = $diplomados;
-		diplomados.update((prev) =>
-			prev.map((elem) => (elem.id != id ? elem : { ...elem, ...newElement }))
-		);
-
-		try {
-			let res = await fetch(`${serverURL}/diplomados/${id}`, {
-				method: 'PUT',
-				body: JSON.stringify({ nombre: updating }),
-				headers: {
-					'Content-type': 'application/json'
-				}
-			});
-			let data = await res.json();
-		} catch (e) {
-			console.log(e, JSON.stringify(newElement));
-			diplomados.set(oldDiplomados);
+	onMount(() => {
+		if ($diplomados.length == 0) {
+			diplomados.getItems();
 		}
+	});
+
+	const handleSubmit = () => {
+		diplomados.addItem({ nombre: text });
+	};
+
+	const updateItem = (id: number, newElement: any) => {
+		diplomados.updateItem(id, { id, nombre: updating });
+	};
+
+	const removeItem = (id: number) => {
+		diplomados.removeItem(id);
 	};
 </script>
 

@@ -1,89 +1,82 @@
+import { tick } from 'svelte';
 import type { Writable } from 'svelte/store';
-import { genID } from './genID';
+import { fakeID } from './fakeID';
 import { serverURL } from './serverURL';
 
-// export const getElements = async <T extends { id: number }>(route: string, elementStore: Writable<T[]>) => {
-// 	let elementList = elementStore.;
-// 	try {
-// 		let res = await fetch(`${serverURL}/${route}`);
-// 		let data = await res.json();
-// 		elementList = data;
-// 	} catch (e) {
-// 		throw Error(e);
-// 	}finally{
-// 		elementStore.set(elementList);
-// 	}
-// };
+export const generateCRUD = <T extends { id: number }>(store: Writable<T[]>, route: string) => ({
+	async getItems() {
+		try {
+			let res = await fetch(`${serverURL}/diplomados`);
+			let data = await res.json();
+			store.set(data);
+		} catch (e) {
+			throw Error(e);
+		}
+	},
+	async addItem(newItem: Omit<T, 'id'>) {
+		//@ts-ignore
+		let mockItem: T = {
+			...newItem,
+			id: fakeID()
+		};
 
-// export const addElement = async <T>(
-// 	element: T,
-// 	elementList: ({ id: number } & T)[],
-// 	route: string
-// ) => {
-// 	let newElement = {
-// 		id: genID(),
-// 		...element
-// 	};
+		let oldStore;
+		store.update((prev) => {
+			oldStore = prev;
+			return [...prev, mockItem];
+		});
 
-// 	elementList = [...elementList, newElement];
+		try {
+			let res = await fetch(`${serverURL}/${route}`, {
+				method: 'POST',
+				body: JSON.stringify(newItem),
+				headers: {
+					'Content-type': 'application/json'
+				}
+			});
+			let data = await res.json();
+			store.update((prev) => prev.map((item) => (item.id === mockItem.id ? data : item)));
+		} catch (e) {
+			store.set(oldStore);
+			throw Error(e);
+		}
+	},
+	async updateItem(id: number, newItem: T) {
+		let oldStore;
+		store.update((prev) => {
+			oldStore = prev;
+			return prev.map((item) => (item.id != id ? item : newItem));
+		});
 
-// 	try {
-// 		let res = await fetch(`${serverURL}/${route}`, {
-// 			method: 'POST',
-// 			body: JSON.stringify(element),
-// 			headers: {
-// 				'Content-type': 'application/json'
-// 			}
-// 		});
-// 		let data = await res.json();
-// 		elementList = elementList.map((elem) => (elem.id === newElement.id ? data : elem));
-// 	} catch (e) {
-// 		elementList = elementList.filter((elem) => elem.id !== newElement.id);
-// 		throw Error(e);
-// 	}
-// };
+		try {
+			let res = await fetch(`${serverURL}/${route}/${id}`, {
+				method: 'PUT',
+				body: JSON.stringify(newItem),
+				headers: {
+					'Content-type': 'application/json'
+				}
+			});
+			await res.json();
+		} catch (e) {
+			store.set(oldStore);
+			throw Error(e);
+		}
+	},
+	async removeItem(id: number) {
+		let oldStore;
+		store.update((prev) => {
+			oldStore = prev;
+			return prev.filter((item) => item.id != id);
+		});
 
-// export const updateElement = async <T extends { id: number }>(
-// 	elementID: number,
-// 	element: T,
-// 	elementList: T[],
-// 	route: string
-// ) => {
-// 	//note im not copying this list
-// 	let oldElementList = elementList;
-// 	let newElement = { ...element };
-// 	elementList = elementList.map((elem) => (elem.id == newElement.id ? newElement : elem));
-// 	try {
-// 		//To prevent overriding id
-// 		delete newElement.id;
-// 		let res = await fetch(`${serverURL}/${route}/${elementID}`, {
-// 			method: 'PUT',
-// 			body: JSON.stringify(newElement),
-// 			headers: {
-// 				'Content-type': 'application/json'
-// 			}
-// 		});
-// 		await res.json();
-// 	} catch (e) {
-// 		elementList = oldElementList;
-// 		throw Error(e);
-// 	}
-// };
-
-// export const deleteElement = async <T extends { id: number }>(
-// 	elementID: number,
-// 	elementList: T[],
-// 	route: string
-// ) => {
-// 	let oldElementList = elementList;
-// 	elementList = elementList.filter((elem) => elem.id != elementID);
-// 	try {
-// 		let res = await fetch(`${serverURL}/${route}/${elementID}`, {
-// 			method: 'DELETE'
-// 		});
-// 		await res.json();
-// 	} catch (e) {
-// 		elementList = oldElementList;
-// 		throw Error(e);
-// 	}
-// };
+		try {
+			let res = await fetch(`${serverURL}/${route}/${id}`, {
+				method: 'DELETE'
+			});
+			await res.json();
+		} catch (e) {
+			store.set(oldStore);
+			throw Error(e);
+		}
+	}
+});

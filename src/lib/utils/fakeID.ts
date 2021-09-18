@@ -1,4 +1,4 @@
-export const genID = (() => {
+export const fakeID = (() => {
 	let currentID = 0.1;
 
 	return () => {
