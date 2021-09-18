@@ -1,5 +1,4 @@
 <script lang="ts">
-	import Sexer from '$lib/components/sexer.svelte';
 	import { diplomados } from '$lib/stores/diplomados';
 	import { genID } from '$lib/utils/genID';
 	import { onMount } from 'svelte';
@@ -47,7 +46,7 @@
 		}
 	};
 
-	const removeItem = async (id: Number) => {
+	const removeItem = async (id: number) => {
 		let oldDiplomados = $diplomados;
 		diplomados.update((prev) => prev.filter((d) => d.id != id));
 		try {
@@ -60,69 +59,33 @@
 		}
 	};
 
-	let display = false;
-
-	const toogleThisMF = () => {
-		display = !display;
-	};
-
 	let updating;
 
-	const updateItem = async (id: number, newElement: any) => {
-		let oldDiplomados = $diplomados;
-		diplomados.update((prev) =>
-			prev.map((elem) => (elem.id != id ? elem : { ...elem, ...newElement }))
-		);
-
-		try {
-			let res = await fetch(`${serverURL}/diplomados/${id}`, {
-				method: 'PUT',
-				body: JSON.stringify({ nombre: updating }),
-				headers: {
-					'Content-type': 'application/json'
-				}
-			});
-			let data = await res.json();
-		} catch (e) {
-			console.log(e, JSON.stringify(newElement));
-			diplomados.set(oldDiplomados);
-		}
-	};
+	const updateItem = async (id: number, element: any) => {};
 </script>
 
 <svelte:head>
 	<title>Home</title>
 </svelte:head>
 
-<div>
+<div class="bg-blue-100">
 	<form action="" on:submit|preventDefault={handleSubmit}>
 		<input type="text" bind:value={text} />
+		<input type="text" bind:value={updating} />
 		<button type="submit">Add diplomado</button>
 	</form>
-
-	<input type="text" bind:value={updating} />
 
 	{#each $diplomados as diplomado (diplomado.id)}
 		<div>
 			<p>
 				{diplomado.id} - {diplomado.nombre}
-				<button
-					class="p-2 text-white bg-blue-500 rounded"
-					on:click={() => updateItem(diplomado.id, { nombre: updating })}>Editar</button
-				>
+
 				<button class="p-2 text-white bg-red-500 rounded" on:click={() => removeItem(diplomado.id)}
 					>Remover</button
 				>
 			</p>
 		</div>
 	{/each}
-
-	<div class="absolute right-0 top-0">
-		<button on:click={toogleThisMF}>Hide</button>
-		{#if display}
-			<Sexer />
-		{/if}
-	</div>
 </div>
 
 <style>
