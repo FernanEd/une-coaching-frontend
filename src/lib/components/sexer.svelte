@@ -18,11 +18,16 @@
 	});
 
 	const handleSubmit = () => {
-		diplomados.addItem({ nombre: text });
+		if (text) {
+			diplomados.addItem({ nombre: text });
+		}
+
+		text = '';
 	};
 
 	const updateItem = (id: number, newElement: any) => {
-		diplomados.updateItem(id, { id, nombre: updating });
+		diplomados.updateItem(id, { nombre: updating });
+		updating = '';
 	};
 
 	const removeItem = (id: number) => {

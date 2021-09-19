@@ -41,11 +41,11 @@ export const generateCRUD = <T extends { id: number }>(store: Writable<T[]>, rou
 			throw Error(e);
 		}
 	},
-	async updateItem(id: number, newItem: T) {
+	async updateItem(id: number, newItem: Omit<T, 'id'>) {
 		let oldStore;
 		store.update((prev) => {
 			oldStore = prev;
-			return prev.map((item) => (item.id != id ? item : newItem));
+			return prev.map((item) => (item.id != id ? item : { ...item, ...newItem }));
 		});
 
 		try {
