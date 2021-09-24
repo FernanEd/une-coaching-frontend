@@ -11,22 +11,49 @@ gap-20"
 	>
 		<h1 class="text-white font-bold text-xl">Portal Coordinador</h1>
 		<p class="text-gray-300">Conectado como 170000</p>
-		<button class="bg-white text-text-1 rounded-full shadow-lg py-2 px-4">Cerrar sesión</button>
+		<button class="font-bold text-accent-inv">Cerrar sesión </button>
 	</section>
 
 	<nav class="flex flex-col gap-2 mb-auto">
 		<p class="leyenda text-gray-300 text-sm">PANELES</p>
 		<ul class="flex flex-col gap-4 font-bold">
-			<li><a class="text-white" href="gestion-usuarios">Gestionar usuarios</a></li>
-			<li><a class="text-white" href="gestion-jornadas">Gestionar jornadas</a></li>
-			<li><a class="text-white" href="coordinar-coaches">Coordinación de Coaches</a></li>
-			<li><a class="text-white" href="diplomados-competencias">Diplomados y competencias</a></li>
-			<li><a class="text-white" href="registros">Archivos y registros</a></li>
+			<li>
+				<a class="text-white" href="/coordinador/gestion-usuarios"
+					>Gestionar usuarios</a
+				>
+			</li>
+			<li>
+				<a class="text-white" href="/coordinador/gestion-jornadas"
+					>Gestionar jornadas</a
+				>
+			</li>
+			<li>
+				<a class="text-white" href="/coordinador/coordinar-coaches"
+					>Coordinación de Coaches</a
+				>
+			</li>
+			<li>
+				<a
+					class="text-white"
+					href="/coordinador/diplomados-competencias"
+					>Diplomados y competencias</a
+				>
+			</li>
+			<li>
+				<a class="text-white" href="/coordinador/registros"
+					>Registros de acreditaciones</a
+				>
+			</li>
 		</ul>
 	</nav>
 
 	<section class="flex flex-col gap-4 items-center">
-		<img class="object-contain" src="../../../static/une white logo.png" alt="Une logo" id="logo" />
+		<img
+			class="object-contain"
+			src="../../../static/une white logo.png"
+			alt="Une logo"
+			id="logo"
+		/>
 	</section>
 </aside>
 <main class="py-8 px-4">

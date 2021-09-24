@@ -17,8 +17,9 @@
 <header class="flex justify-between flex-wrap">
 	<h2 class="text-2xl font-bold">Jornadas</h2>
 	<span class="flex gap-8 items-center">
-		<button on:click={jornadaModal.openModal} class="font-bold text-accent"
-			>Seleccionar jornada</button
+		<button
+			on:click={jornadaModal.openModal}
+			class="font-bold text-accent">Seleccionar jornada</button
 		>
 		<button
 			class="px-4 py-2 bg-accent 
@@ -46,7 +47,11 @@
 				<td>Aplicación de tecnicas docente II</td>
 				<td>Fernando Edmundo Balderas Morán</td>
 				<td>
-					<p>Cupos restantes: <span class="font-bold">{(1 + Math.random() * 6) | 0}</span></p>
+					<p>
+						Cupos restantes: <span class="font-bold"
+							>{(1 + Math.random() * 6) | 0}</span
+						>
+					</p>
 					<p>Inscritos:</p>
 					{#each [...Array((Math.random() * 20) | 0).fill('174819')] as s}
 						<a href="#">{s}</a>,{' '}
@@ -54,8 +59,11 @@
 				</td>
 				<td>
 					<span class="flex gap-8 justify-center">
-						<button class="text-accent">Editar curso</button>
-						<button class="text-text-4">Eliminar curso</button>
+						<button class="font-bold text-accent">Editar curso</button
+						>
+						<button class="font-bold text-text-4"
+							>Eliminar curso</button
+						>
 					</span>
 				</td>
 			</tr>

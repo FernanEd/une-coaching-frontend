@@ -25,7 +25,7 @@ const config = {
 				},
 				accent: {
 					DEFAULT: '#4676D3',
-					inv: '#accent-inv'
+					inv: '#6995EB'
 				}
 			}
 		}

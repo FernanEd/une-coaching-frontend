@@ -19,8 +19,14 @@
 <hr class="my-4 border-none" />
 
 <label>
-	<p class="leyenda text-text-4 text-xs">Buscar usuario por matricula</p>
-	<input type="text" bind:value={filterText} on:input={handleFilterField} />
+	<p class="leyenda text-text-4 text-xs">
+		Buscar usuario por matricula
+	</p>
+	<input
+		type="text"
+		bind:value={filterText}
+		on:input={handleFilterField}
+	/>
 </label>
 
 <hr class="my-4 border-none" />
@@ -64,14 +70,18 @@
 	<tbody class="">
 		{#each [...Array(20).fill(0)] as i}
 			<tr>
-				<td>174819</td>
+				<td><a href="#">174819</a></td>
 				<td>Fernando Edmundo Balderas Morán</td>
 				<td>fernandoed.bm@gmail.com</td>
 				<td>Coachee, Coach</td>
 				<td>
 					<span class="flex gap-8 justify-center">
-						<button class="text-accent font-bold">Editar usuario</button>
-						<button class="text-text-4 font-bold">Eliminar usuario</button>
+						<button class="text-accent font-bold"
+							>Editar usuario</button
+						>
+						<button class="text-text-4 font-bold"
+							>Eliminar usuario</button
+						>
 					</span>
 				</td>
 			</tr>
