@@ -16,12 +16,12 @@ gap-20"
 
 	<nav class="flex flex-col gap-2 mb-auto">
 		<p class="leyenda text-gray-300 text-sm">PANELES</p>
-		<ul class="flex flex-col gap-4 text-white font-bold">
-			<li><a href="gestion-usuarios">Gestionar usuarios</a></li>
-			<li><a href="gestion-jornadas">Gestionar jornadas</a></li>
-			<li><a href="coordinar-coaches">Coordinación de Coaches</a></li>
-			<li><a href="diplomados-competencias">Diplomados y competencias</a></li>
-			<li><a href="registros">Archivos y registros</a></li>
+		<ul class="flex flex-col gap-4 font-bold">
+			<li><a class="text-white" href="gestion-usuarios">Gestionar usuarios</a></li>
+			<li><a class="text-white" href="gestion-jornadas">Gestionar jornadas</a></li>
+			<li><a class="text-white" href="coordinar-coaches">Coordinación de Coaches</a></li>
+			<li><a class="text-white" href="diplomados-competencias">Diplomados y competencias</a></li>
+			<li><a class="text-white" href="registros">Archivos y registros</a></li>
 		</ul>
 	</nav>
 

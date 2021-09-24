@@ -70,8 +70,8 @@
 				<td>Coachee, Coach</td>
 				<td>
 					<span class="flex gap-8 justify-center">
-						<button class="text-accent">Editar usuario</button>
-						<button class="text-text-4">Eliminar usuario</button>
+						<button class="text-accent font-bold">Editar usuario</button>
+						<button class="text-text-4 font-bold">Eliminar usuario</button>
 					</span>
 				</td>
 			</tr>
