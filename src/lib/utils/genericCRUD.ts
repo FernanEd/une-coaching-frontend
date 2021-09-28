@@ -3,10 +3,13 @@ import type { Writable } from 'svelte/store';
 import { fakeID } from './fakeID';
 import { serverURL } from './serverURL';
 
-export const generateCRUD = <T extends { id: number }>(store: Writable<T[]>, route: string) => ({
+export const generateCRUD = <T extends { id: number }>(
+	store: Writable<T[]>,
+	route: string
+) => ({
 	async getItems() {
 		try {
-			let res = await fetch(`${serverURL}/diplomados`);
+			let res = await fetch(`${serverURL}/api/${route}`);
 			let data = await res.json();
 			store.set(data);
 		} catch (e) {
@@ -27,7 +30,7 @@ export const generateCRUD = <T extends { id: number }>(store: Writable<T[]>, rou
 		});
 
 		try {
-			let res = await fetch(`${serverURL}/${route}`, {
+			let res = await fetch(`${serverURL}/api/${route}`, {
 				method: 'POST',
 				body: JSON.stringify(newItem),
 				headers: {
@@ -35,7 +38,9 @@ export const generateCRUD = <T extends { id: number }>(store: Writable<T[]>, rou
 				}
 			});
 			let data = await res.json();
-			store.update((prev) => prev.map((item) => (item.id === mockItem.id ? data : item)));
+			store.update((prev) =>
+				prev.map((item) => (item.id === mockItem.id ? data : item))
+			);
 		} catch (e) {
 			store.set(oldStore);
 			throw Error(e);
@@ -45,11 +50,13 @@ export const generateCRUD = <T extends { id: number }>(store: Writable<T[]>, rou
 		let oldStore;
 		store.update((prev) => {
 			oldStore = prev;
-			return prev.map((item) => (item.id != id ? item : { ...item, ...newItem }));
+			return prev.map((item) =>
+				item.id != id ? item : { ...item, ...newItem }
+			);
 		});
 
 		try {
-			let res = await fetch(`${serverURL}/${route}/${id}`, {
+			let res = await fetch(`${serverURL}/api/${route}/${id}`, {
 				method: 'PUT',
 				body: JSON.stringify(newItem),
 				headers: {
@@ -70,7 +77,7 @@ export const generateCRUD = <T extends { id: number }>(store: Writable<T[]>, rou
 		});
 
 		try {
-			let res = await fetch(`${serverURL}/${route}/${id}`, {
+			let res = await fetch(`${serverURL}/api/${route}/${id}`, {
 				method: 'DELETE'
 			});
 			await res.json();

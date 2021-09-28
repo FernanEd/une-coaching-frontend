@@ -41,8 +41,9 @@ a:hover {
 
 input[type='text'],
 input[type='number'],
+select,
 textarea {
-	@apply border border-text-4 rounded p-1;
+	@apply border-text-4 p-1 border rounded;
 }
 
 input[type='checkbox'] {
@@ -52,5 +53,30 @@ input[type='checkbox'] {
 
 th,
 td {
-	@apply border p-2;
+	@apply p-2 border;
+}
+
+.btn {
+}
+
+.btn {
+	@apply px-4 py-2 font-bold rounded-full shadow-xl;
+}
+.btn.primary {
+	@apply bg-accent text-text-inv;
+}
+
+.link {
+	@apply text-text-4 font-bold;
+}
+.link.primary {
+	@apply text-accent;
+}
+
+.heading {
+	@apply text-text-1 text-2xl font-bold;
+}
+.label {
+	letter-spacing: 1px;
+	@apply text-text-4 text-xs font-bold uppercase;
 }
