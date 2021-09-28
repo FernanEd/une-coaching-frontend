@@ -13,9 +13,14 @@
 			let diplomado = await diplomados.addItem({
 				nombre: nombreDiplomado
 			});
-			for (let cursoID of cursosSeleccionados) {
+			let cursosDeDiplomado = cursosSeleccionados;
+			for (let cursoID of cursosDeDiplomado) {
 				cursos.updateItem(cursoID, { id_diplomado: diplomado.id });
 			}
+
+			//Limpiar form;
+			cursosSeleccionados = [];
+			nombreDiplomado = '';
 		}
 	};
 

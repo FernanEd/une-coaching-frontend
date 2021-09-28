@@ -101,13 +101,21 @@
 					<td>{diplomado.nombre}</td>
 					<td>
 						{#await getCursos(diplomado.id) then cursos}
-							{cursos.map((c) => c.nombre).join(', ')}
+							{#if cursos.length > 0}
+								{cursos.map((c) => c.nombre).join(', ')}
+							{:else}
+								<p class="text text-text-4">Sin cursos</p>
+							{/if}
 						{/await}
 					</td>
 					<td>
 						<span class="flex gap-8 justify-center">
 							<button class="link primary">Editar diplomado</button>
-							<button class="link">Eliminar diplomado</button>
+							<button
+								class="link"
+								on:click={() => diplomados.removeItem(diplomado.id)}
+								>Eliminar diplomado</button
+							>
 						</span>
 					</td>
 				</tr>
