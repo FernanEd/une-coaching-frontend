@@ -17,14 +17,15 @@
 <style lang="postcss">
 	.modal-bg {
 		background: #00000088;
-		@apply fixed left-0 top-0 bottom-0 right-0 flex justify-center items-center;
+		z-index: 10;
+		@apply fixed top-0 bottom-0 left-0 right-0 flex items-center justify-center;
 	}
 
 	.modal {
 		margin-top: -8rem;
 		min-width: 24rem;
 		max-height: 70vh;
-		@apply bg-white p-4 rounded shadow-lg overflow-auto;
+		@apply p-4 overflow-auto bg-white rounded shadow-lg;
 	}
 
 	.modal-header {
