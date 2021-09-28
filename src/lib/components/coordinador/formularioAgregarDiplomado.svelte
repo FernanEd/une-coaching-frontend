@@ -8,10 +8,14 @@
 	let nombreDiplomado;
 	let cursosSeleccionados: number[] = [];
 
-	const handleSubmit = () => {
+	const handleSubmit = async () => {
 		if (nombreDiplomado) {
-			// diplomados.addItem({ nombre: nombreDiplomado });
-			console.log(cursosSeleccionados);
+			let diplomado = await diplomados.addItem({
+				nombre: nombreDiplomado
+			});
+			for (let cursoID of cursosSeleccionados) {
+				cursos.updateItem(cursoID, { id_diplomado: diplomado.id });
+			}
 		}
 	};
 

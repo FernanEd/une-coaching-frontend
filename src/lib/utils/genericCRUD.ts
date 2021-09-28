@@ -16,7 +16,7 @@ export const generateCRUD = <T extends { id: number }>(
 			throw Error(e);
 		}
 	},
-	async addItem(newItem: Omit<T, 'id'>) {
+	async addItem(newItem: Omit<T, 'id'>): Promise<T> {
 		//@ts-ignore
 		let mockItem: T = {
 			...newItem,
@@ -41,12 +41,16 @@ export const generateCRUD = <T extends { id: number }>(
 			store.update((prev) =>
 				prev.map((item) => (item.id === mockItem.id ? data : item))
 			);
+			return data;
 		} catch (e) {
 			store.set(oldStore);
 			throw Error(e);
 		}
 	},
-	async updateItem(id: number, newItem: Omit<T, 'id'>) {
+	async updateItem(
+		id: number,
+		newItem: Partial<Omit<T, 'id'>>
+	): Promise<T> {
 		let oldStore;
 		store.update((prev) => {
 			oldStore = prev;
@@ -63,13 +67,14 @@ export const generateCRUD = <T extends { id: number }>(
 					'Content-type': 'application/json'
 				}
 			});
-			await res.json();
+			let data = await res.json();
+			return data;
 		} catch (e) {
 			store.set(oldStore);
 			throw Error(e);
 		}
 	},
-	async removeItem(id: number) {
+	async removeItem(id: number): Promise<T> {
 		let oldStore;
 		store.update((prev) => {
 			oldStore = prev;
@@ -80,7 +85,8 @@ export const generateCRUD = <T extends { id: number }>(
 			let res = await fetch(`${serverURL}/api/${route}/${id}`, {
 				method: 'DELETE'
 			});
-			await res.json();
+			let data = await res.json();
+			return data;
 		} catch (e) {
 			store.set(oldStore);
 			throw Error(e);

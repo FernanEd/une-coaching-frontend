@@ -2,9 +2,11 @@
 	import FormularioAgregarDiplomado from '$lib/components/coordinador/formularioAgregarDiplomado.svelte';
 	import GestionCursos from '$lib/components/coordinador/gestionCursos.svelte';
 	import Modal from '$lib/components/modal.svelte';
+	import { cursos } from '$lib/stores/cursos';
 	import { diplomados } from '$lib/stores/diplomados';
 	import { useModal } from '$lib/stores/modal';
-	import { onMount } from 'svelte';
+	import { onMount, tick } from 'svelte';
+	import { derived } from 'svelte/store';
 
 	let agregarDiplomadoModal = useModal();
 	let editarDiplomadoModal = useModal();
@@ -22,6 +24,13 @@
 
 	const handleFilterField = () => {
 		console.log(filterText);
+	};
+
+	const getCursos = async (diplomadoID: number) => {
+		await tick();
+		return $cursos.filter(
+			({ id_diplomado }) => id_diplomado == diplomadoID
+		);
 	};
 </script>
 
@@ -91,9 +100,9 @@
 				<tr>
 					<td>{diplomado.nombre}</td>
 					<td>
-						{#each [...Array((1 + Math.random() * 5) | 0).fill('174819')] as s}
-							Introducción al Modelo Educativo y Constructivismo,{' '}
-						{/each}
+						{#await getCursos(diplomado.id) then cursos}
+							{cursos.map((c) => c.nombre).join(', ')}
+						{/await}
 					</td>
 					<td>
 						<span class="flex gap-8 justify-center">
@@ -118,12 +127,12 @@
 			</tr>
 		</thead>
 		<tbody class="">
-			{#each $diplomados as diplomado (diplomado.id)}
+			<!-- {#each $diplomados as diplomado (diplomado.id)}
 				<tr>
-					<td>{diplomado.nombre}</td>
+					<td>{diplomado.id} - sex {diplomado.nombre}</td>
 					<td>
-						{#each [...Array((1 + Math.random() * 5) | 0).fill('174819')] as s}
-							Introducción al Modelo Educativo y Constructivismo,{' '}
+						{#each $cursos.filter((curso) => curso.id_diplomado == diplomado.id) as curso (curso.id)}
+							{curso.nombre},{' '}
 						{/each}
 					</td>
 					<td>
@@ -137,7 +146,7 @@
 						</span>
 					</td>
 				</tr>
-			{/each}
+			{/each} -->
 		</tbody>
 	</table>
 {/if}
