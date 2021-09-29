@@ -4,10 +4,13 @@ import { writable } from 'svelte/store';
 
 let store = writable<Diplomado[]>([]);
 let crud = generateCRUD(store, 'diplomados');
-store.subscribe((initialValue) => {
-	if (initialValue.length == 0) {
-		crud.getItems();
-	}
-});
 
 export const diplomados = { ...store, ...crud };
+
+(async () => {
+	let $val: any[];
+	diplomados.subscribe(($) => ($val = $))();
+	if ($val.length == 0) {
+		await diplomados.getItems();
+	}
+})();

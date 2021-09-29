@@ -5,17 +5,23 @@
 	import { cursos } from '$lib/stores/cursos';
 	import { diplomados } from '$lib/stores/diplomados';
 	import { useModal } from '$lib/stores/modal';
+	import type { Diplomado } from '$lib/utils/interfaces';
 	import { onMount, tick } from 'svelte';
 	import { derived } from 'svelte/store';
 
 	let agregarDiplomadoModal = useModal();
 	let editarDiplomadoModal = useModal();
-
-	onMount(() => {
-		if ($diplomados.length == 0) {
-			diplomados.getItems();
-		}
-	});
+	let listaDiplomados = derived(
+		[diplomados, cursos],
+		([$diplomados, $cursos]) =>
+			$diplomados.map((d) => ({
+				...d,
+				listaCursos: $cursos.filter(
+					({ id_diplomado }) => id_diplomado == d.id
+				)
+			}))
+	);
+	let diplomadoEditable;
 
 	let filterText: string;
 	let cursosModal = useModal();
@@ -46,9 +52,18 @@
 	</Modal>
 {/if}
 
-<!-- {#if $editarDiplomadoModal}
-	<Modal handleClose={editarDiplomadoModal.closeModal} />
-{/if} -->
+{#if $editarDiplomadoModal}
+	<Modal handleClose={editarDiplomadoModal.closeModal}>
+		<FormularioAgregarDiplomado
+			isEditing
+			diplomadoID={diplomadoEditable.id}
+			nombreDiplomado={diplomadoEditable.nombre}
+			cursosSeleccionados={diplomadoEditable.listaCursos.map(
+				(c) => c.id
+			)}
+		/>
+	</Modal>
+{/if}
 
 <header class="flex justify-between flex-wrap">
 	<h2 class="heading">Diplomados y competencias</h2>
@@ -96,21 +111,25 @@
 			</tr>
 		</thead>
 		<tbody class="">
-			{#each $diplomados as diplomado (diplomado.id)}
+			{#each $listaDiplomados as diplomado (diplomado.id)}
 				<tr>
 					<td>{diplomado.nombre}</td>
 					<td>
-						{#await getCursos(diplomado.id) then cursos}
-							{#if cursos.length > 0}
-								{cursos.map((c) => c.nombre).join(', ')}
-							{:else}
-								<p class="text text-text-4">Sin cursos</p>
-							{/if}
-						{/await}
+						{#if diplomado.listaCursos.length > 0}
+							{diplomado.listaCursos.map((c) => c.nombre).join(', ')}
+						{:else}
+							<p class="text text-text-4">Sin cursos</p>
+						{/if}
 					</td>
 					<td>
 						<span class="flex gap-8 justify-center">
-							<button class="link primary">Editar diplomado</button>
+							<button
+								class="link primary"
+								on:click={() => {
+									diplomadoEditable = diplomado;
+									editarDiplomadoModal.openModal();
+								}}>Editar diplomado</button
+							>
 							<button
 								class="link"
 								on:click={() => diplomados.removeItem(diplomado.id)}

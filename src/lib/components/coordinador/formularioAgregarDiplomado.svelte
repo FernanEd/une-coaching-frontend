@@ -2,25 +2,55 @@
 	import { cursos } from '$lib/stores/cursos';
 	import { diplomados } from '$lib/stores/diplomados';
 	import type { Curso } from '$lib/utils/interfaces';
+	import { tick } from 'svelte';
+
+	export let isEditing = false;
+	export let diplomadoID: number = 0;
+
+	export let nombreDiplomado = '';
+	export let cursosSeleccionados: number[] = [];
+	let cursosViejos: number[] = cursosSeleccionados;
 
 	let filterText;
 	let filterFunction: (val: Curso) => boolean = (val) => true;
-	let nombreDiplomado;
-	let cursosSeleccionados: number[] = [];
 
 	const handleSubmit = async () => {
-		if (nombreDiplomado) {
-			let diplomado = await diplomados.addItem({
-				nombre: nombreDiplomado
-			});
-			let cursosDeDiplomado = cursosSeleccionados;
-			for (let cursoID of cursosDeDiplomado) {
-				cursos.updateItem(cursoID, { id_diplomado: diplomado.id });
+		if (nombreDiplomado != '') {
+			if (isEditing) {
+				let cursosDeseleccionados = cursosViejos.filter(
+					(cursoID) => !cursosSeleccionados.includes(cursoID)
+				);
+				let cursosActualizar = cursosSeleccionados.filter(
+					(cursoID) => !cursosViejos.includes(cursoID)
+				);
+				await diplomados.updateItem(diplomadoID, {
+					nombre: nombreDiplomado
+				});
+				for (let cursoID of cursosActualizar) {
+					await cursos.updateItem(cursoID, {
+						id_diplomado: diplomadoID
+					});
+				}
+				for (let cursoID of cursosDeseleccionados) {
+					await cursos.updateItem(cursoID, { id_diplomado: null });
+				}
+				//Actualizar cursos;
+				cursosViejos = cursosSeleccionados;
+			} else {
+				let diplomado = await diplomados.addItem({
+					nombre: nombreDiplomado
+				});
+				let cursosDeDiplomado = cursosSeleccionados;
+				//Limpiar form;
+				cursosSeleccionados = [];
+				nombreDiplomado = '';
+				await Promise.all(
+					cursosDeDiplomado.map((cursoID) =>
+						cursos.updateItem(cursoID, { id_diplomado: diplomado.id })
+					)
+				);
+				tick();
 			}
-
-			//Limpiar form;
-			cursosSeleccionados = [];
-			nombreDiplomado = '';
 		}
 	};
 
@@ -39,7 +69,11 @@
 >
 	<div class="flex justify-between">
 		<h2 class="heading">Diplomados</h2>
-		<button class="btn primary">Agregar diplomado</button>
+		{#if isEditing}
+			<button class="btn primary">Editar diplomado</button>
+		{:else}
+			<button class="btn primary">Agregar diplomado</button>
+		{/if}
 	</div>
 
 	<hr class="my-4 border-none" />
