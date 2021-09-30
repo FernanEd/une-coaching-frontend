@@ -7,31 +7,22 @@
 </script>
 
 <header class="flex justify-between flex-wrap">
-	<h2 class="text-2xl font-bold">Usuarios</h2>
-	<button
-		class="px-4 py-2 bg-accent 
-  rounded-full shadow-xl 
-  font-bold text-text-inv"
-		>Agregar usuarios
-	</button>
+	<h2 class="heading">Usuarios</h2>
+	<button class="btn primary">Agregar usuarios </button>
 </header>
 
 <hr class="my-4 border-none" />
 
-<label>
-	<p class="leyenda text-text-4 text-xs">
-		Buscar usuario por matricula
-	</p>
-	<input
-		type="text"
-		bind:value={filterText}
-		on:input={handleFilterField}
-	/>
-</label>
+<p class="label">Buscar usuario por matricula</p>
+<input
+	type="text"
+	bind:value={filterText}
+	on:input={handleFilterField}
+/>
 
 <hr class="my-4 border-none" />
 
-<p class="leyenda text-text-4 text-xs">Filtrar por</p>
+<p class="label">Filtrar por</p>
 <div class="flex gap-4 flex-wrap">
 	<label class="flex gap-1 items-center">
 		<input type="checkbox" />

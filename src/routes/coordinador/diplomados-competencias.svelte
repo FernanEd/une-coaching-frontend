@@ -99,48 +99,54 @@
 <hr class="my-4 border-none" />
 
 {#if showingTable == 'diplomados'}
-	<table
-		id="table-diplomados"
-		class="table-fixed table shadow-lg w-full"
-	>
-		<thead>
-			<tr>
-				<th>Diplomado</th>
-				<th>Cursos</th>
-				<th>...</th>
-			</tr>
-		</thead>
-		<tbody class="">
-			{#each $listaDiplomados as diplomado (diplomado.id)}
+	{#if $listaDiplomados.length == 0}
+		<p>No hay diplomados aún.</p>
+	{:else}
+		<table
+			id="table-diplomados"
+			class="table-fixed table shadow-lg w-full"
+		>
+			<thead>
 				<tr>
-					<td>{diplomado.nombre}</td>
-					<td>
-						{#if diplomado.listaCursos.length > 0}
-							{diplomado.listaCursos.map((c) => c.nombre).join(', ')}
-						{:else}
-							<p class="text text-text-4">Sin cursos</p>
-						{/if}
-					</td>
-					<td>
-						<span class="flex gap-8 justify-center">
-							<button
-								class="link primary"
-								on:click={() => {
-									diplomadoEditable = diplomado;
-									editarDiplomadoModal.openModal();
-								}}>Editar diplomado</button
-							>
-							<button
-								class="link"
-								on:click={() => diplomados.removeItem(diplomado.id)}
-								>Eliminar diplomado</button
-							>
-						</span>
-					</td>
+					<th>Diplomado</th>
+					<th>Cursos</th>
+					<th>...</th>
 				</tr>
-			{/each}
-		</tbody>
-	</table>
+			</thead>
+			<tbody class="">
+				{#each $listaDiplomados as diplomado (diplomado.id)}
+					<tr>
+						<td>{diplomado.nombre}</td>
+						<td>
+							{#if diplomado.listaCursos.length > 0}
+								{diplomado.listaCursos
+									.map((c) => c.nombre)
+									.join(', ')}
+							{:else}
+								<p class="text text-text-4">Sin cursos</p>
+							{/if}
+						</td>
+						<td>
+							<span class="flex gap-8 justify-center">
+								<button
+									class="link primary"
+									on:click={() => {
+										diplomadoEditable = diplomado;
+										editarDiplomadoModal.openModal();
+									}}>Editar diplomado</button
+								>
+								<button
+									class="link"
+									on:click={() => diplomados.removeItem(diplomado.id)}
+									>Eliminar diplomado</button
+								>
+							</span>
+						</td>
+					</tr>
+				{/each}
+			</tbody>
+		</table>
+	{/if}
 {:else}
 	<table
 		id="table-competencias"
