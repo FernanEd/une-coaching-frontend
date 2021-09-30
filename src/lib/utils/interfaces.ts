@@ -64,7 +64,7 @@ export interface RegistroCompetencia {
 
 // USUARIOS
 
-type matricula = number;
+type id_usuario = number;
 type id_coach = number;
 type id_docente = number;
 type id_administrativo = number;
@@ -73,7 +73,7 @@ type id_instructor = number;
 type id_docenteEnCoach = number;
 
 export interface Usuario {
-	matricula: matricula;
+	id: id_usuario;
 	nombre: String;
 	apellido_paterno: string;
 	apellido_materno: string;
@@ -83,32 +83,32 @@ export interface Usuario {
 
 export interface Coach {
 	id: id_coach;
-	matricula: matricula;
+	id_usuario: id_usuario;
 }
 
 export interface Docente {
 	id: id_docente;
-	matricula: matricula;
+	id_usuario: id_usuario;
 }
 
 export interface Instructor {
 	id: id_instructor;
-	matricula: matricula;
+	id_usuario: id_usuario;
 }
 
 export interface Coordinador {
 	id: id_coordinador;
-	matricula: matricula;
+	id_usuario: id_usuario;
 }
 
 export interface Administrativo {
 	id: id_administrativo;
-	matricula: matricula;
+	id_usuario: id_usuario;
 }
 
 export interface Administrativo {
 	id: id_administrativo;
-	matricula: matricula;
+	id_usuario: id_usuario;
 }
 
 export interface DocentesEnCoaches {
