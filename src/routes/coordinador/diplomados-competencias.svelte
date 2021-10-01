@@ -2,11 +2,8 @@
 	import FormularioAgregarDiplomado from '$lib/components/coordinador/formularioAgregarDiplomado.svelte';
 	import GestionCursos from '$lib/components/coordinador/gestionCursos.svelte';
 	import Modal from '$lib/components/modal.svelte';
-	import { cursos } from '$lib/stores/cursos';
-	import { diplomados } from '$lib/stores/diplomados';
+	import { cursos, diplomados } from '$lib/stores/db';
 	import { useModal } from '$lib/stores/modal';
-	import type { Diplomado } from '$lib/utils/interfaces';
-	import { onMount, tick } from 'svelte';
 	import { derived } from 'svelte/store';
 
 	let agregarDiplomadoModal = useModal();
@@ -22,22 +19,8 @@
 			}))
 	);
 	let diplomadoEditable;
-
-	let filterText: string;
 	let cursosModal = useModal();
-
 	let showingTable: 'diplomados' | 'competencias' = 'diplomados';
-
-	const handleFilterField = () => {
-		console.log(filterText);
-	};
-
-	const getCursos = async (diplomadoID: number) => {
-		await tick();
-		return $cursos.filter(
-			({ id_diplomado }) => id_diplomado == diplomadoID
-		);
-	};
 </script>
 
 {#if $agregarDiplomadoModal}

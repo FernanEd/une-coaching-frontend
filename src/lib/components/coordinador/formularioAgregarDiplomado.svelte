@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { cursos } from '$lib/stores/cursos';
-	import { diplomados } from '$lib/stores/diplomados';
+	import { cursos, diplomados } from '$lib/stores/db';
+
 	import type { Curso } from '$lib/utils/interfaces';
 	import { tick } from 'svelte';
 
@@ -12,7 +12,7 @@
 	let cursosViejos: number[] = cursosSeleccionados;
 
 	let filterText;
-	let filterFunction: (val: Curso) => boolean = (val) => true;
+	let filterFunction: (val: any) => boolean = (val) => true;
 
 	const handleSubmit = async () => {
 		if (nombreDiplomado != '') {

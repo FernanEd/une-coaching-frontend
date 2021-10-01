@@ -74,6 +74,7 @@ type id_docenteEnCoach = number;
 
 export interface Usuario {
 	id: id_usuario;
+	matricula: number;
 	nombre: String;
 	apellido_paterno: string;
 	apellido_materno: string;

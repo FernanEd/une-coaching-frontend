@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { cursos } from '$lib/stores/cursos';
+	import { cursos } from '$lib/stores/db';
+
 	import type { Curso } from '$lib/utils/interfaces';
 	import { onMount } from 'svelte';
 

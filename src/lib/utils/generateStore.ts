@@ -5,7 +5,7 @@ export function generateStore<T extends { id: number }>(
 	path: string
 ) {
 	let store = writable<T[]>([]);
-	let crud = generateCRUD(store, 'cursos');
+	let crud = generateCRUD(store, path);
 
 	const crudStore = { ...store, ...crud };
 
