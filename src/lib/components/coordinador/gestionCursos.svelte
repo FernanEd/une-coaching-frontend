@@ -31,7 +31,10 @@
 	};
 </script>
 
-<form on:submit|preventDefault={handleSubmit}>
+<form
+	on:submit|preventDefault={handleSubmit}
+	class="flex flex-col gap-4"
+>
 	<header class="flex justify-between flex-wrap">
 		<h2 class="heading">Cursos</h2>
 		{#if currentID}
@@ -40,8 +43,6 @@
 			<button class="btn primary">Agregar curso </button>
 		{/if}
 	</header>
-
-	<hr class="my-4 border-none" />
 
 	<label class="w-full">
 		<p class="label">Nombre del curso</p>

@@ -65,18 +65,16 @@
 
 <form
 	on:submit|preventDefault={handleSubmit}
-	class="flex flex-col max-w-xl w-screen"
+	class="flex flex-col max-w-xl w-screen gap-4"
 >
-	<div class="flex justify-between">
+	<header class="flex justify-between">
 		<h2 class="heading">Diplomados</h2>
 		{#if isEditing}
 			<button class="btn primary">Editar diplomado</button>
 		{:else}
 			<button class="btn primary">Agregar diplomado</button>
 		{/if}
-	</div>
-
-	<hr class="my-4 border-none" />
+	</header>
 
 	<div>
 		<p class="label">Nombre del diplomado</p>
@@ -87,8 +85,6 @@
 			bind:value={nombreDiplomado}
 		/>
 	</div>
-
-	<hr class="my-4 border-none" />
 
 	<div class="ml-auto">
 		<p class="label">Filtrar cursos</p>
@@ -101,7 +97,7 @@
 
 	<div>
 		<p class="label">Agregar cursos</p>
-		<div class="flex flex-col gap-2 max-h-60 overflow-auto">
+		<div class="flex flex-col gap-1 max-h-60 overflow-auto">
 			{#each $cursos.filter(filterFunction) as curso (curso.id)}
 				<label class="flex gap-2 items-center">
 					<input

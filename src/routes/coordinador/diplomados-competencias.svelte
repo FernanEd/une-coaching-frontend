@@ -1,5 +1,5 @@
 <script lang="ts">
-	import FormularioAgregarDiplomado from '$lib/components/coordinador/formularioAgregarDiplomado.svelte';
+	import DiplomadoForm from '$lib/components/coordinador/diplomadoForm.svelte';
 	import GestionCursos from '$lib/components/coordinador/gestionCursos.svelte';
 	import Modal from '$lib/components/modal.svelte';
 	import { cursos, diplomados } from '$lib/stores/db';
@@ -25,7 +25,7 @@
 
 {#if $agregarDiplomadoModal}
 	<Modal handleClose={agregarDiplomadoModal.closeModal}>
-		<FormularioAgregarDiplomado />
+		<DiplomadoForm />
 	</Modal>
 {/if}
 
@@ -37,7 +37,7 @@
 
 {#if $editarDiplomadoModal}
 	<Modal handleClose={editarDiplomadoModal.closeModal}>
-		<FormularioAgregarDiplomado
+		<DiplomadoForm
 			isEditing
 			diplomadoID={diplomadoEditable.id}
 			nombreDiplomado={diplomadoEditable.nombre}

@@ -1,35 +1,56 @@
 <script lang="ts">
-	import {
-		administrativos,
-		coaches,
-		coordinadores,
-		docentes,
-		instructores,
-		usuarios
-	} from '$lib/stores/db';
+	import UsuarioForm from '$lib/components/coordinador/usuarioForm.svelte';
+
+	import Modal from '$lib/components/modal.svelte';
+	import { usuarios } from '$lib/stores/db';
+	import { useModal } from '$lib/stores/modal';
+
 	import { usuarioList } from '$lib/stores/usuariosList';
-	import { derived } from 'svelte/store';
+	import type { Usuario } from '$lib/utils/interfaces';
+
+	let addUsuarioModal = useModal();
+	let updateUsuarioModal = useModal();
 
 	let filterText: string;
 	let filterGroup: string[] = [];
+	let filterFunction: (
+		usuario: Usuario & { roles: string[] }
+	) => boolean = (usuario) => true;
 
 	const handleFilterField = () => {
-		console.log(filterText);
+		if (filterText) {
+			filterFunction = (usuario) =>
+				usuario.matricula.toString().includes(filterText);
+		} else {
+			filterFunction = (usuario) => true;
+		}
 	};
 
-	let filterFunction: (val: any) => boolean = (val) => true;
-
 	$: if (filterGroup.length > 0) {
-		filterFunction = (val: { roles: string[] }) =>
-			val.roles.some((rol) => filterGroup.includes(rol));
+		filterFunction = (usuario: { roles: string[] }) =>
+			usuario.roles.some((rol) => filterGroup.includes(rol));
 	} else {
-		filterFunction = (val) => true;
+		filterFunction = (usuario) => true;
 	}
 </script>
 
+{#if $addUsuarioModal}
+	<Modal handleClose={addUsuarioModal.closeModal}
+		><UsuarioForm /></Modal
+	>
+{/if}
+
+{#if $updateUsuarioModal}
+	<Modal handleClose={updateUsuarioModal.closeModal}
+		><UsuarioForm /></Modal
+	>
+{/if}
+
 <header class="flex justify-between flex-wrap">
 	<h2 class="heading">Usuarios</h2>
-	<button class="btn primary">Agregar usuarios </button>
+	<button class="btn primary" on:click={addUsuarioModal.openModal}
+		>Agregar usuarios
+	</button>
 </header>
 
 <hr class="my-4 border-none" />
@@ -111,10 +132,14 @@
 					>
 					<td>
 						<span class="flex gap-8 justify-center">
-							<button class="text-accent font-bold"
+							<button
+								class="link primary"
+								on:click={updateUsuarioModal.openModal}
 								>Editar usuario</button
 							>
-							<button class="text-text-4 font-bold"
+							<button
+								class="link"
+								on:click={() => usuarios.removeItem(usuario.id)}
 								>Eliminar usuario</button
 							>
 						</span>
