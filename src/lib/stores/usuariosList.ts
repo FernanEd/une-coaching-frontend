@@ -1,4 +1,6 @@
+import type { Usuario } from '$lib/utils/interfaces';
 import { derived } from 'svelte/store';
+import type { Readable } from 'svelte/store';
 import {
 	administrativos,
 	coaches,
@@ -8,10 +10,39 @@ import {
 	usuarios
 } from './db';
 
-const checkUserExists = (list: any[], value: any, rol: string) =>
-	list.some((d) => d.id_usuario == value) ? rol : null;
+const checkUserExists = <
+	T extends { id: number; id_usuario: number }
+>(
+	list: T[],
+	value: any,
+	rol: string
+): Rol | null => {
+	let match = list.find((d) => d.id_usuario == value);
+	if (match) {
+		return { id: match.id, rol };
+	} else {
+		null;
+	}
+};
 
-export let usuarioList = derived(
+export interface Rol {
+	id: number;
+	rol: string;
+}
+
+export type UsuarioConRoles = Pick<
+	Usuario & { roles: Rol[] },
+	| 'id'
+	| 'correo'
+	| 'apellido_materno'
+	| 'apellido_paterno'
+	| 'matricula'
+	| 'nombre'
+	| 'password'
+	| 'roles'
+>;
+
+export let usuarioList: Readable<UsuarioConRoles[]> = derived(
 	[
 		usuarios,
 		docentes,

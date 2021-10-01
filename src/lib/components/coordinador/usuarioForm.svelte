@@ -7,10 +7,13 @@
 		instructores,
 		usuarios
 	} from '$lib/stores/db';
-	import type { Usuario } from '$lib/utils/interfaces';
+	import type { UsuarioConRoles } from '$lib/stores/usuariosList';
+	import type { Docente, Usuario } from '$lib/utils/interfaces';
 	import { tick } from 'svelte';
 
-	let form: Omit<Usuario, 'id'> = {
+	export let editingUser: UsuarioConRoles = undefined;
+	export let isEditing = false;
+	export let form: Omit<Usuario, 'id'> = {
 		matricula: undefined,
 		nombre: undefined,
 		apellido_paterno: undefined,
@@ -18,9 +21,10 @@
 		correo: undefined,
 		password: undefined
 	};
-	let rolesSeleccionados: string[] = [];
+	export let rolesSeleccionados: string[] = [];
+	let rolesIniciales = rolesSeleccionados;
 
-	const roles: Object = {
+	const roles = {
 		docente: docentes,
 		coach: coaches,
 		administrativo: administrativos,
@@ -35,14 +39,57 @@
 		const rolesList = [...rolesSeleccionados];
 
 		if (fieldsFilled) {
-			formFields.forEach((key) => (form[key] = undefined));
-			rolesSeleccionados = [];
+			if (isEditing) {
+				let rolesNuevos = rolesSeleccionados.filter(
+					(rol) => !rolesIniciales.includes(rol)
+				);
+				let rolesDesmarcados = rolesIniciales.filter(
+					(rol) => !rolesSeleccionados.includes(rol)
+				);
 
-			let { id: userID } = await usuarios.addItem(formData);
-			if (rolesList.length > 0) {
-				for (let rol of rolesList) {
-					if (roles.hasOwnProperty(rol)) {
-						roles[rol].addItem({ id_usuario: userID });
+				await tick();
+				usuarios.updateItem(editingUser.id, { ...formData });
+
+				console.log(
+					editingUser.roles.map(({ rol }) => rol).join(',')
+				);
+
+				if (rolesNuevos.length > 0) {
+					for (let rol of rolesNuevos) {
+						if (roles.hasOwnProperty(rol)) {
+							await roles[rol].addItem({
+								id_usuario: editingUser.id
+							});
+						}
+					}
+				}
+				if (rolesDesmarcados.length > 0) {
+					for (let rol of rolesDesmarcados) {
+						if (roles.hasOwnProperty(rol)) {
+							await roles[rol].removeItem(
+								editingUser.roles.find(
+									({ rol: oldRol }) => oldRol == rol
+								).id
+							);
+						}
+					}
+				}
+
+				console.log(
+					editingUser.roles.map(({ rol }) => rol).join(',')
+				);
+
+				rolesIniciales = rolesSeleccionados;
+			} else {
+				formFields.forEach((key) => (form[key] = undefined));
+				rolesSeleccionados = [];
+
+				let { id: userID } = await usuarios.addItem(formData);
+				if (rolesList.length > 0) {
+					for (let rol of rolesList) {
+						if (roles.hasOwnProperty(rol)) {
+							roles[rol].addItem({ id_usuario: userID });
+						}
 					}
 				}
 			}
@@ -57,7 +104,13 @@
 >
 	<header class="flex justify-between">
 		<h2 class="heading">Usuario</h2>
-		<button class="btn primary">Agregar usuario</button>
+		<button class="btn primary">
+			{#if isEditing}
+				Editar usuario
+			{:else}
+				Agregar usuario
+			{/if}
+		</button>
 	</header>
 
 	<div class="input-group">
@@ -95,10 +148,12 @@
 		<input type="email" bind:value={form.correo} required />
 	</div>
 
-	<div class="input-group">
-		<label class="label">Contraseña por defecto</label>
-		<input type="text" bind:value={form.password} required />
-	</div>
+	{#if !isEditing}
+		<div class="input-group">
+			<label class="label">Contraseña por defecto</label>
+			<input type="text" bind:value={form.password} required />
+		</div>
+	{/if}
 
 	<p class="label">Roles</p>
 	<div class="flex flex-col gap-1 overflow-auto">

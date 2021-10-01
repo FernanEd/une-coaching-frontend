@@ -5,17 +5,23 @@
 	import { usuarios } from '$lib/stores/db';
 	import { useModal } from '$lib/stores/modal';
 
-	import { usuarioList } from '$lib/stores/usuariosList';
+	import {
+		Rol,
+		UsuarioConRoles,
+		usuarioList
+	} from '$lib/stores/usuariosList';
 	import type { Usuario } from '$lib/utils/interfaces';
 
 	let addUsuarioModal = useModal();
 	let updateUsuarioModal = useModal();
 
+	let currentUserID: number;
+	$: currentUser = $usuarioList[currentUserID];
 	let filterText: string;
 	let filterGroup: string[] = [];
-	let filterFunction: (
-		usuario: Usuario & { roles: string[] }
-	) => boolean = (usuario) => true;
+	let filterFunction: (usuario: UsuarioConRoles) => boolean = (
+		usuario
+	) => true;
 
 	const handleFilterField = () => {
 		if (filterText) {
@@ -27,8 +33,8 @@
 	};
 
 	$: if (filterGroup.length > 0) {
-		filterFunction = (usuario: { roles: string[] }) =>
-			usuario.roles.some((rol) => filterGroup.includes(rol));
+		filterFunction = (usuario) =>
+			usuario.roles.some(({ rol }) => filterGroup.includes(rol));
 	} else {
 		filterFunction = (usuario) => true;
 	}
@@ -42,7 +48,19 @@
 
 {#if $updateUsuarioModal}
 	<Modal handleClose={updateUsuarioModal.closeModal}
-		><UsuarioForm /></Modal
+		><UsuarioForm
+			isEditing
+			editingUser={currentUser}
+			form={{
+				matricula: currentUser.matricula,
+				nombre: currentUser.nombre,
+				apellido_paterno: currentUser.apellido_paterno,
+				apellido_materno: currentUser.apellido_materno,
+				correo: currentUser.correo,
+				password: currentUser.password
+			}}
+			rolesSeleccionados={currentUser.roles.map(({ rol }) => rol)}
+		/></Modal
 	>
 {/if}
 
@@ -116,7 +134,7 @@
 			</tr>
 		</thead>
 		<tbody class="">
-			{#each $usuarioList.filter(filterFunction) as usuario (usuario.id)}
+			{#each $usuarioList.filter(filterFunction) as usuario, i (usuario.id)}
 				<tr>
 					<td><a href="">{usuario.matricula}</a></td>
 					<td
@@ -127,15 +145,17 @@
 					<td>{usuario.correo}</td>
 					<td
 						>{usuario.roles
-							.map((w) => w[0].toUpperCase() + w.substr(1))
+							.map(({ rol: w }) => w[0].toUpperCase() + w.substr(1))
 							.join(', ')}</td
 					>
 					<td>
 						<span class="flex gap-8 justify-center">
 							<button
 								class="link primary"
-								on:click={updateUsuarioModal.openModal}
-								>Editar usuario</button
+								on:click={() => {
+									updateUsuarioModal.openModal();
+									currentUserID = i;
+								}}>Editar usuario</button
 							>
 							<button
 								class="link"
