@@ -1,4 +1,5 @@
 <script lang="ts">
+	import GestionJornadas from '$lib/components/coordinador/gestionJornadas.svelte';
 	import Modal from '$lib/components/modal.svelte';
 	import { useModal } from '$lib/stores/modal';
 
@@ -11,7 +12,9 @@
 </script>
 
 {#if $jornadaModal}
-	<Modal handleClose={jornadaModal.closeModal}>Joder</Modal>
+	<Modal handleClose={jornadaModal.closeModal}
+		><GestionJornadas /></Modal
+	>
 {/if}
 
 <header class="flex justify-between flex-wrap">
@@ -19,7 +22,7 @@
 	<span class="flex gap-8 items-center">
 		<button
 			on:click={jornadaModal.openModal}
-			class="font-bold text-accent">Seleccionar jornada</button
+			class="font-bold text-accent">Gestionar jornadas</button
 		>
 		<button
 			class="px-4 py-2 bg-accent 

@@ -1,17 +1,10 @@
 <script lang="ts">
 	import { cursos } from '$lib/stores/db';
-
 	import type { Curso } from '$lib/utils/interfaces';
 	import { onMount } from 'svelte';
 
 	let cursoName;
 	let currentID;
-
-	onMount(() => {
-		if ($cursos.length == 0) {
-			cursos.getItems();
-		}
-	});
 
 	const handleSubmit = () => {
 		if (cursoName) {

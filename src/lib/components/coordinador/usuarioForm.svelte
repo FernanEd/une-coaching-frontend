@@ -199,16 +199,3 @@
 		</label>
 	</div>
 </form>
-
-<style lang="postcss">
-	.input-group {
-		@apply flex flex-col;
-	}
-	.form-row {
-		@apply flex gap-4;
-	}
-
-	.form-row > * {
-		@apply flex-1;
-	}
-</style>

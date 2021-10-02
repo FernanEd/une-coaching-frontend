@@ -8,7 +8,7 @@ export type DocenteComoUsuario = Usuario & {
 	id_docenteEnCoach: number;
 };
 export type CoachConDocentes = Usuario & { id_coach: number } & {
-	docentes: docenteComoUsuario[];
+	docentes: DocenteComoUsuario[];
 };
 
 export const coachList: Readable<CoachConDocentes[]> = derived(
