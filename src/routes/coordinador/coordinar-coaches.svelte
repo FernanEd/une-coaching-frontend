@@ -1,17 +1,28 @@
 <script lang="ts">
+	import GestionDocentes from '$lib/components/coordinador/gestionDocentes.svelte';
 	import Modal from '$lib/components/modal.svelte';
+	import { coachList } from '$lib/stores/coachList';
+	import {
+		coaches,
+		docentes,
+		docentesEnCoaches
+	} from '$lib/stores/db';
 	import { useModal } from '$lib/stores/modal';
+	import { usuarioList } from '$lib/stores/usuariosList';
 
+	let gestionarDocentes = useModal();
 	let filterText: string;
-	let jornadaModal = useModal();
+	let filterFunction;
 
 	const handleFilterField = () => {
 		console.log(filterText);
 	};
 </script>
 
-{#if $jornadaModal}
-	<Modal handleClose={jornadaModal.closeModal}>Joder</Modal>
+{#if $gestionarDocentes}
+	<Modal handleClose={gestionarDocentes.closeModal}
+		><GestionDocentesEnCoaches /></Modal
+	>
 {/if}
 
 <header class="flex justify-between flex-wrap">
@@ -40,21 +51,31 @@
 		</tr>
 	</thead>
 	<tbody class="">
-		{#each [...Array(20).fill(0)] as i}
+		{#each $coachList as coach (coach.id)}
 			<tr>
 				<td>
-					<a href="#">174819</a>
-					<p>Fernando Edmundo Balderas Morán</p>
+					<a href="#">{coach.matricula}</a>
+					<p>
+						{coach.nombre}
+						{coach.apellido_paterno}
+						{coach.apellido_materno}
+					</p>
 				</td>
 				<td>
-					{#each [...Array((Math.random() * 20) | 0).fill('174819')] as s}
-						<a href="#">{s}</a>,{' '}
+					{#each $docentesEnCoaches as docente (docente.id)}
+						<a href="#"
+							>{coach.docentes
+								.map((docente) => docente.matricula)
+								.join(',')}</a
+						>,{' '}
 					{/each}
 				</td>
 				<td>
 					<span class="flex gap-8 justify-center">
-						<button class="font-bold text-accent"
-							>Gestionar coachees</button
+						<button
+							class="link primary"
+							on:click={gestionarDocentes.openModal}
+							>Gestionar docentes</button
 						>
 					</span>
 				</td>

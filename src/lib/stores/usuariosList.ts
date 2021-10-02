@@ -9,6 +9,7 @@ import {
 	instructores,
 	usuarios
 } from './db';
+import type { tick } from 'svelte';
 
 const checkUserExists = <
 	T extends { id: number; id_usuario: number }
@@ -42,7 +43,7 @@ export type UsuarioConRoles = Pick<
 	| 'roles'
 >;
 
-export let usuarioList: Readable<UsuarioConRoles[]> = derived(
+export const usuarioList: Readable<UsuarioConRoles[]> = derived(
 	[
 		usuarios,
 		docentes,

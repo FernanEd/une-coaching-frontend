@@ -7,7 +7,10 @@ export function generateStore<T extends { id: number }>(
 	let store = writable<T[]>([]);
 	let crud = generateCRUD(store, path);
 
-	const crudStore = { ...store, ...crud };
+	const crudStore = {
+		...store,
+		...crud
+	};
 
 	(async () => {
 		let $val: any[];

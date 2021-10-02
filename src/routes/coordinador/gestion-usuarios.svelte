@@ -10,13 +10,15 @@
 		UsuarioConRoles,
 		usuarioList
 	} from '$lib/stores/usuariosList';
-	import type { Usuario } from '$lib/utils/interfaces';
 
 	let addUsuarioModal = useModal();
 	let updateUsuarioModal = useModal();
 
 	let currentUserID: number;
-	$: currentUser = $usuarioList[currentUserID];
+	$: currentUser =
+		$usuarioList[
+			$usuarioList.findIndex(({ id }) => id == currentUserID)
+		];
 	let filterText: string;
 	let filterGroup: string[] = [];
 	let filterFunction: (usuario: UsuarioConRoles) => boolean = (
@@ -134,7 +136,7 @@
 			</tr>
 		</thead>
 		<tbody class="">
-			{#each $usuarioList.filter(filterFunction) as usuario, i (usuario.id)}
+			{#each $usuarioList.filter(filterFunction) as usuario (usuario.id)}
 				<tr>
 					<td><a href="">{usuario.matricula}</a></td>
 					<td
@@ -154,7 +156,7 @@
 								class="link primary"
 								on:click={() => {
 									updateUsuarioModal.openModal();
-									currentUserID = i;
+									currentUserID = usuario.id;
 								}}>Editar usuario</button
 							>
 							<button

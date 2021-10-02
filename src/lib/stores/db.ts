@@ -7,6 +7,7 @@ import type {
 	Curso,
 	Diplomado,
 	Docente,
+	DocentesEnCoaches,
 	Instructor,
 	TipoCompetencia,
 	Usuario
@@ -24,6 +25,14 @@ export const diplomados = generateStore<Diplomado>('diplomados');
 export const usuarios = generateStore<Usuario>('usuarios');
 export const coaches = generateStore<Coach>('coaches');
 export const docentes = generateStore<Docente>('docentes');
-export const coordinadores = generateStore<Coordinador>('coordinadores');
-export const administrativos = generateStore<Administrativo>('administrativos');
+export const coordinadores = generateStore<Coordinador>(
+	'coordinadores'
+);
+export const administrativos = generateStore<Administrativo>(
+	'administrativos'
+);
 export const instructores = generateStore<Instructor>('instructores');
+
+export const docentesEnCoaches = generateStore<DocentesEnCoaches>(
+	'docentesEnCoaches'
+);
