@@ -1,5 +1,5 @@
 <script lang="ts">
-	import GestionDocentes from '$lib/components/coordinador/gestionDocentes.svelte';
+	import GestionDocentesEnCoaches from '$lib/components/coordinador/gestionDocentesEnCoaches.svelte';
 	import Modal from '$lib/components/modal.svelte';
 	import { coachList } from '$lib/stores/coachList';
 	import {
@@ -62,13 +62,16 @@
 					</p>
 				</td>
 				<td>
-					{#each $docentesEnCoaches as docente (docente.id)}
-						<a href="#"
-							>{coach.docentes
-								.map((docente) => docente.matricula)
-								.join(',')}</a
-						>,{' '}
-					{/each}
+					{#if coach.docentes.length == 0}
+						<p class="text text-text-4">Sin docentes asignados</p>
+					{:else}
+						{#each coach.docentes as docente (docente.id)}
+							<a href="#">{docente.matricula}</a> -
+							{docente.nombre}
+							{docente.apellido_paterno}
+							{docente.apellido_materno}
+						{/each}
+					{/if}
 				</td>
 				<td>
 					<span class="flex gap-8 justify-center">

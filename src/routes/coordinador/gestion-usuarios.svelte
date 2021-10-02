@@ -145,11 +145,15 @@
 						{usuario.apellido_materno}</td
 					>
 					<td>{usuario.correo}</td>
-					<td
-						>{usuario.roles
-							.map(({ rol: w }) => w[0].toUpperCase() + w.substr(1))
-							.join(', ')}</td
-					>
+					<td>
+						{#if usuario.roles.length == 0}
+							<p class="text text-text-4">Sin roles asignados</p>
+						{:else}
+							{usuario.roles
+								.map(({ rol: w }) => w[0].toUpperCase() + w.substr(1))
+								.join(', ')}
+						{/if}
+					</td>
 					<td>
 						<span class="flex gap-8 justify-center">
 							<button
