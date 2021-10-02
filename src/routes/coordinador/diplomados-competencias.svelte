@@ -18,7 +18,11 @@
 				)
 			}))
 	);
-	let diplomadoEditable;
+
+	let diplomadoEditableID: number;
+	$: diplomadoEditable = $listaDiplomados.find(
+		(d) => d.id == diplomadoEditableID
+	);
 	let cursosModal = useModal();
 	let showingTable: 'diplomados' | 'competencias' = 'diplomados';
 </script>
@@ -114,7 +118,7 @@
 								<button
 									class="link primary"
 									on:click={() => {
-										diplomadoEditable = diplomado;
+										diplomadoEditableID = diplomado.id;
 										editarDiplomadoModal.openModal();
 									}}>Editar diplomado</button
 								>

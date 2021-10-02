@@ -13,6 +13,11 @@
 	let gestionarDocentes = useModal();
 	let filterText: string;
 	let filterFunction;
+	let currentCoachID: number;
+
+	$: currentCoach = $coachList.find(
+		(coach) => coach.id_coach == currentCoachID
+	);
 
 	const handleFilterField = () => {
 		console.log(filterText);
@@ -21,7 +26,13 @@
 
 {#if $gestionarDocentes}
 	<Modal handleClose={gestionarDocentes.closeModal}
-		><GestionDocentesEnCoaches /></Modal
+		><GestionDocentesEnCoaches
+			coachID={currentCoach.id_coach}
+			docentesEnCoach={currentCoach.docentes}
+			docentesSeleccionados={currentCoach.docentes.map(
+				(docente) => docente.id_docente
+			)}
+		/></Modal
 	>
 {/if}
 
@@ -66,10 +77,12 @@
 						<p class="text text-text-4">Sin docentes asignados</p>
 					{:else}
 						{#each coach.docentes as docente (docente.id)}
-							<a href="#">{docente.matricula}</a> -
-							{docente.nombre}
-							{docente.apellido_paterno}
-							{docente.apellido_materno}
+							<p>
+								<a href="#">{docente.matricula}</a> -
+								{docente.nombre}
+								{docente.apellido_paterno}
+								{docente.apellido_materno}
+							</p>
 						{/each}
 					{/if}
 				</td>
@@ -77,8 +90,10 @@
 					<span class="flex gap-8 justify-center">
 						<button
 							class="link primary"
-							on:click={gestionarDocentes.openModal}
-							>Gestionar docentes</button
+							on:click={() => {
+								gestionarDocentes.openModal();
+								currentCoachID = coach.id_coach;
+							}}>Gestionar docentes</button
 						>
 					</span>
 				</td>

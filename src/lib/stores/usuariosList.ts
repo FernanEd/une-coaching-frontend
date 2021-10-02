@@ -9,7 +9,6 @@ import {
 	instructores,
 	usuarios
 } from './db';
-import type { tick } from 'svelte';
 
 const checkUserExists = <
 	T extends { id: number; id_usuario: number }
