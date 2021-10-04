@@ -1,11 +1,12 @@
 <script lang="ts">
-import type { DocenteComoUsuario } from '$lib/stores/coachList';
+	import type { DocenteComoUsuario } from '$lib/stores/coachList';
 
 	import {
 		docentes,
 		docentesEnCoaches,
 		usuarios
 	} from '$lib/stores/db';
+	import { docentesList } from '$lib/stores/docentesList';
 	import type { DocentesEnCoaches } from '$lib/utils/interfaces';
 
 	let filterFunction = (val) => val;
@@ -14,11 +15,6 @@ import type { DocenteComoUsuario } from '$lib/stores/coachList';
 	export let docentesSeleccionados: number[];
 	export let docentesEnCoach: DocenteComoUsuario[] = [];
 	let docentesIniciales = docentesSeleccionados;
-
-	$: docentesList = $docentes.map((docente) => ({
-		...$usuarios.find((usuario) => usuario.id == docente.id_usuario),
-		id_docente: docente.id
-	}));
 
 	const handleFilter = () => {
 		if (filterText) {
@@ -53,7 +49,8 @@ import type { DocenteComoUsuario } from '$lib/stores/coachList';
 		if (docentesDesmarcados.length > 0) {
 			for (let docenteID of docentesDesmarcados) {
 				docentesEnCoaches.removeItem(
-					docentesEnCoach.find((v) => v.id_docente == docenteID).id_docenteEnCoach
+					docentesEnCoach.find((v) => v.id_docente == docenteID)
+						.id_docenteEnCoach
 				);
 			}
 		}
@@ -89,7 +86,7 @@ import type { DocenteComoUsuario } from '$lib/stores/coachList';
 
 		<p class="label">Selecciona docentes</p>
 		<div class="flex flex-col gap-1 max-h-60 overflow-auto">
-			{#each docentesList.filter(filterFunction) as docente (docente.id)}
+			{#each $docentesList.filter(filterFunction) as docente (docente.id)}
 				<label class="flex gap-2 items-center">
 					<input
 						type="checkbox"

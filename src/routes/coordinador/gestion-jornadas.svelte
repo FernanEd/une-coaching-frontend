@@ -10,11 +10,17 @@
 	import type { JornadaConCursos } from '$lib/stores/selecionarJornada';
 	import type { Readable } from 'svelte/store';
 	import { onMount } from 'svelte';
+	import CursoJornadaForm from '$lib/components/coordinador/cursoJornadaForm.svelte';
 
 	let filterText: string;
-	let jornadaModal = useModal();
-	let jornadaSeleccionada: number;
+	const handleFilterField = () => {
+		console.log(filterText);
+	};
 
+	let jornadaModal = useModal();
+	let cursoModal = useModal();
+
+	let jornadaSeleccionada: number;
 	onMount(() => {
 		let unsubscribe = store_jornadaSeleccionada.subscribe((val) => {
 			jornadaSeleccionada = val;
@@ -25,14 +31,6 @@
 
 	let currentJornada: Readable<JornadaConCursos> | undefined;
 	$: currentJornada = seleccionarJornada(jornadaSeleccionada);
-
-	const handleFilterField = () => {
-		console.log(filterText);
-	};
-
-	$: {
-		console.log(jornadaSeleccionada, $currentJornada);
-	}
 </script>
 
 {#if $jornadaModal}
@@ -41,8 +39,14 @@
 	>
 {/if}
 
+{#if $cursoModal}
+	<Modal handleClose={cursoModal.closeModal}>
+		<CursoJornadaForm />
+	</Modal>
+{/if}
+
 <header class="flex justify-between flex-wrap">
-	<h2 class="text-2xl font-bold">
+	<h2 class="heading">
 		{#if $currentJornada}
 			Jornada: {$currentJornada.titulo}
 		{:else}
@@ -50,14 +54,10 @@
 		{/if}
 	</h2>
 	<span class="flex gap-8 items-center">
-		<button
-			on:click={jornadaModal.openModal}
-			class="font-bold text-accent">Gestionar jornadas</button
+		<button on:click={jornadaModal.openModal} class="link primary"
+			>Gestionar jornadas</button
 		>
-		<button
-			class="px-4 py-2 bg-accent 
-  rounded-full shadow-xl 
-  font-bold text-text-inv"
+		<button class="btn primary" on:click={cursoModal.openModal}
 			>Agregar curso
 		</button>
 	</span>
