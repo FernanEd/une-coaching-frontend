@@ -22,12 +22,12 @@ import type {
 
 export const cursos = generateStore<Curso>('cursos');
 export const diplomados = generateStore<Diplomado>('diplomados');
-export const competencias = generateStore<Competencia>(
-	'competencias'
-);
-export const tipoCompetencias = generateStore<TipoCompetencia>(
-	'tipoCompetencias'
-);
+// export const competencias = generateStore<Competencia>(
+// 	'competencias'
+// );
+// export const tipoCompetencias = generateStore<TipoCompetencia>(
+// 	'tipoCompetencias'
+// );
 
 export const usuarios = generateStore<Usuario>('usuarios');
 export const coaches = generateStore<Coach>('coaches');
@@ -57,7 +57,7 @@ export const registrosCompetencias = generateStore<RegistroCompetencia>(
 	'registrosCompetencias'
 );
 export const registrosCursos = generateStore<RegistroCurso>(
-	'usuarioregistrosCursos'
+	'registrosCursos'
 );
 export const registrosDiplomados = generateStore<RegistroDiplomado>(
 	'registrosDiplomados'

@@ -50,10 +50,6 @@
 				await tick();
 				usuarios.updateItem(editingUser.id, { ...formData });
 
-				console.log(
-					editingUser.roles.map(({ rol }) => rol).join(',')
-				);
-
 				if (rolesNuevos.length > 0) {
 					for (let rol of rolesNuevos) {
 						if (roles.hasOwnProperty(rol)) {
@@ -74,10 +70,6 @@
 						}
 					}
 				}
-
-				console.log(
-					editingUser.roles.map(({ rol }) => rol).join(',')
-				);
 
 				rolesIniciales = rolesSeleccionados;
 			} else {
