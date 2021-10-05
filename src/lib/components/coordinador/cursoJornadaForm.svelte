@@ -11,6 +11,7 @@
 	let formErrors = writable<string[]>([]);
 
 	export let currentjornadaID;
+	export let currentCursoID: number = undefined;
 	export let isEditing = false;
 	export let cupoCurso: number = undefined;
 	export let cursoSeleccionado: number = undefined;
@@ -41,6 +42,12 @@
 		if (cupoCurso && cursoSeleccionado && instructorSeleccionado) {
 			formErrors.set([]);
 			if (isEditing) {
+				cursosEnJornada.updateItem(currentCursoID, {
+					id_jornada: currentjornadaID,
+					id_instructor: instructorSeleccionado,
+					cupo_maximo: cupoCurso,
+					id_curso: cursoSeleccionado
+				});
 			} else {
 				cursosEnJornada.addItem({
 					id_jornada: currentjornadaID,

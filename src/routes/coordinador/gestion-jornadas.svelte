@@ -1,7 +1,7 @@
 <script lang="ts">
 	import GestionJornadas from '$lib/components/coordinador/gestionJornadas.svelte';
 	import Modal from '$lib/components/modal.svelte';
-	import { cursos, jornadas } from '$lib/stores/db';
+	import { cursos, cursosEnJornada, jornadas } from '$lib/stores/db';
 	import { useModal } from '$lib/stores/modal';
 	import {
 		seleccionarJornada,
@@ -18,7 +18,8 @@
 	};
 
 	let jornadaModal = useModal();
-	let cursoModal = useModal();
+	let addCursoModal = useModal();
+	let updateCursoModal = useModal();
 
 	let jornadaSeleccionada: number;
 	onMount(() => {
@@ -31,6 +32,11 @@
 
 	let currentJornada: Readable<JornadaConCursos> | undefined;
 	$: currentJornada = seleccionarJornada(jornadaSeleccionada);
+
+	let currentCursoID: number;
+	$: currentCurso = $cursosEnJornada.find(
+		(c) => c.id == currentCursoID
+	);
 </script>
 
 {#if $jornadaModal}
@@ -39,9 +45,22 @@
 	>
 {/if}
 
-{#if $cursoModal}
-	<Modal handleClose={cursoModal.closeModal}>
+{#if $addCursoModal}
+	<Modal handleClose={addCursoModal.closeModal}>
 		<CursoJornadaForm currentjornadaID={$currentJornada.id} />
+	</Modal>
+{/if}
+
+{#if $updateCursoModal}
+	<Modal handleClose={updateCursoModal.closeModal}>
+		<CursoJornadaForm
+			currentjornadaID={$currentJornada.id}
+			isEditing
+			currentCursoID={currentCurso.id}
+			cupoCurso={currentCurso.cupo_maximo}
+			cursoSeleccionado={currentCurso.id_curso}
+			instructorSeleccionado={currentCurso.id_instructor}
+		/>
 	</Modal>
 {/if}
 
@@ -54,7 +73,7 @@
 			<button on:click={jornadaModal.openModal} class="link primary"
 				>Gestionar jornadas</button
 			>
-			<button class="btn primary" on:click={cursoModal.openModal}
+			<button class="btn primary" on:click={addCursoModal.openModal}
 				>Agregar curso
 			</button>
 		</span>
@@ -123,10 +142,17 @@
 					</td>
 					<td>
 						<span class="flex gap-8 justify-center">
-							<button class="font-bold text-accent"
-								>Editar curso</button
+							<button
+								class="font-bold text-accent"
+								on:click={() => {
+									currentCursoID = cursoJornada.id;
+									updateCursoModal.openModal();
+								}}>Editar curso</button
 							>
-							<button class="font-bold text-text-4"
+							<button
+								class="font-bold text-text-4"
+								on:click={() =>
+									cursosEnJornada.removeItem(cursoJornada.id)}
 								>Eliminar curso</button
 							>
 						</span>
