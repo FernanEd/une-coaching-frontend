@@ -41,26 +41,26 @@
 
 {#if $cursoModal}
 	<Modal handleClose={cursoModal.closeModal}>
-		<CursoJornadaForm />
+		<CursoJornadaForm currentjornadaID={$currentJornada.id} />
 	</Modal>
 {/if}
 
 <header class="flex justify-between flex-wrap">
-	<h2 class="heading">
-		{#if $currentJornada}
+	{#if $currentJornada}
+		<h2 class="heading">
 			Jornada: {$currentJornada.titulo}
-		{:else}
-			Jornadas
-		{/if}
-	</h2>
-	<span class="flex gap-8 items-center">
-		<button on:click={jornadaModal.openModal} class="link primary"
-			>Gestionar jornadas</button
-		>
-		<button class="btn primary" on:click={cursoModal.openModal}
-			>Agregar curso
-		</button>
-	</span>
+		</h2>
+		<span class="flex gap-8 items-center">
+			<button on:click={jornadaModal.openModal} class="link primary"
+				>Gestionar jornadas</button
+			>
+			<button class="btn primary" on:click={cursoModal.openModal}
+				>Agregar curso
+			</button>
+		</span>
+	{:else}
+		<h2 class="heading">Jornadas</h2>
+	{/if}
 </header>
 
 <hr class="my-4 border-none" />
@@ -92,20 +92,34 @@
 			</tr>
 		</thead>
 		<tbody class="">
-			{#each $currentJornada.cursos as curso (curso.id)}
+			{#each $currentJornada.cursos as cursoJornada (cursoJornada.id)}
 				<tr>
-					<td>Aplicación de tecnicas docente II</td>
-					<td>Fernando Edmundo Balderas Morán</td>
+					<td>{cursoJornada.curso.nombre}</td>
+					<td>
+						<a href="#">{cursoJornada.instructor.matricula}</a>
+						<p>
+							{cursoJornada.instructor.nombre}
+							{cursoJornada.instructor.apellido_paterno}
+							{cursoJornada.instructor.apellido_materno}
+						</p>
+					</td>
 					<td>
 						<p>
 							Cupos restantes: <span class="font-bold"
-								>{(1 + Math.random() * 6) | 0}</span
+								>{cursoJornada.cupo_maximo}</span
 							>
 						</p>
-						<p>Inscritos:</p>
-						{#each [...Array((Math.random() * 20) | 0).fill('174819')] as s}
-							<a href="#">{s}</a>,{' '}
-						{/each}
+
+						{#if cursoJornada.asistentes.length == 0}
+							<p class="text-text-4">
+								No hay asistentes inscritos aun
+							</p>
+						{:else}
+							<p>Inscritos:</p>
+							{#each cursoJornada.asistentes as asistente (asistente.id)}
+								<a href="#">{asistente.docente.matricula}</a>
+							{/each}
+						{/if}
 					</td>
 					<td>
 						<span class="flex gap-8 justify-center">
