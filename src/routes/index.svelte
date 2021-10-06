@@ -3,9 +3,9 @@
 
 	import { onMount } from 'svelte';
 
-	onMount(() => {
-		goto('/coordinador');
-	});
+	// onMount(() => {
+	// 	goto('/coordinador');
+	// });
 </script>
 
 <svelte:head>

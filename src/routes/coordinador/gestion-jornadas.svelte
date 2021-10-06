@@ -11,6 +11,8 @@
 	import type { Readable } from 'svelte/store';
 	import { onMount } from 'svelte';
 	import CursoJornadaForm from '$lib/components/coordinador/cursoJornadaForm.svelte';
+	import dayjs from 'dayjs';
+	import { dateFormat } from '$lib/utils/dateFormat';
 
 	let filterText: string;
 	const handleFilterField = () => {
@@ -93,6 +95,31 @@
 </select>
 
 <hr class="my-4 border-none" />
+
+{#if $currentJornada}
+	<span class="flex gap-8">
+		<div>
+			<p class="label">Periodo de la jornada</p>
+			<p>
+				{dayjs($currentJornada.fecha_inicio).format(dateFormat)} - {dayjs(
+					$currentJornada.fecha_fin
+				).format(dateFormat)}
+			</p>
+		</div>
+		<div>
+			<p class="label">Periodo de inscripciones</p>
+			<p>
+				{dayjs($currentJornada.fecha_inscripcion_inicio).format(
+					dateFormat
+				)} - {dayjs($currentJornada.fecha_inscripcion_fin).format(
+					dateFormat
+				)}
+			</p>
+		</div>
+	</span>
+
+	<hr class="my-4 border-none" />
+{/if}
 
 {#if !$currentJornada}
 	<p>No hay jornada seleccionda aún</p>
