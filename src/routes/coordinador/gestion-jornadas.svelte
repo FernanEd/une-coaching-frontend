@@ -67,21 +67,23 @@
 {/if}
 
 <header class="flex justify-between flex-wrap">
-	{#if $currentJornada}
-		<h2 class="heading">
+	<h2 class="heading">
+		{#if $currentJornada}
 			Jornada: {$currentJornada.titulo}
-		</h2>
-		<span class="flex gap-8 items-center">
-			<button on:click={jornadaModal.openModal} class="link primary"
-				>Gestionar jornadas</button
-			>
+		{:else}
+			Jornadas
+		{/if}
+	</h2>
+	<span class="flex gap-8 items-center">
+		<button on:click={jornadaModal.openModal} class="link primary"
+			>Gestionar jornadas</button
+		>
+		{#if $currentJornada}
 			<button class="btn primary" on:click={addCursoModal.openModal}
 				>Agregar curso
 			</button>
-		</span>
-	{:else}
-		<h2 class="heading">Jornadas</h2>
-	{/if}
+		{/if}
+	</span>
 </header>
 
 <hr class="my-4 border-none" />

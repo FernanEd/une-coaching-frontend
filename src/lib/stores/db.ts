@@ -21,47 +21,40 @@ import type {
 	TipoCompetencia,
 	Usuario
 } from '$lib/utils/interfaces';
-import { get } from 'svelte/store';
+import { userSession } from './userSession';
 
-export const cursos = generateStore<Curso>('cursos');
-export const diplomados = generateStore<Diplomado>('diplomados');
-// export const competencias = generateStore<Competencia>(
-// 	'competencias'
-// );
-// export const tipoCompetencias = generateStore<TipoCompetencia>(
-// 	'tipoCompetencias'
-// );
-
-export const usuarios = generateStore<Usuario>('usuarios');
-export const coaches = generateStore<Coach>('coaches');
-export const docentes = generateStore<Docente>('docentes');
-export const coordinadores = generateStore<Coordinador>(
+export let cursos = generateStore<Curso>('cursos');
+export let diplomados = generateStore<Diplomado>('diplomados');
+export let usuarios = generateStore<Usuario>('usuarios');
+export let coaches = generateStore<Coach>('coaches');
+export let docentes = generateStore<Docente>('docentes');
+export let coordinadores = generateStore<Coordinador>(
 	'coordinadores'
 );
-export const administrativos = generateStore<Administrativo>(
+export let administrativos = generateStore<Administrativo>(
 	'administrativos'
 );
-export const instructores = generateStore<Instructor>('instructores');
+export let instructores = generateStore<Instructor>('instructores');
 
-export const docentesEnCoaches = generateStore<DocentesEnCoaches>(
+export let docentesEnCoaches = generateStore<DocentesEnCoaches>(
 	'docentesEnCoaches'
 );
 
-export const jornadas = generateStore<Jornada>('jornadas');
-export const cursosEnJornada = generateStore<CursoEnJornada>(
+export let jornadas = generateStore<Jornada>('jornadas');
+export let cursosEnJornada = generateStore<CursoEnJornada>(
 	'cursosEnJornada'
 );
-export const asistentesEnCurso = generateStore<AsistenteEnCurso>(
+export let asistentesEnCurso = generateStore<AsistenteEnCurso>(
 	'asistentesEnCurso'
 );
-export const reportes = generateStore<Reporte>('reportes');
+export let reportes = generateStore<Reporte>('reportes');
 
-export const registrosCompetencias = generateStore<RegistroCompetencia>(
+export let registrosCompetencias = generateStore<RegistroCompetencia>(
 	'registrosCompetencias'
 );
-export const registrosCursos = generateStore<RegistroCurso>(
+export let registrosCursos = generateStore<RegistroCurso>(
 	'registrosCursos'
 );
-export const registrosDiplomados = generateStore<RegistroDiplomado>(
+export let registrosDiplomados = generateStore<RegistroDiplomado>(
 	'registrosDiplomados'
 );

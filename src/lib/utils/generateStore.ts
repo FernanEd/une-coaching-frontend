@@ -8,20 +8,35 @@ export function generateStore<T extends { id: number }>(
 	let store = writable<T[]>([]);
 	let crud = generateCRUD(store, path, '');
 
-	const crudStore = {
+	let crudStore = {
 		...store,
 		...crud
 	};
 
 	userSession.subscribe((session) => {
-		crud = generateCRUD(store, path, session.token);
+		if (session) {
+			crudStore = {
+				...crudStore,
+				...generateCRUD(store, path, session.token)
+			};
+
+			(async () => {
+				try {
+					await crudStore.getItems();
+				} catch (e) {
+					console.log(e);
+				}
+			})();
+		}
 	});
 
-	try {
-		crudStore.getItems();
-	} catch (e) {
-		console.log(e);
-	}
+	(async () => {
+		try {
+			await crudStore.getItems();
+		} catch (e) {
+			console.log(e);
+		}
+	})();
 
 	return crudStore;
 }

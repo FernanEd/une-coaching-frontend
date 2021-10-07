@@ -17,7 +17,7 @@ export const generateCRUD = <T extends { id: number }>(
 			let data = await res.json();
 			store.set(data);
 		} catch (e) {
-			throw Error(e);
+			throw e;
 		}
 	},
 	async addItem(newItem: Omit<T, 'id'>): Promise<T> {
@@ -49,7 +49,7 @@ export const generateCRUD = <T extends { id: number }>(
 			return data;
 		} catch (e) {
 			store.set(oldStore);
-			throw Error(e);
+			throw e;
 		}
 	},
 	async updateItem(
@@ -77,7 +77,7 @@ export const generateCRUD = <T extends { id: number }>(
 			return data;
 		} catch (e) {
 			store.set(oldStore);
-			throw Error(e);
+			throw e;
 		}
 	},
 	async removeItem(id: number): Promise<T> {
@@ -98,7 +98,7 @@ export const generateCRUD = <T extends { id: number }>(
 			return data;
 		} catch (e) {
 			store.set(oldStore);
-			throw Error(e);
+			throw e;
 		}
 	}
 });

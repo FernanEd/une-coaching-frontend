@@ -54,7 +54,11 @@
 			});
 
 			if ($page.query.get('next')) {
-				if (!login['roles'].find((rol) => $page.path.includes(rol))) {
+				if (
+					!login['roles'].find((rol) =>
+						$page.query.get('next').includes(rol)
+					)
+				) {
 					await goto('/');
 				} else {
 					await goto($page.query.get('next'));

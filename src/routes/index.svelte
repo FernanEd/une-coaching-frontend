@@ -2,7 +2,8 @@
 	import { goto } from '$app/navigation';
 	import { usuarioList } from '$lib/stores/usuariosList';
 	import { userSession } from '$lib/stores/userSession';
-	import { onMount } from 'svelte';
+	import { onMount, tick } from 'svelte';
+	import { logOut } from '$lib/utils/auth';
 
 	$: currentUser = $usuarioList.find(({ id }) => {
 		if ($userSession) {
@@ -50,7 +51,7 @@
 				<div>
 					<p class="label">Selecciona un rol para ir a su portal</p>
 
-					{#each currentUser.roles as role (role.id)}
+					{#each currentUser.roles as role (role)}
 						<p>
 							<a href={role.rol}
 								>{role.rol[0].toUpperCase() + role.rol.substr(1)}</a
@@ -59,6 +60,10 @@
 					{/each}
 				</div>
 			{/if}
+
+			<button class="link primary self-start" on:click={logOut}
+				>Cerrar sesión</button
+			>
 		</div>
 	</section>
 {/if}
