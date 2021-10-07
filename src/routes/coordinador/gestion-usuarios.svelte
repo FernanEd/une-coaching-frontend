@@ -2,14 +2,14 @@
 	import UsuarioForm from '$lib/components/coordinador/usuarioForm.svelte';
 
 	import Modal from '$lib/components/modal.svelte';
-	import { usuarios } from '$lib/stores/db';
 	import { useModal } from '$lib/stores/modal';
 
 	import {
 		Rol,
 		UsuarioConRoles,
 		usuarioList
-	} from '$lib/stores/usuariosList';
+	} from '$lib/stores/lists/usuariosList';
+	import { usuarios } from '$lib/stores/db/usuarios';
 
 	let addUsuarioModal = useModal();
 	let updateUsuarioModal = useModal();

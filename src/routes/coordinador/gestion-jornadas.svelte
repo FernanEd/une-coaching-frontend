@@ -1,23 +1,19 @@
 <script lang="ts">
 	import GestionJornadas from '$lib/components/coordinador/gestionJornadas.svelte';
 	import Modal from '$lib/components/modal.svelte';
-	import { cursos, cursosEnJornada, jornadas } from '$lib/stores/db';
 	import { useModal } from '$lib/stores/modal';
-	import {
-		seleccionarJornada,
-		store_jornadaSeleccionada
-	} from '$lib/stores/selecionarJornada';
-	import type { JornadaConCursos } from '$lib/stores/selecionarJornada';
 	import type { Readable } from 'svelte/store';
 	import { onMount } from 'svelte';
 	import CursoJornadaForm from '$lib/components/coordinador/cursoJornadaForm.svelte';
 	import dayjs from 'dayjs';
 	import { dateFormat } from '$lib/utils/dateFormat';
-
-	let filterText: string;
-	const handleFilterField = () => {
-		console.log(filterText);
-	};
+	import {
+		seleccionarJornada,
+		store_jornadaSeleccionada
+	} from '$lib/stores/lists/selecionarJornada';
+	import type { JornadaConCursos } from '$lib/stores/lists/selecionarJornada';
+	import { jornadas } from '$lib/stores/db/jornadas';
+	import { cursosEnJornada } from '$lib/stores/db/cursosEnJornada';
 
 	let jornadaModal = useModal();
 	let addCursoModal = useModal();

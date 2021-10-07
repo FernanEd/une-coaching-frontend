@@ -2,7 +2,8 @@
 	import DiplomadoForm from '$lib/components/coordinador/diplomadoForm.svelte';
 	import GestionCursos from '$lib/components/coordinador/gestionCursos.svelte';
 	import Modal from '$lib/components/modal.svelte';
-	import { cursos, diplomados } from '$lib/stores/db';
+	import { cursos } from '$lib/stores/db/cursos';
+	import { diplomados } from '$lib/stores/db/diplomados';
 	import { useModal } from '$lib/stores/modal';
 	import { derived } from 'svelte/store';
 

@@ -7,15 +7,13 @@ import type {
 } from '$lib/utils/interfaces';
 import { derived, writable } from 'svelte/store';
 import type { Readable } from 'svelte/store';
-import {
-	asistentesEnCurso,
-	cursos,
-	cursosEnJornada,
-	docentes,
-	instructores,
-	jornadas,
-	usuarios
-} from './db';
+import { asistentesEnCurso } from '../db/asistentesEnCurso';
+import { cursos } from '../db/cursos';
+import { cursosEnJornada } from '../db/cursosEnJornada';
+import { docentes } from '../db/docentes';
+import { instructores } from '../db/instructores';
+import { jornadas } from '../db/jornadas';
+import { usuarios } from '../db/usuarios';
 
 type InstructorDeCurso = Usuario & { id_instructor: number };
 type AsistenteDeCurso = AsistenteEnCurso & {

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { cursos, jornadas } from '$lib/stores/db';
+	import { jornadas } from '$lib/stores/db/jornadas';
 	import { dateFormat } from '$lib/utils/dateFormat';
 	import type { Jornada } from '$lib/utils/interfaces';
 	import dayjs from 'dayjs';

@@ -1,12 +1,11 @@
 <script lang="ts">
-	import type { DocenteComoUsuario } from '$lib/stores/coachList';
+	import { docentes } from '$lib/stores/db/docentes';
 
-	import {
-		docentes,
-		docentesEnCoaches,
-		usuarios
-	} from '$lib/stores/db';
-	import { docentesList } from '$lib/stores/docentesList';
+	import { docentesEnCoaches } from '$lib/stores/db/docentesEnCoaches';
+
+	import type { DocenteComoUsuario } from '$lib/stores/lists/coachList';
+
+	import { docentesList } from '$lib/stores/lists/docentesList';
 	import type { DocentesEnCoaches } from '$lib/utils/interfaces';
 
 	let filterFunction = (val) => val;

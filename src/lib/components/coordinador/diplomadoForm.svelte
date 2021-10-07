@@ -1,5 +1,7 @@
 <script lang="ts">
-	import { cursos, diplomados } from '$lib/stores/db';
+	import { cursos } from '$lib/stores/db/cursos';
+
+	import { diplomados } from '$lib/stores/db/diplomados';
 
 	import type { Curso } from '$lib/utils/interfaces';
 	import { tick } from 'svelte';

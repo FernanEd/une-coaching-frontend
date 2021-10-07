@@ -1,7 +1,8 @@
 import type { Usuario } from '$lib/utils/interfaces';
 import type { Readable } from 'svelte/store';
 import { derived } from 'svelte/store';
-import { docentes, usuarios } from './db';
+import { docentes } from '../db/docentes';
+import { usuarios } from '../db/usuarios';
 
 export type DocenteEntrada = Usuario & { id_docente: number };
 

@@ -1,13 +1,15 @@
 <script lang="ts">
-	import {
-		administrativos,
-		coaches,
-		coordinadores,
-		docentes,
-		instructores,
-		usuarios
-	} from '$lib/stores/db';
-	import type { UsuarioConRoles } from '$lib/stores/usuariosList';
+	import { administrativos } from '$lib/stores/db/administrativos';
+
+	import { coaches } from '$lib/stores/db/coaches';
+	import { coordinadores } from '$lib/stores/db/coordinadores';
+
+	import { docentes } from '$lib/stores/db/docentes';
+	import { instructores } from '$lib/stores/db/instructores';
+
+	import { usuarios } from '$lib/stores/db/usuarios';
+
+	import type { UsuarioConRoles } from '$lib/stores/lists/usuariosList';
 	import type { Docente, Usuario } from '$lib/utils/interfaces';
 	import { tick } from 'svelte';
 

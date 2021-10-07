@@ -1,10 +1,9 @@
 <script lang="ts">
-	import {
-		cursos,
-		cursosEnJornada,
-		diplomados
-	} from '$lib/stores/db';
-	import { instructoresList } from '$lib/stores/instructorList';
+	import { cursos } from '$lib/stores/db/cursos';
+
+	import { cursosEnJornada } from '$lib/stores/db/cursosEnJornada';
+	import { instructoresList } from '$lib/stores/lists/instructorList';
+
 	import type { Curso, Usuario } from '$lib/utils/interfaces';
 	import { writable } from 'svelte/store';
 

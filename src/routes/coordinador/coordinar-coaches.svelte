@@ -1,14 +1,9 @@
 <script lang="ts">
 	import GestionDocentesEnCoaches from '$lib/components/coordinador/gestionDocentesEnCoaches.svelte';
 	import Modal from '$lib/components/modal.svelte';
-	import { coachList } from '$lib/stores/coachList';
-	import {
-		coaches,
-		docentes,
-		docentesEnCoaches
-	} from '$lib/stores/db';
 	import { useModal } from '$lib/stores/modal';
-	import { usuarioList } from '$lib/stores/usuariosList';
+	import { usuarioList } from '$lib/stores/lists/usuariosList';
+	import { coachList } from '$lib/stores/lists/coachList';
 
 	let gestionarDocentes = useModal();
 	let filterText: string;

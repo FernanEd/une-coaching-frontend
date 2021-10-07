@@ -1,14 +1,12 @@
 import type { Usuario } from '$lib/utils/interfaces';
 import { derived } from 'svelte/store';
 import type { Readable } from 'svelte/store';
-import {
-	administrativos,
-	coaches,
-	coordinadores,
-	docentes,
-	instructores,
-	usuarios
-} from './db';
+import { administrativos } from '../db/administrativos';
+import { coaches } from '../db/coaches';
+import { coordinadores } from '../db/coordinadores';
+import { docentes } from '../db/docentes';
+import { instructores } from '../db/instructores';
+import { usuarios } from '../db/usuarios';
 
 const checkUserExists = <
 	T extends { id: number; id_usuario: number }

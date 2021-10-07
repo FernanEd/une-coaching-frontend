@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import { usuarioList } from '$lib/stores/usuariosList';
+	import { usuarioList } from '$lib/stores/lists/usuariosList';
 	import { userSession } from '$lib/stores/userSession';
 	import { onMount, tick } from 'svelte';
 	import { logOut } from '$lib/utils/auth';
