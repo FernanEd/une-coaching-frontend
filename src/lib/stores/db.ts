@@ -1,4 +1,6 @@
+import { session } from '$app/stores';
 import { generateStore } from '$lib/utils/generateStore';
+
 import type {
 	Administrativo,
 	AsistenteEnCurso,
@@ -19,6 +21,7 @@ import type {
 	TipoCompetencia,
 	Usuario
 } from '$lib/utils/interfaces';
+import { get } from 'svelte/store';
 
 export const cursos = generateStore<Curso>('cursos');
 export const diplomados = generateStore<Diplomado>('diplomados');

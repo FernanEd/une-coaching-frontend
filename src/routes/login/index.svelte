@@ -53,7 +53,11 @@
 				userRoles: login['roles']
 			});
 
-			await goto($page.query.get('next'));
+			if ($page.query.get('next')) {
+				await goto($page.query.get('next'));
+			} else {
+				await goto('/');
+			}
 		} else {
 			errors.set([login['message']]);
 		}

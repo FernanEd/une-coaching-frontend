@@ -1,12 +1,14 @@
-import { session } from '$app/stores';
+import { writable } from 'svelte/store';
 import type { JWT } from './interfaces';
+
+export let currentSession = writable<JWT>();
 
 export const logIn = (jwt: JWT) => {
 	localStorage.setItem('jwt', JSON.stringify(jwt));
-	session.set({ ...jwt });
+	currentSession.set({ ...jwt });
 };
 
 export const logOut = () => {
 	localStorage.removeItem('jwt');
-	session.set(undefined);
+	currentSession.set(undefined);
 };

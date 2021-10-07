@@ -1,11 +1,12 @@
 import { generateCRUD } from '$lib/utils/genericCRUD';
 import { writable } from 'svelte/store';
+import { currentSession } from './auth';
 
 export function generateStore<T extends { id: number }>(
 	path: string
 ) {
 	let store = writable<T[]>([]);
-	let crud = generateCRUD(store, path);
+	let crud = generateCRUD(store, path, currentSession);
 
 	const crudStore = {
 		...store,
