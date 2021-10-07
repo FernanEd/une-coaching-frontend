@@ -158,13 +158,13 @@ export interface Reporte {
 }
 
 export interface JWT {
-	currentUser: Omit<Usuario, 'password'>;
-	userRoles: (
+	currentUser?: Omit<Usuario, 'password'>;
+	userRoles?: (
 		| 'docente'
 		| 'coach'
 		| 'coordinador'
 		| 'instructor'
 		| 'administrativo'
 	)[];
-	token: string;
+	token?: string;
 }

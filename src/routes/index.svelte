@@ -1,23 +1,66 @@
 <script lang="ts">
-	import { currentSession } from '$lib/utils/auth';
+	import { goto } from '$app/navigation';
+	import { usuarioList } from '$lib/stores/usuariosList';
+	import { userSession } from '$lib/stores/userSession';
+	import { onMount } from 'svelte';
+
+	$: currentUser = $usuarioList.find(({ id }) => {
+		if ($userSession) {
+			if ($userSession.currentUser) {
+				return id == $userSession.currentUser.id;
+			}
+		}
+
+		return false;
+	});
 </script>
 
 <svelte:head>
 	<title>Home</title>
 </svelte:head>
 
-{#if $currentSession}
-	<div>
-		<p>
-			Bienvenido {$currentSession.currentUser.nombre}
-
-			{#each $currentSession.userRoles as role (role)}
-				<p>
-					<a href={role}>{role}</a>
+{#if currentUser}
+	<section
+		class="absolute top-0 left-0 right-0 bottom-0
+	flex flex-col justify-center items-center
+	bg-white gap-8
+	"
+	>
+		<div class="w-full max-w-md flex flex-col gap-8">
+			<div>
+				<p class="text-3xl font-bold text-text-1">
+					Bienvenido {currentUser.nombre}
+					{currentUser.apellido_paterno}
+					{currentUser.apellido_materno}
 				</p>
-			{/each}
-		</p>
-	</div>
+				<p>
+					Este es el portal principal, aqui puedes acceder a tus
+					roles.
+				</p>
+			</div>
+
+			{#if currentUser.roles.length == 0}
+				<div>
+					<p class="text-text-4 font-bold">
+						Oops! parece que no tienes roles asignados
+					</p>
+					<p>Comunicate con el coordinador del área</p>
+				</div>
+			{:else}
+				<div>
+					<p class="label">Selecciona un rol para ir a su portal</p>
+
+					{#each currentUser.roles as role (role.id)}
+						<p>
+							<a href={role.rol}
+								>{role.rol[0].toUpperCase() + role.rol.substr(1)}</a
+							>
+						</p>
+					{/each}
+				</div>
+			{/if}
+		</div>
+	</section>
 {/if}
 
 <style>

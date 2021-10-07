@@ -1,25 +1,27 @@
+import { userSession } from '$lib/stores/userSession';
 import { generateCRUD } from '$lib/utils/genericCRUD';
 import { writable } from 'svelte/store';
-import { currentSession } from './auth';
 
 export function generateStore<T extends { id: number }>(
 	path: string
 ) {
 	let store = writable<T[]>([]);
-	let crud = generateCRUD(store, path, currentSession);
+	let crud = generateCRUD(store, path, '');
 
 	const crudStore = {
 		...store,
 		...crud
 	};
 
-	(async () => {
-		let $val: any[];
-		crudStore.subscribe(($) => ($val = $))();
-		if ($val.length == 0) {
-			await crudStore.getItems();
-		}
-	})();
+	userSession.subscribe((session) => {
+		crud = generateCRUD(store, path, session.token);
+	});
+
+	try {
+		crudStore.getItems();
+	} catch (e) {
+		console.log(e);
+	}
 
 	return crudStore;
 }

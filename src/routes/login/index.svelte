@@ -54,9 +54,17 @@
 			});
 
 			if ($page.query.get('next')) {
-				await goto($page.query.get('next'));
+				if (!login['roles'].find((rol) => $page.path.includes(rol))) {
+					await goto('/');
+				} else {
+					await goto($page.query.get('next'));
+				}
 			} else {
-				await goto('/');
+				if (login['roles'].length == 1) {
+					await goto(login['roles'][0]);
+				} else {
+					await goto('/');
+				}
 			}
 		} else {
 			errors.set([login['message']]);

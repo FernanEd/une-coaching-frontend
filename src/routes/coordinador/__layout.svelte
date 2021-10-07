@@ -1,3 +1,15 @@
+<script lang="ts">
+	import { goto } from '$app/navigation';
+	import { userSession } from '$lib/stores/userSession';
+
+	import { logOut } from '$lib/utils/auth';
+
+	const handleLogout = async () => {
+		logOut();
+		await goto('/');
+	};
+</script>
+
 <aside
 	class="bg-une-red fixed 
 left-0 top-0 bottom-0 
@@ -10,8 +22,12 @@ gap-20"
 	text-center"
 	>
 		<h1 class="text-white font-bold text-xl">Portal Coordinador</h1>
-		<p class="text-gray-300">Conectado como 170000</p>
-		<button class="font-bold text-accent-inv">Cerrar sesión </button>
+		<p class="text-gray-300">
+			Conectado como {$userSession.currentUser.matricula}
+		</p>
+		<button class="font-bold text-accent-inv" on:click={handleLogout}
+			>Cerrar sesión
+		</button>
 	</section>
 
 	<nav class="flex flex-col gap-2 mb-auto">
