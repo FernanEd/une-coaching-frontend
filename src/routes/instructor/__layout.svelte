@@ -1,4 +1,11 @@
-<main>
-	<p class="bg-green-200">Instructor layout</p>
+<script>
+	import MobileLayout from '$lib/layout/mobileLayout.svelte';
+</script>
+
+<MobileLayout
+	layoutHeading="Portal Instructor"
+	bgColor="bg-une-green"
+	tabs={[{ 'Mis cursos': '/instructor/mis-cursos' }]}
+>
 	<slot />
-</main>
+</MobileLayout>

@@ -15,7 +15,7 @@ gap-20"
 	text-center"
 	>
 		<h1 class="text-white font-bold text-xl">Portal Coordinador</h1>
-		<p class="text-gray-300">
+		<p class="text-gray-100">
 			Conectado como {$userSession.currentUser.matricula}
 		</p>
 		<button class="font-bold text-accent-inv" on:click={logOut}

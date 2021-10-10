@@ -1,4 +1,14 @@
-<main>
-	<p class="bg-yellow-200">Instructor layout</p>
+<script>
+	import MobileLayout from '$lib/layout/mobileLayout.svelte';
+</script>
+
+<MobileLayout
+	layoutHeading="Portal coach"
+	bgColor="bg-une-gold"
+	tabs={[
+		{ Docentes: '/coach/docentes' },
+		{ Inscripciones: '/coach/inscripciones' }
+	]}
+>
 	<slot />
-</main>
+</MobileLayout>
