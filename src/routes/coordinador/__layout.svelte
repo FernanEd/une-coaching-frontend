@@ -23,38 +23,49 @@ gap-20"
 		</button>
 	</section>
 
-	<nav class="flex flex-col gap-2 mb-auto">
-		<p class="leyenda text-gray-300 text-sm">PANELES</p>
-		<ul class="flex flex-col gap-4 font-bold">
-			<li>
-				<a class="text-white" href="/coordinador/gestion-usuarios"
-					>Gestionar usuarios</a
-				>
-			</li>
-			<li>
-				<a class="text-white" href="/coordinador/gestion-jornadas"
-					>Gestionar jornadas</a
-				>
-			</li>
-			<li>
-				<a class="text-white" href="/coordinador/coordinar-coaches"
-					>Coordinación de Coaches</a
-				>
-			</li>
-			<li>
-				<a
-					class="text-white"
-					href="/coordinador/diplomados-competencias"
-					>Diplomados y competencias</a
-				>
-			</li>
-			<li>
-				<a class="text-white" href="/coordinador/registros"
-					>Registros de acreditaciones</a
-				>
-			</li>
-		</ul>
-	</nav>
+	<section class="flex flex-col gap-8 mb-auto">
+		<nav>
+			<p class="leyenda text-gray-300 text-sm">Principal</p>
+			<ul class="flex flex-col gap-4 font-bold">
+				<li>
+					<a class="text-white" href="/">Inicio</a>
+				</li>
+			</ul>
+		</nav>
+
+		<nav>
+			<p class="leyenda text-gray-300 text-sm">PANELES</p>
+			<ul class="flex flex-col gap-4 font-bold">
+				<li>
+					<a class="text-white" href="/coordinador/gestion-usuarios"
+						>Gestionar usuarios</a
+					>
+				</li>
+				<li>
+					<a class="text-white" href="/coordinador/gestion-jornadas"
+						>Gestionar jornadas</a
+					>
+				</li>
+				<li>
+					<a class="text-white" href="/coordinador/coordinar-coaches"
+						>Coordinación de Coaches</a
+					>
+				</li>
+				<li>
+					<a
+						class="text-white"
+						href="/coordinador/diplomados-competencias"
+						>Diplomados y competencias</a
+					>
+				</li>
+				<li>
+					<a class="text-white" href="/coordinador/registros"
+						>Registros de acreditaciones</a
+					>
+				</li>
+			</ul>
+		</nav>
+	</section>
 
 	<section class="flex flex-col gap-4 items-center">
 		<img

@@ -27,7 +27,7 @@
 	bg-white gap-8
 	"
 	>
-		<div class="w-full max-w-md flex flex-col gap-8">
+		<div class="w-full max-w-lg flex flex-col gap-8">
 			<div>
 				<p class="text-3xl font-bold text-text-1">
 					Bienvenido {currentUser.nombre}
@@ -52,7 +52,7 @@
 					<p class="label">Selecciona un rol para ir a su portal</p>
 
 					{#each currentUser.roles as role (role)}
-						<p>
+						<p class="my-4">
 							<a href={role.rol}
 								>{role.rol[0].toUpperCase() + role.rol.substr(1)}</a
 							>

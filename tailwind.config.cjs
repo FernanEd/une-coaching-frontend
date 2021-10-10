@@ -26,6 +26,13 @@ const config = {
 				accent: {
 					DEFAULT: '#4676D3',
 					inv: '#6995EB'
+				},
+				neutral: {
+					100: '#EAEAEA',
+					200: '#D3D3D3',
+					300: '#AFAFAF',
+					400: '#8C8C8C',
+					500: '#6C6C6C'
 				}
 			}
 		}

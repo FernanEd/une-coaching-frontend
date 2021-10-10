@@ -2,7 +2,7 @@
 	export let handleClose;
 </script>
 
-<div class="modal-bg">
+<div class="modal-bg" on:click|self={handleClose}>
 	<div class="modal">
 		<header class="modal-header">
 			<button class="font-bold text-text-4" on:click={handleClose}
