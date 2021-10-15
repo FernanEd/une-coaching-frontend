@@ -1,6 +1,7 @@
-import { userSession } from '$lib/stores/userSession';
 import { generateCRUD } from '$lib/utils/genericCRUD';
+import { userSession } from '$lib/stores/userSession';
 import { writable } from 'svelte/store';
+import type { JWT } from './interfaces';
 
 export function generateStore<T extends { id: number }>(
 	path: string
@@ -14,10 +15,10 @@ export function generateStore<T extends { id: number }>(
 	};
 
 	userSession.subscribe((session) => {
-		if (session) {
+		if (session.hasOwnProperty('token')) {
 			crudStore = {
 				...crudStore,
-				...generateCRUD(store, path, session.token)
+				...generateCRUD(store, path, (session as JWT).token)
 			};
 
 			(async () => {
@@ -29,14 +30,6 @@ export function generateStore<T extends { id: number }>(
 			})();
 		}
 	});
-
-	(async () => {
-		try {
-			await crudStore.getItems();
-		} catch (e) {
-			console.log(e);
-		}
-	})();
 
 	return crudStore;
 }

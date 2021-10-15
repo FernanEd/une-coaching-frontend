@@ -157,14 +157,9 @@ export interface Reporte {
 	id_jornada: id_jornada;
 }
 
+// AUTH
+
 export interface JWT {
-	currentUser?: Omit<Usuario, 'password'>;
-	userRoles?: (
-		| 'docente'
-		| 'coach'
-		| 'coordinador'
-		| 'instructor'
-		| 'administrativo'
-	)[];
-	token?: string;
+	userID: id_usuario;
+	token: string;
 }

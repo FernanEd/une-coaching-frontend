@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { useModal } from '$lib/stores/modal';
-	import { userSession } from '$lib/stores/userSession';
 	import { logOut } from '$lib/utils/auth';
 	import { page } from '$app/stores';
+	import { currentUser } from '$lib/stores/currentUser';
 
 	export let bgColor = 'bg-une-red';
 	export let layoutHeading;
@@ -43,7 +43,7 @@ gap-20"
 					/>
 				</section>
 				<p class="text-gray-100">
-					Conectado como {$userSession.currentUser.matricula}
+					Conectado como {$currentUser.matricula}
 				</p>
 				<a href="/" class="text-white font-bold">Menú principal</a>
 				<button class="font-bold text-accent-inv" on:click={logOut}

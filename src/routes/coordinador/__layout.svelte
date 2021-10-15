@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { currentUser } from '$lib/stores/currentUser';
+
 	import { userSession } from '$lib/stores/userSession';
 	import { logOut } from '$lib/utils/auth';
 </script>
@@ -16,7 +18,7 @@ gap-20"
 	>
 		<h1 class="text-white font-bold text-xl">Portal Coordinador</h1>
 		<p class="text-gray-100">
-			Conectado como {$userSession.currentUser.matricula}
+			Conectado como {$currentUser.matricula}
 		</p>
 		<button class="font-bold text-accent-inv" on:click={logOut}
 			>Cerrar sesión

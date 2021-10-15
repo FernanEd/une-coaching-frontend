@@ -9,6 +9,6 @@ export const logIn = (jwt: JWT) => {
 
 export const logOut = () => {
 	localStorage.removeItem('jwt');
-	userSession.set(undefined);
+	userSession.set({});
 	goto('/login');
 };

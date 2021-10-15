@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
+	import { currentUser } from '$lib/stores/currentUser';
 	import { logIn } from '$lib/utils/auth';
 	import type { JWT, Usuario } from '$lib/utils/interfaces';
 	import { serverURL } from '$lib/utils/serverURL';
@@ -25,15 +26,8 @@
 
 		type loginSuccess = {
 			auth: true;
-			user: Usuario;
+			userID: number;
 			token: string;
-			roles: (
-				| 'coach'
-				| 'coordinador'
-				| 'instructor'
-				| 'administrativo'
-				| 'docente'
-			)[];
 		};
 
 		type loginError = {
@@ -48,14 +42,13 @@
 			passwordInput = undefined;
 
 			logIn({
-				currentUser: login['user'],
-				token: login['token'],
-				userRoles: login['roles']
+				userID: login['userID'],
+				token: login['token']
 			});
 
 			if ($page.query.get('next')) {
 				if (
-					!login['roles'].find((rol) =>
+					!$currentUser.roles.find(({ rol }) =>
 						$page.query.get('next').includes(rol)
 					)
 				) {
@@ -64,8 +57,8 @@
 					await goto($page.query.get('next'));
 				}
 			} else {
-				if (login['roles'].length == 1) {
-					await goto(login['roles'][0]);
+				if ($currentUser.roles.length == 1) {
+					await goto($currentUser.roles[0].rol);
 				} else {
 					await goto('/');
 				}
