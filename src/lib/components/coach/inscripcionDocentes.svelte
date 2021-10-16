@@ -3,13 +3,13 @@
 
 	import { docentesList } from '$lib/stores/lists/docentesList';
 	import type { AsistenteDeCurso } from '$lib/stores/lists/selecionarJornada';
-	import type { AsistenteEnCurso } from '$lib/utils/interfaces';
 
 	let filterFunction = (val) => val;
 	let filterText: string;
 	export let cursoJornadaID;
 	export let docentesSeleccionados: number[] = [];
 	export let asistenteEnCurso: AsistenteDeCurso[] = [];
+	export let cupoCurso;
 	let docentesIniciales = docentesSeleccionados;
 
 	const handleFilter = () => {
@@ -29,9 +29,6 @@
 		let docentesDesmarcados = docentesIniciales.filter(
 			(d) => !docentesSeleccionados.includes(d)
 		);
-
-		console.log('nuevos', doscentesNuevos);
-		console.log('desmarcados', docentesDesmarcados);
 
 		if (doscentesNuevos.length > 0) {
 			for (let docenteID of doscentesNuevos) {
@@ -65,7 +62,12 @@
 	{:else}
 		<header class="flex justify-between">
 			<h2 class="heading">Inscribir a curso</h2>
-			<button class="btn primary"> Inscribir docentes </button>
+			<button
+				class="btn primary"
+				class:hidden={docentesSeleccionados.length > cupoCurso}
+			>
+				Inscribir docentes
+			</button>
 		</header>
 
 		<div class="ml-auto">
@@ -76,6 +78,12 @@
 				on:input={handleFilter}
 			/>
 		</div>
+
+		{#if docentesSeleccionados.length > cupoCurso}
+			<p class="text-status-danger">
+				Por favor seleccione maximo {cupoCurso} docentes
+			</p>
+		{/if}
 
 		<p class="label">Selecciona docentes</p>
 		<div class="flex flex-col gap-1 max-h-60 overflow-auto">

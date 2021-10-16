@@ -30,6 +30,7 @@
 				(a) => a.id_docente
 			)}
 			asistenteEnCurso={$currentCursoEnJornada.asistentes}
+			cupoCurso={$currentCursoEnJornada.cupo_maximo}
 		/>
 	</Modal>
 {/if}
