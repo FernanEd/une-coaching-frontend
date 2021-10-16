@@ -7,13 +7,13 @@ import type {
 } from '$lib/utils/interfaces';
 import { derived, writable } from 'svelte/store';
 import type { Readable } from 'svelte/store';
-import { asistentesEnCurso } from '../db/asistentesEnCurso';
+import { jornadas } from '../db/jornadas';
 import { cursos } from '../db/cursos';
-import { cursosEnJornada } from '../db/cursosEnJornada';
+import { usuarios } from '../db/usuarios';
 import { docentes } from '../db/docentes';
 import { instructores } from '../db/instructores';
-import { jornadas } from '../db/jornadas';
-import { usuarios } from '../db/usuarios';
+import { asistentesEnCurso } from '../db/asistentesEnCurso';
+import { cursosEnJornada } from '../db/cursosEnJornada';
 
 type InstructorDeCurso = Usuario & { id_instructor: number };
 export type AsistenteDeCurso = AsistenteEnCurso & {
@@ -56,7 +56,11 @@ export const seleccionarJornada = (
 			let jornadaEncontrada = $jornadas.find(
 				(j) => j.id == jornadaID
 			);
+
 			if (!jornadaEncontrada) return;
+			if ($jornadas.length == 0) return;
+			if ($cursosEnJornada.length == 0) return;
+			if ($instructores.length == 0) return;
 
 			return {
 				...jornadaEncontrada,

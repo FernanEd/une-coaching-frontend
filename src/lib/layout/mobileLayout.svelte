@@ -18,77 +18,79 @@
 	const menu = useModal();
 </script>
 
-{#if $menu}
-	<section
-		class="fixed menu-bg w-screen h-screen z-10"
-		on:click|self={menu.closeModal}
-	>
-		<aside
-			class="{bgColor} fixed 
+{#if currentUser}
+	{#if $menu}
+		<section
+			class="fixed menu-bg w-screen h-screen z-10"
+			on:click|self={menu.closeModal}
+		>
+			<aside
+				class="{bgColor} fixed 
 left-0 top-0 bottom-0 
 py-8 px-4 flex flex-col 
 gap-20"
-		>
-			<section
-				class="flex flex-col 
+			>
+				<section
+					class="flex flex-col 
 	gap-4 items-center 
 	text-center"
-			>
-				<section class="flex flex-col gap-4 items-center">
-					<img
-						class="object-contain"
-						src="../../../static/une white logo.png"
-						alt="Une logo"
-						id="logo"
-					/>
+				>
+					<section class="flex flex-col gap-4 items-center">
+						<img
+							class="object-contain"
+							src="../../../static/une white logo.png"
+							alt="Une logo"
+							id="logo"
+						/>
+					</section>
+					<p class="text-gray-100">
+						Conectado como {$currentUser.matricula}
+					</p>
+					<a href="/" class="text-white font-bold">Menú principal</a>
+					<button class="font-bold text-accent-inv" on:click={logOut}
+						>Cerrar sesión
+					</button>
 				</section>
-				<p class="text-gray-100">
-					Conectado como {$currentUser.matricula}
-				</p>
-				<a href="/" class="text-white font-bold">Menú principal</a>
-				<button class="font-bold text-accent-inv" on:click={logOut}
-					>Cerrar sesión
-				</button>
-			</section>
-		</aside>
-	</section>
+			</aside>
+		</section>
+	{/if}
+
+	<header>
+		<section class={bgColor}>
+			<div class="notch h-4" />
+			<div
+				class="container relative text-2xl font-bold text-white p-4 text-center"
+			>
+				<svg
+					on:click={menu.openModal}
+					class="menu-icon"
+					xmlns="http://www.w3.org/2000/svg"
+					height="24px"
+					viewBox="0 0 24 24"
+					width="24px"
+					fill="#000000"
+					><path d="M0 0h24v24H0V0z" fill="none" /><path
+						d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"
+					/></svg
+				>
+				{layoutHeading}
+			</div>
+		</section>
+
+		<nav class="container flex justify-center">
+			{#each TABS as tab, i (tab)}
+				<a
+					href={tab.path}
+					class="tab"
+					class:selected={$page.path == tab.path}>{tab.title}</a
+				>
+			{/each}
+		</nav>
+	</header>
+	<main class="max-w-md mx-auto px-4 py-8">
+		<slot />
+	</main>
 {/if}
-
-<header>
-	<section class={bgColor}>
-		<div class="notch h-4" />
-		<div
-			class="container relative text-2xl font-bold text-white p-4 text-center"
-		>
-			<svg
-				on:click={menu.openModal}
-				class="menu-icon"
-				xmlns="http://www.w3.org/2000/svg"
-				height="24px"
-				viewBox="0 0 24 24"
-				width="24px"
-				fill="#000000"
-				><path d="M0 0h24v24H0V0z" fill="none" /><path
-					d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"
-				/></svg
-			>
-			{layoutHeading}
-		</div>
-	</section>
-
-	<nav class="container flex justify-center">
-		{#each TABS as tab, i (tab)}
-			<a
-				href={tab.path}
-				class="tab"
-				class:selected={$page.path == tab.path}>{tab.title}</a
-			>
-		{/each}
-	</nav>
-</header>
-<main class="max-w-md mx-auto px-4 py-8">
-	<slot />
-</main>
 
 <style lang="postcss">
 	.menu-bg {

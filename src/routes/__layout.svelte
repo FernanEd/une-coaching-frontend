@@ -11,19 +11,21 @@
 		if (!$userSession.hasOwnProperty('userID')) {
 			await goto(`/login?next=${$page.path}`);
 		} else {
-			currentUser.subscribe((user) => {
-				if (user) {
-					if (
-						!user.roles.find(({ rol }) => $page.path.includes(rol))
-					) {
-						goto('/');
-					}
+			if ($currentUser) {
+				if (
+					!$currentUser.roles.find(({ rol }) =>
+						$page.path.includes(rol)
+					)
+				) {
+					goto('/');
 				}
-			});
+			}
 		}
 	});
 </script>
 
-{#if $userSession.hasOwnProperty('userID') && $currentUser}
-	<slot />
+{#if $userSession.hasOwnProperty('userID')}
+	{#if $currentUser}
+		<slot />
+	{/if}
 {/if}

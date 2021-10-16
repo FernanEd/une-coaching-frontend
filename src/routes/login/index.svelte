@@ -46,22 +46,26 @@
 				token: login['token']
 			});
 
-			if ($page.query.get('next')) {
-				if (
-					!$currentUser.roles.find(({ rol }) =>
-						$page.query.get('next').includes(rol)
-					)
-				) {
-					await goto('/');
+			if ($currentUser) {
+				if ($page.query.get('next')) {
+					if (
+						!$currentUser.roles.find(({ rol }) =>
+							$page.query.get('next').includes(rol)
+						)
+					) {
+						await goto('/');
+					} else {
+						await goto($page.query.get('next'));
+					}
 				} else {
-					await goto($page.query.get('next'));
+					if ($currentUser.roles.length == 1) {
+						await goto($currentUser.roles[0].rol);
+					} else {
+						await goto('/');
+					}
 				}
 			} else {
-				if ($currentUser.roles.length == 1) {
-					await goto($currentUser.roles[0].rol);
-				} else {
-					await goto('/');
-				}
+				await goto('/');
 			}
 		} else {
 			errors.set([login['message']]);
