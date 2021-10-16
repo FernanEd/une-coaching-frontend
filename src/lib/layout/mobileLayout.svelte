@@ -86,7 +86,7 @@ gap-20"
 		{/each}
 	</nav>
 </header>
-<main class="max-w-md mx-auto p-4">
+<main class="max-w-md mx-auto px-4 py-8">
 	<slot />
 </main>
 

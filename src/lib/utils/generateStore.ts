@@ -14,6 +14,10 @@ export function generateStore<T extends { id: number }>(
 		...crud
 	};
 
+	if (!userSession) {
+		return crudStore;
+	}
+
 	userSession.subscribe((session) => {
 		if (session.hasOwnProperty('token')) {
 			crudStore = {

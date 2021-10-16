@@ -16,7 +16,7 @@ import { jornadas } from '../db/jornadas';
 import { usuarios } from '../db/usuarios';
 
 type InstructorDeCurso = Usuario & { id_instructor: number };
-type AsistenteDeCurso = AsistenteEnCurso & {
+export type AsistenteDeCurso = AsistenteEnCurso & {
 	docente: Usuario & { id_docente: number };
 };
 type CursosConAsistentesInstructores = CursoEnJornada & {

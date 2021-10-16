@@ -3,6 +3,9 @@ const config = {
 	purge: ['./src/**/*.{html,js,svelte,ts}'],
 	theme: {
 		extend: {
+			boxShadow: {
+				fix: '0 4px 15px 0 rgba(0, 0, 0, 0.15)'
+			},
 			colors: {
 				une: {
 					red: '#A22E3E',
