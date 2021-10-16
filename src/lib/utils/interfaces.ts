@@ -141,11 +141,17 @@ export interface CursoEnJornada {
 	id_jornada: id_jornada;
 }
 
+// Estados
+// 0 - denied
+// 1 - pending
+// 2 - progress
+// 3 - closed
+
 export interface AsistenteEnCurso {
 	id: id_asistenteEnCurso;
 	id_cursojornada: id_cursoEnJornada;
 	id_docente: id_docente;
-	estado: 1 | 2 | 3 | 4;
+	estado: 0 | 1 | 2 | 3;
 	calificacion: number;
 }
 
