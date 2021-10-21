@@ -23,8 +23,8 @@
 	);
 
 	let competenciaEditableID: number;
-	$: diplomadoEditable = $listaCompetencias.find(
-		(d) => d.id == competenciaEditableID
+	$: competenciaEditable = $listaCompetencias.find(
+		(c) => c.id == competenciaEditableID
 	);
 	let cursosModal = useModal();
 </script>
@@ -45,12 +45,18 @@
 	<Modal handleClose={editarCOmpetenciaModal.closeModal}>
 		<!-- <DiplomadoForm
 			isEditing
-			diplomadoID={diplomadoEditable.id}
-			nombreDiplomado={diplomadoEditable.nombre}
-			cursosSeleccionados={diplomadoEditable.listaCursos.map(
+			diplomadoID={competenciaEditable.id}
+			nombreDiplomado={competenciaEditable.nombre}
+			cursosSeleccionados={competenciaEditable.listaCursos.map(
 				(c) => c.id
 			)}
 		/> -->
+		<CompetenciaForm
+			isEditing
+			competenciaID={competenciaEditable.id}
+			nombreCompetencia={competenciaEditable.nombre}
+			selectedTipo={competenciaEditable.id_tipo}
+		/>
 	</Modal>
 {/if}
 

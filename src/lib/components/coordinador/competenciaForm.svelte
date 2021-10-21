@@ -7,55 +7,25 @@
 	import { tick } from 'svelte';
 
 	export let isEditing = false;
-	export let diplomadoID: number = 0;
-
-	export let nombreDiplomado = '';
-	export let cursosSeleccionados: number[] = [];
-	let cursosViejos: number[] = cursosSeleccionados;
-
-	let selectedTipo: number;
+	export let competenciaID: number = 0;
+	export let nombreCompetencia = '';
+	export let selectedTipo: number = undefined;
 
 	const handleSubmit = async () => {
-		if (nombreDiplomado != '') {
+		if (nombreCompetencia != '') {
 			if (isEditing) {
-				// let cursosDeseleccionados = cursosViejos.filter(
-				// 	(cursoID) => !cursosSeleccionados.includes(cursoID)
-				// );
-				// let cursosActualizar = cursosSeleccionados.filter(
-				// 	(cursoID) => !cursosViejos.includes(cursoID)
-				// );
-				// await diplomados.updateItem(diplomadoID, {
-				// 	nombre: nombreDiplomado
-				// });
-				// for (let cursoID of cursosActualizar) {
-				// 	await cursos.updateItem(cursoID, {
-				// 		id_diplomado: diplomadoID
-				// 	});
-				// }
-				// for (let cursoID of cursosDeseleccionados) {
-				// 	await cursos.updateItem(cursoID, { id_diplomado: null });
-				// }
-				// //Actualizar cursos;
-				// cursosViejos = cursosSeleccionados;
-			} else {
-				// let diplomado = await diplomados.addItem({
-				// 	nombre: nombreDiplomado
-				// });
-				// let cursosDeDiplomado = cursosSeleccionados;
-				// //Limpiar form;
-				// cursosSeleccionados = [];
-				// nombreDiplomado = '';
-				// await Promise.all(
-				// 	cursosDeDiplomado.map((cursoID) =>
-				// 		cursos.updateItem(cursoID, { id_diplomado: diplomado.id })
-				// 	)
-				// );
-				await competencias.addItem({
-					nombre: nombreDiplomado,
+				await competencias.updateItem(competenciaID, {
+					nombre: nombreCompetencia,
 					id_tipo: selectedTipo
 				});
-				tick();
-				nombreDiplomado = '';
+				await tick();
+			} else {
+				await competencias.addItem({
+					nombre: nombreCompetencia,
+					id_tipo: selectedTipo
+				});
+				await tick();
+				nombreCompetencia = '';
 			}
 		}
 	};
@@ -80,7 +50,7 @@
 			type="text"
 			class="w-full"
 			required
-			bind:value={nombreDiplomado}
+			bind:value={nombreCompetencia}
 		/>
 	</div>
 
