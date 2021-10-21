@@ -6,6 +6,7 @@
 	import { cursos } from '$lib/stores/db/cursos';
 	import { diplomados } from '$lib/stores/db/diplomados';
 	import { tiposCompetencias } from '$lib/stores/db/tipoCompetencias';
+	import { competenciasList } from '$lib/stores/lists/competenciasList';
 	import { useModal } from '$lib/stores/modal';
 	import { derived } from 'svelte/store';
 	import CompetenciaForm from './competenciaForm.svelte';
@@ -13,17 +14,9 @@
 
 	let agregarCompetenciaModal = useModal();
 	let editarCOmpetenciaModal = useModal();
-	let listaCompetencias = derived(
-		[competencias, tiposCompetencias],
-		([$competencias, $tiposCompetencias]) =>
-			$competencias.map((c) => ({
-				...c,
-				tipo: $tiposCompetencias.find((t) => t.id == c.id_tipo)
-			}))
-	);
 
 	let competenciaEditableID: number;
-	$: competenciaEditable = $listaCompetencias.find(
+	$: competenciaEditable = $competenciasList.find(
 		(c) => c.id == competenciaEditableID
 	);
 	let cursosModal = useModal();
@@ -76,7 +69,7 @@
 
 <hr class="my-4 border-none" />
 
-{#if $listaCompetencias.length == 0}
+{#if $competenciasList.length == 0}
 	<p>No hay competencias aún.</p>
 {:else}
 	<table
@@ -91,7 +84,7 @@
 			</tr>
 		</thead>
 		<tbody class="">
-			{#each $listaCompetencias as competencia (competencia.id)}
+			{#each $competenciasList as competencia (competencia.id)}
 				<tr>
 					<td>{competencia.nombre}</td>
 					<td>

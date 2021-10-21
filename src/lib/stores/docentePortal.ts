@@ -22,6 +22,7 @@ import { instructores } from './db/instructores';
 import { registrosCompetencias } from './db/registrosCompetencias';
 import { registrosCursos } from './db/registrosCursos';
 import { registrosDiplomados } from './db/registrosDiplomados';
+import { tiposCompetencias } from './db/tipoCompetencias';
 import { usuarios } from './db/usuarios';
 
 type cursoEnProgreso = AsistenteEnCurso & {
@@ -67,6 +68,7 @@ export const getDocentePortal = (usuarioID: number) => {
 			docentes,
 			instructores,
 			competencias,
+			tiposCompetencias,
 			cursos,
 			diplomados,
 			registrosCompetencias,
@@ -80,6 +82,7 @@ export const getDocentePortal = (usuarioID: number) => {
 			$docentes,
 			$instructores,
 			$competencias,
+			$tiposCompetencias,
 			$cursos,
 			$diplomados,
 			$registrosCompetencias,
@@ -146,9 +149,52 @@ export const getDocentePortal = (usuarioID: number) => {
 					a ? a.estado != 0 && a.estado != 1 : false
 				),
 				acreditaciones: {
-					cursos: [],
-					diplomados: [],
-					competencias: []
+					cursos: $registrosCursos
+						.filter((r) => r.id_acreditor == docente.id)
+						.map((r) => {
+							let cursoDiplomado = $cursos.find(
+								(c) => c.id == r.id_curso
+							);
+
+							return {
+								...r,
+								curso: {
+									...cursoDiplomado,
+									diplomado: $diplomados.find((d) =>
+										cursoDiplomado
+											? d.id == cursoDiplomado.id_diplomado
+											: false
+									)
+								}
+							};
+						}),
+					diplomados: $registrosDiplomados
+						.filter((r) => r.id_acreditor == docente.id)
+						.map((r) => ({
+							...r,
+							diplomado: $diplomados.find(
+								(d) => d.id == r.id_diplomado
+							)
+						})),
+					competencias: $registrosCompetencias
+						.filter((r) => r.id_acreditor == docente.id)
+						.map((r) => {
+							let competenciaEncontrada = $competencias.find(
+								(c) => c.id == r.id_competencia
+							);
+
+							return {
+								...r,
+								competencia: {
+									...competenciaEncontrada,
+									tipo: $tiposCompetencias.find((t) =>
+										competenciaEncontrada
+											? t.id == competenciaEncontrada.id_tipo
+											: false
+									)
+								}
+							};
+						})
 				}
 			};
 		}

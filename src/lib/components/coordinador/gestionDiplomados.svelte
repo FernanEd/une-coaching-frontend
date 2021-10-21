@@ -4,24 +4,15 @@
 	import Modal from '$lib/components/modal.svelte';
 	import { cursos } from '$lib/stores/db/cursos';
 	import { diplomados } from '$lib/stores/db/diplomados';
+	import { diplomadosList } from '$lib/stores/lists/diplomadosList';
 	import { useModal } from '$lib/stores/modal';
 	import { derived } from 'svelte/store';
 
 	let agregarDiplomadoModal = useModal();
 	let editarDiplomadoModal = useModal();
-	let listaDiplomados = derived(
-		[diplomados, cursos],
-		([$diplomados, $cursos]) =>
-			$diplomados.map((d) => ({
-				...d,
-				listaCursos: $cursos.filter(
-					({ id_diplomado }) => id_diplomado == d.id
-				)
-			}))
-	);
 
 	let diplomadoEditableID: number;
-	$: diplomadoEditable = $listaDiplomados.find(
+	$: diplomadoEditable = $diplomadosList.find(
 		(d) => d.id == diplomadoEditableID
 	);
 	let cursosModal = useModal();
@@ -68,7 +59,7 @@
 
 <hr class="my-4 border-none" />
 
-{#if $listaDiplomados.length == 0}
+{#if $diplomadosList.length == 0}
 	<p>No hay diplomados aún.</p>
 {:else}
 	<table
@@ -83,7 +74,7 @@
 			</tr>
 		</thead>
 		<tbody class="">
-			{#each $listaDiplomados as diplomado (diplomado.id)}
+			{#each $diplomadosList as diplomado (diplomado.id)}
 				<tr>
 					<td>{diplomado.nombre}</td>
 					<td>

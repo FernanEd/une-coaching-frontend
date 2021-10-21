@@ -149,8 +149,14 @@
 					</td>
 					<td>
 						<p>
+							Cupos asignados: <span class="font-bold">
+								{cursoJornada.cupo_maximo}
+							</span>
+						</p>
+						<p>
 							Cupos restantes: <span class="font-bold"
-								>{cursoJornada.cupo_maximo}</span
+								>{cursoJornada.cupo_maximo -
+									cursoJornada.asistentes.length}</span
 							>
 						</p>
 
@@ -161,7 +167,9 @@
 						{:else}
 							<p>Inscritos:</p>
 							{#each cursoJornada.asistentes as asistente (asistente.id)}
-								<a href="#">{asistente.docente.matricula}</a>
+								<a href="#">{asistente.docente.matricula}</a><span
+									>,
+								</span>
 							{/each}
 						{/if}
 					</td>
