@@ -1,49 +1,52 @@
 <script lang="ts">
 	import { cursos } from '$lib/stores/db/cursos';
+	import { tiposCompetencias } from '$lib/stores/db/tipoCompetencias';
+	import type { TipoCompetencia } from '$lib/utils/interfaces';
 
-	import type { Curso } from '$lib/utils/interfaces';
-	import { onMount } from 'svelte';
-
-	let cursoName;
+	let tipoCompetenciaName;
 	let currentID;
 
 	const handleSubmit = () => {
-		if (cursoName) {
+		if (tipoCompetenciaName) {
 			if (currentID) {
-				cursos.updateItem(currentID, { nombre: cursoName });
+				tiposCompetencias.updateItem(currentID, {
+					nombre: tipoCompetenciaName
+				});
 				currentID = undefined;
 			} else {
-				cursos.addItem({ nombre: cursoName, id_diplomado: null });
+				tiposCompetencias.addItem({
+					nombre: tipoCompetenciaName
+				});
 			}
-			cursoName = '';
+			tipoCompetenciaName = '';
 		}
 	};
 
-	const handleUpdate = (curso: Curso) => {
-		currentID = curso.id;
-		cursoName = curso.nombre;
+	const handleUpdate = (tipoCompetencia: TipoCompetencia) => {
+		currentID = tipoCompetencia.id;
+		tipoCompetenciaName = tipoCompetencia.nombre;
 	};
 </script>
 
 <form
 	on:submit|preventDefault={handleSubmit}
-	class="flex flex-col gap-4"
+	class="flex flex-col gap-4 w-screen max-w-xl"
 >
 	<header class="flex justify-between flex-wrap">
 		<h2 class="heading">Tipos de competencias</h2>
 		{#if currentID}
-			<button class="btn primary">Editar curso </button>
+			<button class="btn primary">Editar tipo </button>
 		{:else}
-			<button class="btn primary">Agregar curso </button>
+			<button class="btn primary">Agregar tipo </button>
 		{/if}
 	</header>
 
 	<label class="w-full">
-		<p class="label">Nombre del curso</p>
+		<p class="label">Nombre del tipo de competencia</p>
 		<input
 			type="text"
 			class="w-full"
-			bind:value={cursoName}
+			bind:value={tipoCompetenciaName}
 			required
 		/>
 	</label>
@@ -51,31 +54,31 @@
 
 <hr class="my-4 border-none" />
 
-{#if $cursos.length == 0}
+{#if $tiposCompetencias.length == 0}
 	<p>No hay cursos aún.</p>
 {:else}
-	<table class="table-fixed table shadow-lg max-w-xl w-full">
+	<table class="table-fixed table shadow-lg w-full max-w-xl">
 		<thead>
 			<tr>
-				<th>Curso</th>
+				<th>Tipo de competencia</th>
 				<th>...</th>
 			</tr>
 		</thead>
 		<tbody class="max-h-60 overflow-auto">
-			{#each $cursos as curso (curso.id)}
+			{#each $tiposCompetencias as tipoCompetencia (tipoCompetencia.id)}
 				<tr>
-					<td>{curso.nombre}</td>
+					<td>{tipoCompetencia.nombre}</td>
 					<td>
 						<span class="flex gap-8 justify-center">
 							<button
 								class="font-bold text-accent"
-								on:click={() => handleUpdate(curso)}
-								>Editar curso</button
+								on:click={() => handleUpdate(tipoCompetencia)}
+								>Editar tipo</button
 							>
 							<button
 								class="font-bold text-text-4"
-								on:click={() => cursos.removeItem(curso.id)}
-								>Eliminar curso</button
+								on:click={() => cursos.removeItem(tipoCompetencia.id)}
+								>Eliminar tipo</button
 							>
 						</span>
 					</td>

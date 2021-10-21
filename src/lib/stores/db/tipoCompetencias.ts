@@ -4,6 +4,6 @@ import type {
 	TipoCompetencia
 } from '$lib/utils/interfaces';
 
-export let tipoCompetencia = generateStore<TipoCompetencia>(
-	'tipoCompetencia'
+export let tiposCompetencias = generateStore<TipoCompetencia>(
+	'tiposCompetencias'
 );

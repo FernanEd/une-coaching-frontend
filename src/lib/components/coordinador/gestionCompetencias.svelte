@@ -2,53 +2,55 @@
 	import DiplomadoForm from '$lib/components/coordinador/diplomadoForm.svelte';
 	import GestionCursos from '$lib/components/coordinador/gestionCursos.svelte';
 	import Modal from '$lib/components/modal.svelte';
+	import { competencias } from '$lib/stores/db/competencias';
 	import { cursos } from '$lib/stores/db/cursos';
 	import { diplomados } from '$lib/stores/db/diplomados';
+	import { tiposCompetencias } from '$lib/stores/db/tipoCompetencias';
 	import { useModal } from '$lib/stores/modal';
 	import { derived } from 'svelte/store';
+	import CompetenciaForm from './competenciaForm.svelte';
+	import GestionTiposCompetencia from './gestionTiposCompetencia.svelte';
 
 	let agregarCompetenciaModal = useModal();
 	let editarCOmpetenciaModal = useModal();
-	let listaDiplomados = derived(
-		[diplomados, cursos],
-		([$diplomados, $cursos]) =>
-			$diplomados.map((d) => ({
-				...d,
-				listaCursos: $cursos.filter(
-					({ id_diplomado }) => id_diplomado == d.id
-				)
+	let listaCompetencias = derived(
+		[competencias, tiposCompetencias],
+		([$competencias, $tiposCompetencias]) =>
+			$competencias.map((c) => ({
+				...c,
+				tipo: $tiposCompetencias.find((t) => t.id == c.id_tipo)
 			}))
 	);
 
-	let diplomadoEditableID: number;
-	$: diplomadoEditable = $listaDiplomados.find(
-		(d) => d.id == diplomadoEditableID
+	let competenciaEditableID: number;
+	$: diplomadoEditable = $listaCompetencias.find(
+		(d) => d.id == competenciaEditableID
 	);
 	let cursosModal = useModal();
 </script>
 
 {#if $agregarCompetenciaModal}
 	<Modal handleClose={agregarCompetenciaModal.closeModal}>
-		<DiplomadoForm />
+		<CompetenciaForm />
 	</Modal>
 {/if}
 
 {#if $cursosModal}
 	<Modal handleClose={cursosModal.closeModal}>
-		<GestionCursos />
+		<GestionTiposCompetencia />
 	</Modal>
 {/if}
 
 {#if $editarCOmpetenciaModal}
 	<Modal handleClose={editarCOmpetenciaModal.closeModal}>
-		<DiplomadoForm
+		<!-- <DiplomadoForm
 			isEditing
 			diplomadoID={diplomadoEditable.id}
 			nombreDiplomado={diplomadoEditable.nombre}
 			cursosSeleccionados={diplomadoEditable.listaCursos.map(
 				(c) => c.id
 			)}
-		/>
+		/> -->
 	</Modal>
 {/if}
 
@@ -56,7 +58,7 @@
 	<h2 class="heading">Competencias</h2>
 	<span class="flex gap-8 items-center">
 		<button class="link primary" on:click={cursosModal.openModal}
-			>Gestionar tipos</button
+			>Gestionar tipos de competencias</button
 		>
 		<button
 			class="btn primary"
@@ -68,8 +70,8 @@
 
 <hr class="my-4 border-none" />
 
-{#if $listaDiplomados.length == 0}
-	<p>No hay diplomados aún.</p>
+{#if $listaCompetencias.length == 0}
+	<p>No hay competencias aún.</p>
 {:else}
 	<table
 		id="table-diplomados"
@@ -83,14 +85,14 @@
 			</tr>
 		</thead>
 		<tbody class="">
-			{#each $listaDiplomados as diplomado (diplomado.id)}
+			{#each $listaCompetencias as competencia (competencia.id)}
 				<tr>
-					<td>{diplomado.nombre}</td>
+					<td>{competencia.nombre}</td>
 					<td>
-						{#if diplomado.listaCursos.length > 0}
-							{diplomado.listaCursos.map((c) => c.nombre).join(', ')}
+						{#if competencia.tipo}
+							{competencia.tipo.nombre}
 						{:else}
-							<p class="text text-text-4">Sin cursos</p>
+							<p class="text text-text-4">Sin tipo</p>
 						{/if}
 					</td>
 					<td>
@@ -98,14 +100,15 @@
 							<button
 								class="link primary"
 								on:click={() => {
-									diplomadoEditableID = diplomado.id;
+									competenciaEditableID = competencia.id;
 									editarCOmpetenciaModal.openModal();
-								}}>Editar diplomado</button
+								}}>Editar competencia</button
 							>
 							<button
 								class="link"
-								on:click={() => diplomados.removeItem(diplomado.id)}
-								>Eliminar diplomado</button
+								on:click={() =>
+									competencias.removeItem(competencia.id)}
+								>Eliminar competencia</button
 							>
 						</span>
 					</td>

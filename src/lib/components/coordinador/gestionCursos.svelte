@@ -27,7 +27,7 @@
 
 <form
 	on:submit|preventDefault={handleSubmit}
-	class="flex flex-col gap-4"
+	class="flex flex-col gap-4 w-screen max-w-xl"
 >
 	<header class="flex justify-between flex-wrap">
 		<h2 class="heading">Cursos</h2>
