@@ -2,6 +2,7 @@ import type {
 	AsistenteEnCurso,
 	Competencia,
 	Curso,
+	CursoEnJornada,
 	Diplomado,
 	Instructor,
 	RegistroCompetencia,
@@ -25,7 +26,14 @@ import { registrosDiplomados } from './db/registrosDiplomados';
 import { tiposCompetencias } from './db/tipoCompetencias';
 import { usuarios } from './db/usuarios';
 
-type cursoEnProgreso = AsistenteEnCurso & {
+type InvitacionesDelDocente = AsistenteEnCurso & {
+	instructor: Usuario & { id_instructor: number };
+	curso: Curso & {
+		diplomado: Diplomado;
+	};
+};
+
+type CursosDelDocente = CursoEnJornada & {
 	instructor: Usuario & { id_instructor: number };
 	curso: Curso & {
 		diplomado: Diplomado;
@@ -50,8 +58,8 @@ type registroAcreditacionCompetencia = RegistroCompetencia & {
 
 export interface DocentePortal {
 	user: Usuario & { id_docente: number };
-	invitaciones: cursoEnProgreso[];
-	cursos: cursoEnProgreso[];
+	invitaciones: InvitacionesDelDocente[];
+	cursos: CursosDelDocente[];
 	acreditaciones: {
 		cursos: registroAcreditacionCurso[];
 		diplomados: registroAcreditacionDiplomado[];
@@ -101,7 +109,9 @@ export const getDocentePortal = (usuarioID: number) => {
 
 			let docente = $docentes.find((d) => d.id_usuario == usuarioID);
 
-			let asistencias: cursoEnProgreso[] = $asistentesEnCurso
+			if (!docente) return;
+
+			let asistencias: InvitacionesDelDocente[] = $asistentesEnCurso
 				.filter((a) => a.id_docente == docente.id)
 				.map((a) => {
 					let cursoJornada = $cursosEnJornada.find(
@@ -137,17 +147,51 @@ export const getDocentePortal = (usuarioID: number) => {
 					};
 				});
 
+			let invitacionAceptadas = asistencias.filter((a) =>
+				a ? a.estado == 1 : false
+			);
+
+			let cursosInscritos: CursosDelDocente[] = $cursosEnJornada
+				.filter((c) =>
+					invitacionAceptadas.some((a) => a.id_cursojornada == c.id)
+				)
+				.map((c) => {
+					let instructorDelCurso = $instructores.find(
+						(i) => i.id == c.id_instructor
+					);
+					if (!instructorDelCurso) return;
+
+					let cursoComoMateria = $cursos.find(
+						(curso) => curso.id == c.id_curso
+					);
+					if (!cursoComoMateria) return;
+
+					return {
+						...c,
+						instructor: {
+							...$usuarios.find(
+								(u) => u.id == instructorDelCurso.id_usuario
+							),
+							id_instructor: c.id_instructor
+						},
+						curso: {
+							...cursoComoMateria,
+							diplomado: $diplomados.find(
+								(d) => d.id == cursoComoMateria.id_diplomado
+							)
+						}
+					};
+				});
+
 			return {
 				user: {
 					...$usuarios.find((u) => u.id == usuarioID),
 					id_docente: docente.id
 				},
 				invitaciones: asistencias.filter((a) =>
-					a ? a.estado == 1 : false
+					a ? a.estado == 0 : false
 				),
-				cursos: asistencias.filter((a) =>
-					a ? a.estado != 0 && a.estado != 1 : false
-				),
+				cursos: cursosInscritos,
 				acreditaciones: {
 					cursos: $registrosCursos
 						.filter((r) => r.id_acreditor == docente.id)

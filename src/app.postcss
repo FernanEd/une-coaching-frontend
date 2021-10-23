@@ -6,92 +6,99 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-	font-family: 'Inter', sans-serif;
-	font-weight: 500;
-	font-size: 16px;
+@layer base {
+	body {
+		font-family: 'Inter', sans-serif;
+		font-weight: 500;
+		font-size: 16px;
 
-	@apply text-text-1;
-}
+		@apply text-text-1;
+	}
 
-a {
-	@apply text-une-purple;
-}
+	a {
+		@apply text-une-purple;
+	}
 
-* {
-	word-break: break-word;
-}
+	* {
+		word-break: break-word;
+	}
 
-.leyenda {
-	@apply font-bold uppercase;
-	letter-spacing: 1px;
-}
+	button,
+	input[type='submit'],
+	a {
+		transition: filter 0.3s ease;
+	}
 
-button,
-input[type='submit'],
-a {
-	transition: filter 0.3s ease;
-}
+	button:hover,
+	input[type='submit']:hover,
+	a:hover {
+		filter: brightness(0.8);
+	}
 
-button:hover,
-input[type='submit']:hover,
-a:hover {
-	filter: brightness(0.8);
-}
+	input[type='text'],
+	input[type='number'],
+	input[type='email'],
+	input[type='password'],
+	input[type='date'],
+	select,
+	textarea {
+		@apply border-text-4 p-1 border rounded;
+	}
 
-input[type='text'],
-input[type='number'],
-input[type='email'],
-input[type='password'],
-input[type='date'],
-select,
-textarea {
-	@apply border-text-4 p-1 border rounded;
-}
+	input[type='checkbox'],
+	input[type='radio'] {
+		cursor: pointer;
+		@apply w-5 h-5;
+	}
 
-input[type='checkbox'],
-input[type='radio'] {
-	cursor: pointer;
-	@apply w-5 h-5;
-}
-
-th,
-td {
-	@apply p-2 border;
+	th,
+	td {
+		@apply p-2 border;
+	}
 }
 
-.btn {
+@layer components {
+	.leyenda {
+		@apply font-bold uppercase;
+		letter-spacing: 1px;
+	}
+
+	.btn {
+	}
+
+	.btn {
+		@apply px-4 py-2 font-bold rounded-full shadow-xl;
+	}
+	.btn.primary {
+		@apply bg-accent text-text-inv;
+	}
+
+	.link {
+		@apply text-text-4 font-bold;
+	}
+	.link.primary {
+		@apply text-accent;
+	}
+
+	.heading {
+		@apply text-text-1 text-2xl font-bold;
+	}
+	.label {
+		letter-spacing: 1px;
+		@apply text-text-4 text-xs font-bold uppercase;
+	}
+
+	.input-group {
+		@apply flex flex-col;
+	}
+	.form-row {
+		@apply flex gap-4;
+	}
+
+	.form-row > * {
+		@apply flex-1;
+	}
 }
 
-.btn {
-	@apply px-4 py-2 font-bold rounded-full shadow-xl;
-}
-.btn.primary {
-	@apply bg-accent text-text-inv;
-}
-
-.link {
-	@apply text-text-4 font-bold;
-}
-.link.primary {
-	@apply text-accent;
-}
-
-.heading {
-	@apply text-text-1 text-2xl font-bold;
-}
-.label {
-	letter-spacing: 1px;
-	@apply text-text-4 text-xs font-bold uppercase;
-}
-
-.input-group {
-	@apply flex flex-col;
-}
-.form-row {
-	@apply flex gap-4;
-}
-
-.form-row > * {
-	@apply flex-1;
+@layer utilities {
 }

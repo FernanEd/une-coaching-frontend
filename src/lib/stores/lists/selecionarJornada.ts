@@ -59,40 +59,48 @@ export const seleccionarJornada = (
 
 			if (!jornadaEncontrada) return;
 			if ($jornadas.length == 0) return;
-			if ($cursosEnJornada.length == 0) return;
-			if ($instructores.length == 0) return;
+			if (!$cursosEnJornada) return;
+			if (!$instructores) return;
 
 			return {
 				...jornadaEncontrada,
 				cursos: $cursosEnJornada
 					.filter((c) => c.id_jornada == jornadaID)
-					.map((c) => ({
-						...c,
-						instructor: {
-							...$usuarios.find(
-								(u) =>
-									u.id ==
-									$instructores.find((i) => i.id == c.id_instructor)
-										.id_usuario
-							),
-							id_instructor: c.id_instructor
-						},
-						curso: $cursos.find((curso) => curso.id == c.id_curso),
-						asistentes: $asistentesEnCurso
-							.filter((a) => a.id_cursojornada == c.id)
-							.map((a) => ({
-								...a,
-								docente: {
-									...$usuarios.find(
-										(u) =>
-											u.id ==
-											$docentes.find((d) => d.id == a.id_docente)
-												.id_usuario
-									),
-									id_docente: a.id_docente
-								}
-							}))
-					}))
+					.map((c) => {
+						let instructorDelCurso = $instructores.find(
+							(i) => i.id == c.id_instructor
+						);
+						if (!instructorDelCurso) return;
+
+						return {
+							...c,
+							instructor: {
+								...$usuarios.find(
+									(u) => u.id == instructorDelCurso.id
+								),
+								id_instructor: c.id_instructor
+							},
+							curso: $cursos.find((curso) => curso.id == c.id_curso),
+							asistentes: $asistentesEnCurso
+								.filter((a) => a.id_cursojornada == c.id)
+								.map((a) => {
+									let docenteComoAsistente = $docentes.find(
+										(d) => d.id == a.id_docente
+									);
+									if (!docenteComoAsistente) return;
+
+									return {
+										...a,
+										docente: {
+											...$usuarios.find(
+												(u) => u.id == docenteComoAsistente.id_usuario
+											),
+											id_docente: a.id_docente
+										}
+									};
+								})
+						};
+					})
 			};
 		}
 	);

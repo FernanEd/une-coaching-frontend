@@ -133,25 +133,29 @@ export interface Jornada {
 	fecha_inscripcion_fin: Date;
 }
 
+// Estados
+// 0 - on going
+// 1 - closed
+
 export interface CursoEnJornada {
 	id: id_cursoEnJornada;
 	id_curso: id_curso;
 	cupo_maximo: number;
 	id_instructor: id_instructor;
 	id_jornada: id_jornada;
+	estado: 0 | 1;
 }
 
 // Estados
-// 0 - denied
-// 1 - pending
-// 2 - progress
-// 3 - closed
+// 0 - pending
+// 1 - accepted
+// 2 - denied
 
 export interface AsistenteEnCurso {
 	id: id_asistenteEnCurso;
 	id_cursojornada: id_cursoEnJornada;
 	id_docente: id_docente;
-	estado: 0 | 1 | 2 | 3;
+	estado: 0 | 1 | 2;
 	calificacion: number;
 }
 

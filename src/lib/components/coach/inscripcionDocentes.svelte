@@ -36,7 +36,7 @@
 					id_docente: Number(docenteID),
 					id_cursojornada: cursoJornadaID,
 					calificacion: 0,
-					estado: 1
+					estado: 0
 				});
 			}
 		}

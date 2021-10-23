@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { currentUser } from '$lib/stores/currentUser';
 	import { asistentesEnCurso } from '$lib/stores/db/asistentesEnCurso';
+	import { cursosEnJornada } from '$lib/stores/db/cursosEnJornada';
 	import type { DocentePortal } from '$lib/stores/docentePortal';
 	import { getDocentePortal } from '$lib/stores/docentePortal';
 	import type { Readable } from 'svelte/store';
@@ -10,7 +11,7 @@
 
 	const handleInvite = (inviteID: number, accept: boolean) => {
 		asistentesEnCurso.updateItem(inviteID, {
-			estado: accept ? 2 : 0
+			estado: accept ? 1 : 2
 		});
 	};
 </script>
@@ -67,6 +68,8 @@
 
 	<h2 class="heading">Cursos ({$docente.cursos.length})</h2>
 
+	<hr class="my-2 border-none" />
+
 	{#if $docente.cursos.length == 0}
 		<p>No estas inscrito a cursos esta jornada</p>
 	{:else}
@@ -75,11 +78,14 @@
 				<article
 					class="rounded-2xl shadow-fix text-center p-4 flex flex-col gap-4"
 				>
-					<p class="label">
-						{cursoDeLaJornada?.estado == 2
+					<p
+						class="label"
+						class:text-status-danger={cursoDeLaJornada?.estado == 1}
+					>
+						{cursoDeLaJornada?.estado == 0
 							? 'En curso'
-							: cursoDeLaJornada?.estado == 3
-							? 'Completado'
+							: cursoDeLaJornada?.estado == 1
+							? 'Cerrado'
 							: '...'}
 					</p>
 
@@ -99,7 +105,7 @@
 						</p>
 					</div>
 
-					{#if cursoDeLaJornada.estado == 3}
+					{#if cursoDeLaJornada.estado == 1}
 						<div class="flex gap-8 justify-center">
 							<button class="link primary">Ver calificaciones</button>
 						</div>

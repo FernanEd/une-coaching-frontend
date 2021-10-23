@@ -58,6 +58,7 @@
 			cupoCurso={currentCurso.cupo_maximo}
 			cursoSeleccionado={currentCurso.id_curso}
 			instructorSeleccionado={currentCurso.id_instructor}
+			cursoEstado={currentCurso.estado}
 		/>
 	</Modal>
 {/if}
@@ -130,6 +131,7 @@
 		<thead>
 			<tr>
 				<th>Curso</th>
+				<th>Estado</th>
 				<th>Instructor del curso</th>
 				<th>Participantes</th>
 				<th>...</th>
@@ -139,6 +141,13 @@
 			{#each $currentJornada.cursos as cursoJornada (cursoJornada.id)}
 				<tr>
 					<td>{cursoJornada.curso.nombre}</td>
+					<td
+						>{cursoJornada.estado == 0
+							? 'En progreso'
+							: cursoJornada.estado == 1
+							? 'Cerrado'
+							: '...'}</td
+					>
 					<td>
 						<a href="#">{cursoJornada.instructor.matricula}</a>
 						<p>

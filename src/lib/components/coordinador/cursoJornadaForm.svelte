@@ -15,6 +15,7 @@
 	export let cupoCurso: number = undefined;
 	export let cursoSeleccionado: number = undefined;
 	export let instructorSeleccionado: number = undefined;
+	export let cursoEstado: 0 | 1 = undefined;
 
 	let filterTextCursos;
 	let filterFunctionCursos: (val: Curso) => boolean = (val) => true;
@@ -45,14 +46,16 @@
 					id_jornada: currentjornadaID,
 					id_instructor: instructorSeleccionado,
 					cupo_maximo: cupoCurso,
-					id_curso: cursoSeleccionado
+					id_curso: cursoSeleccionado,
+					estado: cursoEstado
 				});
 			} else {
 				cursosEnJornada.addItem({
 					id_jornada: currentjornadaID,
 					id_instructor: instructorSeleccionado,
 					cupo_maximo: cupoCurso,
-					id_curso: cursoSeleccionado
+					id_curso: cursoSeleccionado,
+					estado: 0
 				});
 
 				instructorSeleccionado = undefined;
@@ -95,6 +98,32 @@
 			<button class="btn primary">Agregar curso</button>
 		{/if}
 	</header>
+
+	{#if isEditing}
+		<div>
+			<p class="label">Estado del curso</p>
+			<div class="flex justify-between">
+				<label class="flex gap-2 items-center">
+					<input
+						type="radio"
+						bind:group={cursoEstado}
+						value={0}
+						required
+					/>
+					En progreso
+				</label>
+				<label class="flex gap-2 items-center">
+					<input
+						type="radio"
+						bind:group={cursoEstado}
+						value={1}
+						required
+					/>
+					Cerrado
+				</label>
+			</div>
+		</div>
+	{/if}
 
 	<div>
 		<p class="label">Cupo del curso</p>
