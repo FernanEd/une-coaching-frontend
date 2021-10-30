@@ -91,7 +91,8 @@
 
 					<div>
 						<p class="label">
-							{cursoDeLaJornada?.curso?.diplomado?.nombre}
+							{cursoDeLaJornada?.curso?.diplomado?.nombre ||
+								'Sin diplomado'}
 						</p>
 						<p>{cursoDeLaJornada?.curso?.nombre}</p>
 					</div>

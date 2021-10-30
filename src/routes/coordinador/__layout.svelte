@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { page } from '$app/stores';
+
 	import { currentUser } from '$lib/stores/currentUser';
 
 	import { userSession } from '$lib/stores/userSession';
@@ -39,29 +41,45 @@ gap-20"
 			<p class="leyenda text-gray-300 text-sm">PANELES</p>
 			<ul class="flex flex-col gap-4 font-bold">
 				<li>
-					<a class="text-white" href="/coordinador/gestion-usuarios"
-						>Gestionar usuarios</a
+					<a
+						class="text-white"
+						class:text-neutral-300={$page.path ==
+							'/coordinador/gestion-usuarios'}
+						href="/coordinador/gestion-usuarios">Gestionar usuarios</a
 					>
 				</li>
 				<li>
-					<a class="text-white" href="/coordinador/gestion-jornadas"
-						>Gestionar jornadas</a
+					<a
+						class="text-white"
+						class:text-neutral-300={$page.path ==
+							'/coordinador/gestion-jornadas'}
+						href="/coordinador/gestion-jornadas">Gestionar jornadas</a
 					>
 				</li>
 				<li>
-					<a class="text-white" href="/coordinador/coordinar-coaches"
+					<a
+						class="text-white"
+						class:text-neutral-300={$page.path ==
+							'/coordinador/coordinar-coaches'}
+						href="/coordinador/coordinar-coaches"
 						>Coordinación de Coaches</a
 					>
 				</li>
 				<li>
 					<a
 						class="text-white"
+						class:text-neutral-300={$page.path ==
+							'/coordinador/diplomados-competencias'}
 						href="/coordinador/diplomados-competencias"
 						>Diplomados y competencias</a
 					>
 				</li>
 				<li>
-					<a class="text-white" href="/coordinador/registros"
+					<a
+						class="text-white"
+						class:text-neutral-300={$page.path ==
+							'/coordinador/registros'}
+						href="/coordinador/registros"
 						>Registros de acreditaciones</a
 					>
 				</li>

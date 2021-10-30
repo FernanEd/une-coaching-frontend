@@ -55,7 +55,7 @@
 						<p class="label">
 							{$diplomados.find(
 								(d) => d.id == cursoEnJornada?.curso?.id_diplomado
-							)?.nombre}
+							)?.nombre || 'Sin diplomado'}
 						</p>
 						<p>{cursoEnJornada?.curso?.nombre}</p>
 					</div>

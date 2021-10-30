@@ -13,6 +13,7 @@ import type {
 } from '$lib/utils/interfaces';
 import type { Readable } from 'svelte/store';
 import { derived } from 'svelte/store';
+import { currentJornada } from './currentJornada';
 import { asistentesEnCurso } from './db/asistentesEnCurso';
 import { competencias } from './db/competencias';
 import { cursos } from './db/cursos';
@@ -81,7 +82,8 @@ export const getDocentePortal = (usuarioID: number) => {
 			diplomados,
 			registrosCompetencias,
 			registrosCursos,
-			registrosDiplomados
+			registrosDiplomados,
+			currentJornada
 		],
 		([
 			$asistentesEnCurso,
@@ -95,10 +97,11 @@ export const getDocentePortal = (usuarioID: number) => {
 			$diplomados,
 			$registrosCompetencias,
 			$registrosCursos,
-			$registrosDiplomados
+			$registrosDiplomados,
+			$currentJornada
 		]) => {
 			if (!usuarioID) return;
-
+			if (!$currentJornada) return;
 			if (!$asistentesEnCurso) return;
 			if (!$cursosEnJornada) return;
 			if (!$usuarios) return;
@@ -119,6 +122,7 @@ export const getDocentePortal = (usuarioID: number) => {
 					);
 
 					if (!cursoJornada) return;
+					if (cursoJornada.id_jornada != $currentJornada.id) return;
 
 					let cursoDeCatalogoDeLaJornada = $cursos.find(
 						(c) => c.id == cursoJornada.id_curso
