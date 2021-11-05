@@ -42,19 +42,13 @@
 						<div>
 							<p>{curso.nombre}</p>
 							<p class="label">
-								{$docente.acreditaciones.cursos.find(
+								{$docente.acreditaciones?.cursos?.find(
 									(r) => r.id_curso == curso.id
 								)
 									? 'Completado'
 									: 'No completado'}
 							</p>
 						</div>
-
-						<!-- <div class="flex gap-8 justify-center">
-							<button
-								>Ver cursos</button
-							>
-						</div> -->
 					</article>
 				{/each}
 			</section>
@@ -62,70 +56,76 @@
 	</Modal>
 {/if}
 
-<h2 class="heading">Diplomados</h2>
-{#if $diplomados.length == 0}
-	<p>No hay diplomados aun</p>
-{:else}
-	<p class="label">
-		{$docente.acreditaciones.diplomados.filter((r) => r.documento)
-			.length} de {$diplomados.length} completados
-	</p>
-	<section class="flex flex-col gap-8 mt-4 mb-8">
-		{#each $diplomadosList as diplomado (diplomado.id)}
-			<article
-				class="rounded-2xl shadow-fix text-center p-4 flex flex-col gap-8"
-			>
-				<div>
-					<p>{diplomado.nombre}</p>
-					<p class="label">
-						{$docente.acreditaciones.cursos.filter(
-							(r) =>
-								r.curso.id_diplomado == diplomado.id && r.documento
-						).length} de {diplomado.listaCursos.length} cursos completados
-					</p>
-				</div>
+{#if $docente}
+	<h2 class="heading">Diplomados</h2>
+	{#if $diplomados.length == 0}
+		<p>No hay diplomados aun</p>
+	{:else}
+		<p class="label">
+			{$docente?.acreditaciones.diplomados.filter((r) => r.documento)
+				.length} de {$diplomados.length} completados
+		</p>
+		<section class="flex flex-col gap-8 mt-4 mb-8">
+			{#each $diplomadosList as diplomado (diplomado.id)}
+				<article
+					class="rounded-2xl shadow-fix text-center p-4 flex flex-col gap-8"
+				>
+					<div>
+						<p>{diplomado.nombre}</p>
+						<p class="label">
+							{$docente?.acreditaciones?.cursos?.filter(
+								(r) => r.curso.id_diplomado == diplomado.id
+							).length || 0} de {diplomado.listaCursos.length} cursos completados
+						</p>
+					</div>
 
-				<div class="flex gap-8 justify-center">
-					<button
-						class="link primary"
-						on:click={() => {
-							currentDiplomadoID = diplomado.id;
-							cursosDeDiplomadoModal.openModal();
-						}}>Ver cursos</button
+					<div class="flex gap-8 justify-center">
+						<button
+							class="link primary"
+							on:click={() => {
+								currentDiplomadoID = diplomado.id;
+								cursosDeDiplomadoModal.openModal();
+							}}>Ver cursos</button
+						>
+						<!-- <button class="link">Descargar documento</button> -->
+					</div>
+				</article>
+			{/each}
+		</section>
+	{/if}
+
+	{#each tiposPorCompetencias as tipoPorCompetencia (tipoPorCompetencia.id)}
+		{#if tipoPorCompetencia.competencias.length > 0}
+			<hr class="border-none py-4" />
+
+			<h2 class="heading">
+				Competencias tipo {tipoPorCompetencia.nombre}
+			</h2>
+			<p class="label">
+				{$docente?.acreditaciones?.competencias?.filter(
+					(r) =>
+						r.competencia.tipo.id == tipoPorCompetencia.id &&
+						r.documento
+				).length} de {tipoPorCompetencia.competencias.length} completados
+			</p>
+			<section class="flex flex-col gap-8 mt-4 mb-8">
+				{#each tipoPorCompetencia.competencias as competencia (competencia.id)}
+					<article
+						class="rounded-2xl shadow-fix text-center p-4 flex flex-col gap-8"
 					>
-					<!-- <button class="link">Descargar documento</button> -->
-				</div>
-			</article>
-		{/each}
-	</section>
+						<div>
+							<p>{competencia.nombre}</p>
+							<p class="label">
+								{$docente.acreditaciones?.competencias?.find(
+									(r) => r.id_competencia == competencia.id
+								)
+									? 'Completado'
+									: 'No completado'}
+							</p>
+						</div>
+					</article>
+				{/each}
+			</section>
+		{/if}
+	{/each}
 {/if}
-
-{#each tiposPorCompetencias as tipoPorCompetencia (tipoPorCompetencia.id)}
-	<hr class="border-none py-4" />
-
-	<h2 class="heading">
-		Competencias tipo {tipoPorCompetencia.nombre}
-	</h2>
-	<p class="label">
-		{$docente.acreditaciones.competencias.filter(
-			(r) =>
-				r.competencia.tipo.id == tipoPorCompetencia.id && r.documento
-		).length} de {tipoPorCompetencia.competencias.length} completados
-	</p>
-	<section class="flex flex-col gap-8 mt-4 mb-8">
-		{#each tipoPorCompetencia.competencias as competencia (competencia.id)}
-			<article
-				class="rounded-2xl shadow-fix text-center p-4 flex flex-col gap-8"
-			>
-				<div>
-					<p>{competencia.nombre}</p>
-					<p class="label">Sin completar</p>
-				</div>
-
-				<!-- <div class="flex gap-8 justify-center">
-					<button class="link">Descargar documento</button>
-				</div> -->
-			</article>
-		{/each}
-	</section>
-{/each}
