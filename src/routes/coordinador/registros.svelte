@@ -21,10 +21,6 @@
 
 	import { derived, Readable } from 'svelte/store';
 
-	let acreditacionFormModal = useModal();
-
-	let filterText: string;
-
 	const registros = derived(
 		[
 			registrosCompetencias,
@@ -136,9 +132,39 @@
 		}
 	);
 
+	let acreditacionFormModal = useModal();
+
+	let filterText: string;
+	let filterGroup: string[] = [];
+	let filterFunction = (any) => true;
+
 	const handleFilterField = () => {
-		console.log(filterText);
+		if (filterText) {
+			filterFunction = (registro) =>
+				registro.acreditor.matricula
+					.toString()
+					.includes(filterText) ||
+				registro.expeditor.matricula.toString().includes(filterText);
+		} else {
+			filterFunction = (any) => true;
+		}
 	};
+
+	$: if (filterGroup.length > 0) {
+		filterFunction = (registro) => {
+			if ('id_diplomado' in registro) {
+				return filterGroup.includes('diplomado');
+			} else if ('id_curso' in registro) {
+				return filterGroup.includes('curso');
+			} else if ('id_competencia' in registro) {
+				return filterGroup.includes('competencia');
+			} else {
+				return false;
+			}
+		};
+	} else {
+		filterFunction = (registro) => true;
+	}
 </script>
 
 {#if $acreditacionFormModal}
@@ -172,15 +198,23 @@
 <p class="label">Filtrar por</p>
 <div class="flex gap-4 flex-wrap">
 	<label class="flex gap-1 items-center">
-		<input type="checkbox" />
+		<input type="checkbox" value="curso" bind:group={filterGroup} />
 		Cursos
 	</label>
 	<label class="flex gap-1 items-center">
-		<input type="checkbox" />
+		<input
+			type="checkbox"
+			value="diplomado"
+			bind:group={filterGroup}
+		/>
 		Diplomados
 	</label>
 	<label class="flex gap-1 items-center">
-		<input type="checkbox" />
+		<input
+			type="checkbox"
+			value="competencia"
+			bind:group={filterGroup}
+		/>
 		Competencias
 	</label>
 </div>
@@ -198,7 +232,7 @@
 		</tr>
 	</thead>
 	<tbody class="">
-		{#each $registros as registro, i (i)}
+		{#each $registros.filter(filterFunction) as registro, i (i)}
 			<tr>
 				<td>
 					{#if 'id_competencia' in registro}
@@ -217,14 +251,6 @@
 					{/if}
 				</td>
 				<td>
-					<a href="#">{registro.expeditor.matricula}</a>
-					<p>
-						{registro.expeditor.nombre}
-						{registro.expeditor.apellido_paterno}
-						{registro.expeditor.apellido_materno}
-					</p>
-				</td>
-				<td>
 					<a href="#">{registro.acreditor.matricula}</a>
 					<p>
 						{registro.acreditor.nombre}
@@ -232,15 +258,19 @@
 						{registro.acreditor.apellido_materno}
 					</p>
 				</td>
+				<td>
+					<a href="#">{registro.expeditor.matricula}</a>
+					<p>
+						{registro.expeditor.nombre}
+						{registro.expeditor.apellido_paterno}
+						{registro.expeditor.apellido_materno}
+					</p>
+				</td>
 				<td>{dayjs(registro.fecha_expedicion).format(dateFormat)}</td>
 				<td>
 					<span class="flex gap-8 justify-center">
-						<button class="text-accent font-bold"
-							>Editar acreditación</button
-						>
-						<button class="text-text-4 font-bold"
-							>Eliminar acreditación</button
-						>
+						<button class="link primary">Editar acreditación</button>
+						<button class="link">Eliminar acreditación</button>
 					</span>
 				</td>
 			</tr>
