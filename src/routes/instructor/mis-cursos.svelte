@@ -16,7 +16,7 @@
 	let instructor: Readable<InstructorPortal>;
 	$: instructor = getInstructorPortal($currentUser?.id);
 
-	$: currentCursoDeLaJornada = $instructor.cursos.find(
+	$: currentCursoDeLaJornada = $instructor?.cursos?.find(
 		(c) => c.id == currentCursoDeLaJornadaID
 	);
 </script>
@@ -62,7 +62,8 @@
 
 						<div>
 							<p class="label">
-								{cursoDeLaJornada?.curso?.diplomado?.nombre}
+								{cursoDeLaJornada?.curso?.diplomado?.nombre ||
+									'Sin diplomado'}
 							</p>
 							<p>{cursoDeLaJornada?.curso?.nombre}</p>
 						</div>

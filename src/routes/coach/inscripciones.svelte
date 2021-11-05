@@ -10,7 +10,7 @@
 
 	$: jornada = seleccionarJornada($currentJornada?.id);
 	$: cursosDeLaJornada =
-		$jornada?.cursos?.filter((c) => c.estado == 0) || [];
+		$jornada?.cursos?.filter((c) => c?.estado == 0) || [];
 
 	let inscribirModal = useModal();
 	let currentCursoEnJornadaID: number;
@@ -20,7 +20,7 @@
 		if ($jornada.cursos.length == 0) return;
 
 		return $jornada?.cursos?.find(
-			(c) => c.id == currentCursoEnJornadaID
+			(c) => c?.id == currentCursoEnJornadaID
 		);
 	});
 </script>

@@ -107,8 +107,11 @@
 					</div>
 
 					{#if cursoDeLaJornada.estado == 1}
-						<div class="flex gap-8 justify-center">
-							<button class="link primary">Ver calificaciones</button>
+						<div>
+							<p class="label">Calificación</p>
+							<p>
+								{cursoDeLaJornada.calificacion}
+							</p>
 						</div>
 					{/if}
 				</article>

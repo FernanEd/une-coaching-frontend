@@ -8,12 +8,6 @@ export const currentJornada: Readable<Jornada> = derived(
 	[jornadas],
 	([$jornadas]) =>
 		$jornadas.reduce((j1, j2) => {
-			// console.log(
-			// 	dayjs(j1.fecha_inicio),
-			// 	dayjs(j2.fecha_inicio),
-			// 	dayjs(j1.fecha_inicio).isAfter(dayjs(j2.fecha_inicio))
-			// );
-
 			return dayjs(j1.fecha_inicio).isAfter(dayjs(j2.fecha_inicio))
 				? j1
 				: j2;

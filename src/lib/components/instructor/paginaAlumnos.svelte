@@ -5,9 +5,10 @@
 
 	export let goBack;
 	export let alumnos: AsistenteDeCursoDeInstructor[] = [];
-	let calificacion: number;
+	let calificaciones: number[] = [];
 
-	const asignarCalificacion = (asistenteID: number) => {
+	const asignarCalificacion = (califIndx, asistenteID: number) => {
+		let calificacion = calificaciones[califIndx];
 		if (calificacion) {
 			asistentesEnCurso.updateItem(asistenteID, {
 				calificacion
@@ -21,7 +22,7 @@
 <h2 class="heading mt-4">Alumnos ({alumnos.length})</h2>
 
 <section class="flex flex-col gap-8 mt-4">
-	{#each alumnos as alumno (alumno.id)}
+	{#each alumnos as alumno, indx (alumno.id)}
 		<article
 			class="rounded-2xl shadow-fix text-center p-4 flex flex-col gap-4"
 		>
@@ -38,15 +39,16 @@
 			<form
 				class="flex flex-col gap-4"
 				on:submit|preventDefault={() =>
-					asignarCalificacion(alumno.id)}
+					asignarCalificacion(indx, alumno.id)}
 			>
 				<div>
 					<p class="label">Calificación</p>
 					<input
 						type="number"
 						value={alumno.calificacion}
+						step="0.01"
 						on:input={(e) => {
-							calificacion = Number(e.currentTarget.value);
+							calificaciones[indx] = Number(e.currentTarget.value);
 						}}
 					/>
 				</div>

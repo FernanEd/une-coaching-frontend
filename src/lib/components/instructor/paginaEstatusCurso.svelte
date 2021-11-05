@@ -24,13 +24,13 @@
 	$: masBajo =
 		alumnos.length > 0
 			? alumnos.reduce((a, b) =>
-					a.calificacion > b.calificacion ? a : b
+					a.calificacion < b.calificacion ? a : b
 			  )
 			: undefined;
 	$: masAlto =
 		alumnos.length > 0
 			? alumnos.reduce((a, b) =>
-					a.calificacion > b.calificacion ? b : a
+					a.calificacion > b.calificacion ? a : b
 			  )
 			: undefined;
 </script>

@@ -76,7 +76,7 @@ export const seleccionarJornada = (
 							...c,
 							instructor: {
 								...$usuarios.find(
-									(u) => u.id == instructorDelCurso.id
+									(u) => u.id == instructorDelCurso.id_usuario
 								),
 								id_instructor: c.id_instructor
 							},
