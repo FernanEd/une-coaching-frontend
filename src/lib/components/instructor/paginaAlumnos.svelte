@@ -3,7 +3,6 @@
 
 	import type { AsistenteDeCursoDeInstructor } from '$lib/stores/instructorPortal';
 
-	export let goBack;
 	export let alumnos: AsistenteDeCursoDeInstructor[] = [];
 	let calificaciones: number[] = [];
 
@@ -17,9 +16,7 @@
 	};
 </script>
 
-<button class="link" on:click={goBack}>← Volver atrás</button>
-
-<h2 class="heading mt-4">Alumnos ({alumnos.length})</h2>
+<h2 class="heading">Alumnos ({alumnos.length})</h2>
 
 <section class="flex flex-col gap-8 mt-4">
 	{#each alumnos as alumno, indx (alumno.id)}

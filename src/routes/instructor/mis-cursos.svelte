@@ -22,10 +22,10 @@
 </script>
 
 {#if $paginaAlumnosModal}
-	<PaginaAlumnos
-		goBack={paginaAlumnosModal.closeModal}
-		alumnos={currentCursoDeLaJornada.asistentes}
-	/>
+	<button class="link mb-4" on:click={paginaAlumnosModal.closeModal}
+		>← Volver atrás</button
+	>
+	<PaginaAlumnos alumnos={currentCursoDeLaJornada.asistentes} />
 {/if}
 
 {#if $paginaEstatusCursoModal}
