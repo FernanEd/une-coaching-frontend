@@ -4,6 +4,7 @@
 	import { currentUser } from '$lib/stores/currentUser';
 	import { usuarioList } from '$lib/stores/lists/usuariosList';
 	import { userSession } from '$lib/stores/userSession';
+	import { logOut } from '$lib/utils/auth';
 	import { onMount } from 'svelte';
 	import '../app.postcss';
 
@@ -27,5 +28,15 @@
 {#if $userSession.hasOwnProperty('userID')}
 	{#if $currentUser}
 		<slot />
+	{:else}
+		<h2>Parece que ocurrió un error con la sesión actual</h2>
+		<button class="btn primary" on:click={logOut}
+			>Volver a inicio</button
+		>
 	{/if}
+{:else}
+	<h2>Parece que ocurrió un error con la sesión actual</h2>
+	<button class="btn primary" on:click={logOut}
+		>Volver a inicio</button
+	>
 {/if}
