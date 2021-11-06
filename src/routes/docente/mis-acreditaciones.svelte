@@ -103,9 +103,7 @@
 			</h2>
 			<p class="label">
 				{$docente?.acreditaciones?.competencias?.filter(
-					(r) =>
-						r.competencia.tipo.id == tipoPorCompetencia.id &&
-						r.documento
+					(r) => r.competencia.tipo.id == tipoPorCompetencia.id
 				).length} de {tipoPorCompetencia.competencias.length} completados
 			</p>
 			<section class="flex flex-col gap-8 mt-4 mb-8">

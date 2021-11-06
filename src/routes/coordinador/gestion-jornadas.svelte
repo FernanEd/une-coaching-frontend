@@ -8,6 +8,7 @@
 	import dayjs from 'dayjs';
 	import { dateFormat } from '$lib/utils/dateFormat';
 	import {
+		AsistenteDeCurso,
 		seleccionarJornada,
 		store_jornadaSeleccionada
 	} from '$lib/stores/lists/selecionarJornada';
@@ -18,6 +19,8 @@
 	let jornadaModal = useModal();
 	let addCursoModal = useModal();
 	let updateCursoModal = useModal();
+	let aprobados: AsistenteDeCurso[];
+	let reprobados: AsistenteDeCurso[];
 
 	let jornadaSeleccionada: number;
 	onMount(() => {
@@ -142,12 +145,44 @@
 				<tr>
 					<td>{cursoJornada.curso.nombre}</td>
 					<td
-						>{cursoJornada.estado == 0
-							? 'En progreso'
-							: cursoJornada.estado == 1
-							? 'Cerrado'
-							: '...'}</td
-					>
+						><p>
+							{cursoJornada.estado == 0
+								? 'En progreso'
+								: cursoJornada.estado == 1
+								? 'Cerrado'
+								: '...'}
+						</p>
+						<br />
+						{#if cursoJornada.estado == 1 && (aprobados = cursoJornada.asistentes.filter((a) => a.calificacion >= 7)) && (reprobados = cursoJornada.asistentes.filter((a) => a.calificacion < 7))}
+							{#if aprobados.length == 0}
+								<p class="text-text-3">No hay asistentes aprobados</p>
+							{:else}
+								<p class="text-status-success">
+									Asistentes aprobados (con 7)
+								</p>
+								{#each aprobados as asistente (asistente.id)}
+									<a href="#">{asistente.docente.matricula}</a><span
+										>,
+									</span>
+								{/each}
+							{/if}
+							<br /><br />
+							{#if reprobados.length == 0}
+								<p class="text-text-3">
+									No hay asistentes reprobados
+								</p>
+							{:else}
+								<p class="text-status-danger">
+									Asistentes reprobados
+								</p>
+								{#each reprobados as asistente (asistente.id)}
+									<a href="#">{asistente.docente.matricula}</a><span
+										>,
+									</span>
+								{/each}
+							{/if}
+						{/if}
+					</td>
 					<td>
 						<a href="#">{cursoJornada.instructor.matricula}</a>
 						<p>

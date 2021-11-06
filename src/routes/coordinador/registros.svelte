@@ -269,7 +269,6 @@
 				<td>{dayjs(registro.fecha_expedicion).format(dateFormat)}</td>
 				<td>
 					<span class="flex gap-8 justify-center">
-						<button class="link primary">Editar acreditación</button>
 						<button class="link">Eliminar acreditación</button>
 					</span>
 				</td>
