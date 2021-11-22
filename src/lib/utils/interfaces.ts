@@ -172,4 +172,5 @@ export interface Reporte {
 export interface JWT {
 	userID: id_usuario;
 	token: string;
+	roles: string[];
 }

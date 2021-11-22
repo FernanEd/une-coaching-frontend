@@ -8,7 +8,7 @@
 	import { currentUser } from '$lib/stores/currentUser';
 	import { usuarioList } from '$lib/stores/lists/usuariosList';
 	import { loggedIn, userSession } from '$lib/stores/userSession';
-	import { logOut } from '$lib/utils/auth';
+	import { logIn, logOut } from '$lib/utils/auth';
 	import type { JWT } from '$lib/utils/interfaces';
 	import { serverURL } from '$lib/utils/serverURL';
 	import { onMount, tick } from 'svelte';
@@ -19,8 +19,6 @@
 	const checkUserPermission = () => {
 		if ($page.path != '/') {
 			let portal = $page.path.split('/')[1];
-			console.log(portal);
-			console.log($currentUser.roles.map((r) => r.rol));
 			if (!$currentUser.roles.map((r) => r.rol).includes(portal))
 				return goto('/');
 		}
@@ -43,29 +41,13 @@
 				if (res.status != 200) {
 					return fail();
 				}
-
 				let auth = await res.json();
 
 				loggedIn.set(true);
-				userSession.set(jwt);
-
-				currentUser.set({
-					id: auth.userID,
+				logIn({
+					userID: auth.userID,
 					roles: auth.roles,
-					matricula: 0,
-					nombre: '',
-					apellido_paterno: '',
-					apellido_materno: '',
-					correo: '',
-					password: ''
-				});
-
-				usuarioList.subscribe((usuarios) => {
-					let usuario = usuarios.find((u) => u.id == auth.userID);
-
-					if (usuario) {
-						currentUser.set(usuario);
-					}
+					token: auth.token
 				});
 				await tick();
 				checkUserPermission();

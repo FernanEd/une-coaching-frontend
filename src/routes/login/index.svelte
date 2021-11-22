@@ -12,6 +12,7 @@
 		auth: true;
 		userID: number;
 		token: string;
+		roles: string[];
 	};
 
 	type loginError = {
@@ -47,30 +48,19 @@
 
 				logIn({
 					userID: login['userID'],
-					token: login['token']
+					token: login['token'],
+					roles: login['roles']
 				});
 
-				if ($currentUser) {
-					if ($page.query.get('next')) {
-						if (
-							!$currentUser.roles.find(({ rol }) =>
-								$page.query.get('next').includes(rol)
-							)
-						) {
-							await goto('/');
-						} else {
-							await goto($page.query.get('next'));
-						}
-					} else {
-						if ($currentUser.roles.length == 1) {
-							await goto($currentUser.roles[0].rol);
-						} else {
-							await goto('/');
-						}
-					}
-				} else {
-					await goto('/');
+				let next = $page.query.get('next') || '/';
+
+				if (next != '/') {
+					let portal = next.split('/')[1];
+					if (!$currentUser.roles.map((r) => r.rol).includes(portal))
+						return goto('/');
 				}
+
+				return goto(next);
 			} else {
 				errors.set([login['message']]);
 			}
