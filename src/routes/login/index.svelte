@@ -54,7 +54,11 @@
 
 				let next = $page.query.get('next') || '/';
 
-				if (next != '/') {
+				if (
+					next != '/' &&
+					next != '/login' &&
+					next != '/newpassword'
+				) {
 					let portal = next.split('/')[1];
 					if (!$currentUser.roles.map((r) => r.rol).includes(portal))
 						return goto('/');

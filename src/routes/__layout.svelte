@@ -17,7 +17,8 @@
 	const fail = async () => await goto(`/login?next=${$page.path}`);
 
 	const checkUserPermission = () => {
-		if ($page.path != '/') {
+		let next = $page.path;
+		if (next != '/' && next != '/login' && next != '/newpassword') {
 			let portal = $page.path.split('/')[1];
 			if (!$currentUser.roles.map((r) => r.rol).includes(portal))
 				return goto('/');

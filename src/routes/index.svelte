@@ -14,7 +14,7 @@
 <section
 	class="absolute top-0 left-0 right-0 bottom-0
 	flex flex-col justify-center items-center
-	bg-white gap-8
+	bg-white gap-8 p-4
 	"
 >
 	<div class="w-full max-w-lg flex flex-col gap-8">

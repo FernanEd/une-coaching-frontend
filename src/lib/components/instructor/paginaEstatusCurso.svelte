@@ -60,8 +60,10 @@
 		<div>
 			<p class="label">Porcentaje de aprobados</p>
 			<p>
-				{(alumnos.filter((a) => a.aprobado).length /
+				{(((alumnos.filter((a) => a.aprobado).length /
 					(alumnos.length || 1)) *
+					10000) |
+					0) /
 					100} %
 			</p>
 		</div>

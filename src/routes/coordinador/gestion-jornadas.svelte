@@ -15,12 +15,14 @@
 	import type { JornadaConCursos } from '$lib/stores/lists/selecionarJornada';
 	import { jornadas } from '$lib/stores/db/jornadas';
 	import { cursosEnJornada } from '$lib/stores/db/cursosEnJornada';
+	import ListaAsistentes from '$lib/components/coordinador/listaAsistentes.svelte';
 
 	let jornadaModal = useModal();
 	let addCursoModal = useModal();
 	let updateCursoModal = useModal();
-	let aprobados: AsistenteDeCurso[];
-	let reprobados: AsistenteDeCurso[];
+
+	let asistentesModal = useModal();
+	let listaAsistentes: AsistenteDeCurso[] = [];
 
 	let jornadaSeleccionada: number;
 	onMount(() => {
@@ -63,6 +65,12 @@
 			instructorSeleccionado={currentCurso.id_instructor}
 			cursoEstado={currentCurso.estado}
 		/>
+	</Modal>
+{/if}
+
+{#if $asistentesModal}
+	<Modal handleClose={asistentesModal.closeModal}>
+		<ListaAsistentes asistentes={listaAsistentes} />
 	</Modal>
 {/if}
 
@@ -145,46 +153,15 @@
 				<tr>
 					<td>{cursoJornada.curso.nombre}</td>
 					<td
-						><p>
+						><p class:text-status-danger={cursoJornada.estado == 1}>
 							{cursoJornada.estado == 0
 								? 'En progreso'
 								: cursoJornada.estado == 1
 								? 'Cerrado'
 								: '...'}
 						</p>
-						<br />
-						{#if cursoJornada.estado == 1 && (aprobados = cursoJornada.asistentes.filter((a) => a.aprobado)) && (reprobados = cursoJornada.asistentes.filter((a) => !a.aprobado))}
-							{#if aprobados.length == 0}
-								<p class="text-text-3">No hay asistentes aprobados</p>
-							{:else}
-								<p class="text-status-success">
-									Asistentes aprobados (con 7)
-								</p>
-								{#each aprobados as asistente (asistente.id)}
-									<a href="#">{asistente.docente.matricula}</a><span
-										>,
-									</span>
-								{/each}
-							{/if}
-							<br /><br />
-							{#if reprobados.length == 0}
-								<p class="text-text-3">
-									No hay asistentes reprobados
-								</p>
-							{:else}
-								<p class="text-status-danger">
-									Asistentes reprobados
-								</p>
-								{#each reprobados as asistente (asistente.id)}
-									<a href="#">{asistente.docente.matricula}</a><span
-										>,
-									</span>
-								{/each}
-							{/if}
-						{/if}
 					</td>
 					<td>
-						<a href="#">{cursoJornada.instructor.matricula}</a>
 						<p>
 							{cursoJornada.instructor.nombre}
 							{cursoJornada.instructor.apellido_paterno}
@@ -193,29 +170,18 @@
 					</td>
 					<td>
 						<p>
-							Cupos asignados: <span class="font-bold">
-								{cursoJornada.cupo_maximo}
-							</span>
+							Inscritos: {cursoJornada.asistentes
+								.length}/{cursoJornada.cupo_maximo}
 						</p>
 						<p>
-							Cupos restantes: <span class="font-bold"
-								>{cursoJornada.cupo_maximo -
-									cursoJornada.asistentes.length}</span
+							<button
+								class="link primary"
+								on:click={() => {
+									asistentesModal.openModal();
+									listaAsistentes = cursoJornada.asistentes;
+								}}>Ver asistentes</button
 							>
 						</p>
-
-						{#if cursoJornada.asistentes.length == 0}
-							<p class="text-text-4">
-								No hay asistentes inscritos aun
-							</p>
-						{:else}
-							<p>Inscritos:</p>
-							{#each cursoJornada.asistentes as asistente (asistente.id)}
-								<a href="#">{asistente.docente.matricula}</a><span
-									>,
-								</span>
-							{/each}
-						{/if}
 					</td>
 					<td>
 						<span class="flex gap-8 justify-center">

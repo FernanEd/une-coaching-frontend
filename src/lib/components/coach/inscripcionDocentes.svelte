@@ -3,6 +3,7 @@
 
 	import { docentesList } from '$lib/stores/lists/docentesList';
 	import type { AsistenteDeCurso } from '$lib/stores/lists/selecionarJornada';
+	import { toasts } from '$lib/stores/toastlist';
 	import { makeArraySearchable } from '$lib/utils/makeArraySearchable';
 
 	let filterText: string;
@@ -12,7 +13,7 @@
 	export let cupoCurso;
 	let docentesIniciales = docentesSeleccionados;
 
-	const handleSubmit = () => {
+	const handleSubmit = async () => {
 		let doscentesNuevos = docentesSeleccionados.filter(
 			(d) => !docentesIniciales.includes(d)
 		);
@@ -20,23 +21,30 @@
 			(d) => !docentesSeleccionados.includes(d)
 		);
 
-		if (doscentesNuevos.length > 0) {
-			for (let docenteID of doscentesNuevos) {
-				asistentesEnCurso.addItem({
-					id_docente: Number(docenteID),
-					id_cursojornada: cursoJornadaID,
-					aprobado: false,
-					estado: 0
-				});
+		try {
+			if (doscentesNuevos.length > 0) {
+				for (let docenteID of doscentesNuevos) {
+					asistentesEnCurso.addItem({
+						id_docente: Number(docenteID),
+						id_cursojornada: cursoJornadaID,
+						aprobado: false,
+						estado: 0
+					});
+				}
 			}
-		}
 
-		if (docentesDesmarcados.length > 0) {
-			for (let docenteID of docentesDesmarcados) {
-				asistentesEnCurso.removeItem(
-					asistenteEnCurso.find((a) => a.id_docente == docenteID).id
-				);
+			if (docentesDesmarcados.length > 0) {
+				for (let docenteID of docentesDesmarcados) {
+					asistentesEnCurso.removeItem(
+						asistenteEnCurso.find((a) => a.id_docente == docenteID).id
+					);
+				}
 			}
+
+			toasts.success();
+		} catch (e) {
+			console.error(e);
+			toasts.error();
 		}
 
 		docentesIniciales = docentesSeleccionados;
