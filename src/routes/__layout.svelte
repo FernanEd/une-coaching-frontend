@@ -1,6 +1,8 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
+	import Prompt from '$lib/components/common/prompt.svelte';
+	import Prompts from '$lib/components/common/prompt.svelte';
 	import Toasts from '$lib/components/common/toasts.svelte';
 	import Spinner from '$lib/components/Spinner.svelte';
 	import { currentUser } from '$lib/stores/currentUser';
@@ -44,3 +46,5 @@
 {/if}
 
 <Toasts />
+
+<Prompt />

@@ -5,6 +5,7 @@
 	import { instructoresList } from '$lib/stores/lists/instructorList';
 
 	import type { Curso, Usuario } from '$lib/utils/interfaces';
+	import { makeArraySearchable } from '$lib/utils/makeArraySearchable';
 	import { writable } from 'svelte/store';
 
 	let formErrors = writable<string[]>([]);
@@ -18,11 +19,7 @@
 	export let cursoEstado: 0 | 1 = undefined;
 
 	let filterTextCursos;
-	let filterFunctionCursos: (val: Curso) => boolean = (val) => true;
-
 	let filterTextInstructores;
-	let filterFunctionInstructores: (val: Usuario) => boolean = (val) =>
-		true;
 
 	const handleSubmit = async () => {
 		if (!cursoSeleccionado) {
@@ -64,24 +61,6 @@
 			}
 		} else {
 			return;
-		}
-	};
-
-	const handleFilterCursos = () => {
-		if (filterTextCursos) {
-			filterFunctionCursos = (val) =>
-				val.nombre.includes(filterTextCursos);
-		} else {
-			filterFunctionCursos = (val) => true;
-		}
-	};
-
-	const handleFilterInstructores = () => {
-		if (filterTextInstructores) {
-			filterFunctionInstructores = (val) =>
-				val.matricula.toString().includes(filterTextInstructores);
-		} else {
-			filterFunctionInstructores = (val) => true;
 		}
 	};
 </script>
@@ -142,17 +121,13 @@
 
 	<div class="ml-auto">
 		<p class="label">Filtrar cursos</p>
-		<input
-			type="text"
-			bind:value={filterTextCursos}
-			on:input={handleFilterCursos}
-		/>
+		<input type="text" bind:value={filterTextCursos} />
 	</div>
 
 	<div>
 		<p class="label">Selecciona un curso</p>
 		<div class="flex flex-col gap-1 max-h-60 overflow-auto">
-			{#each $cursos.filter(filterFunctionCursos) as curso (curso.id)}
+			{#each makeArraySearchable($cursos, ['nombre'], filterTextCursos) as curso (curso.id)}
 				<label class="flex gap-2 items-center">
 					<input
 						type="radio"
@@ -167,18 +142,14 @@
 	</div>
 
 	<div class="ml-auto">
-		<p class="label">Filtrar instructor por matricula</p>
-		<input
-			type="text"
-			bind:value={filterTextInstructores}
-			on:input={handleFilterInstructores}
-		/>
+		<p class="label">Filtrar instructor</p>
+		<input type="text" bind:value={filterTextInstructores} />
 	</div>
 
 	<div>
 		<p class="label">Selecciona un instructor para el curso</p>
 		<div class="flex flex-col gap-1 max-h-60 overflow-auto">
-			{#each $instructoresList.filter(filterFunctionInstructores) as instructor (instructor.id)}
+			{#each makeArraySearchable($instructoresList, ['matricula', 'nombre', 'apellido_paterno', 'apellido_materno'], filterTextInstructores) as instructor (instructor.id)}
 				<label class="flex gap-2 items-center">
 					<input
 						type="radio"

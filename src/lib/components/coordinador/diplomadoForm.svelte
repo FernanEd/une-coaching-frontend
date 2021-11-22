@@ -4,6 +4,7 @@
 	import { diplomados } from '$lib/stores/db/diplomados';
 
 	import type { Curso } from '$lib/utils/interfaces';
+	import { makeArraySearchable } from '$lib/utils/makeArraySearchable';
 	import { tick } from 'svelte';
 
 	export let isEditing = false;
@@ -14,7 +15,6 @@
 	let cursosViejos: number[] = cursosSeleccionados;
 
 	let filterText;
-	let filterFunction: (val: any) => boolean = (val) => true;
 
 	const handleSubmit = async () => {
 		if (nombreDiplomado != '') {
@@ -55,14 +55,6 @@
 			}
 		}
 	};
-
-	const handleFilter = () => {
-		if (filterText) {
-			filterFunction = (val) => val.nombre.includes(filterText);
-		} else {
-			filterFunction = (val) => true;
-		}
-	};
 </script>
 
 <form
@@ -90,17 +82,13 @@
 
 	<div class="ml-auto">
 		<p class="label">Filtrar cursos</p>
-		<input
-			type="text"
-			bind:value={filterText}
-			on:input={handleFilter}
-		/>
+		<input type="text" bind:value={filterText} />
 	</div>
 
 	<div>
 		<p class="label">Agregar cursos</p>
 		<div class="flex flex-col gap-1 max-h-60 overflow-auto">
-			{#each $cursos.filter(filterFunction) as curso (curso.id)}
+			{#each makeArraySearchable($cursos, ['nombre'], filterText) as curso (curso.id)}
 				<label class="flex gap-2 items-center">
 					<input
 						type="checkbox"

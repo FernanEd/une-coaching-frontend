@@ -7,7 +7,6 @@
 
 	let gestionarDocentes = useModal();
 	let filterText: string;
-	let filterFunction;
 	let currentCoachID: number;
 
 	$: currentCoach = $coachList.find(
@@ -35,9 +34,7 @@
 	<h2 class="text-2xl font-bold">Coordinación de Coaches</h2>
 
 	<label>
-		<p class="leyenda text-text-4 text-xs">
-			Buscar usuario por matricula
-		</p>
+		<p class="leyenda text-text-4 text-xs">Buscar usuario</p>
 		<input
 			type="text"
 			bind:value={filterText}

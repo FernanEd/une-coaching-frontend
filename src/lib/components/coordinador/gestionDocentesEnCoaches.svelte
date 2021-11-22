@@ -75,7 +75,7 @@
 		<div />
 
 		<div class="ml-auto">
-			<p class="label">Filtrar docentes por matricula</p>
+			<p class="label">Filtrar docentes</p>
 			<input
 				type="text"
 				bind:value={filterText}

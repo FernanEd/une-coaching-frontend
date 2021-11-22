@@ -11,6 +11,7 @@
 	} from '$lib/stores/lists/usuariosList';
 	import { usuarios } from '$lib/stores/db/usuarios';
 	import { makeArraySearchable } from '$lib/utils/makeArraySearchable';
+	import { prompts } from '$lib/stores/prompts';
 
 	let addUsuarioModal = useModal();
 	let updateUsuarioModal = useModal();
@@ -57,6 +58,17 @@
 		/></Modal
 	>
 {/if}
+
+<button
+	class="btn primary"
+	on:click={() => {
+		prompts.showPrompt({
+			type: 'danger',
+			message: 'Estas seguro que quieres realizar esto',
+			onAccept: () => {}
+		});
+	}}>Lmao</button
+>
 
 <header class="flex justify-between flex-wrap">
 	<h2 class="heading">Usuarios</h2>

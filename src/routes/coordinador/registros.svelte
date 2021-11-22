@@ -15,7 +15,8 @@
 	import type {
 		RegistroCompetencia,
 		RegistroCurso,
-		RegistroDiplomado
+		RegistroDiplomado,
+		Usuario
 	} from '$lib/utils/interfaces';
 	import dayjs from 'dayjs';
 
@@ -140,11 +141,26 @@
 
 	const handleFilterField = () => {
 		if (filterText) {
-			filterFunction = (registro) =>
-				registro.acreditor.matricula
-					.toString()
-					.includes(filterText) ||
-				registro.expeditor.matricula.toString().includes(filterText);
+			filterFunction = (registro) => {
+				let fields: (keyof Usuario)[] = [
+					'matricula',
+					'nombre',
+					'apellido_paterno',
+					'apellido_materno'
+				];
+
+				return fields.some(
+					(f) =>
+						registro.acreditor[f]
+							.toString()
+							.toLowerCase()
+							.includes(filterText.toLowerCase()) ||
+						registro.expeditor[f]
+							.toString()
+							.toLowerCase()
+							.includes(filterText.toLowerCase())
+				);
+			};
 		} else {
 			filterFunction = (any) => true;
 		}
@@ -185,7 +201,7 @@
 <hr class="my-4 border-none" />
 
 <label>
-	<p class="label">Buscar usuario por matricula</p>
+	<p class="label">Buscar usuario</p>
 	<input
 		type="text"
 		bind:value={filterText}
