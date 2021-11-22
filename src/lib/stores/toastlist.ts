@@ -35,12 +35,10 @@ export const toasts = (() => {
 	return {
 		subscribe: store.subscribe,
 		addToast,
-		success: () =>
-			addToast('success', 'Operación realizada con exito'),
-		error: () =>
-			addToast(
-				'danger',
-				'Ha habido un error. No se ha podido realizar la operación'
-			)
+		success: (msg = 'Operación realizada con exito') =>
+			addToast('success', msg),
+		error: (
+			msg = 'Ha habido un error. No se ha podido realizar la operación'
+		) => addToast('danger', msg)
 	};
 })();

@@ -50,6 +50,7 @@
 				);
 
 				await tick();
+				delete formData.password;
 				usuarios.updateItem(editingUser.id, { ...formData });
 
 				if (rolesNuevos.length > 0) {

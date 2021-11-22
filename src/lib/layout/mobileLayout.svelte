@@ -30,12 +30,8 @@ left-0 top-0 bottom-0
 py-8 px-4 flex flex-col 
 gap-20"
 			>
-				<section
-					class="flex flex-col 
-	gap-4 items-center 
-	text-center"
-				>
-					<section class="flex flex-col gap-4 items-center">
+				<section class="flex flex-col gap-8 items-start">
+					<section class="mx-auto">
 						<img
 							class="object-contain"
 							src="../../../static/une white logo.png"
@@ -43,11 +39,16 @@ gap-20"
 							id="logo"
 						/>
 					</section>
-					<p class="text-gray-100">
-						Conectado como {$currentUser.matricula}
-					</p>
-					<a href="/" class="text-white font-bold">Menú principal</a>
-					<button class="font-bold text-accent-inv" on:click={logOut}
+
+					<nav class="flex flex-col gap-4">
+						<a href="/" class="text-white font-bold">Menú principal</a
+						>
+						<a href="/newpassword" class="text-white font-bold"
+							>Cambiar contraseña</a
+						>
+					</nav>
+
+					<button class="link primary" on:click={logOut}
 						>Cerrar sesión
 					</button>
 				</section>
@@ -88,6 +89,23 @@ gap-20"
 		</nav>
 	</header>
 	<main class="max-w-md mx-auto px-4 py-8">
+		<div
+			class="mb-8 p-4 bg-neutral-100 rounded 
+			flex flex-col gap-4 items-center text-center
+			"
+		>
+			<p>
+				Sí es primera vez que ingresas, cambia tu contraseña para
+				proteger tu cuenta.
+			</p>
+			<p>
+				Accede desde el menú o da clic <a href="/newpassword">aqui</a
+				>.
+			</p>
+			<button class="btn primary"
+				>Entendido, no volver a mostrar</button
+			>
+		</div>
 		<slot />
 	</main>
 {/if}

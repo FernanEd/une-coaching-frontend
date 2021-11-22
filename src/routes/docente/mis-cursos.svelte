@@ -78,10 +78,7 @@
 				<article
 					class="rounded-2xl shadow-fix text-center p-4 flex flex-col gap-4"
 				>
-					<p
-						class="label"
-						class:text-status-danger={cursoDeLaJornada?.estado == 1}
-					>
+					<p class="label">
 						{cursoDeLaJornada?.estado == 0
 							? 'En curso'
 							: cursoDeLaJornada?.estado == 1
@@ -109,8 +106,11 @@
 					{#if cursoDeLaJornada.estado == 1}
 						<div>
 							<p class="label">Calificación</p>
-							<p>
-								{cursoDeLaJornada.calificacion}
+							<p
+								class:text-status-success={cursoDeLaJornada.aprobado}
+								class:text-status-danger={!cursoDeLaJornada.aprobado}
+							>
+								{cursoDeLaJornada.aprobado ? 'Aprobado' : 'Reprobado'}
 							</p>
 						</div>
 					{/if}
