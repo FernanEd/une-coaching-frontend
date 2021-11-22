@@ -35,7 +35,7 @@ type InvitacionesDelDocente = AsistenteEnCurso & {
 };
 
 type CursosDelDocente = CursoEnJornada & {
-	calificacion: number;
+	aprobado: boolean;
 	instructor: Usuario & { id_instructor: number };
 	curso: Curso & {
 		diplomado: Diplomado;
@@ -173,9 +173,9 @@ export const getDocentePortal = (usuarioID: number) => {
 
 					return {
 						...c,
-						calificacion: invitacionAceptadas.find(
+						aprobado: invitacionAceptadas.find(
 							(i) => i.id_cursojornada == c.id
-						).calificacion,
+						).aprobado,
 						instructor: {
 							...$usuarios.find(
 								(u) => u.id == instructorDelCurso.id_usuario

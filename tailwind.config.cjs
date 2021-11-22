@@ -3,6 +3,15 @@ const config = {
 	purge: ['./src/**/*.{html,js,svelte,ts}'],
 	theme: {
 		extend: {
+			keyframes: {
+				'fade-in': {
+					'0%': { opacity: 0 },
+					'100%': { opacity: 1 }
+				}
+			},
+			animation: {
+				'fade-in': 'fade-in 0.3s ease'
+			},
 			boxShadow: {
 				fix: '0 4px 15px 0 rgba(0, 0, 0, 0.15)'
 			},

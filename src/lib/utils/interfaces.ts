@@ -156,7 +156,7 @@ export interface AsistenteEnCurso {
 	id_cursojornada: id_cursoEnJornada;
 	id_docente: id_docente;
 	estado: 0 | 1 | 2;
-	calificacion: number;
+	aprobado: boolean;
 }
 
 export interface Reporte {

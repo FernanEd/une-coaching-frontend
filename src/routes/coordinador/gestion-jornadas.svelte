@@ -153,7 +153,7 @@
 								: '...'}
 						</p>
 						<br />
-						{#if cursoJornada.estado == 1 && (aprobados = cursoJornada.asistentes.filter((a) => a.calificacion >= 7)) && (reprobados = cursoJornada.asistentes.filter((a) => a.calificacion < 7))}
+						{#if cursoJornada.estado == 1 && (aprobados = cursoJornada.asistentes.filter((a) => a.aprobado)) && (reprobados = cursoJornada.asistentes.filter((a) => !a.aprobado))}
 							{#if aprobados.length == 0}
 								<p class="text-text-3">No hay asistentes aprobados</p>
 							{:else}

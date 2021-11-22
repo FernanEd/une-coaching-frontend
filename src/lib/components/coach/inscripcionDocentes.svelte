@@ -35,7 +35,7 @@
 				asistentesEnCurso.addItem({
 					id_docente: Number(docenteID),
 					id_cursojornada: cursoJornadaID,
-					calificacion: 0,
+					aprobado: false,
 					estado: 0
 				});
 			}

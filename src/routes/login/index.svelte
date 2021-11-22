@@ -1,74 +1,83 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
+	import Spinner from '$lib/components/Spinner.svelte';
 	import { currentUser } from '$lib/stores/currentUser';
 	import { logIn } from '$lib/utils/auth';
 	import type { JWT, Usuario } from '$lib/utils/interfaces';
 	import { serverURL } from '$lib/utils/serverURL';
 	import { writable } from 'svelte/store';
 
+	type loginSuccess = {
+		auth: true;
+		userID: number;
+		token: string;
+	};
+
+	type loginError = {
+		auth: false;
+		message: string;
+	};
+
+	let loading = false;
 	let errors = writable<string[]>([]);
 	let matriculaInput: number;
 	let passwordInput: string;
 
 	const handleLogin = async () => {
+		loading = true;
 		errors.set([]);
-		let res = await fetch(`${serverURL}/login`, {
-			method: 'POST',
-			body: JSON.stringify({
-				matricula: matriculaInput,
-				password: passwordInput
-			}),
-			headers: {
-				'Content-type': 'application/json'
-			}
-		});
-
-		type loginSuccess = {
-			auth: true;
-			userID: number;
-			token: string;
-		};
-
-		type loginError = {
-			auth: false;
-			message: string;
-		};
-
-		let login: loginSuccess | loginError = await res.json();
-
-		if (login['auth'] == true) {
-			matriculaInput = undefined;
-			passwordInput = undefined;
-
-			logIn({
-				userID: login['userID'],
-				token: login['token']
+		try {
+			let res = await fetch(`${serverURL}/login`, {
+				method: 'POST',
+				body: JSON.stringify({
+					matricula: matriculaInput,
+					password: passwordInput
+				}),
+				headers: {
+					'Content-type': 'application/json'
+				}
 			});
 
-			if ($currentUser) {
-				if ($page.query.get('next')) {
-					if (
-						!$currentUser.roles.find(({ rol }) =>
-							$page.query.get('next').includes(rol)
-						)
-					) {
-						await goto('/');
+			let login: loginSuccess | loginError = await res.json();
+
+			if (login['auth'] == true) {
+				matriculaInput = undefined;
+				passwordInput = undefined;
+
+				logIn({
+					userID: login['userID'],
+					token: login['token']
+				});
+
+				if ($currentUser) {
+					if ($page.query.get('next')) {
+						if (
+							!$currentUser.roles.find(({ rol }) =>
+								$page.query.get('next').includes(rol)
+							)
+						) {
+							await goto('/');
+						} else {
+							await goto($page.query.get('next'));
+						}
 					} else {
-						await goto($page.query.get('next'));
+						if ($currentUser.roles.length == 1) {
+							await goto($currentUser.roles[0].rol);
+						} else {
+							await goto('/');
+						}
 					}
 				} else {
-					if ($currentUser.roles.length == 1) {
-						await goto($currentUser.roles[0].rol);
-					} else {
-						await goto('/');
-					}
+					await goto('/');
 				}
 			} else {
-				await goto('/');
+				errors.set([login['message']]);
 			}
-		} else {
-			errors.set([login['message']]);
+		} catch (e) {
+			errors.set(e);
+		} finally {
+			loading = false;
 		}
 	};
 </script>
@@ -112,7 +121,13 @@
 			</p>
 		{/each}
 
-		<button class="btn primary">Ingresar</button>
+		<button class="btn primary flex justify-center items-center">
+			{#if loading}
+				<Spinner />
+			{/if}
+
+			Ingresar</button
+		>
 	</form>
 	<div class="h-20" />
 </main>

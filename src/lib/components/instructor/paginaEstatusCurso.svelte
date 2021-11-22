@@ -3,36 +3,36 @@
 	import { cursosEnJornada } from '$lib/stores/db/cursosEnJornada';
 
 	import type { AsistenteDeCursoDeInstructor } from '$lib/stores/instructorPortal';
+	import { toasts } from '$lib/stores/toastlist';
 
 	export let goBack;
 	export let alumnos: AsistenteDeCursoDeInstructor[] = [];
 	export let cursoEnJornadaID: number;
 	export let isCompleted: boolean;
 
-	const marcarCursoCompletado = () => {
-		cursosEnJornada.updateItem(cursoEnJornadaID, {
-			estado: 1
-		});
+	const marcarCursoCompletado = async () => {
+		try {
+			await cursosEnJornada.updateItem(cursoEnJornadaID, {
+				estado: 1
+			});
+			toasts.success();
+		} catch (e) {
+			console.log(e);
+			toasts.error();
+		}
 	};
 
-	const abrirCurso = () => {
-		cursosEnJornada.updateItem(cursoEnJornadaID, {
-			estado: 0
-		});
+	const abrirCurso = async () => {
+		try {
+			await cursosEnJornada.updateItem(cursoEnJornadaID, {
+				estado: 0
+			});
+			toasts.success();
+		} catch (e) {
+			console.log(e);
+			toasts.error();
+		}
 	};
-
-	$: masBajo =
-		alumnos.length > 0
-			? alumnos.reduce((a, b) =>
-					a.calificacion < b.calificacion ? a : b
-			  )
-			: undefined;
-	$: masAlto =
-		alumnos.length > 0
-			? alumnos.reduce((a, b) =>
-					a.calificacion > b.calificacion ? a : b
-			  )
-			: undefined;
 </script>
 
 <button class="link" on:click={goBack}>← Volver atrás</button>
@@ -46,63 +46,40 @@
 		<div>
 			<p class="label">Aprobados</p>
 			<p>
-				{alumnos.filter((a) => a.calificacion >= 7).length}
+				{alumnos.filter((a) => a.aprobado).length}
 			</p>
 		</div>
 
 		<div>
 			<p class="label">Reprobados</p>
 			<p>
-				{alumnos.filter((a) => a.calificacion < 7).length}
+				{alumnos.filter((a) => !a.aprobado).length}
 			</p>
 		</div>
 
-		{#if alumnos.length > 0}
-			<div>
-				<p class="label">Calificación promedio</p>
-				<p>
-					{alumnos.reduce((a, b) => a + b.calificacion, 0) /
-						alumnos.length}
-				</p>
-			</div>
-		{/if}
+		<div>
+			<p class="label">Porcentaje de aprobados</p>
+			<p>
+				{(alumnos.filter((a) => a.aprobado).length /
+					(alumnos.length || 1)) *
+					100} %
+			</p>
+		</div>
 
-		{#if masAlto}
-			<div>
-				<p class="label">Calificación más alta</p>
-				<p>
-					{masAlto.usuario.nombre}
-					{masAlto.usuario.apellido_paterno}
-					{masAlto.usuario.apellido_materno} ({masAlto.calificacion})
-				</p>
-			</div>
-		{/if}
-
-		{#if masBajo}
-			<div>
-				<p class="label">Calificación más baja</p>
-				<p>
-					{masBajo.usuario.nombre}
-					{masBajo.usuario.apellido_paterno}
-					{masBajo.usuario.apellido_materno} ({masBajo.calificacion})
-				</p>
-			</div>
+		{#if isCompleted}
+			<button
+				class="btn"
+				on:click={() => {
+					abrirCurso();
+				}}>Abrir curso</button
+			>
+		{:else}
+			<button
+				class="btn primary"
+				on:click={() => {
+					marcarCursoCompletado();
+				}}>Marcar curso como completado</button
+			>
 		{/if}
 	</article>
-
-	{#if isCompleted}
-		<button
-			class="link"
-			on:click={() => {
-				abrirCurso();
-			}}>Abrir curso</button
-		>
-	{:else}
-		<button
-			class="btn primary"
-			on:click={() => {
-				marcarCursoCompletado();
-			}}>Marcar curso como completado</button
-		>
-	{/if}
 </section>
