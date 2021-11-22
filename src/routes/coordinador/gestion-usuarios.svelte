@@ -24,22 +24,6 @@
 	let filterFunction: (usuario: UsuarioConRoles) => boolean = (
 		usuario
 	) => true;
-
-	const handleFilterField = () => {
-		if (filterText) {
-			filterFunction = (usuario) =>
-				usuario.matricula.toString().includes(filterText);
-		} else {
-			filterFunction = (usuario) => true;
-		}
-	};
-
-	$: if (filterGroup.length > 0) {
-		filterFunction = (usuario) =>
-			usuario.roles.some(({ rol }) => filterGroup.includes(rol));
-	} else {
-		filterFunction = (usuario) => true;
-	}
 </script>
 
 {#if $addUsuarioModal}

@@ -4,5 +4,9 @@ export const makeArraySearchable = <T>(
 	searchText: string
 ) =>
 	array.filter((elem) =>
-		searchFields.some((f) => elem[f].toString().includes(searchText))
+		searchText
+			? searchFields.some((f) =>
+					elem[f].toString().includes(searchText)
+			  )
+			: true
 	);
