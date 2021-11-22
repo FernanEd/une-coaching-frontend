@@ -40,7 +40,7 @@
 		{#if isEditing}
 			<button class="btn primary">Editar competencia</button>
 		{:else}
-			<button class="btn primary">Agregar competencia</button>
+			<button class="btn primary">Guardar competencia</button>
 		{/if}
 	</header>
 

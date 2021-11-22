@@ -74,7 +74,7 @@
 		{#if isEditing}
 			<button class="btn primary">Editar diplomado</button>
 		{:else}
-			<button class="btn primary">Agregar diplomado</button>
+			<button class="btn primary">Guardar diplomado</button>
 		{/if}
 	</header>
 

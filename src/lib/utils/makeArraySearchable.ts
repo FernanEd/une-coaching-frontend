@@ -6,7 +6,10 @@ export const makeArraySearchable = <T>(
 	array.filter((elem) =>
 		searchText
 			? searchFields.some((f) =>
-					elem[f].toString().includes(searchText)
+					elem[f]
+						.toString()
+						.toLowerCase()
+						.includes(searchText.toLowerCase())
 			  )
 			: true
 	);

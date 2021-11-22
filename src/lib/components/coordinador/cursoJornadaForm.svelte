@@ -95,7 +95,7 @@
 		{#if isEditing}
 			<button class="btn primary">Editar curso</button>
 		{:else}
-			<button class="btn primary">Agregar curso</button>
+			<button class="btn primary">Guardar curso</button>
 		{/if}
 	</header>
 

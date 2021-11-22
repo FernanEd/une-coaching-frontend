@@ -103,7 +103,7 @@
 			{#if isEditing}
 				Editar usuario
 			{:else}
-				Agregar usuario
+				Guardar usuario
 			{/if}
 		</button>
 	</header>

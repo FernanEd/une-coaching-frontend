@@ -100,7 +100,7 @@
 		{#if isEditing}
 			<button class="btn primary">Agregar Acreditación</button>
 		{:else}
-			<button class="btn primary">Agregar Acreditación</button>
+			<button class="btn primary">Guardar Acreditación</button>
 		{/if}
 	</header>
 

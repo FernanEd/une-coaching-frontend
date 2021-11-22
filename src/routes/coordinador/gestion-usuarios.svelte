@@ -10,6 +10,7 @@
 		usuarioList
 	} from '$lib/stores/lists/usuariosList';
 	import { usuarios } from '$lib/stores/db/usuarios';
+	import { makeArraySearchable } from '$lib/utils/makeArraySearchable';
 
 	let addUsuarioModal = useModal();
 	let updateUsuarioModal = useModal();
@@ -24,6 +25,13 @@
 	let filterFunction: (usuario: UsuarioConRoles) => boolean = (
 		usuario
 	) => true;
+
+	$: if (filterGroup.length > 0) {
+		filterFunction = (usuario) =>
+			usuario.roles.some(({ rol }) => filterGroup.includes(rol));
+	} else {
+		filterFunction = (usuario) => true;
+	}
 </script>
 
 {#if $addUsuarioModal}
@@ -59,12 +67,8 @@
 
 <hr class="my-4 border-none" />
 
-<p class="label">Buscar usuario por matricula</p>
-<input
-	type="text"
-	bind:value={filterText}
-	on:input={handleFilterField}
-/>
+<p class="label">Buscar usuario</p>
+<input type="text" bind:value={filterText} />
 
 <hr class="my-4 border-none" />
 
@@ -120,7 +124,7 @@
 			</tr>
 		</thead>
 		<tbody class="">
-			{#each $usuarioList.filter(filterFunction) as usuario (usuario.id)}
+			{#each makeArraySearchable($usuarioList, ['matricula', 'nombre', 'apellido_paterno', 'apellido_materno'], filterText).filter(filterFunction) as usuario (usuario.id)}
 				<tr>
 					<td><a href="">{usuario.matricula}</a></td>
 					<td
