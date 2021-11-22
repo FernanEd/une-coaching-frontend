@@ -10,6 +10,8 @@
 	import { usuarios } from '$lib/stores/db/usuarios';
 
 	import type { UsuarioConRoles } from '$lib/stores/lists/usuariosList';
+	import { prompts } from '$lib/stores/prompts';
+	import { toasts } from '$lib/stores/toastlist';
 	import type { Docente, Usuario } from '$lib/utils/interfaces';
 	import { tick } from 'svelte';
 
@@ -53,25 +55,32 @@
 				delete formData.password;
 				usuarios.updateItem(editingUser.id, { ...formData });
 
-				if (rolesNuevos.length > 0) {
-					for (let rol of rolesNuevos) {
-						if (roles.hasOwnProperty(rol)) {
-							await roles[rol].addItem({
-								id_usuario: editingUser.id
-							});
+				try {
+					if (rolesNuevos.length > 0) {
+						for (let rol of rolesNuevos) {
+							if (roles.hasOwnProperty(rol)) {
+								await roles[rol].addItem({
+									id_usuario: editingUser.id
+								});
+							}
 						}
 					}
-				}
-				if (rolesDesmarcados.length > 0) {
-					for (let rol of rolesDesmarcados) {
-						if (roles.hasOwnProperty(rol)) {
-							await roles[rol].removeItem(
-								editingUser.roles.find(
-									({ rol: oldRol }) => oldRol == rol
-								).id
-							);
+
+					if (rolesDesmarcados.length > 0) {
+						for (let rol of rolesDesmarcados) {
+							if (roles.hasOwnProperty(rol)) {
+								await roles[rol].removeItem(
+									editingUser.roles.find(
+										({ rol: oldRol }) => oldRol == rol
+									).id
+								);
+							}
 						}
 					}
+					toasts.success();
+				} catch (e) {
+					console.error(e);
+					toasts.error();
 				}
 
 				rolesIniciales = rolesSeleccionados;
