@@ -4,6 +4,10 @@
 	import { page } from '$app/stores';
 	import { currentUser } from '$lib/stores/currentUser';
 
+	let showPasswordDialog: boolean = !localStorage.getItem(
+		'display_password_dialog'
+	);
+
 	export let bgColor = 'bg-une-red';
 	export let layoutHeading;
 	export let tabs: { [x: string]: string }[];
@@ -89,23 +93,30 @@ gap-20"
 		</nav>
 	</header>
 	<main class="max-w-md mx-auto px-4 py-8">
-		<div
-			class="mb-8 p-4 bg-neutral-100 rounded 
+		{#if showPasswordDialog}
+			<div
+				class="mb-8 p-4 bg-neutral-100 rounded 
 			flex flex-col gap-4 items-center text-center
 			"
-		>
-			<p>
-				Sí es primera vez que ingresas, cambia tu contraseña para
-				proteger tu cuenta.
-			</p>
-			<p>
-				Accede desde el menú o da clic <a href="/newpassword">aqui</a
-				>.
-			</p>
-			<button class="btn primary"
-				>Entendido, no volver a mostrar</button
 			>
-		</div>
+				<p>
+					Sí es primera vez que ingresas, cambia tu contraseña para
+					proteger tu cuenta.
+				</p>
+				<p>
+					Accede desde el menú o da clic <a href="/newpassword"
+						>aqui</a
+					>.
+				</p>
+				<button
+					class="btn primary"
+					on:click={() => {
+						localStorage.setItem('display_password_dialog', 'false');
+						showPasswordDialog = false;
+					}}>Entendido, no volver a mostrar</button
+				>
+			</div>
+		{/if}
 		<slot />
 	</main>
 {/if}

@@ -34,6 +34,11 @@ gap-20"
 				<li>
 					<a class="text-white" href="/">Inicio</a>
 				</li>
+				<li>
+					<a href="/newpassword" class="text-white"
+						>Cambiar contraseña</a
+					>
+				</li>
 			</ul>
 		</nav>
 
