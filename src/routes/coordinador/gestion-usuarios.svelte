@@ -12,6 +12,8 @@
 	import { usuarios } from '$lib/stores/db/usuarios';
 	import { makeArraySearchable } from '$lib/utils/makeArraySearchable';
 	import { prompts } from '$lib/stores/prompts';
+	import { toasts } from '$lib/stores/toastlist';
+	import { currentUser as currentCoordinator } from '$lib/stores/currentUser';
 
 	let addUsuarioModal = useModal();
 	let updateUsuarioModal = useModal();
@@ -33,6 +35,16 @@
 	} else {
 		filterFunction = (usuario) => true;
 	}
+
+	const deleteUser = async (id: number) => {
+		try {
+			await usuarios.removeItem(id);
+			toasts.success();
+		} catch (e) {
+			console.error(e);
+			toasts.error();
+		}
+	};
 </script>
 
 {#if $addUsuarioModal}
@@ -58,17 +70,6 @@
 		/></Modal
 	>
 {/if}
-
-<button
-	class="btn primary"
-	on:click={() => {
-		prompts.showPrompt({
-			type: 'danger',
-			message: 'Estas seguro que quieres realizar esto',
-			onAccept: () => {}
-		});
-	}}>Lmao</button
->
 
 <header class="flex justify-between flex-wrap">
 	<h2 class="heading">Usuarios</h2>
@@ -163,11 +164,20 @@
 									currentUserID = usuario.id;
 								}}>Editar usuario</button
 							>
-							<button
-								class="link"
-								on:click={() => usuarios.removeItem(usuario.id)}
-								>Eliminar usuario</button
-							>
+							{#if $currentCoordinator.id == usuario.id}
+								<p />
+							{:else}
+								<button
+									class="link"
+									on:click={() => {
+										prompts.showPrompt({
+											message: `¿Estás seguro que quieres borrar a ${usuario.nombre}? Si lo borras todos sus registros se borraran con él.`,
+											type: 'danger',
+											onAccept: () => deleteUser(usuario.id)
+										});
+									}}>Eliminar usuario</button
+								>
+							{/if}
 						</span>
 					</td>
 				</tr>

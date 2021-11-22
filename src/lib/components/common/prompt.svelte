@@ -47,7 +47,7 @@
 		margin-top: -8rem;
 		min-width: 24rem;
 		max-height: 70vh;
-		@apply overflow-auto bg-white rounded shadow-lg;
+		@apply w-screen max-w-sm overflow-auto bg-white rounded shadow-lg;
 	}
 
 	.modal-header {

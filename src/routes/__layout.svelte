@@ -7,23 +7,35 @@
 	import Spinner from '$lib/components/Spinner.svelte';
 	import { currentUser } from '$lib/stores/currentUser';
 	import { usuarioList } from '$lib/stores/lists/usuariosList';
-	import { userSession } from '$lib/stores/userSession';
+	import { loggedIn, userSession } from '$lib/stores/userSession';
 	import { logOut } from '$lib/utils/auth';
+	import { serverURL } from '$lib/utils/serverURL';
 	import { onMount } from 'svelte';
 	import '../app.postcss';
 
+	const fail = async () => await goto(`/login?next=${$page.path}`);
+
 	onMount(async () => {
-		if (!$userSession.hasOwnProperty('userID')) {
-			await goto(`/login?next=${$page.path}`);
-		} else {
-			if ($currentUser) {
-				if (
-					!$currentUser.roles.find(({ rol }) =>
-						$page.path.includes(rol)
-					)
-				) {
-					goto('/');
+		if (!$loggedIn) {
+			let jwt = JSON.parse(localStorage.getItem('jwt'));
+			if (!jwt) return fail();
+
+			try {
+				let ping = await fetch(`${serverURL}/token`, {
+					headers: {
+						Authorization: jwt
+					}
+				});
+
+				if (ping.status != 200) {
+					return fail();
 				}
+
+				console.log('weew lad');
+				loggedIn.set(true);
+				userSession.set(jwt);
+			} catch (e) {
+				return fail();
 			}
 		}
 	});
