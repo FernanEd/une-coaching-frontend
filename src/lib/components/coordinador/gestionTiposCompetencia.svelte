@@ -1,22 +1,37 @@
 <script lang="ts">
 	import { cursos } from '$lib/stores/db/cursos';
 	import { tiposCompetencias } from '$lib/stores/db/tipoCompetencias';
+	import { prompts } from '$lib/stores/prompts';
+	import { toasts } from '$lib/stores/toastlist';
 	import type { TipoCompetencia } from '$lib/utils/interfaces';
 
 	let tipoCompetenciaName;
 	let currentID;
 
-	const handleSubmit = () => {
+	const handleSubmit = async () => {
 		if (tipoCompetenciaName) {
 			if (currentID) {
-				tiposCompetencias.updateItem(currentID, {
-					nombre: tipoCompetenciaName
-				});
+				try {
+					await tiposCompetencias.updateItem(currentID, {
+						nombre: tipoCompetenciaName
+					});
+					toasts.success();
+				} catch (e) {
+					console.error(e);
+					toasts.error();
+				}
+
 				currentID = undefined;
 			} else {
-				tiposCompetencias.addItem({
-					nombre: tipoCompetenciaName
-				});
+				try {
+					await tiposCompetencias.addItem({
+						nombre: tipoCompetenciaName
+					});
+					toasts.success();
+				} catch (e) {
+					console.error(e);
+					toasts.error();
+				}
 			}
 			tipoCompetenciaName = '';
 		}
@@ -77,8 +92,23 @@
 							>
 							<button
 								class="font-bold text-text-4"
-								on:click={() => cursos.removeItem(tipoCompetencia.id)}
-								>Eliminar tipo</button
+								on:click={() =>
+									prompts.showPrompt({
+										type: 'danger',
+										message:
+											'¿Estás seguro que quieres borrar este tipo de competencia? Si la borras todos los registros creados de este tipo de competencia se perderán.',
+										onAccept: async () => {
+											try {
+												await tiposCompetencias.removeItem(
+													tipoCompetencia.id
+												);
+												toasts.success();
+											} catch (e) {
+												console.error(e);
+												toasts.error();
+											}
+										}
+									})}>Eliminar tipo</button
 							>
 						</span>
 					</td>

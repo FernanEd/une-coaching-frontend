@@ -8,6 +8,8 @@
 	import { tiposCompetencias } from '$lib/stores/db/tipoCompetencias';
 	import { competenciasList } from '$lib/stores/lists/competenciasList';
 	import { useModal } from '$lib/stores/modal';
+	import { prompts } from '$lib/stores/prompts';
+	import { toasts } from '$lib/stores/toastlist';
 	import { derived } from 'svelte/store';
 	import CompetenciaForm from './competenciaForm.svelte';
 	import GestionTiposCompetencia from './gestionTiposCompetencia.svelte';
@@ -106,8 +108,20 @@
 							<button
 								class="link"
 								on:click={() =>
-									competencias.removeItem(competencia.id)}
-								>Eliminar competencia</button
+									prompts.showPrompt({
+										type: 'danger',
+										message:
+											'¿Estás seguro que quieres borrar esta competencia? Si la borras todos los registros creados de esta competencia se perderán.',
+										onAccept: async () => {
+											try {
+												await competencias.removeItem(competencia.id);
+												toasts.success();
+											} catch (e) {
+												console.error(e);
+												toasts.error();
+											}
+										}
+									})}>Eliminar competencia</button
 							>
 						</span>
 					</td>

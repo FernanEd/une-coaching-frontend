@@ -3,6 +3,7 @@
 
 	import { diplomados } from '$lib/stores/db/diplomados';
 	import { tiposCompetencias } from '$lib/stores/db/tipoCompetencias';
+	import { toasts } from '$lib/stores/toastlist';
 
 	import { tick } from 'svelte';
 
@@ -14,17 +15,30 @@
 	const handleSubmit = async () => {
 		if (nombreCompetencia != '') {
 			if (isEditing) {
-				await competencias.updateItem(competenciaID, {
-					nombre: nombreCompetencia,
-					id_tipo: selectedTipo
-				});
-				await tick();
+				try {
+					await competencias.updateItem(competenciaID, {
+						nombre: nombreCompetencia,
+						id_tipo: selectedTipo
+					});
+					await tick();
+					toasts.success();
+				} catch (e) {
+					console.error(e);
+					toasts.error();
+				}
 			} else {
-				await competencias.addItem({
-					nombre: nombreCompetencia,
-					id_tipo: selectedTipo
-				});
-				await tick();
+				try {
+					await competencias.addItem({
+						nombre: nombreCompetencia,
+						id_tipo: selectedTipo
+					});
+					await tick();
+					toasts.success();
+				} catch (e) {
+					console.error(e);
+					toasts.error();
+				}
+
 				nombreCompetencia = '';
 			}
 		}
