@@ -3,6 +3,7 @@
 
 	import { cursosEnJornada } from '$lib/stores/db/cursosEnJornada';
 	import { instructoresList } from '$lib/stores/lists/instructorList';
+	import { toasts } from '$lib/stores/toastlist';
 
 	import type { Curso, Usuario } from '$lib/utils/interfaces';
 	import { makeArraySearchable } from '$lib/utils/makeArraySearchable';
@@ -39,21 +40,33 @@
 		if (cupoCurso && cursoSeleccionado && instructorSeleccionado) {
 			formErrors.set([]);
 			if (isEditing) {
-				cursosEnJornada.updateItem(currentCursoID, {
-					id_jornada: currentjornadaID,
-					id_instructor: instructorSeleccionado,
-					cupo_maximo: cupoCurso,
-					id_curso: cursoSeleccionado,
-					estado: cursoEstado
-				});
+				try {
+					await cursosEnJornada.updateItem(currentCursoID, {
+						id_jornada: currentjornadaID,
+						id_instructor: instructorSeleccionado,
+						cupo_maximo: cupoCurso,
+						id_curso: cursoSeleccionado,
+						estado: cursoEstado
+					});
+					toasts.success();
+				} catch (e) {
+					console.error(e);
+					toasts.error();
+				}
 			} else {
-				cursosEnJornada.addItem({
-					id_jornada: currentjornadaID,
-					id_instructor: instructorSeleccionado,
-					cupo_maximo: cupoCurso,
-					id_curso: cursoSeleccionado,
-					estado: 0
-				});
+				try {
+					await cursosEnJornada.addItem({
+						id_jornada: currentjornadaID,
+						id_instructor: instructorSeleccionado,
+						cupo_maximo: cupoCurso,
+						id_curso: cursoSeleccionado,
+						estado: 0
+					});
+					toasts.success();
+				} catch (e) {
+					console.error(e);
+					toasts.error();
+				}
 
 				instructorSeleccionado = undefined;
 				cupoCurso = undefined;

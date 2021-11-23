@@ -4,18 +4,15 @@
 	import { useModal } from '$lib/stores/modal';
 	import { usuarioList } from '$lib/stores/lists/usuariosList';
 	import { coachList } from '$lib/stores/lists/coachList';
+	import { makeArraySearchable } from '$lib/utils/makeArraySearchable';
 
 	let gestionarDocentes = useModal();
 	let filterText: string;
-	let currentCoachID: number;
 
+	let currentCoachID: number;
 	$: currentCoach = $coachList.find(
 		(coach) => coach.id_coach == currentCoachID
 	);
-
-	const handleFilterField = () => {
-		console.log(filterText);
-	};
 </script>
 
 {#if $gestionarDocentes}
@@ -35,11 +32,7 @@
 
 	<label>
 		<p class="leyenda text-text-4 text-xs">Buscar usuario</p>
-		<input
-			type="text"
-			bind:value={filterText}
-			on:input={handleFilterField}
-		/>
+		<input type="text" bind:value={filterText} />
 	</label>
 </header>
 
@@ -49,15 +42,14 @@
 	<thead>
 		<tr>
 			<th>Coach</th>
-			<th>Coachees asignados</th>
+			<th>Docentes asignados</th>
 			<th>...</th>
 		</tr>
 	</thead>
 	<tbody class="">
-		{#each $coachList as coach (coach.id)}
+		{#each makeArraySearchable($coachList, ['nombre', 'apellido_paterno', 'apellido_materno'], filterText) as coach (coach.id)}
 			<tr>
 				<td>
-					<a href="#">{coach.matricula}</a>
 					<p>
 						{coach.nombre}
 						{coach.apellido_paterno}
@@ -68,9 +60,9 @@
 					{#if coach.docentes.length == 0}
 						<p class="text text-text-4">Sin docentes asignados</p>
 					{:else}
+						<p>{coach.docentes.length} docentes asignados</p>
 						{#each coach.docentes as docente (docente.id)}
 							<p>
-								<a href="#">{docente.matricula}</a> -
 								{docente.nombre}
 								{docente.apellido_paterno}
 								{docente.apellido_materno}

@@ -1,15 +1,15 @@
 export const makeArraySearchable = <T>(
 	array: T[],
 	searchFields: (keyof T)[],
-	searchText: string
+	searchText: string | undefined
 ) =>
-	array.filter((elem) =>
-		searchText
-			? searchFields.some((f) =>
-					elem[f]
-						.toString()
-						.toLowerCase()
-						.includes(searchText.toLowerCase())
-			  )
-			: true
-	);
+	array.filter((elem) => {
+		let fieldText = searchFields.reduce(
+			(str, field) => (str += elem[field] + ' '),
+			''
+		);
+
+		return fieldText.match(new RegExp(searchText, 'i'))
+			? true
+			: false;
+	});

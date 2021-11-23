@@ -16,6 +16,8 @@
 	import { jornadas } from '$lib/stores/db/jornadas';
 	import { cursosEnJornada } from '$lib/stores/db/cursosEnJornada';
 	import ListaAsistentes from '$lib/components/coordinador/listaAsistentes.svelte';
+	import { prompts } from '$lib/stores/prompts';
+	import { toasts } from '$lib/stores/toastlist';
 
 	let jornadaModal = useModal();
 	let addCursoModal = useModal();
@@ -195,8 +197,21 @@
 							<button
 								class="font-bold text-text-4"
 								on:click={() =>
-									cursosEnJornada.removeItem(cursoJornada.id)}
-								>Eliminar curso</button
+									prompts.showPrompt({
+										type: 'danger',
+										message:
+											'¿Estás seguro que quieres borrar éste curso? Si la borras todos los registros, diplomados creados de este curso se perderán.',
+										onAccept: async () => {
+											try {
+												await cursosEnJornada.removeItem(
+													cursoJornada.id
+												);
+												toasts.success();
+											} catch (e) {
+												toasts.error();
+											}
+										}
+									})}>Eliminar curso</button
 							>
 						</span>
 					</td>

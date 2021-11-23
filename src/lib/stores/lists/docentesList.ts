@@ -9,8 +9,16 @@ export type DocenteEntrada = Usuario & { id_docente: number };
 export const docentesList: Readable<DocenteEntrada[]> = derived(
 	[docentes, usuarios],
 	([$docentes, $usuarios]) =>
-		$docentes.map((d) => ({
-			...$usuarios.find((u) => u.id == d.id_usuario),
-			id_docente: d.id
-		}))
+		$docentes
+			.map((d) => {
+				let user = $usuarios.find((u) => u.id == d.id_usuario);
+
+				if (!user) return;
+
+				return {
+					...user,
+					id_docente: d.id
+				};
+			})
+			.filter((d) => d)
 );

@@ -10,7 +10,6 @@ export const instructoresList: Readable<
 	InstructorEntrada[]
 > = derived([instructores, usuarios], ([$instructores, $usuarios]) =>
 	$instructores
-		.filter((i) => i)
 		.map((i) => {
 			let usuario = $usuarios.find((u) => u.id == i.id_usuario);
 
@@ -21,4 +20,5 @@ export const instructoresList: Readable<
 				id_instructor: i.id
 			};
 		})
+		.filter((i) => i)
 );

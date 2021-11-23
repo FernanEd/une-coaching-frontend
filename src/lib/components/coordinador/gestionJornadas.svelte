@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { jornadas } from '$lib/stores/db/jornadas';
+	import { prompts } from '$lib/stores/prompts';
 	import { toasts } from '$lib/stores/toastlist';
 	import { dateFormat } from '$lib/utils/dateFormat';
 	import type { Jornada } from '$lib/utils/interfaces';
@@ -151,19 +152,24 @@
 							<button
 								class="font-bold text-accent"
 								on:click={() => handleUpdate(jornada)}
-								>Editar curso</button
+								>Editar jornada</button
 							>
 							<button
 								class="font-bold text-text-4"
-								on:click={async () => {
-									try {
-										await jornadas.removeItem(jornada.id);
-										toasts.success();
-									} catch (e) {
-										console.error(e);
-										toasts.error();
-									}
-								}}>Eliminar curso</button
+								on:click={() =>
+									prompts.showPrompt({
+										type: 'danger',
+										message: `¿Estás seguro que quieres borrar ésta jornada? Si la borras todos los registros, diplomados y cursos de ésta jornada se perderán.`,
+										onAccept: async () => {
+											try {
+												await jornadas.removeItem(jornada.id);
+												toasts.success();
+											} catch (e) {
+												console.error(e);
+												toasts.error();
+											}
+										}
+									})}>Eliminar jornada</button
 							>
 						</span>
 					</td>
