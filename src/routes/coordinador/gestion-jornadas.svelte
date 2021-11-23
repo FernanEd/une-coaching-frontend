@@ -200,7 +200,7 @@
 									prompts.showPrompt({
 										type: 'danger',
 										message:
-											'¿Estás seguro que quieres borrar éste curso? Si la borras todos los registros, diplomados creados de este curso se perderán.',
+											'¿Estás seguro que quieres borrar este curso? Si la borras todos los registros, diplomados creados de este curso se perderán.',
 										onAccept: async () => {
 											try {
 												await cursosEnJornada.removeItem(

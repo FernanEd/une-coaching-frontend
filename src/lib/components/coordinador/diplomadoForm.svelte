@@ -2,6 +2,7 @@
 	import { cursos } from '$lib/stores/db/cursos';
 
 	import { diplomados } from '$lib/stores/db/diplomados';
+	import { toasts } from '$lib/stores/toastlist';
 
 	import type { Curso } from '$lib/utils/interfaces';
 	import { makeArraySearchable } from '$lib/utils/makeArraySearchable';
@@ -25,33 +26,49 @@
 				let cursosActualizar = cursosSeleccionados.filter(
 					(cursoID) => !cursosViejos.includes(cursoID)
 				);
-				await diplomados.updateItem(diplomadoID, {
-					nombre: nombreDiplomado
-				});
-				for (let cursoID of cursosActualizar) {
-					await cursos.updateItem(cursoID, {
-						id_diplomado: diplomadoID
+
+				try {
+					await diplomados.updateItem(diplomadoID, {
+						nombre: nombreDiplomado
 					});
+					for (let cursoID of cursosActualizar) {
+						await cursos.updateItem(cursoID, {
+							id_diplomado: diplomadoID
+						});
+					}
+					for (let cursoID of cursosDeseleccionados) {
+						await cursos.updateItem(cursoID, { id_diplomado: null });
+					}
+					toasts.success();
+				} catch (e) {
+					console.error(e);
+					toasts.error();
 				}
-				for (let cursoID of cursosDeseleccionados) {
-					await cursos.updateItem(cursoID, { id_diplomado: null });
-				}
+
 				//Actualizar cursos;
 				cursosViejos = cursosSeleccionados;
 			} else {
-				let diplomado = await diplomados.addItem({
-					nombre: nombreDiplomado
-				});
-				let cursosDeDiplomado = cursosSeleccionados;
-				//Limpiar form;
-				cursosSeleccionados = [];
-				nombreDiplomado = '';
-				await Promise.all(
-					cursosDeDiplomado.map((cursoID) =>
-						cursos.updateItem(cursoID, { id_diplomado: diplomado.id })
-					)
-				);
-				tick();
+				try {
+					let diplomado = await diplomados.addItem({
+						nombre: nombreDiplomado
+					});
+					let cursosDeDiplomado = cursosSeleccionados;
+					//Limpiar form;
+					cursosSeleccionados = [];
+					nombreDiplomado = '';
+					await Promise.all(
+						cursosDeDiplomado.map((cursoID) =>
+							cursos.updateItem(cursoID, {
+								id_diplomado: diplomado.id
+							})
+						)
+					);
+					await tick();
+					toasts.success();
+				} catch (e) {
+					console.error(e);
+					toasts.error();
+				}
 			}
 		}
 	};

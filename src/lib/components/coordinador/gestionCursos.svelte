@@ -1,5 +1,7 @@
 <script lang="ts">
 	import { cursos } from '$lib/stores/db/cursos';
+	import { prompts } from '$lib/stores/prompts';
+	import { toasts } from '$lib/stores/toastlist';
 
 	import type { Curso } from '$lib/utils/interfaces';
 	import { onMount } from 'svelte';
@@ -7,13 +9,30 @@
 	let cursoName;
 	let currentID;
 
-	const handleSubmit = () => {
+	const handleSubmit = async () => {
 		if (cursoName) {
 			if (currentID) {
-				cursos.updateItem(currentID, { nombre: cursoName });
-				currentID = undefined;
+				try {
+					await cursos.updateItem(currentID, { nombre: cursoName });
+					currentID = undefined;
+
+					toasts.success();
+				} catch (e) {
+					console.error(e);
+					toasts.error();
+				}
 			} else {
-				cursos.addItem({ nombre: cursoName, id_diplomado: null });
+				try {
+					await cursos.addItem({
+						nombre: cursoName,
+						id_diplomado: null
+					});
+
+					toasts.success();
+				} catch (e) {
+					console.error(e);
+					toasts.error();
+				}
 			}
 			cursoName = '';
 		}
@@ -74,8 +93,21 @@
 							>
 							<button
 								class="font-bold text-text-4"
-								on:click={() => cursos.removeItem(curso.id)}
-								>Eliminar curso</button
+								on:click={() =>
+									prompts.showPrompt({
+										type: 'danger',
+										message:
+											'¿Estás seguro que quieres borrar este curso? Si la borras todos los registros creados de este curso se perderán.',
+										onAccept: async () => {
+											try {
+												await cursos.removeItem(curso.id);
+												toasts.success();
+											} catch (e) {
+												console.error(e);
+												toasts.error();
+											}
+										}
+									})}>Eliminar curso</button
 							>
 						</span>
 					</td>

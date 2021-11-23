@@ -170,7 +170,6 @@
 						value={instructor.id_instructor}
 						required
 					/>
-					{instructor.matricula}
 					{instructor.nombre}
 					{instructor.apellido_paterno}
 					{instructor.apellido_materno}

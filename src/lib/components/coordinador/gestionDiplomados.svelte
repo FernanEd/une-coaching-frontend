@@ -6,6 +6,8 @@
 	import { diplomados } from '$lib/stores/db/diplomados';
 	import { diplomadosList } from '$lib/stores/lists/diplomadosList';
 	import { useModal } from '$lib/stores/modal';
+	import { prompts } from '$lib/stores/prompts';
+	import { toasts } from '$lib/stores/toastlist';
 	import { derived } from 'svelte/store';
 
 	let agregarDiplomadoModal = useModal();
@@ -95,8 +97,21 @@
 							>
 							<button
 								class="link"
-								on:click={() => diplomados.removeItem(diplomado.id)}
-								>Eliminar diplomado</button
+								on:click={() =>
+									prompts.showPrompt({
+										type: 'danger',
+										message:
+											'¿Estás seguro que quieres borrar este diplomado? Si la borras todos los registros creados de este diplomado se perderán.',
+										onAccept: async () => {
+											try {
+												await diplomados.removeItem(diplomado.id);
+												toasts.success();
+											} catch (e) {
+												console.error(e);
+												toasts.error();
+											}
+										}
+									})}>Eliminar diplomado</button
 							>
 						</span>
 					</td>
