@@ -3,11 +3,18 @@
 	import Modal from '$lib/components/modal.svelte';
 	import { useModal } from '$lib/stores/modal';
 	import { usuarioList } from '$lib/stores/lists/usuariosList';
-	import { coachList } from '$lib/stores/lists/coachList';
+	import {
+		coachList,
+		DocenteComoUsuario
+	} from '$lib/stores/lists/coachList';
 	import { makeArraySearchable } from '$lib/utils/makeArraySearchable';
+	import ListaDocentesAsignados from '$lib/components/coordinador/listaDocentesAsignados.svelte';
 
 	let gestionarDocentes = useModal();
 	let filterText: string;
+
+	let docentesAsignadosModal = useModal();
+	let listaDocentesAsignados: DocenteComoUsuario[] = [];
 
 	let currentCoachID: number;
 	$: currentCoach = $coachList.find(
@@ -27,11 +34,17 @@
 	>
 {/if}
 
+{#if $docentesAsignadosModal}
+	<Modal handleClose={docentesAsignadosModal.closeModal}>
+		<ListaDocentesAsignados docentes={listaDocentesAsignados} />
+	</Modal>
+{/if}
+
 <header class="flex justify-between flex-wrap">
 	<h2 class="text-2xl font-bold">Coordinación de Coaches</h2>
 
 	<label>
-		<p class="leyenda text-text-4 text-xs">Buscar usuario</p>
+		<p class="leyenda text-text-4 text-xs">Buscar coach</p>
 		<input type="text" bind:value={filterText} />
 	</label>
 </header>
@@ -60,14 +73,18 @@
 					{#if coach.docentes.length == 0}
 						<p class="text text-text-4">Sin docentes asignados</p>
 					{:else}
-						<p>{coach.docentes.length} docentes asignados</p>
-						{#each coach.docentes as docente (docente.id)}
-							<p>
-								{docente.nombre}
-								{docente.apellido_paterno}
-								{docente.apellido_materno}
-							</p>
-						{/each}
+						<p>
+							{coach.docentes.length == 1
+								? `${coach.docentes.length} docente asignado`
+								: `${coach.docentes.length} docentes asignados`}
+						</p>
+						<button
+							class="link primary"
+							on:click={() => {
+								docentesAsignadosModal.openModal();
+								listaDocentesAsignados = coach.docentes;
+							}}>Ver docentes asignados</button
+						>
 					{/if}
 				</td>
 				<td>
