@@ -88,13 +88,21 @@
 				formFields.forEach((key) => (form[key] = undefined));
 				rolesSeleccionados = [];
 
-				let { id: userID } = await usuarios.addItem(formData);
-				if (rolesList.length > 0) {
-					for (let rol of rolesList) {
-						if (roles.hasOwnProperty(rol)) {
-							roles[rol].addItem({ id_usuario: userID });
+				try {
+					let { id: userID } = await usuarios.addItem(formData);
+					if (rolesList.length > 0) {
+						for (let rol of rolesList) {
+							if (roles.hasOwnProperty(rol)) {
+								await roles[rol].addItem({ id_usuario: userID });
+							}
 						}
 					}
+					toasts.success();
+				} catch (e) {
+					console.error(e);
+					toasts.error(
+						'Ha habido un error. Compruebe que no es una matricula duplicada'
+					);
 				}
 			}
 			await tick();

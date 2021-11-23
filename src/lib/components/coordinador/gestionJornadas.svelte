@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { jornadas } from '$lib/stores/db/jornadas';
+	import { toasts } from '$lib/stores/toastlist';
 	import { dateFormat } from '$lib/utils/dateFormat';
 	import type { Jornada } from '$lib/utils/interfaces';
 	import dayjs from 'dayjs';
@@ -15,7 +16,7 @@
 
 	let currentID;
 
-	const handleSubmit = () => {
+	const handleSubmit = async () => {
 		const formFields = Object.keys(form);
 		const formData = { ...form };
 		const fieldsFilled = formFields.every((key) => form[key]);
@@ -23,10 +24,22 @@
 
 		if (fieldsFilled) {
 			if (isEditing) {
-				jornadas.updateItem(currentID, { ...formData });
+				try {
+					await jornadas.updateItem(currentID, { ...formData });
+					toasts.success();
+				} catch (e) {
+					console.error(e);
+					toasts.error();
+				}
 				currentID = undefined;
 			} else {
-				jornadas.addItem(formData);
+				try {
+					await jornadas.addItem(formData);
+					toasts.success();
+				} catch (e) {
+					console.error(e);
+					toasts.error();
+				}
 			}
 			formFields.forEach((field) => (form[field] = undefined));
 		}
@@ -142,8 +155,15 @@
 							>
 							<button
 								class="font-bold text-text-4"
-								on:click={() => jornadas.removeItem(jornada.id)}
-								>Eliminar curso</button
+								on:click={async () => {
+									try {
+										await jornadas.removeItem(jornada.id);
+										toasts.success();
+									} catch (e) {
+										console.error(e);
+										toasts.error();
+									}
+								}}>Eliminar curso</button
 							>
 						</span>
 					</td>
