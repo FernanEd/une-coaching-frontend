@@ -81,7 +81,7 @@
 
 		<p class="label">Selecciona docentes</p>
 		<div class="flex flex-col gap-1 max-h-60 overflow-auto">
-			{#each makeArraySearchable($docentesList, ['matricula', 'nombre', 'apellido_paterno', 'apellido_materno'], filterText) as docente (docente.id)}
+			{#each makeArraySearchable($docentesList, ['nombre', 'apellido_paterno', 'apellido_materno'], filterText) as docente (docente.id)}
 				<label class="flex gap-2 items-center">
 					<input
 						type="checkbox"

@@ -25,6 +25,7 @@
 {#if $gestionarDocentes}
 	<Modal handleClose={gestionarDocentes.closeModal}
 		><GestionDocentesEnCoaches
+			coachUserID={currentCoach.id}
 			coachID={currentCoach.id_coach}
 			docentesEnCoach={currentCoach.docentes}
 			docentesSeleccionados={currentCoach.docentes.map(

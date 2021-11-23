@@ -137,7 +137,7 @@
 			</tr>
 		</thead>
 		<tbody class="">
-			{#each makeArraySearchable($usuarioList, ['matricula', 'nombre', 'apellido_paterno', 'apellido_materno'], filterText).filter(filterFunction) as usuario (usuario.id)}
+			{#each makeArraySearchable($usuarioList, ['nombre', 'apellido_paterno', 'apellido_materno'], filterText).filter(filterFunction) as usuario (usuario.id)}
 				<tr>
 					<td><a href="">{usuario.matricula}</a></td>
 					<td

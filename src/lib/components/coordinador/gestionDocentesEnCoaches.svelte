@@ -6,17 +6,19 @@
 	import type { DocenteComoUsuario } from '$lib/stores/lists/coachList';
 
 	import { docentesList } from '$lib/stores/lists/docentesList';
+	import { toasts } from '$lib/stores/toastlist';
 	import type { DocentesEnCoaches } from '$lib/utils/interfaces';
 	import { makeArraySearchable } from '$lib/utils/makeArraySearchable';
 
 	let filterText: string;
 
-	export let coachID;
+	export let coachID: number;
+	export let coachUserID: number;
 	export let docentesSeleccionados: number[];
 	export let docentesEnCoach: DocenteComoUsuario[] = [];
 	let docentesIniciales = docentesSeleccionados;
 
-	const handleSubmit = () => {
+	const handleSubmit = async () => {
 		let doscentesNuevos = docentesSeleccionados.filter(
 			(d) => !docentesIniciales.includes(d)
 		);
@@ -24,22 +26,29 @@
 			(d) => !docentesSeleccionados.includes(d)
 		);
 
-		if (doscentesNuevos.length > 0) {
-			for (let docenteID of doscentesNuevos) {
-				docentesEnCoaches.addItem({
-					id_coach: coachID,
-					id_docente: Number(docenteID)
-				});
+		try {
+			if (doscentesNuevos.length > 0) {
+				for (let docenteID of doscentesNuevos) {
+					await docentesEnCoaches.addItem({
+						id_coach: coachID,
+						id_docente: Number(docenteID)
+					});
+				}
 			}
-		}
 
-		if (docentesDesmarcados.length > 0) {
-			for (let docenteID of docentesDesmarcados) {
-				docentesEnCoaches.removeItem(
-					docentesEnCoach.find((v) => v.id_docente == docenteID)
-						.id_docenteEnCoach
-				);
+			if (docentesDesmarcados.length > 0) {
+				for (let docenteID of docentesDesmarcados) {
+					await docentesEnCoaches.removeItem(
+						docentesEnCoach.find((v) => v.id_docente == docenteID)
+							.id_docenteEnCoach
+					);
+				}
 			}
+
+			toasts.success();
+		} catch (e) {
+			console.error(e);
+			toasts.error();
 		}
 
 		docentesIniciales = docentesSeleccionados;
@@ -67,7 +76,7 @@
 
 		<p class="label">Selecciona docentes</p>
 		<div class="flex flex-col gap-1 max-h-60 overflow-auto">
-			{#each makeArraySearchable($docentesList, ['nombre', 'apellido_paterno', 'apellido_materno'], filterText) as docente (docente.id)}
+			{#each makeArraySearchable( $docentesList.filter((d) => d.id != coachUserID), ['nombre', 'apellido_paterno', 'apellido_materno'], filterText ) as docente (docente.id)}
 				<label class="flex gap-2 items-center">
 					<input
 						type="checkbox"

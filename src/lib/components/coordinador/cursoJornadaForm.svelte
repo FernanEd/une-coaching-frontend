@@ -162,7 +162,7 @@
 	<div>
 		<p class="label">Selecciona un instructor para el curso</p>
 		<div class="flex flex-col gap-1 max-h-60 overflow-auto">
-			{#each makeArraySearchable($instructoresList, ['matricula', 'nombre', 'apellido_paterno', 'apellido_materno'], filterTextInstructores) as instructor (instructor.id)}
+			{#each makeArraySearchable($instructoresList, ['nombre', 'apellido_paterno', 'apellido_materno'], filterTextInstructores) as instructor (instructor.id)}
 				<label class="flex gap-2 items-center">
 					<input
 						type="radio"
