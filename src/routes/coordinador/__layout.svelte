@@ -1,10 +1,6 @@
 <script lang="ts">
-	import { page } from '$app/stores';
-
-	import { currentUser } from '$lib/stores/currentUser';
-
-	import { userSession } from '$lib/stores/userSession';
-	import { logOut } from '$lib/utils/auth';
+	import { page, session } from '$app/stores';
+	import LogoutButton from '$lib/components/common/logoutButton.svelte';
 </script>
 
 <aside
@@ -20,11 +16,11 @@ gap-20"
 	>
 		<h1 class="text-white font-bold text-xl">Portal Coordinador</h1>
 		<p class="text-gray-100">
-			Conectado como {$currentUser.matricula}
+			Conectado como {$session.user.nombre}
+			{$session.user.apellido_paterno}
+			{$session.user.apellido_materno}
 		</p>
-		<button class="font-bold text-accent-inv" on:click={logOut}
-			>Cerrar sesión
-		</button>
+		<LogoutButton />
 	</section>
 
 	<section class="flex flex-col gap-8 mb-auto">
