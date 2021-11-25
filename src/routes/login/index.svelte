@@ -1,18 +1,19 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-
 	import { session } from '$app/stores';
-
 	import Spinner from '$lib/components/common/spinner.svelte';
 	import { serverURL } from '$lib/constants/serverURL';
+	import { prompts } from '$lib/stores/prompts';
+	import { toasts } from '$lib/stores/toasts';
+
 	let matriculaInput = '';
 	let passwordInput = '';
-
 	let loading = false;
+	let error: string | undefined;
 
 	const handleLogin = async () => {
-		console.log(matriculaInput, passwordInput);
 		loading = true;
+		error = undefined;
 
 		try {
 			const res = await fetch(`${serverURL}/login`, {
@@ -28,7 +29,10 @@
 				}),
 			});
 
-			if (res.status != 200) return;
+			if (res.status != 200) {
+				error = 'Usuario o contraseña incorrectos.';
+				return;
+			}
 
 			const data = await res.json();
 
@@ -37,11 +41,10 @@
 				isLoggedIn: true,
 			};
 
-			console.log(data);
-
 			goto('/');
 		} catch (e) {
 			console.error(e);
+			toasts.error();
 		} finally {
 			loading = false;
 		}
@@ -80,6 +83,10 @@
 			<p class="label">Contraseña</p>
 			<input type="password" bind:value={passwordInput} required />
 		</div>
+
+		{#if error}
+			<p class="text-status-danger">{error}</p>
+		{/if}
 
 		<button class="btn primary flex justify-center items-center">
 			{#if loading}

@@ -21,6 +21,8 @@
 
 <script>
 	import { session } from '$app/stores';
+	import PromptArea from '$lib/components/common/promptArea.svelte';
+	import ToastArea from '$lib/components/common/toastArea.svelte';
 	import '../app.postcss';
 </script>
 
@@ -29,3 +31,6 @@
 {:else}
 	<slot name="login" />
 {/if}
+
+<ToastArea />
+<PromptArea />
