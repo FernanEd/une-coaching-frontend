@@ -10,8 +10,25 @@
 			status: 200,
 		};
 
+		const goIndex = {
+			status: 302,
+			redirect: '/',
+		};
+
 		if (page.path == '/login') return goThrough;
 		if (!session.isLoggedIn) return goLogin;
+
+		let portal = page.path.split('/').filter((p) => p)[0];
+
+		if (
+			portal == 'docente' ||
+			portal == 'coordinador' ||
+			portal == 'instructor' ||
+			portal == 'coach' ||
+			portal == 'administrativo'
+		) {
+			if (!session.roles.includes(portal)) return goIndex;
+		}
 
 		console.log(session);
 

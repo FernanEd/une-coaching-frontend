@@ -1,14 +1,15 @@
 import type { Usuario } from './db';
 
+export type userRoles =
+	| 'docente'
+	| 'coach'
+	| 'administrativo'
+	| 'coordinador'
+	| 'instructor';
+
 export interface userSession {
 	user: Omit<Usuario, 'password'>;
-	roles: (
-		| 'docente'
-		| 'coach'
-		| 'administrativo'
-		| 'coordinador'
-		| 'instructor'
-	)[];
+	roles: userRoles[];
 	token: string;
 }
 

@@ -42,41 +42,47 @@ gap-20"
 				<li>
 					<a
 						class="text-white"
-						class:text-neutral-300={$page.path ==
-							'/coordinador/gestion-usuarios'}
+						class:text-neutral-300={$page.path.includes(
+							'/coordinador/gestion-usuarios'
+						)}
 						href="/coordinador/gestion-usuarios">Gestionar usuarios</a
 					>
 				</li>
 				<li>
 					<a
 						class="text-white"
-						class:text-neutral-300={$page.path ==
-							'/coordinador/gestion-jornadas'}
-						href="/coordinador/gestion-jornadas">Gestionar jornadas</a
+						class:text-neutral-300={$page.path.includes(
+							'/coordinador/gestion-jornadas'
+						)}
+						href="/coordinador/gestion-jornadas">Gestionar Jornadas</a
 					>
 				</li>
 				<li>
 					<a
 						class="text-white"
-						class:text-neutral-300={$page.path ==
-							'/coordinador/coordinar-coaches'}
+						class:text-neutral-300={$page.path.includes(
+							'/coordinador/coordinar-coaches'
+						)}
 						href="/coordinador/coordinar-coaches">Coordinación de Coaches</a
 					>
 				</li>
 				<li>
 					<a
 						class="text-white"
-						class:text-neutral-300={$page.path ==
-							'/coordinador/diplomados-competencias'}
-						href="/coordinador/diplomados-competencias"
-						>Diplomados y competencias</a
+						class:text-neutral-300={$page.path.includes(
+							'/coordinador/gestion-diplomados-competencias'
+						)}
+						href="/coordinador/gestion-diplomados-competencias"
+						>Gestionar Diplomados, Cursos y Competencias</a
 					>
 				</li>
 				<li>
 					<a
 						class="text-white"
-						class:text-neutral-300={$page.path == '/coordinador/registros'}
-						href="/coordinador/registros">Registros de acreditaciones</a
+						class:text-neutral-300={$page.path.includes(
+							'/coordinador/gestion-registros'
+						)}
+						href="/coordinador/gestion-registros">Registros de acreditaciones</a
 					>
 				</li>
 			</ul>
