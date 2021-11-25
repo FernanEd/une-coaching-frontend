@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { session } from '$app/stores';
 	import LogoutButton from '$lib/components/common/logoutButton.svelte';
+	import { capitalizeString } from '$lib/utils/capitalizeString';
 </script>
 
 <svelte:head>
@@ -36,7 +37,7 @@
 
 				{#each $session.roles as role (role)}
 					<p class="my-4">
-						<a href={role}>{role[0].toUpperCase() + role.substr(1)}</a>
+						<a href={role}>{capitalizeString(role)}</a>
 					</p>
 				{/each}
 			</div>

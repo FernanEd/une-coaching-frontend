@@ -2,6 +2,7 @@ import { serverURL } from '$lib/constants/serverURL';
 import { get } from 'svelte/store';
 import type { Writable } from 'svelte/store';
 import { getFakeID } from './getFakeID';
+import { tick } from 'svelte';
 
 export const getCRUD = <T extends { id: number }>(
 	store: Writable<T[]>,
@@ -12,14 +13,23 @@ export const getCRUD = <T extends { id: number }>(
 	};
 
 	const getItems = async () => {
+		let oldStore = get(store);
+		if (oldStore.length > 0) return oldStore;
+
+		console.log('called');
+
 		try {
 			let res = await fetch(`${serverURL}/api/${route}`, {
 				credentials: 'include',
 			});
-			let data = await res.json();
+
+			if (res.status >= 400) throw Error('Sin autorización');
+
+			let data: T[] = await res.json();
 			store.set(data);
+			return data;
 		} catch (e) {
-			throw e;
+			console.error(e);
 		}
 	};
 
@@ -42,13 +52,15 @@ export const getCRUD = <T extends { id: number }>(
 				body: JSON.stringify(itemContents),
 			});
 
+			if (res.status >= 400) throw Error('Sin autorización');
+
 			let newItem: T = await res.json();
 			store.update((prev) =>
 				prev.map((item) => (item.id == fakeItemID ? newItem : item))
 			);
 		} catch (e) {
 			store.update((prev) => prev.filter((item) => item.id != fakeItemID));
-			throw e;
+			console.error(e);
 		}
 	};
 
@@ -62,7 +74,7 @@ export const getCRUD = <T extends { id: number }>(
 		);
 
 		try {
-			await fetch(`${serverURL}/api/${route}/${id}`, {
+			let res = await fetch(`${serverURL}/api/${route}/${id}`, {
 				credentials: 'include',
 				headers: {
 					'Content-type': 'application/json',
@@ -70,11 +82,12 @@ export const getCRUD = <T extends { id: number }>(
 				method: 'PUT',
 				body: JSON.stringify(itemContents),
 			});
+			if (res.status >= 400) throw Error('Sin autorización');
 		} catch (e) {
 			store.update((prev) =>
 				prev.map((item) => (item.id == id ? oldItem || item : item))
 			);
-			throw e;
+			console.error(e);
 		}
 	};
 
@@ -83,13 +96,14 @@ export const getCRUD = <T extends { id: number }>(
 		store.update((prev) => prev.filter((item) => item.id != id));
 
 		try {
-			await fetch(`${serverURL}/api/${route}/${id}`, {
+			let res = await fetch(`${serverURL}/api/${route}/${id}`, {
 				credentials: 'include',
 				method: 'DELETE',
 			});
+			if (res.status >= 400) throw Error('Sin autorización');
 		} catch (e) {
 			store.set(oldStore);
-			throw e;
+			console.error(e);
 		}
 	};
 

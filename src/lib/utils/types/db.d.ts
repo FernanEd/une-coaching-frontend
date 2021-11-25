@@ -112,7 +112,7 @@ export interface Administrativo {
 	id_usuario: id_usuario;
 }
 
-export interface DocentesEnCoaches {
+export interface DocenteEnCoach {
 	id: id_docenteEnCoach;
 	id_docente: id_docente;
 	id_coach: id_coach;

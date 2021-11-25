@@ -98,6 +98,9 @@ gap-20"
 		/>
 	</section>
 </aside>
+
+<svelte:head>UNE Coaching</svelte:head>
+
 <main class="py-8 px-4">
 	<slot />
 </main>
