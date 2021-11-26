@@ -13,11 +13,7 @@ export const getCRUD = <T extends { id: number }>(
 	};
 
 	const getItems = async () => {
-		let oldStore = get(store);
-		if (oldStore.length > 0) return oldStore;
-
 		console.log('called');
-
 		try {
 			let res = await fetch(`${serverURL}/api/${route}`, {
 				credentials: 'include',
@@ -29,8 +25,22 @@ export const getCRUD = <T extends { id: number }>(
 			store.set(data);
 			return data;
 		} catch (e) {
-			console.error(e);
+			console.log(e);
 		}
+	};
+
+	const callOnce = (fn: Function) => {
+		let hasBeenCalled = false;
+		return () => {
+			if (!hasBeenCalled) {
+				try {
+					hasBeenCalled = true;
+					fn();
+				} catch (e) {
+					hasBeenCalled = false;
+				}
+			}
+		};
 	};
 
 	const addItem = async (itemContents: Omit<T, 'id'>) => {
@@ -58,9 +68,11 @@ export const getCRUD = <T extends { id: number }>(
 			store.update((prev) =>
 				prev.map((item) => (item.id == fakeItemID ? newItem : item))
 			);
+
+			return newItem;
 		} catch (e) {
 			store.update((prev) => prev.filter((item) => item.id != fakeItemID));
-			console.error(e);
+			throw e;
 		}
 	};
 
@@ -83,11 +95,14 @@ export const getCRUD = <T extends { id: number }>(
 				body: JSON.stringify(itemContents),
 			});
 			if (res.status >= 400) throw Error('Sin autorización');
+
+			let updatedItem: T = await res.json();
+			return updatedItem;
 		} catch (e) {
 			store.update((prev) =>
 				prev.map((item) => (item.id == id ? oldItem || item : item))
 			);
-			console.error(e);
+			throw e;
 		}
 	};
 
@@ -101,14 +116,17 @@ export const getCRUD = <T extends { id: number }>(
 				method: 'DELETE',
 			});
 			if (res.status >= 400) throw Error('Sin autorización');
+
+			let deletedItem: T = await res.json();
+			return deletedItem;
 		} catch (e) {
 			store.set(oldStore);
-			console.error(e);
+			throw e;
 		}
 	};
 
 	return {
-		getItems,
+		getItems: callOnce(getItems),
 		findItem,
 		addItem,
 		updateItem,

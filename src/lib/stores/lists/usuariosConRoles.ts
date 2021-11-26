@@ -10,8 +10,12 @@ import {
 	db_usuarios,
 } from '../db';
 
+export interface RolesDeUsuario {
+	id: number;
+	rol: userRoles;
+}
 export interface UsuarioConRoles extends Usuario {
-	roles: userRoles[];
+	roles: RolesDeUsuario[];
 }
 
 export const usuariosConRoles = derived(
@@ -39,17 +43,38 @@ export const usuariosConRoles = derived(
 		db_administrativos.getItems();
 
 		return usuarios.map((u): UsuarioConRoles => {
-			let foundRoles: userRoles[] = [];
+			let foundRoles: RolesDeUsuario[] = [];
+			let docente = docentes.find((a) => a.id_usuario == u.id);
+			let coach = coaches.find((a) => a.id_usuario == u.id);
+			let instructor = instructores.find((a) => a.id_usuario == u.id);
+			let coordinador = coordinadores.find((a) => a.id_usuario == u.id);
+			let administrativo = administrativos.find((a) => a.id_usuario == u.id);
 
-			if (docentes.find((a) => a.id_usuario == u.id))
-				foundRoles.push('docente');
-			if (coaches.find((a) => a.id_usuario == u.id)) foundRoles.push('coach');
-			if (instructores.find((a) => a.id_usuario == u.id))
-				foundRoles.push('instructor');
-			if (coordinadores.find((a) => a.id_usuario == u.id))
-				foundRoles.push('coordinador');
-			if (administrativos.find((a) => a.id_usuario == u.id))
-				foundRoles.push('administrativo');
+			if (docente)
+				foundRoles.push({
+					id: docente.id,
+					rol: 'docente',
+				});
+			if (coach)
+				foundRoles.push({
+					id: coach.id,
+					rol: 'coach',
+				});
+			if (instructor)
+				foundRoles.push({
+					id: instructor.id,
+					rol: 'instructor',
+				});
+			if (coordinador)
+				foundRoles.push({
+					id: coordinador.id,
+					rol: 'coordinador',
+				});
+			if (administrativo)
+				foundRoles.push({
+					id: administrativo.id,
+					rol: 'administrativo',
+				});
 
 			return {
 				...u,
