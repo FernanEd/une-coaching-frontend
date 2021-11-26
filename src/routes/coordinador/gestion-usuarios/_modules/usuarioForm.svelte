@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { session } from '$app/stores';
+
 	import {
 		db_administrativos,
 		db_coaches,
@@ -77,7 +79,16 @@
 									({ rol: oldRol }) => oldRol == rol
 								);
 								if (userHasRol) {
-									await roles[rol].deleteItem(userHasRol.id);
+									try {
+										if (
+											rol == 'coordinador' &&
+											editingUsuario.id == $session.user.id
+										)
+											throw Error('No puedes quitarte el cargo de coordinador');
+										await roles[rol].deleteItem(userHasRol.id);
+									} catch (e: any) {
+										toasts.error(e);
+									}
 								}
 							}
 						}

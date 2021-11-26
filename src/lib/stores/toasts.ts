@@ -39,6 +39,6 @@ export const toasts = (() => {
 			addToast('success', msg),
 		error: (
 			msg = 'Ha habido un error. No se ha podido realizar la operación'
-		) => addToast('danger', msg),
+		) => addToast('danger', msg, 5000),
 	};
 })();
