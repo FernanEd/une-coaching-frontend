@@ -1,12 +1,27 @@
 <script lang="ts">
-	import { coachesConDocentes } from '$lib/stores/lists/coachesConDocentes';
+	import Modal from '$lib/components/common/modal.svelte';
+
+	import {
+		CoachConDocentes,
+		coachesConDocentes,
+	} from '$lib/stores/lists/coachesConDocentes';
+	import { useModal } from '$lib/stores/useModal';
 
 	import { makeArraySearchable } from '$lib/utils/makeArraySearchable';
+	import GestionarDocentesEnCoaches from './_modules/gestionarDocentesEnCoaches.svelte';
+	import ListaDocentesAsignadosACoach from './_modules/listaDocentesAsignadosACoach.svelte';
 
-	// let gestionarDocentes = useModal();
 	let filterText: string;
 
-	// let docentesAsignadosModal = useModal();
+	let editingCoachID: number | undefined;
+	let editingCoach: CoachConDocentes | undefined;
+	$: editingCoach = $coachesConDocentes.find(
+		(c) => c.id_coach == editingCoachID
+	);
+
+	let gestionarDocentes = useModal();
+	let docentesAsignadosModal = useModal();
+
 	// let listaDocentesAsignados: DocenteComoUsuario[] = [];
 
 	// let currentCoachID: number;
@@ -15,13 +30,13 @@
 	// );
 </script>
 
-<!-- {#if $gestionarDocentes}
+{#if $gestionarDocentes}
 	<Modal handleClose={gestionarDocentes.closeModal}
-		><GestionDocentesEnCoaches
-			coachUserID={currentCoach.id}
-			coachID={currentCoach.id_coach}
-			docentesEnCoach={currentCoach.docentes}
-			docentesSeleccionados={currentCoach.docentes.map(
+		><GestionarDocentesEnCoaches
+			coachUserID={editingCoach?.id}
+			coachID={editingCoach?.id_coach}
+			docentesEnCoach={editingCoach?.docentes}
+			docentesSeleccionados={editingCoach?.docentes.map(
 				(docente) => docente.id_docente
 			)}
 		/></Modal
@@ -30,9 +45,9 @@
 
 {#if $docentesAsignadosModal}
 	<Modal handleClose={docentesAsignadosModal.closeModal}>
-		<ListaDocentesAsignados docentes={listaDocentesAsignados} />
+		<!-- <ListaDocentesAsignadosACoach docentes={listaDocentesAsignados} /> -->
 	</Modal>
-{/if} -->
+{/if}
 
 <h2 class="text-2xl font-bold">Coordinación de Coaches</h2>
 
@@ -84,8 +99,8 @@
 						<button
 							class="link primary"
 							on:click={() => {
-								// gestionarDocentes.openModal();
-								// currentCoachID = coach.id_coach;
+								gestionarDocentes.openModal();
+								editingCoachID = coach.id_coach;
 							}}>Gestionar docentes</button
 						>
 					</span>

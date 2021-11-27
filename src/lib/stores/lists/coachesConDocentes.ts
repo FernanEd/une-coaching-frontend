@@ -7,8 +7,12 @@ import { docentesComoUsuarios } from './docentesComoUsuario';
 import type { CoachComoUsuario } from './coachesComoUsuario';
 import type { DocenteComoUsuario } from './docentesComoUsuario';
 
-interface CoachConDocentes extends CoachComoUsuario {
-	docentes: DocenteComoUsuario[];
+export interface DocenteComoUsuarioEnCoach extends DocenteComoUsuario {
+	id_docenteEnCoach: number;
+}
+
+export interface CoachConDocentes extends CoachComoUsuario {
+	docentes: DocenteComoUsuarioEnCoach[];
 }
 
 export const coachesConDocentes: Readable<CoachConDocentes[]> = derived(
@@ -26,9 +30,12 @@ export const coachesConDocentes: Readable<CoachConDocentes[]> = derived(
 						const docente = docentes.find((d) => d.id_docente == r.id_docente);
 						if (!docente) return;
 
-						return docente;
+						return {
+							...docente,
+							id_docenteEnCoach: r.id,
+						};
 					})
-					.filter((r): r is DocenteComoUsuario => r != undefined),
+					.filter((r): r is DocenteComoUsuarioEnCoach => r != undefined),
 			};
 		})
 );
