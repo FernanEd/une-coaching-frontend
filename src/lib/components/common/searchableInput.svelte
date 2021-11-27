@@ -9,7 +9,15 @@
 
 	let showList = false;
 	let filterText: string | undefined = selected
-		? listToSearch.find((item) => item.id == selected).nombre.toString()
+		? searchFields
+				.map((f) => {
+					let foundItem = listToSearch.find(
+						(item) => item[valueKey] == selected
+					);
+
+					if (foundItem) return foundItem[f];
+				})
+				.join(' ')
 		: undefined;
 </script>
 
