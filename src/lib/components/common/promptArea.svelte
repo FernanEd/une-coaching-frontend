@@ -1,12 +1,24 @@
 <script>
 	import { prompts } from '$lib/stores/prompts';
+	import WarningIcon from 'svelte-icons/md/MdWarning.svelte';
 </script>
 
 {#if $prompts}
 	<div class="modal-bg">
-		<div class="modal">
-			<div class="p-4">
-				<p class="text-lg font-bold">
+		<div
+			class="modal"
+			class:success={$prompts.type == 'success'}
+			class:neutral={$prompts.type == 'neutral'}
+			class:danger={$prompts.type == 'danger'}
+		>
+			<div class="modal-body">
+				{#if $prompts.type == 'danger'}
+					<div class="w-20 text-status-danger flex-shrink-0">
+						<WarningIcon />
+					</div>
+				{/if}
+
+				<p class="text-lg font-bold flex-1">
 					{$prompts.message}
 				</p>
 			</div>
@@ -48,10 +60,18 @@
 		margin-top: -8rem;
 		min-width: 24rem;
 		max-height: 70vh;
-		@apply w-screen max-w-sm overflow-auto bg-white rounded shadow-lg;
+		@apply w-screen max-w-lg overflow-auto bg-white rounded shadow-lg;
 	}
 
-	.modal-header {
-		@apply flex justify-end;
+	.modal-body {
+		@apply p-4 flex gap-8 items-center;
+	}
+
+	.modal.danger {
+		@apply border-status-danger border-2;
+	}
+
+	.modal.danger svg {
+		@apply text-status-danger;
 	}
 </style>

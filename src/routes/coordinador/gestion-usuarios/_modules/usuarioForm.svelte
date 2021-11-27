@@ -125,8 +125,9 @@
 					);
 				}
 
-				//@ts-ignore
-				Object.keys(form).forEach((key) => (form[key] = undefined));
+				(Object.keys(form) as Array<keyof typeof form>).forEach(
+					(key) => (form[key] = undefined)
+				);
 				rolesSeleccionados = [];
 			}
 		}
@@ -138,7 +139,7 @@
 		? () =>
 				prompts.showPrompt({
 					message:
-						'Acabas de marcar a este usuario como coordinador. Con este rol podrá acceder a los registros, editarlos y eliminarlos, ¿estás seguro?',
+						'Acabas de marcar a este usuario como coordinador. Con este rol podrá acceder a los registros, editarlos y eliminarlos, ¿Estás seguro?',
 					type: 'danger',
 					onAccept: handleSubmit,
 				})

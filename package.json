@@ -26,6 +26,7 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"cookie": "^0.4.1"
+		"cookie": "^0.4.1",
+		"svelte-icons": "^2.1.0"
 	}
 }

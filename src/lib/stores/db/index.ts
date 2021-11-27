@@ -48,6 +48,6 @@ export const db_registrosDiplomados = makeDBStore<RegistroDiplomado>(
 
 export const db_cursos = makeDBStore<Curso>('cursos');
 export const db_diplomados = makeDBStore<Diplomado>('diplomados');
-export const db_competencias = makeDBStore<Competencia>('cursos');
+export const db_competencias = makeDBStore<Competencia>('competencias');
 export const db_tiposCompetencias =
 	makeDBStore<TipoCompetencia>('tiposCompetencias');
