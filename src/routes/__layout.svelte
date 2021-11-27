@@ -88,6 +88,10 @@
 	});
 </script>
 
+<svelte:head>
+	<title>UNE Coaching</title>
+</svelte:head>
+
 {#if $session.isLoggedIn}
 	{#if loading}
 		<div

@@ -37,7 +37,7 @@ export interface RegistroDiplomado {
 	id: id_registroDiplomado;
 	id_diplomado: id_diplomado;
 	id_acreditor: id_docente;
-	id_expeditor: id_administrativo;
+	id_expeditor: id_coordinador;
 	fecha_expedicion: Date;
 	documento: string;
 }
@@ -46,7 +46,7 @@ export interface RegistroCurso {
 	id: id_registroCurso;
 	id_curso: id_curso;
 	id_acreditor: id_docente;
-	id_expeditor: id_administrativo;
+	id_expeditor: id_coordinador;
 	fecha_expedicion: Date;
 	documento: string;
 	cursado: boolean;
@@ -57,7 +57,7 @@ export interface RegistroCompetencia {
 	id: id_registroCompetencia;
 	id_competencia: id_competencia;
 	id_acreditor: id_docente;
-	id_expeditor: id_administrativo;
+	id_expeditor: id_coordinador;
 	fecha_expedicion: Date;
 	documento: string;
 }
@@ -163,7 +163,7 @@ export interface Reporte {
 	id: id_reporte;
 	fecha_generacion: Date;
 	documento: string;
-	id_expeditor: id_administrativo;
+	id_expeditor: id_coordinador;
 	id_jornada: id_jornada;
 }
 
