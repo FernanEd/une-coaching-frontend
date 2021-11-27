@@ -10,6 +10,7 @@
 		db_usuarios,
 	} from '$lib/stores/db';
 	import type { UsuarioConRoles } from '$lib/stores/lists/usuariosConRoles';
+	import { prompts } from '$lib/stores/prompts';
 	import { toasts } from '$lib/stores/toasts';
 	import { noUndefinedValues } from '$lib/utils/noUndefinedValues';
 	import type { Usuario } from '$lib/utils/types/db';
@@ -133,7 +134,15 @@
 </script>
 
 <form
-	on:submit|preventDefault={handleSubmit}
+	on:submit|preventDefault={rolesSeleccionados.includes('coordinador')
+		? () =>
+				prompts.showPrompt({
+					message:
+						'Acabas de marcar a este usuario como coordinador. Con este rol podrá acceder a los registros, editarlos y eliminarlos, ¿estás seguro?',
+					type: 'danger',
+					onAccept: handleSubmit,
+				})
+		: handleSubmit}
 	class="flex flex-col max-w-xl w-screen gap-4"
 >
 	<header class="flex justify-between">
@@ -181,7 +190,7 @@
 		</div>
 	{/if}
 
-	<p class="label">Roles</p>
+	<p class="label">Selecciona roles de usuario</p>
 	<div class="flex flex-col gap-1 overflow-auto">
 		<label class="flex gap-2 items-center">
 			<input type="checkbox" bind:group={rolesSeleccionados} value="docente" />
