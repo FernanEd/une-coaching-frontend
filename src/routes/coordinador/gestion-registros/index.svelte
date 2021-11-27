@@ -1,95 +1,71 @@
 <script lang="ts">
-	import { session } from '$app/stores';
 	import Modal from '$lib/components/common/modal.svelte';
 	import { db_usuarios } from '$lib/stores/db';
-	import {
-		UsuarioConRoles,
-		usuariosConRoles,
-	} from '$lib/stores/lists/usuariosConRoles';
+	import { registrosAcreditaciones } from '$lib/stores/lists/registrosAcreditaciones';
+	import type { RegistroAcreditacion } from '$lib/stores/lists/registrosAcreditaciones';
 	import { prompts } from '$lib/stores/prompts';
 	import { useModal } from '$lib/stores/useModal';
-	import { capitalizeString } from '$lib/utils/capitalizeString';
 	import { makeArraySearchable } from '$lib/utils/makeArraySearchable';
-	import UsuarioForm from './_modules/usuarioForm.svelte';
+	import RegistroForm from './_modules/registroForm.svelte';
 
 	let filterText: string;
-	let filterFunction: (usuario: UsuarioConRoles) => boolean;
+	let filterFunction: (registro: RegistroAcreditacion) => boolean;
 	let filterGroup: string[] = [];
 	$: if (filterGroup.length > 0) {
-		filterFunction = (usuario) =>
-			usuario.roles
-				.map(({ rol }) => rol)
-				.some((rol) => filterGroup.includes(rol));
+		filterFunction = (registro) => filterGroup.includes(registro.tipo);
 	} else {
 		filterFunction = (usuario) => true;
 	}
 
-	let editingUserID: number | undefined;
-	let editingUser: UsuarioConRoles | undefined;
-	$: editingUser = $usuariosConRoles.find((u) => u.id == editingUserID);
+	let editingRegistroID: number | undefined;
+	let editingRegistro: RegistroAcreditacion | undefined;
+	$: editingRegistro = $registrosAcreditaciones.find(
+		(r) => r.id == editingRegistroID
+	);
 
-	const agregarUsuarioForm = useModal();
-	const editarUsuarioForm = useModal();
+	const agregarRegistroForm = useModal();
+	const editarRegistroForm = useModal();
 </script>
 
-{#if $agregarUsuarioForm}
-	<Modal handleClose={agregarUsuarioForm.closeModal}>
-		<UsuarioForm />
+{#if $agregarRegistroForm}
+	<Modal handleClose={agregarRegistroForm.closeModal}>
+		<RegistroForm />
 	</Modal>
 {/if}
 
-{#if $editarUsuarioForm}
-	<Modal handleClose={editarUsuarioForm.closeModal}>
-		<UsuarioForm
-			editingUsuario={editingUser}
-			form={{
-				matricula: editingUser?.matricula,
-				nombre: editingUser?.nombre,
-				apellido_paterno: editingUser?.apellido_paterno,
-				apellido_materno: editingUser?.apellido_materno,
-				correo: editingUser?.correo,
-				password: '',
-			}}
-			rolesSeleccionados={editingUser?.roles.map(({ rol }) => rol)}
-		/>
+{#if $editarRegistroForm}
+	<Modal handleClose={editarRegistroForm.closeModal}>
+		<RegistroForm />
 	</Modal>
 {/if}
 
 <header class="flex justify-between flex-wrap">
-	<h2 class="heading">Usuarios en el sistema</h2>
-	<button class="btn primary" on:click={agregarUsuarioForm.openModal}
-		>Agregar usuarios
+	<h2 class="heading">Registros de acreditaciones</h2>
+	<button class="btn primary" on:click={agregarRegistroForm.openModal}
+		>Agregar registros
 	</button>
 </header>
 
 <hr class="my-4 border-none" />
 
-<p class="label">Buscar usuario</p>
+<p class="label">Buscar usuario en los registros</p>
 <input type="text" bind:value={filterText} />
 
 <hr class="my-4 border-none" />
 
-<p class="label">Filtrar por</p>
+<p class="label">Filtrar registros por</p>
 <div class="flex gap-4 flex-wrap">
 	<label class="flex gap-1 items-center">
-		<input type="checkbox" value="docente" bind:group={filterGroup} />
-		Docentes
+		<input type="checkbox" value="cursos" bind:group={filterGroup} />
+		Cursos
 	</label>
 	<label class="flex gap-1 items-center">
-		<input type="checkbox" value="coach" bind:group={filterGroup} />
-		Coaches
+		<input type="checkbox" value="diplomados" bind:group={filterGroup} />
+		Diplomados
 	</label>
 	<label class="flex gap-1 items-center">
-		<input type="checkbox" value="instructor" bind:group={filterGroup} />
-		Instructores
-	</label>
-	<label class="flex gap-1 items-center">
-		<input type="checkbox" value="coordinador" bind:group={filterGroup} />
-		Coordinadores
-	</label>
-	<label class="flex gap-1 items-center">
-		<input type="checkbox" value="administrativo" bind:group={filterGroup} />
-		Administrativo
+		<input type="checkbox" value="competencias" bind:group={filterGroup} />
+		Competencias
 	</label>
 </div>
 
@@ -98,53 +74,50 @@
 <table id="table" class="table-fixed table shadow-lg w-full">
 	<thead>
 		<tr>
-			<th class="w-24">Matricula</th>
-			<th>Nombre de usuario</th>
-			<th>Correo</th>
-			<th>Roles</th>
+			<th>Acreditación</th>
+			<th>Acreditor</th>
+			<th>Expeditor</th>
+			<th class="w-48">Fecha de expedición</th>
 			<th>...</th>
 		</tr>
 	</thead>
 	<tbody class="">
-		{#each makeArraySearchable($usuariosConRoles, ['matricula', 'nombre', 'apellido_paterno', 'apellido_materno', 'correo'], filterText).filter(filterFunction) as usuario (usuario.id)}
+		{#each makeArraySearchable($registrosAcreditaciones, ['fecha_expedicion'], filterText).filter(filterFunction) as registro (registro.id)}
 			<tr>
-				<td><a href="">{usuario.matricula}</a></td>
+				<td />
 				<td
-					>{usuario.nombre}
-					{usuario.apellido_paterno}
-					{usuario.apellido_materno}</td
+					>{registro.acreditor.nombre}
+					{registro.acreditor.apellido_paterno}
+					{registro.acreditor.apellido_materno}</td
 				>
-				<td>{usuario.correo}</td>
+				<td
+					>{registro.expeditor.nombre}
+					{registro.expeditor.apellido_paterno}
+					{registro.expeditor.apellido_materno}</td
+				>
 				<td>
-					{#if usuario.roles.length == 0}
-						<p class="text text-text-4">Sin roles asignados</p>
-					{:else}
-						{usuario.roles.map(({ rol }) => capitalizeString(rol)).join(', ')}
-					{/if}
+					{registro.fecha_expedicion}
 				</td>
 				<td>
 					<span class="flex gap-8 justify-center">
 						<button
 							class="link primary"
 							on:click={() => {
-								editingUserID = usuario.id;
-								editarUsuarioForm.openModal();
-							}}>Editar usuario</button
+								editingRegistroID = registro.id;
+								editarRegistroForm.openModal();
+							}}>Editar registro</button
 						>
-						{#if $session.user.id != usuario.id && !usuario.roles
-								.map(({ rol }) => rol)
-								.includes('coordinador')}
-							<button
-								class="link"
-								on:click={() => {
-									prompts.showPrompt({
-										message: `¿Estás seguro que quieres borrar a ${usuario.nombre}? Si lo borras todos sus registros se borraran con él.`,
-										type: 'danger',
-										onAccept: () => db_usuarios.deleteItem(usuario.id),
-									});
-								}}>Eliminar usuario</button
-							>
-						{/if}
+
+						<button
+							class="link"
+							on:click={() => {
+								prompts.showPrompt({
+									message: `¿Estás seguro que quieres borrar este registro de acreditación?.`,
+									type: 'danger',
+									onAccept: () => db_usuarios.deleteItem(registro.id),
+								});
+							}}>Eliminar registro</button
+						>
 					</span>
 				</td>
 			</tr>

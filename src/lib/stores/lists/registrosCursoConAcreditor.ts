@@ -2,23 +2,20 @@ import type { RegistroCurso } from '$lib/utils/types/db';
 import { derived } from 'svelte/store';
 import type { Readable } from 'svelte/store';
 import { db_registrosCursos } from '../db';
-import {
-	CoordinadorComoUsuario,
-	coordinadoresComoUsuario,
-} from './coordinadoresComoUsuario';
-import {
-	DocenteComoUsuario,
-	docentesComoUsuarios,
-} from './docentesComoUsuario';
-import { CursoConDiplomado, cursosConDiplomado } from './cursosConDiplomado';
+import { coordinadoresComoUsuario } from './coordinadoresComoUsuario';
+import type { CoordinadorComoUsuario } from './coordinadoresComoUsuario';
+import type { DocenteComoUsuario } from './docentesComoUsuario';
+import { docentesComoUsuarios } from './docentesComoUsuario';
+import type { CursoConDiplomado } from './cursosConDiplomado';
+import { cursosConDiplomado } from './cursosConDiplomado';
 
-interface RegistroCursoConAcreditor extends RegistroCurso {
+export interface RegistroCursoConAcreditor extends RegistroCurso {
 	curso: CursoConDiplomado;
 	acreditor: DocenteComoUsuario;
 	expeditor: CoordinadorComoUsuario;
 }
 
-export const registrosCursoConDocente: Readable<RegistroCursoConAcreditor[]> =
+export const registrosCursoConAcreditor: Readable<RegistroCursoConAcreditor[]> =
 	derived(
 		[
 			db_registrosCursos,
