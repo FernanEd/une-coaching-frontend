@@ -4,6 +4,7 @@
 	import {
 		CoachConDocentes,
 		coachesConDocentes,
+		DocenteComoUsuarioEnCoach,
 	} from '$lib/stores/lists/coachesConDocentes';
 	import { useModal } from '$lib/stores/useModal';
 
@@ -22,12 +23,7 @@
 	let gestionarDocentes = useModal();
 	let docentesAsignadosModal = useModal();
 
-	// let listaDocentesAsignados: DocenteComoUsuario[] = [];
-
-	// let currentCoachID: number;
-	// $: currentCoach = $coachList.find(
-	// 	(coach) => coach.id_coach == currentCoachID
-	// );
+	let listaDocentesAsignados: DocenteComoUsuarioEnCoach[] = [];
 </script>
 
 {#if $gestionarDocentes}
@@ -45,7 +41,7 @@
 
 {#if $docentesAsignadosModal}
 	<Modal handleClose={docentesAsignadosModal.closeModal}>
-		<!-- <ListaDocentesAsignadosACoach docentes={listaDocentesAsignados} /> -->
+		<ListaDocentesAsignadosACoach docentes={listaDocentesAsignados} />
 	</Modal>
 {/if}
 
@@ -88,8 +84,8 @@
 						<button
 							class="link primary"
 							on:click={() => {
-								// docentesAsignadosModal.openModal();
-								// listaDocentesAsignados = coach.docentes;
+								docentesAsignadosModal.openModal();
+								listaDocentesAsignados = coach.docentes;
 							}}>Ver docentes asignados</button
 						>
 					{/if}

@@ -187,6 +187,9 @@
 		<div class="input-group">
 			<label class="label">Contraseña por defecto</label>
 			<input type="text" bind:value={form.password} required />
+			<p class="helper">
+				El usuario podrá cambiar su contraseña una vez dentro
+			</p>
 		</div>
 	{/if}
 
