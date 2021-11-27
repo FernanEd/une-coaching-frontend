@@ -11,7 +11,7 @@
 		nombre: undefined,
 		id_tipo: undefined,
 	};
-	export let selectedTipo: number | undefined = undefined;
+	export let selectedTipo: number | null = null;
 
 	$: console.log(selectedTipo);
 
@@ -44,7 +44,7 @@
 					toasts.error();
 				}
 
-				clearForm(form);
+				form = clearForm(form);
 			}
 		}
 	};
@@ -79,7 +79,7 @@
 	<div>
 		<p class="label">Tipo de la competencia</p>
 		<select class="w-full" bind:value={selectedTipo}>
-			<option value={undefined}>Sin tipo</option>
+			<option value={null}>Sin tipo</option>
 			{#each $db_tiposCompetencias as tipoCompetencia (tipoCompetencia.id)}
 				<option value={tipoCompetencia.id}>{tipoCompetencia.nombre}</option>
 			{/each}

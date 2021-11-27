@@ -126,9 +126,7 @@
 					);
 				}
 
-				(Object.keys(form) as Array<keyof typeof form>).forEach(
-					(key) => (form[key] = undefined)
-				);
+				form = clearForm(form);
 				rolesSeleccionados = [];
 			}
 		}

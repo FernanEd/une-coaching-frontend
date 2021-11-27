@@ -13,7 +13,7 @@ export interface Diplomado {
 export interface Curso {
 	id: id_curso;
 	nombre: string;
-	id_diplomado: id_diplomado | undefined;
+	id_diplomado: id_diplomado | null;
 }
 
 export interface TipoCompetencia {
@@ -24,7 +24,7 @@ export interface TipoCompetencia {
 export interface Competencia {
 	id: id_competencia;
 	nombre: string;
-	id_tipo: id_competencia | undefined;
+	id_tipo: id_competencia | null;
 }
 
 //REGISTROS

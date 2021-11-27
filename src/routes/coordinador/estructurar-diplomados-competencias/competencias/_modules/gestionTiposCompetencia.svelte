@@ -51,7 +51,15 @@
 </script>
 
 <form
-	on:submit|preventDefault={handleSubmit}
+	on:submit|preventDefault={currentID
+		? () =>
+				prompts.showPrompt({
+					type: 'danger',
+					message:
+						'Editar una competencia repercutirá en todos los registros de acreditaciones. ¿Estás seguro?',
+					onAccept: handleSubmit,
+				})
+		: handleSubmit}
 	class="flex flex-col gap-4 w-screen max-w-xl"
 >
 	<header class="flex justify-between flex-wrap">
@@ -72,7 +80,7 @@
 <hr class="my-4 border-none" />
 
 {#if $db_tiposCompetencias.length == 0}
-	<p>No hay cursos aún.</p>
+	<p>No hay tipos de competencias aún.</p>
 {:else}
 	<table class="table-fixed table shadow-lg w-full max-w-xl">
 		<thead>
