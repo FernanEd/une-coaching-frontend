@@ -45,23 +45,47 @@
 	/>
 </div>
 
-<div class="relative">
-	{#if showList}
-		<div
-			class="absolute bg-white border index-10 max-h-60 overflow-y-scroll w-full"
-		>
-			{#each makeArraySearchable(listToSearch, searchFields, filterText) as item, i (i)}
-				<p
-					class="p-2 hover:bg-accent hover:text-white cursor-pointer"
-					on:mousedown={() => {
-						filterText = searchFields.map((f) => item[f].toString()).join(' ');
-						selected = item.id;
-						hasBeenSelected = 1;
-					}}
-				>
-					{searchFields.map((f) => item[f].toString()).join(' ')}
-				</p>
-			{/each}
-		</div>
-	{/if}
-</div>
+<!-- <div class="relative"> -->
+{#if showList}
+	<div
+		class="absolute bg-white border z-10 max-h-60 overflow-y-scroll translate-y-12 w-[576px]"
+	>
+		{#each makeArraySearchable(listToSearch, searchFields, filterText) as item, i (i)}
+			<p
+				class="p-2 hover:bg-accent hover:text-white cursor-pointer"
+				on:mousedown={() => {
+					filterText = searchFields.map((f) => item[f].toString()).join(' ');
+					selected = item.id;
+					hasBeenSelected = 1;
+				}}
+			>
+				{searchFields.map((f) => item[f].toString()).join(' ')}
+			</p>
+		{/each}
+		{#each makeArraySearchable(listToSearch, searchFields, filterText) as item, i (i)}
+			<p
+				class="p-2 hover:bg-accent hover:text-white cursor-pointer"
+				on:mousedown={() => {
+					filterText = searchFields.map((f) => item[f].toString()).join(' ');
+					selected = item.id;
+					hasBeenSelected = 1;
+				}}
+			>
+				{searchFields.map((f) => item[f].toString()).join(' ')}
+			</p>
+		{/each}
+		{#each makeArraySearchable(listToSearch, searchFields, filterText) as item, i (i)}
+			<p
+				class="p-2 hover:bg-accent hover:text-white cursor-pointer"
+				on:mousedown={() => {
+					filterText = searchFields.map((f) => item[f].toString()).join(' ');
+					selected = item.id;
+					hasBeenSelected = 1;
+				}}
+			>
+				{searchFields.map((f) => item[f].toString()).join(' ')}
+			</p>
+		{/each}
+	</div>
+{/if}
+<!-- </div> -->

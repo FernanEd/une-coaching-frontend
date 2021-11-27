@@ -72,7 +72,7 @@
 
 <form
 	on:submit|preventDefault={handleSubmit}
-	class="flex flex-col max-w-xl w-screen gap-4 h-screen max-h-80"
+	class="flex flex-col max-w-xl w-screen gap-4"
 >
 	<header class="flex justify-between">
 		<h2 class="heading">Acreditación</h2>
