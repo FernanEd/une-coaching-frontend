@@ -30,7 +30,30 @@
 			if (!session.roles.includes(portal)) return goIndex;
 		}
 
-		console.log(session);
+		//Make the call
+		db_usuarios.getItems();
+		db_docentes.getItems();
+		db_coaches.getItems();
+		db_instructores.getItems();
+		db_administrativos.getItems();
+		db_coordinadores.getItems();
+
+		db_docentesEnCoaches.getItems();
+
+		db_jornadas.getItems();
+		db_cursosEnJornada.getItems();
+		db_asistentesEnCurso.getItems();
+		db_reportes.getItems();
+
+		db_registrosCompetencias.getItems();
+
+		db_registrosCursos.getItems();
+		db_registrosDiplomados.getItems();
+
+		db_cursos.getItems();
+		db_diplomados.getItems();
+		db_competencias.getItems();
+		db_tiposCompetencias.getItems();
 
 		return goThrough;
 	}
@@ -40,6 +63,26 @@
 	import { session } from '$app/stores';
 	import PromptArea from '$lib/components/common/promptArea.svelte';
 	import ToastArea from '$lib/components/common/toastArea.svelte';
+	import {
+		db_administrativos,
+		db_asistentesEnCurso,
+		db_coaches,
+		db_competencias,
+		db_coordinadores,
+		db_cursos,
+		db_cursosEnJornada,
+		db_diplomados,
+		db_docentes,
+		db_docentesEnCoaches,
+		db_instructores,
+		db_jornadas,
+		db_registrosCompetencias,
+		db_registrosCursos,
+		db_registrosDiplomados,
+		db_reportes,
+		db_tiposCompetencias,
+		db_usuarios,
+	} from '$lib/stores/db';
 	import '../app.postcss';
 </script>
 

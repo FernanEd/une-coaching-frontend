@@ -9,9 +9,9 @@
 		db_instructores,
 		db_usuarios,
 	} from '$lib/stores/db';
-	import { noUndefinedValues } from '$lib/stores/db/utils/noUndefinedValues';
 	import type { UsuarioConRoles } from '$lib/stores/lists/usuariosConRoles';
 	import { toasts } from '$lib/stores/toasts';
+	import { noUndefinedValues } from '$lib/utils/noUndefinedValues';
 	import type { Usuario } from '$lib/utils/types/db';
 	import type { MayBeUndefined } from '$lib/utils/types/forms';
 

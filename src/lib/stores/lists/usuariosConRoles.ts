@@ -34,15 +34,8 @@ export const usuariosConRoles = derived(
 		instructores,
 		coordinadores,
 		administrativos,
-	]) => {
-		db_usuarios.getItems();
-		db_docentes.getItems();
-		db_coaches.getItems();
-		db_instructores.getItems();
-		db_coordinadores.getItems();
-		db_administrativos.getItems();
-
-		return usuarios.map((u): UsuarioConRoles => {
+	]) =>
+		usuarios.map((u): UsuarioConRoles => {
 			let foundRoles: RolesDeUsuario[] = [];
 			let docente = docentes.find((a) => a.id_usuario == u.id);
 			let coach = coaches.find((a) => a.id_usuario == u.id);
@@ -80,6 +73,5 @@ export const usuariosConRoles = derived(
 				...u,
 				roles: foundRoles,
 			};
-		});
-	}
+		})
 );
