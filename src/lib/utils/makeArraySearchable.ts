@@ -1,4 +1,4 @@
-const parseAccents = (word: string) =>
+export const parseAccents = (word: string) =>
 	word
 		.replace('á', 'a')
 		.replace('é', 'e')
