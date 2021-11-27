@@ -75,6 +75,9 @@
 			} catch (e) {
 				console.error(e);
 				toasts.error();
+			} finally {
+				docenteSeleccionado = undefined;
+				acreditacionSeleccionada = undefined;
 			}
 		}
 	};
@@ -107,7 +110,7 @@
 	<div>
 		<p class="label">Tipo de acreditacion</p>
 		<select bind:value={tipoDeAcreditacionSeleccionada} required>
-			<option value="" disabled>Selecciona uno</option>
+			<option value={undefined} disabled>Selecciona uno</option>
 			<option value="curso">Curso</option>
 			<option value="diplomado">Diplomado</option>
 			<option value="competencia">Competencia</option>

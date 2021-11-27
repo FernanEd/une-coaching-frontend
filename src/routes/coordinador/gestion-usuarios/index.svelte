@@ -7,6 +7,7 @@
 		usuariosConRoles,
 	} from '$lib/stores/lists/usuariosConRoles';
 	import { prompts } from '$lib/stores/prompts';
+	import { toasts } from '$lib/stores/toasts';
 	import { useModal } from '$lib/stores/useModal';
 	import { capitalizeString } from '$lib/utils/capitalizeString';
 	import { makeArraySearchable } from '$lib/utils/makeArraySearchable';
@@ -140,7 +141,15 @@
 									prompts.showPrompt({
 										message: `¿Estás seguro que quieres borrar a ${usuario.nombre}? Si lo borras todos sus registros se borraran con él.`,
 										type: 'danger',
-										onAccept: () => db_usuarios.deleteItem(usuario.id),
+										onAccept: async () => {
+											try {
+												await db_usuarios.deleteItem(usuario.id);
+												toasts.success();
+											} catch (e) {
+												console.error();
+												toasts.error();
+											}
+										},
 									});
 								}}>Eliminar usuario</button
 							>

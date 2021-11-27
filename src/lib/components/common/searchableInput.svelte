@@ -7,8 +7,6 @@
 	export let isRequired: boolean = false;
 	export let valueKey: string = 'id';
 
-	let hasBeenSelected: number | undefined;
-
 	let showList = false;
 	let filterText: string | undefined = selected
 		? listToSearch.find((item) => item.id == selected).nombre.toString()
@@ -19,7 +17,7 @@
 	<select
 		class="absolute opacity-0"
 		required={isRequired}
-		bind:value={hasBeenSelected}
+		value={selected ? 1 : undefined}
 	>
 		<option value="" />
 		<option value={1} />
@@ -28,11 +26,10 @@
 	<input
 		class=" w-full absolute border "
 		placeholder="Escriba para buscar..."
-		class:bg-neutral-200={hasBeenSelected == 1}
+		class:bg-neutral-200={selected}
 		type="search"
 		on:input={() => {
-			selected = 0;
-			hasBeenSelected = undefined;
+			selected = undefined;
 		}}
 		bind:value={filterText}
 		on:blur={() => {
@@ -55,7 +52,6 @@
 				on:mousedown={() => {
 					filterText = searchFields.map((f) => item[f].toString()).join(' ');
 					selected = item[valueKey];
-					hasBeenSelected = 1;
 				}}
 			>
 				{searchFields.map((f) => item[f].toString()).join(' ')}

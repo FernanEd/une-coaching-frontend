@@ -25,7 +25,6 @@ export const registrosDiplomadoConAcreditor: Readable<
 	([registrosDiplomados, diplomados, docentes, coordinadores]) =>
 		registrosDiplomados
 			.map((r) => {
-				console.log('registro de diplomado', r);
 				let diplomadoDelRegistro = diplomados.find(
 					(d) => d.id == r.id_diplomado
 				);

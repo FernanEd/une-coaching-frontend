@@ -27,6 +27,7 @@
 	"type": "module",
 	"dependencies": {
 		"cookie": "^0.4.1",
+		"dayjs": "^1.10.7",
 		"svelte-icons": "^2.1.0"
 	}
 }

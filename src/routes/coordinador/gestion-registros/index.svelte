@@ -1,6 +1,11 @@
 <script lang="ts">
 	import Modal from '$lib/components/common/modal.svelte';
-	import { db_usuarios } from '$lib/stores/db';
+	import {
+		db_registrosCompetencias,
+		db_registrosCursos,
+		db_registrosDiplomados,
+		db_usuarios,
+	} from '$lib/stores/db';
 	import { registrosAcreditaciones } from '$lib/stores/lists/registrosAcreditaciones';
 	import type { RegistroAcreditacion } from '$lib/stores/lists/registrosAcreditaciones';
 	import { prompts } from '$lib/stores/prompts';
@@ -10,6 +15,9 @@
 		parseAccents,
 	} from '$lib/utils/makeArraySearchable';
 	import RegistroForm from './_modules/registroForm.svelte';
+	import { formatDate } from '$lib/utils/formatDate';
+	import { toasts } from '$lib/stores/toasts';
+	import dayjs from 'dayjs';
 
 	let filterText: string;
 	let filterFunction: (registro: RegistroAcreditacion) => boolean;
@@ -18,34 +26,52 @@
 	$: if (filterGroup.length > 0) {
 		filterGroupFunction = (registro) => filterGroup.includes(registro.tipo);
 	} else {
-		filterGroupFunction = (usuario) => true;
+		filterGroupFunction = (registro) => true;
 	}
 
-	$: if (filterText) {
-		filterFunction = (registro) => {
-			let acreditorNombre =
-				`${registro.acreditor.nombre} ${registro.acreditor.apellido_paterno} ${registro.acreditor.apellido_materno}`
-					.split('')
-					.map((l) => parseAccents(l).toLowerCase())
-					.join('');
-			let expeditorNombre =
-				`${registro.expeditor.nombre} ${registro.expeditor.apellido_paterno} ${registro.expeditor.apellido_materno}`
-					.split('')
-					.map((l) => parseAccents(l).toLowerCase())
-					.join('');
+	let orderDirection: 'reciente' | 'antiguo' = 'reciente';
+	let orderFunction: (
+		registroAnterior: RegistroAcreditacion,
+		registroPosterior: RegistroAcreditacion
+	) => number;
 
-			console.log(filterText, acreditorNombre, expeditorNombre);
+	$: {
+		if (orderDirection == 'reciente') {
+			orderFunction = (a, b) =>
+				dayjs(a.fecha_expedicion).isAfter(b.fecha_expedicion) ? -1 : 1;
+		} else {
+			orderFunction = (a, b) =>
+				dayjs(a.fecha_expedicion).isAfter(b.fecha_expedicion) ? 1 : -1;
+		}
+	}
 
-			let searchWords = filterText.split(/\s/);
+	$: {
+		if (filterText) {
+			filterFunction = (registro) => {
+				let acreditorNombre =
+					`${registro.acreditor.nombre} ${registro.acreditor.apellido_paterno} ${registro.acreditor.apellido_materno}`
+						.split('')
+						.map((l) => parseAccents(l).toLowerCase())
+						.join('');
+				let expeditorNombre =
+					`${registro.expeditor.nombre} ${registro.expeditor.apellido_paterno} ${registro.expeditor.apellido_materno}`
+						.split('')
+						.map((l) => parseAccents(l).toLowerCase())
+						.join('');
 
-			return searchWords.every(
-				(word) =>
-					acreditorNombre.match(new RegExp(parseAccents(word), 'i')) ||
-					expeditorNombre.match(new RegExp(parseAccents(word), 'i'))
-			);
-		};
-	} else {
-		filterFunction = (r) => true;
+				console.log(filterText, acreditorNombre, expeditorNombre);
+
+				let searchWords = filterText.split(/\s/);
+
+				return searchWords.every(
+					(word) =>
+						acreditorNombre.match(new RegExp(parseAccents(word), 'i')) ||
+						expeditorNombre.match(new RegExp(parseAccents(word), 'i'))
+				);
+			};
+		} else {
+			filterFunction = (r) => true;
+		}
 	}
 
 	let editingRegistroID: number | undefined;
@@ -103,10 +129,23 @@
 		</div>
 	</div>
 	<div>
-		<p class="label text-right">Ordenar por</p>
+		<p class="label">Ordenar por</p>
 		<div class="flex gap-8">
-			<button class="link">Más recientes</button>
-			<button class="link">Más antiguas</button>
+			<button
+				class="link"
+				class:primary={orderDirection == 'reciente'}
+				on:click={() => {
+					orderDirection = 'reciente';
+				}}>Más recientes</button
+			>
+			/
+			<button
+				class="link"
+				class:primary={orderDirection == 'antiguo'}
+				on:click={() => {
+					orderDirection = 'antiguo';
+				}}>Más antiguas</button
+			>
 		</div>
 	</div>
 </div>
@@ -125,13 +164,14 @@
 	</thead>
 	<tbody class="">
 		{#each $registrosAcreditaciones
+			.sort(orderFunction)
 			.filter(filterFunction)
 			.filter(filterGroupFunction) as registro, i (i)}
 			<tr>
 				<td>
 					{#if registro.tipo == 'curso'}
 						<p class="label">
-							Curso {registro.curso.diplomado?.nombre || 'sin diplomado'}
+							Curso - {registro.curso.diplomado?.nombre || 'sin diplomado'}
 						</p>
 						<p>{registro.curso.nombre}</p>
 					{:else if registro.tipo == 'diplomado'}
@@ -139,7 +179,7 @@
 						<p>{registro.diplomado.nombre}</p>
 					{:else if registro.tipo == 'competencia'}
 						<p class="label">
-							Competencia {registro.competencia.tipo?.nombre || 'sin tipo'}
+							Competencia - {registro.competencia.tipo?.nombre || 'sin tipo'}
 						</p>
 						<p>Competencia {registro.competencia.nombre}</p>
 					{/if}
@@ -155,7 +195,7 @@
 					{registro.expeditor.apellido_materno}</td
 				>
 				<td>
-					{registro.fecha_expedicion}
+					{formatDate(registro.fecha_expedicion)}
 				</td>
 				<td>
 					<span class="flex gap-8 justify-center">
@@ -173,7 +213,21 @@
 								prompts.showPrompt({
 									message: `¿Estás seguro que quieres borrar este registro de acreditación?.`,
 									type: 'danger',
-									onAccept: () => db_usuarios.deleteItem(registro.id),
+									onAccept: async () => {
+										try {
+											if (registro.tipo == 'curso')
+												await db_registrosCursos.deleteItem(registro.id);
+											else if (registro.tipo == 'diplomado')
+												await db_registrosDiplomados.deleteItem(registro.id);
+											else if (registro.tipo == 'competencia')
+												await db_registrosCompetencias.deleteItem(registro.id);
+
+											toasts.success();
+										} catch (e) {
+											console.error(e);
+											toasts.error();
+										}
+									},
 								});
 							}}>Eliminar registro</button
 						>
