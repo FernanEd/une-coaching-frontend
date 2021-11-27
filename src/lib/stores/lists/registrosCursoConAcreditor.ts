@@ -26,12 +26,24 @@ export const registrosCursoConAcreditor: Readable<RegistroCursoConAcreditor[]> =
 		([registrosCursos, cursos, docentes, coordinadores]) =>
 			registrosCursos
 				.map((r) => {
+					console.log('registro de curso', r);
 					let cursoDelRegistro = cursos.find((c) => c.id == r.id_curso);
 					let acreditorDelRegistro = docentes.find(
-						(d) => d.id == r.id_acreditor
+						(d) => d.id_docente == r.id_acreditor
 					);
 					let expeditorDelRegistro = coordinadores.find(
 						(c) => c.id == r.id_expeditor
+					);
+
+					console.log(
+						'registro de curso:',
+						r,
+						'curso:',
+						cursoDelRegistro,
+						'acreditor:',
+						acreditorDelRegistro,
+						'expeditor:',
+						expeditorDelRegistro
 					);
 
 					if (

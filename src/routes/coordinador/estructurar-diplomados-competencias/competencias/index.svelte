@@ -73,7 +73,7 @@
 <hr class="my-4 border-none" />
 
 {#if $competenciasConTipo.length == 0}
-	<p>No hay competencias aún.</p>
+	<p>No hay competencias registradas aún.</p>
 {:else}
 	<table id="table-diplomados" class="table-fixed table shadow-lg w-full">
 		<thead>

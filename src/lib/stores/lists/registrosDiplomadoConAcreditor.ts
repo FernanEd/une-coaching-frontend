@@ -25,10 +25,13 @@ export const registrosDiplomadoConAcreditor: Readable<
 	([registrosDiplomados, diplomados, docentes, coordinadores]) =>
 		registrosDiplomados
 			.map((r) => {
+				console.log('registro de diplomado', r);
 				let diplomadoDelRegistro = diplomados.find(
 					(d) => d.id == r.id_diplomado
 				);
-				let acreditorDelRegistro = docentes.find((d) => d.id == r.id_acreditor);
+				let acreditorDelRegistro = docentes.find(
+					(d) => d.id_docente == r.id_acreditor
+				);
 				let expeditorDelRegistro = coordinadores.find(
 					(c) => c.id == r.id_expeditor
 				);

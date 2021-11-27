@@ -1,73 +1,83 @@
 <script lang="ts">
+	import { session } from '$app/stores';
+
 	import SearchableInput from '$lib/components/common/searchableInput.svelte';
-	import { db_competencias, db_cursos, db_diplomados } from '$lib/stores/db';
+	import {
+		db_competencias,
+		db_coordinadores,
+		db_cursos,
+		db_diplomados,
+		db_registrosCompetencias,
+		db_registrosCursos,
+		db_registrosDiplomados,
+	} from '$lib/stores/db';
 	import { competenciasConTipo } from '$lib/stores/lists/competenciasConTipo';
 
 	import { cursosConDiplomado } from '$lib/stores/lists/cursosConDiplomado';
 
 	import { docentesComoUsuarios } from '$lib/stores/lists/docentesComoUsuario';
 	import { usuariosConRoles } from '$lib/stores/lists/usuariosConRoles';
+	import { toasts } from '$lib/stores/toasts';
 	import { writable } from 'svelte/store';
 
-	let formErrors = writable<string[]>([]);
-
 	let isEditing = false;
-
-	let acreditorSeleccionado: number;
+	let docenteSeleccionado: number | undefined;
+	let acreditacionSeleccionada: number | undefined;
 	let tipoDeAcreditacionSeleccionada:
 		| 'curso'
 		| 'diplomado'
 		| 'competencia'
 		| undefined = undefined;
 
-	let filterTextCursos;
-	let filterTextAcreditores;
+	let coordinadorID: number | undefined;
+	$: coordinadorID = $db_coordinadores.find(
+		(c) => c.id == $session.user.id
+	)?.id;
 
-	const handleSubmit = async () => {
-		console.log('oooh');
-		// if (
-		// 	acreditorSeleccionado &&
-		// 	tipoDeAcreditacionSeleccionada &&
-		// 	acreditacionSeleccionada
-		// ) {
-		// 	formErrors.set([]);
-		// 	if (tipoDeAcreditacionSeleccionada == 'curso') {
-		// 		registrosCursos.addItem({
-		// 			id_curso: acreditacionSeleccionada,
-		// 			id_acreditor: acreditorSeleccionado,
-		// 			acreditado: false,
-		// 			cursado: false,
-		// 			documento: '',
-		// 			fecha_expedicion: new Date(),
-		// 			id_expeditor: $currentUser.id,
-		// 		});
-		// 	} else if (tipoDeAcreditacionSeleccionada == 'diplomado') {
-		// 		registrosDiplomados.addItem({
-		// 			id_diplomado: acreditacionSeleccionada,
-		// 			id_acreditor: acreditorSeleccionado,
-		// 			documento: '',
-		// 			fecha_expedicion: new Date(),
-		// 			id_expeditor: $currentUser.id,
-		// 		});
-		// 	} else if (tipoDeAcreditacionSeleccionada == 'competencia') {
-		// 		registrosCompetencias.addItem({
-		// 			id_competencia: acreditacionSeleccionada,
-		// 			id_acreditor: acreditorSeleccionado,
-		// 			documento: '',
-		// 			fecha_expedicion: new Date(),
-		// 			id_expeditor: $currentUser.id,
-		// 		});
-		// 	}
-		// } else {
-		// 	formErrors.set(['Por favor selecciona todos los campos']);
-		// 	return;
-		// }
-	};
-
-	let docenteSeleccionado: number | undefined;
-	let acreditacionSeleccionada: number | undefined;
+	$: console.log('id coord:', coordinadorID);
 
 	$: console.log(docenteSeleccionado);
+
+	const handleSubmit = async () => {
+		if (
+			docenteSeleccionado &&
+			tipoDeAcreditacionSeleccionada &&
+			acreditacionSeleccionada &&
+			coordinadorID
+		) {
+			try {
+				if (tipoDeAcreditacionSeleccionada == 'curso') {
+					await db_registrosCursos.addItem({
+						id_curso: acreditacionSeleccionada,
+						id_acreditor: docenteSeleccionado,
+						documento: undefined,
+						fecha_expedicion: new Date(),
+						id_expeditor: coordinadorID,
+					});
+				} else if (tipoDeAcreditacionSeleccionada == 'diplomado') {
+					await db_registrosDiplomados.addItem({
+						id_diplomado: acreditacionSeleccionada,
+						id_acreditor: docenteSeleccionado,
+						documento: undefined,
+						fecha_expedicion: new Date(),
+						id_expeditor: coordinadorID,
+					});
+				} else if (tipoDeAcreditacionSeleccionada == 'competencia') {
+					await db_registrosCompetencias.addItem({
+						id_competencia: acreditacionSeleccionada,
+						id_acreditor: docenteSeleccionado,
+						documento: undefined,
+						fecha_expedicion: new Date(),
+						id_expeditor: coordinadorID,
+					});
+				}
+				toasts.success();
+			} catch (e) {
+				console.error(e);
+				toasts.error();
+			}
+		}
+	};
 </script>
 
 <form
@@ -83,18 +93,13 @@
 		{/if}
 	</header>
 
-	{#if $formErrors.length > 0}
-		{#each $formErrors as error, i (i)}
-			<p class="label text-status-danger">{error}</p>
-		{/each}
-	{/if}
-
 	<div class="input-group">
 		<p class="label">Selecciona un acreditor</p>
 		<SearchableInput
 			bind:selected={docenteSeleccionado}
 			listToSearch={$docentesComoUsuarios}
 			searchFields={['nombre', 'apellido_paterno', 'apellido_materno']}
+			valueKey="id_docente"
 			isRequired
 		/>
 	</div>
@@ -116,6 +121,7 @@
 				bind:selected={acreditacionSeleccionada}
 				listToSearch={$db_cursos}
 				searchFields={['nombre']}
+				isRequired
 			/>
 		{:else if tipoDeAcreditacionSeleccionada == 'diplomado'}
 			<p class="label">Selecciona un diplomado</p>
@@ -123,6 +129,7 @@
 				bind:selected={acreditacionSeleccionada}
 				listToSearch={$db_diplomados}
 				searchFields={['nombre']}
+				isRequired
 			/>
 		{:else if tipoDeAcreditacionSeleccionada == 'competencia'}
 			<p class="label">Selecciona una competencia</p>
@@ -130,6 +137,7 @@
 				bind:selected={acreditacionSeleccionada}
 				listToSearch={$db_competencias}
 				searchFields={['nombre']}
+				isRequired
 			/>
 		{/if}
 	</div>

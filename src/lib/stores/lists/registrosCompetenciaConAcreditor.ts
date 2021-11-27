@@ -27,10 +27,13 @@ export const registrosCompetenciaConAcreditor: Readable<
 	([registrosDiplomados, competencias, docentes, coordinadores]) =>
 		registrosDiplomados
 			.map((r) => {
+				console.log('registro de competencia', r);
 				let competenciaDelRegistro = competencias.find(
 					(c) => c.id == r.id_competencia
 				);
-				let acreditorDelRegistro = docentes.find((d) => d.id == r.id_acreditor);
+				let acreditorDelRegistro = docentes.find(
+					(d) => d.id_docente == r.id_acreditor
+				);
 				let expeditorDelRegistro = coordinadores.find(
 					(c) => c.id == r.id_expeditor
 				);

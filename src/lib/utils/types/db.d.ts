@@ -39,7 +39,7 @@ export interface RegistroDiplomado {
 	id_acreditor: id_docente;
 	id_expeditor: id_coordinador;
 	fecha_expedicion: Date;
-	documento: string;
+	documento: string | undefined;
 }
 
 export interface RegistroCurso {
@@ -48,9 +48,7 @@ export interface RegistroCurso {
 	id_acreditor: id_docente;
 	id_expeditor: id_coordinador;
 	fecha_expedicion: Date;
-	documento: string;
-	cursado: boolean;
-	acreditado: boolean;
+	documento: string | undefined;
 }
 
 export interface RegistroCompetencia {
@@ -59,7 +57,7 @@ export interface RegistroCompetencia {
 	id_acreditor: id_docente;
 	id_expeditor: id_coordinador;
 	fecha_expedicion: Date;
-	documento: string;
+	documento: string | undefined;
 }
 
 // USUARIOS
@@ -151,12 +149,19 @@ export interface CursoEnJornada {
 // 1 - accepted
 // 2 - denied
 
+export interface InvitacionCurso {
+	id: id_invitacionCurso;
+	id_cursojornada: id_cursoEnJornada;
+	id_docente: id_docente;
+	estado_invitacion: 0 | 1 | 2;
+}
+
 export interface AsistenteEnCurso {
 	id: id_asistenteEnCurso;
 	id_cursojornada: id_cursoEnJornada;
 	id_docente: id_docente;
-	estado: 0 | 1 | 2;
 	aprobado: boolean;
+	cursado: boolean;
 }
 
 export interface Reporte {

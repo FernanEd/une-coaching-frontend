@@ -51,6 +51,7 @@
 		db_docentes,
 		db_docentesEnCoaches,
 		db_instructores,
+		db_invitacionesCurso,
 		db_jornadas,
 		db_registrosCompetencias,
 		db_registrosCursos,
@@ -75,6 +76,7 @@
 		await db_jornadas.getItems();
 		await db_cursosEnJornada.getItems();
 		await db_asistentesEnCurso.getItems();
+		await db_invitacionesCurso.getItems();
 		await db_reportes.getItems();
 		await db_registrosCompetencias.getItems();
 		await db_registrosCursos.getItems();

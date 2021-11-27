@@ -10,6 +10,7 @@ import type {
 	Docente,
 	DocenteEnCoach,
 	Instructor,
+	InvitacionCurso,
 	Jornada,
 	RegistroCompetencia,
 	RegistroCurso,
@@ -37,6 +38,8 @@ export const db_cursosEnJornada =
 export const db_asistentesEnCurso =
 	makeDBStore<AsistenteEnCurso>('asistentesEnCurso');
 export const db_reportes = makeDBStore<Reporte>('reportes');
+export const db_invitacionesCurso =
+	makeDBStore<InvitacionCurso>('invitacionesCursos');
 
 export const db_registrosCompetencias = makeDBStore<RegistroCompetencia>(
 	'registrosCompetencias'

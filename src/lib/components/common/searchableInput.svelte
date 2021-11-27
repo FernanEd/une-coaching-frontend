@@ -5,6 +5,7 @@
 	export let listToSearch: any[];
 	export let searchFields: string[];
 	export let isRequired: boolean = false;
+	export let valueKey: string = 'id';
 
 	let hasBeenSelected: number | undefined;
 
@@ -12,8 +13,6 @@
 	let filterText: string | undefined = selected
 		? listToSearch.find((item) => item.id == selected).nombre.toString()
 		: undefined;
-
-	$: console.log(hasBeenSelected);
 </script>
 
 <div class="relative h-[34px]">
@@ -55,31 +54,7 @@
 				class="p-2 hover:bg-accent hover:text-white cursor-pointer"
 				on:mousedown={() => {
 					filterText = searchFields.map((f) => item[f].toString()).join(' ');
-					selected = item.id;
-					hasBeenSelected = 1;
-				}}
-			>
-				{searchFields.map((f) => item[f].toString()).join(' ')}
-			</p>
-		{/each}
-		{#each makeArraySearchable(listToSearch, searchFields, filterText) as item, i (i)}
-			<p
-				class="p-2 hover:bg-accent hover:text-white cursor-pointer"
-				on:mousedown={() => {
-					filterText = searchFields.map((f) => item[f].toString()).join(' ');
-					selected = item.id;
-					hasBeenSelected = 1;
-				}}
-			>
-				{searchFields.map((f) => item[f].toString()).join(' ')}
-			</p>
-		{/each}
-		{#each makeArraySearchable(listToSearch, searchFields, filterText) as item, i (i)}
-			<p
-				class="p-2 hover:bg-accent hover:text-white cursor-pointer"
-				on:mousedown={() => {
-					filterText = searchFields.map((f) => item[f].toString()).join(' ');
-					selected = item.id;
+					selected = item[valueKey];
 					hasBeenSelected = 1;
 				}}
 			>

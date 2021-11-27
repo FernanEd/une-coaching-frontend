@@ -82,7 +82,9 @@
 		</tr>
 	</thead>
 	<tbody class="">
-		{#each makeArraySearchable($registrosAcreditaciones, ['fecha_expedicion'], filterText).filter(filterFunction) as registro (registro.id)}
+		<!-- {#each makeArraySearchable($registrosAcreditaciones, ['fecha_expedicion'], filterText).filter(filterFunction) as registro (registro.id)} -->
+
+		{#each $registrosAcreditaciones as registro, i (i)}
 			<tr>
 				<td />
 				<td
