@@ -24,8 +24,6 @@
 	);
 
 	let filterText: string;
-
-	let cursosModal = useModal();
 </script>
 
 {#if $agregarCompetenciaModal}
@@ -37,12 +35,12 @@
 {#if $editarCompetenciaModal}
 	<Modal handleClose={editarCompetenciaModal.closeModal}>
 		<CompetenciaForm
-			competenciaID={editingCompetencia?.id}
+			editingCompetenciaID={editingCompetencia?.id}
 			form={{
 				nombre: editingCompetencia?.nombre,
 				id_tipo: editingCompetencia?.id_tipo,
 			}}
-			selectedTipo={editingCompetencia?.id_tipo}
+			selectedTipoID={editingCompetencia?.id_tipo}
 		/>
 	</Modal>
 {/if}

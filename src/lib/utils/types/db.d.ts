@@ -13,7 +13,7 @@ export interface Diplomado {
 export interface Curso {
 	id: id_curso;
 	nombre: string;
-	id_diplomado: id_diplomado | null;
+	id_diplomado: id_diplomado | undefined;
 }
 
 export interface TipoCompetencia {
@@ -24,7 +24,7 @@ export interface TipoCompetencia {
 export interface Competencia {
 	id: id_competencia;
 	nombre: string;
-	id_tipo: id_competencia | null;
+	id_tipo: id_competencia | undefined;
 }
 
 //REGISTROS
@@ -141,7 +141,7 @@ export interface CursoEnJornada {
 	id: id_cursoEnJornada;
 	id_curso: id_curso;
 	cupo_maximo: number;
-	id_instructor: id_instructor | null;
+	id_instructor: id_instructor | undefined;
 	id_jornada: id_jornada;
 	estado: 0 | 1;
 }

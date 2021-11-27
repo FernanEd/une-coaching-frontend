@@ -6,24 +6,22 @@
 	import type { Competencia } from '$lib/utils/types/db';
 	import type { MayBeUndefined } from '$lib/utils/types/forms';
 
-	export let competenciaID: number | undefined = undefined;
+	export let editingCompetenciaID: number | undefined = undefined;
 	export let form: MayBeUndefined<Omit<Competencia, 'id'>> = {
 		nombre: undefined,
 		id_tipo: undefined,
 	};
-	export let selectedTipo: number | null = null;
-
-	$: console.log(selectedTipo);
+	export let selectedTipoID: number | undefined = undefined;
 
 	const handleSubmit = async () => {
 		const formData = { ...form };
 
 		if (formData.nombre) {
-			if (competenciaID) {
+			if (editingCompetenciaID) {
 				try {
-					await db_competencias.updateItem(competenciaID, {
+					await db_competencias.updateItem(editingCompetenciaID, {
 						nombre: formData.nombre,
-						id_tipo: selectedTipo,
+						id_tipo: selectedTipoID,
 					});
 
 					toasts.success();
@@ -35,7 +33,7 @@
 				try {
 					await db_competencias.addItem({
 						nombre: formData.nombre,
-						id_tipo: selectedTipo,
+						id_tipo: selectedTipoID,
 					});
 
 					toasts.success();
@@ -44,6 +42,7 @@
 					toasts.error();
 				}
 
+				selectedTipoID = undefined;
 				form = clearForm(form);
 			}
 		}
@@ -51,7 +50,7 @@
 </script>
 
 <form
-	on:submit|preventDefault={competenciaID
+	on:submit|preventDefault={editingCompetenciaID
 		? () =>
 				prompts.showPrompt({
 					type: 'danger',
@@ -64,7 +63,7 @@
 >
 	<header class="flex justify-between">
 		<h2 class="heading">Competencia</h2>
-		{#if competenciaID}
+		{#if editingCompetenciaID}
 			<button class="btn primary">Editar competencia</button>
 		{:else}
 			<button class="btn primary">Guardar competencia</button>
@@ -78,8 +77,8 @@
 
 	<div>
 		<p class="label">Tipo de la competencia</p>
-		<select class="w-full" bind:value={selectedTipo}>
-			<option value={null}>Sin tipo</option>
+		<select class="w-full" bind:value={selectedTipoID}>
+			<option value={undefined}>Sin tipo</option>
 			{#each $db_tiposCompetencias as tipoCompetencia (tipoCompetencia.id)}
 				<option value={tipoCompetencia.id}>{tipoCompetencia.nombre}</option>
 			{/each}
