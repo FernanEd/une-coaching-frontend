@@ -6,16 +6,17 @@
 <p class="label">Ver tabla</p>
 <div class="flex gap-4">
 	<a
-		href="/coordinador/gestion-diplomados-competencias/diplomados"
+		href="/coordinador/estructurar-diplomados-competencias/cursos"
 		class="link"
 		class:primary={$page.path ==
-			'/coordinador/gestion-diplomados-competencias/diplomados'}>Diplomados</a
+			'/coordinador/estructurar-diplomados-competencias/cursos'}>Cursos</a
 	>
+	/
 	<a
-		href="/coordinador/gestion-diplomados-competencias/competencias"
+		href="/coordinador/estructurar-diplomados-competencias/competencias"
 		class="link"
 		class:primary={$page.path ==
-			'/coordinador/gestion-diplomados-competencias/competencias'}
+			'/coordinador/estructurar-diplomados-competencias/competencias'}
 		>Competencias</a
 	>
 </div>

@@ -31,11 +31,11 @@ export const getCRUD = <T extends { id: number }>(
 
 	const callOnce = (fn: Function) => {
 		let hasBeenCalled = false;
-		return () => {
+		return async () => {
 			if (!hasBeenCalled) {
 				try {
 					hasBeenCalled = true;
-					fn();
+					await fn();
 				} catch (e) {
 					hasBeenCalled = false;
 				}

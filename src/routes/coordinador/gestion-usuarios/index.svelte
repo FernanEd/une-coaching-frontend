@@ -56,7 +56,7 @@
 {/if}
 
 <header class="flex justify-between flex-wrap">
-	<h2 class="heading">Usuarios</h2>
+	<h2 class="heading">Usuarios en el sistema</h2>
 	<button class="btn primary" on:click={agregarUsuarioForm.openModal}
 		>Agregar usuarios
 	</button>

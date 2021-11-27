@@ -70,10 +70,10 @@ gap-20"
 					<a
 						class="text-white"
 						class:text-neutral-300={$page.path.includes(
-							'/coordinador/gestion-diplomados-competencias'
+							'/coordinador/estructurar-diplomados-competencias'
 						)}
-						href="/coordinador/gestion-diplomados-competencias"
-						>Gestionar Diplomados, Cursos y Competencias</a
+						href="/coordinador/estructurar-diplomados-competencias"
+						>Estructurar Diplomados, Cursos y Competencias</a
 					>
 				</li>
 				<li>

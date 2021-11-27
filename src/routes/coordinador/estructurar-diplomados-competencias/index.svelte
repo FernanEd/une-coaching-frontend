@@ -1,5 +1,5 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 
-	goto('/coordinador/gestion-diplomados-competencias/diplomados');
+	goto('/coordinador/estructurar-diplomados-competencias/cursos');
 </script>

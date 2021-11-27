@@ -65,37 +65,24 @@
 	export let loading = true;
 
 	onMount(async () => {
-		db_usuarios.getItems();
-		db_docentes.getItems();
-		db_coaches.getItems();
-		db_instructores.getItems();
-		db_administrativos.getItems();
-		db_coordinadores.getItems();
-		db_docentesEnCoaches.getItems();
-		db_jornadas.getItems();
-		db_cursosEnJornada.getItems();
-		db_asistentesEnCurso.getItems();
-		db_reportes.getItems();
-		db_registrosCompetencias.getItems();
-		db_registrosCursos.getItems();
-		db_registrosDiplomados.getItems();
-		db_cursos.getItems();
-		db_diplomados.getItems();
-		db_competencias.getItems();
-		db_tiposCompetencias.getItems();
-
-		let miPrimeraPromise = new Promise((resolve, reject) => {
-			// Llamamos a resolve(...) cuando lo que estabamos haciendo finaliza con éxito, y reject(...) cuando falla.
-			// En este ejemplo, usamos setTimeout(...) para simular código asíncrono.
-			// En la vida real, probablemente uses algo como XHR o una API HTML5.
-			setTimeout(function () {
-				resolve('¡Éxito!'); // ¡Todo salió bien!
-			}, 2000);
-		});
-
-		console.log('ye');
-
-		await miPrimeraPromise;
+		await db_usuarios.getItems();
+		await db_docentes.getItems();
+		await db_coaches.getItems();
+		await db_instructores.getItems();
+		await db_administrativos.getItems();
+		await db_coordinadores.getItems();
+		await db_docentesEnCoaches.getItems();
+		await db_jornadas.getItems();
+		await db_cursosEnJornada.getItems();
+		await db_asistentesEnCurso.getItems();
+		await db_reportes.getItems();
+		await db_registrosCompetencias.getItems();
+		await db_registrosCursos.getItems();
+		await db_registrosDiplomados.getItems();
+		await db_cursos.getItems();
+		await db_diplomados.getItems();
+		await db_competencias.getItems();
+		await db_tiposCompetencias.getItems();
 
 		loading = false;
 	});
