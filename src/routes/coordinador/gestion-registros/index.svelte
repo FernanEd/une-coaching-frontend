@@ -74,12 +74,6 @@
 		}
 	}
 
-	let editingRegistroID: number | undefined;
-	let editingRegistro: RegistroAcreditacion | undefined;
-	$: editingRegistro = $registrosAcreditaciones.find(
-		(r) => r.id == editingRegistroID
-	);
-
 	const agregarRegistroForm = useModal();
 	const editarRegistroForm = useModal();
 </script>
@@ -199,14 +193,6 @@
 				</td>
 				<td>
 					<span class="flex gap-8 justify-center">
-						<button
-							class="link primary"
-							on:click={() => {
-								editingRegistroID = registro.id;
-								editarRegistroForm.openModal();
-							}}>Editar registro</button
-						>
-
 						<button
 							class="link"
 							on:click={() => {

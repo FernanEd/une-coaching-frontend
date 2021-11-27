@@ -1,5 +1,9 @@
 <script lang="ts">
+	import { session } from '$app/stores';
+
 	import Spinner from '$lib/components/common/spinner.svelte';
+	import { db_usuarios } from '$lib/stores/db';
+	import { toasts } from '$lib/stores/toasts';
 
 	import { writable } from 'svelte/store';
 
@@ -7,22 +11,21 @@
 	let errors = writable<string[]>([]);
 	let passwordInput: string;
 
-	// const handleChange = async () => {
-	// 	loading = true;
-	// 	errors.set([]);
+	const handleChange = async () => {
+		loading = true;
+		errors.set([]);
 
-	// 	try {
-	// 		await usuarios.updateItem($currentUser.id, {
-	// 			password: passwordInput,
-	// 		});
-	// 		console.log(passwordInput);
-	// 		toasts.success();
-	// 	} catch (e) {
-	// 		toasts.error();
-	// 	} finally {
-	// 		loading = false;
-	// 	}
-	// };
+		try {
+			await db_usuarios.updateItem($session.user.id, {
+				password: passwordInput,
+			});
+			toasts.success();
+		} catch (e) {
+			toasts.error();
+		} finally {
+			loading = false;
+		}
+	};
 </script>
 
 <main
@@ -42,7 +45,7 @@
 	<h1 class="text-4xl font-bold text-white">Sistema coaching</h1>
 
 	<form
-		on:submit|preventDefault={() => {}}
+		on:submit|preventDefault={handleChange}
 		class="shadow-lg bg-white p-4 rounded-md flex flex-col max-w-sm w-screen gap-4"
 	>
 		<a href="/" class="link">Volver al menú principal</a>
