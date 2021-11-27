@@ -2,7 +2,7 @@
 	import { db_competencias, db_tiposCompetencias } from '$lib/stores/db';
 	import { prompts } from '$lib/stores/prompts';
 	import { toasts } from '$lib/stores/toasts';
-	import { noUndefinedValues } from '$lib/utils/noUndefinedValues';
+	import { clearForm } from '$lib/utils/clearForm';
 	import type { Competencia } from '$lib/utils/types/db';
 	import type { MayBeUndefined } from '$lib/utils/types/forms';
 
@@ -44,9 +44,7 @@
 					toasts.error();
 				}
 
-				(Object.keys(form) as Array<keyof typeof form>).forEach(
-					(key) => (form[key] = undefined)
-				);
+				clearForm(form);
 			}
 		}
 	};

@@ -10,9 +10,12 @@
 	import { useModal } from '$lib/stores/useModal';
 	import { makeArraySearchable } from '$lib/utils/makeArraySearchable';
 	import CompetenciaForm from './_modules/competenciaForm.svelte';
+	import GestionTiposCompetencia from './_modules/gestionTiposCompetencia.svelte';
 
 	let agregarCompetenciaModal = useModal();
-	let editarCOmpetenciaModal = useModal();
+	let editarCompetenciaModal = useModal();
+
+	let gestionarTiposCompetenciaModal = useModal();
 
 	let editingCompetenciaID: number | undefined;
 	let editingCompetencia: CompetenciaConTipo | undefined;
@@ -21,10 +24,6 @@
 	);
 
 	let filterText: string;
-
-	// $: competenciaEditable = $competenciasList.find(
-	// 	(c) => c.id == competenciaEditableID
-	// );
 
 	let cursosModal = useModal();
 </script>
@@ -35,8 +34,8 @@
 	</Modal>
 {/if}
 
-{#if $editarCOmpetenciaModal}
-	<Modal handleClose={editarCOmpetenciaModal.closeModal}>
+{#if $editarCompetenciaModal}
+	<Modal handleClose={editarCompetenciaModal.closeModal}>
 		<CompetenciaForm
 			competenciaID={editingCompetencia?.id}
 			form={{
@@ -48,10 +47,18 @@
 	</Modal>
 {/if}
 
+{#if $gestionarTiposCompetenciaModal}
+	<Modal handleClose={gestionarTiposCompetenciaModal.closeModal}>
+		<GestionTiposCompetencia />
+	</Modal>
+{/if}
+
 <header class="flex justify-between flex-wrap">
 	<h2 class="heading">Tabla de Competencias</h2>
 	<span class="flex gap-8 items-center">
-		<button class="link primary" on:click={cursosModal.openModal}
+		<button
+			class="link primary"
+			on:click={gestionarTiposCompetenciaModal.openModal}
 			>Gestionar tipos de competencias</button
 		>
 		<button class="btn primary" on:click={agregarCompetenciaModal.openModal}
@@ -95,7 +102,7 @@
 								class="link primary"
 								on:click={() => {
 									editingCompetenciaID = competencia.id;
-									editarCOmpetenciaModal.openModal();
+									editarCompetenciaModal.openModal();
 								}}>Editar competencia</button
 							>
 							<button
