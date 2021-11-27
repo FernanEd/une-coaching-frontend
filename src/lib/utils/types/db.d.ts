@@ -141,7 +141,7 @@ export interface CursoEnJornada {
 	id: id_cursoEnJornada;
 	id_curso: id_curso;
 	cupo_maximo: number;
-	id_instructor: id_instructor;
+	id_instructor: id_instructor | null;
 	id_jornada: id_jornada;
 	estado: 0 | 1;
 }
