@@ -24,6 +24,7 @@
 	let filterTextAcreditores;
 
 	const handleSubmit = async () => {
+		console.log('oooh');
 		// if (
 		// 	acreditorSeleccionado &&
 		// 	tipoDeAcreditacionSeleccionada &&
@@ -94,13 +95,14 @@
 			bind:selected={docenteSeleccionado}
 			listToSearch={$docentesComoUsuarios}
 			searchFields={['nombre', 'apellido_paterno', 'apellido_materno']}
+			isRequired
 		/>
 	</div>
 
 	<div>
 		<p class="label">Tipo de acreditacion</p>
-		<select name="" bind:value={tipoDeAcreditacionSeleccionada}>
-			<option selected disabled>Selecciona uno</option>
+		<select bind:value={tipoDeAcreditacionSeleccionada} required>
+			<option value="" disabled>Selecciona uno</option>
 			<option value="curso">Curso</option>
 			<option value="diplomado">Diplomado</option>
 			<option value="competencia">Competencia</option>
