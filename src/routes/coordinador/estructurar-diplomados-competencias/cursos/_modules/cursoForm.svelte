@@ -23,7 +23,7 @@
 				try {
 					await db_cursos.updateItem(editingCursoID, {
 						nombre: formData.nombre,
-						id_diplomado: null,
+						id_diplomado: selectedDiplomadoID,
 					});
 
 					toasts.success();

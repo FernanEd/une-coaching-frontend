@@ -29,7 +29,7 @@
 
 	export let editingCursoJornada: CursoEnJornada | undefined = undefined;
 	export let jornadaPertenecienteID: number | undefined;
-	export let instructorSeleccionado: number | undefined = undefined;
+	export let instructorSeleccionado: number | null = null;
 	export let estadoDelCurso: 0 | 1 = 0;
 	export let form: MayBeUndefined<
 		Omit<CursoEnJornada, 'id' | 'id_instructor' | 'id_jornada' | 'estado'>

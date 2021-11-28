@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { makeArraySearchable } from '$lib/utils/makeArraySearchable';
 
-	export let selected: number | undefined = undefined;
+	export let selected: number | null = null;
 	export let listToSearch: any[];
 	export let searchFields: string[];
 	export let isRequired: boolean = false;
@@ -38,7 +38,7 @@
 		class:bg-neutral-200={selected}
 		type="search"
 		on:input={() => {
-			selected = undefined;
+			selected = null;
 		}}
 		bind:value={filterText}
 		on:blur={() => {
