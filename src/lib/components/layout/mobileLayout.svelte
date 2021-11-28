@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { browser } from '$app/env';
 
-	import { page } from '$app/stores';
+	import { page, session } from '$app/stores';
 	import { useModal } from '$lib/stores/useModal';
 	import LogoutButton from '../common/logoutButton.svelte';
 
@@ -32,13 +32,25 @@
 			class="{bgColor} fixed left-0 top-0 bottom-0 py-8 px-4 flex flex-col gap-20"
 		>
 			<section class="flex flex-col gap-8 items-start">
-				<section class="mx-auto">
-					<img
-						class="object-contain"
-						src="../../../static/une white logo.png"
-						alt="Une logo"
-						id="logo"
-					/>
+				<section
+					class="flex flex-col 
+			gap-4 items-center 
+			text-center"
+				>
+					<section class="flex flex-col gap-4 items-center">
+						<img
+							class="object-contain"
+							src="../../../static/une white logo.png"
+							alt="Une logo"
+							id="logo"
+						/>
+					</section>
+					<p class="text-gray-100">
+						Conectado como {$session.user.nombre}
+						{$session.user.apellido_paterno}
+						{$session.user.apellido_materno}
+					</p>
+					<LogoutButton />
 				</section>
 
 				<nav class="flex flex-col gap-4">
@@ -47,8 +59,6 @@
 						>Cambiar contraseña</a
 					>
 				</nav>
-
-				<LogoutButton />
 			</section>
 		</aside>
 	</section>

@@ -73,11 +73,21 @@
 			fecha_inscripcion_inicio,
 			fecha_inscripcion_fin,
 		};
+
+		console.log;
 	};
 </script>
 
 <form
-	on:submit|preventDefault={handleSubmit}
+	on:submit|preventDefault={currentID
+		? () =>
+				prompts.showPrompt({
+					type: 'danger',
+					message:
+						'Editar una jornada repercutirá en todos los registros de acreditaciones. ¿Estás seguro?',
+					onAccept: handleSubmit,
+				})
+		: handleSubmit}
 	class="flex flex-col max-w-2xl w-screen gap-4 "
 >
 	<header class="flex justify-between flex-wrap">
@@ -97,22 +107,22 @@
 	<div class="form-row">
 		<div class="input-group">
 			<p class="label">Fecha de inicio de la jornada</p>
-			<DateInput bind:date={form.fecha_inicio} />
+			<DateInput bind:date={form.fecha_inicio} required />
 		</div>
 		<div class="input-group">
 			<p class="label">Fecha de cierre de la jornada</p>
-			<DateInput bind:date={form.fecha_fin} />
+			<DateInput bind:date={form.fecha_fin} required />
 		</div>
 	</div>
 
 	<div class="form-row">
 		<div class="input-group">
 			<p class="label">Fecha de inicio de inscripciones</p>
-			<DateInput bind:date={form.fecha_inscripcion_inicio} />
+			<DateInput bind:date={form.fecha_inscripcion_inicio} required />
 		</div>
 		<div class="input-group">
 			<p class="label">Fecha de cierre de inscripciones</p>
-			<DateInput bind:date={form.fecha_inscripcion_fin} />
+			<DateInput bind:date={form.fecha_inscripcion_fin} required />
 		</div>
 	</div>
 </form>

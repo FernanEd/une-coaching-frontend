@@ -26,6 +26,7 @@
 		class="absolute opacity-0"
 		required={isRequired}
 		value={selected ? 1 : undefined}
+		tabindex={-1}
 	>
 		<option value="" />
 		<option value={1} />

@@ -10,6 +10,4 @@
 	};
 </script>
 
-<button class="font-bold text-accent-inv" on:click={handleLogout}
-	>Cerrar sesión
-</button>
+<button class="btn bg-white" on:click={handleLogout}>Cerrar sesión </button>

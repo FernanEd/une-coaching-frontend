@@ -1,28 +1,18 @@
-<script lang="ts">
+<script>
+	import { onMount } from 'svelte';
 	import dayjs from 'dayjs';
 
 	let format = 'YYYY-MM-DD';
+	export let date = undefined;
+	export let required;
 
-	export let date: Date | undefined = undefined;
-	let internal: string = '';
+	let internal;
 
-	const input = (x: Date | undefined) =>
-		(internal = date ? dayjs(x).format(format) : internal);
-	const output = (x: string) => (date = dayjs(x, format).toDate());
+	const input = (x) => (internal = date ? dayjs(x).format(format) : '');
+	const output = (x) => (date = dayjs(x, format).toDate());
 
-	$: if (date == undefined) {
-		internal = '';
-		//@ts-ignore (i dont even feel like reworking this)
-	} else if (date != ' Invalid Date') {
-		input(date);
-	}
-
-	$: {
-		if (internal.charAt(0) != '0') {
-			output(internal);
-			input(date);
-		}
-	}
+	$: input(date);
+	$: output(internal);
 </script>
 
-<input type="date" bind:value={internal} />
+<input type="date" bind:value={internal} {required} />
