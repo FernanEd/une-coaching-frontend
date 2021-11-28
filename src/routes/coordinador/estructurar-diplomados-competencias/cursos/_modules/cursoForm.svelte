@@ -11,7 +11,9 @@
 		nombre: undefined,
 		id_diplomado: undefined,
 	};
-	export let selectedDiplomadoID: number | undefined = undefined;
+	export let selectedDiplomadoID: number | null = null;
+
+	$: console.log(selectedDiplomadoID);
 
 	const handleSubmit = async () => {
 		const formData = { ...form };
@@ -21,7 +23,7 @@
 				try {
 					await db_cursos.updateItem(editingCursoID, {
 						nombre: formData.nombre,
-						id_diplomado: selectedDiplomadoID,
+						id_diplomado: null,
 					});
 
 					toasts.success();
@@ -42,7 +44,7 @@
 					toasts.error();
 				}
 
-				selectedDiplomadoID = undefined;
+				selectedDiplomadoID = null;
 				form = clearForm(form);
 			}
 		}
@@ -78,7 +80,7 @@
 	<div>
 		<p class="label">Diplomado del curso</p>
 		<select class="w-full" bind:value={selectedDiplomadoID}>
-			<option value={undefined}>Sin diplomado</option>
+			<option value={null}>Sin diplomado</option>
 			{#each $db_diplomados as diplomado (diplomado.id)}
 				<option value={diplomado.id}>{diplomado.nombre}</option>
 			{/each}

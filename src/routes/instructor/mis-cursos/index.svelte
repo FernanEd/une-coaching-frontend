@@ -1,9 +1,8 @@
 <script lang="ts">
 	import { session } from '$app/stores';
-
 	import { instructoresComoUsuario } from '$lib/stores/lists/instructoresComoUsuario';
 	import type { CursoEnJornadaConAsistentes } from '$lib/stores/lists/jornada/cursosEnJornadaConAsistentes';
-	import { getCursosParaInstructor } from '$lib/stores/lists/portal-instructor/cursosDeLaJornadaActualParaInstructor';
+	import { getCursosParaInstructor } from '$lib/stores/lists/portal-instructor/getCursosParaInstructor';
 
 	import { useModal } from '$lib/stores/useModal';
 	import type { Readable } from 'svelte/store';

@@ -1,20 +1,22 @@
-<!-- <script lang="ts">
-	
-	$: jornada = seleccionarJornada($currentJornada?.id);
-	$: cursosDeLaJornada = $jornada?.cursos?.filter((c) => c?.estado == 0) || [];
+<script lang="ts">
+	import type { CursoEnJornadaConInvitaciones } from '$lib/stores/lists/jornada/cursosEnJornadaConInvitaciones';
+	import { jornadaActual } from '$lib/stores/lists/jornada/jornadaActual';
+	import { cursosParaInscribir } from '$lib/stores/lists/portal-coach/cursosParaInscribir';
+	import { useModal } from '$lib/stores/useModal';
+	import dayjs from 'dayjs';
 
 	let inscribirModal = useModal();
 	let currentCursoEnJornadaID: number;
 
-	$: currentCursoEnJornada = derived(jornada, ($jornada) => {
-		if (!$jornada) return;
-		if ($jornada.cursos.length == 0) return;
+	// $: currentCursoEnJornada = derived(jornada, ($jornada) => {
+	// 	if (!$jornada) return;
+	// 	if ($jornada.cursos.length == 0) return;
 
-		return $jornada?.cursos?.find((c) => c?.id == currentCursoEnJornadaID);
-	});
+	// 	return $jornada?.cursos?.find((c) => c?.id == currentCursoEnJornadaID);
+	// });
 </script>
 
-{#if $inscribirModal}
+<!-- {#if $inscribirModal}
 	<Modal handleClose={inscribirModal.closeModal}>
 		<InscripcionDocentes
 			cursoJornadaID={$currentCursoEnJornada.id}
@@ -25,43 +27,60 @@
 			cupoCurso={$currentCursoEnJornada.cupo_maximo}
 		/>
 	</Modal>
-{/if}
+{/if} -->
 
-{#if $jornada}
+{#if $jornadaActual}
 	<h2 class="heading">
-		{$jornada.titulo}
+		{$jornadaActual.titulo}
 	</h2>
 
-	{#if cursosDeLaJornada.length == 0}
-		<p>No hay cursos en esta jornada aun...</p>
+	{#if dayjs(Date()).isAfter($jornadaActual.fecha_inscripcion_fin)}
+		<p>El periodo de inscripciones ha terminado.</p>
+	{:else if dayjs(Date()).isBefore($jornadaActual.fecha_inscripcion_inicio)}
+		<p>El periodo de inscripciones aún no comienza.</p>
+	{:else if $cursosParaInscribir.length == 0}
+		<p>Aún no hay cursos en esta jornada.</p>
 	{:else}
 		<section class="flex flex-col gap-8 mt-4">
-			{#each cursosDeLaJornada as cursoEnJornada (cursoEnJornada.id)}
+			{#each $cursosParaInscribir as cursoEnJornada (cursoEnJornada.id)}
 				<article
 					class="flex flex-col gap-4 rounded-2xl shadow-fix text-center p-4"
 				>
 					<div>
 						<p class="label">
-							{$diplomados.find(
-								(d) => d.id == cursoEnJornada?.curso?.id_diplomado
-							)?.nombre || 'Sin diplomado'}
+							{#if cursoEnJornada.curso.diplomado}
+								{cursoEnJornada.curso.diplomado.nombre}
+							{:else}
+								Sin Diplomado
+							{/if}
 						</p>
-						<p>{cursoEnJornada?.curso?.nombre}</p>
+						<p>{cursoEnJornada.curso.nombre}</p>
 					</div>
 
 					<div>
-						<p class="label">Instructor</p>
-						<p>
-							{cursoEnJornada.instructor.nombre}
-							{cursoEnJornada.instructor.apellido_paterno}
-							{cursoEnJornada.instructor.apellido_materno}
-						</p>
+						{#if cursoEnJornada.instructor}
+							<p class="label">Instructor</p>
+							<p>
+								{cursoEnJornada.instructor.nombre}
+								{cursoEnJornada.instructor.apellido_paterno}
+								{cursoEnJornada.instructor.apellido_materno}
+							</p>
+						{:else}
+							<p class="text-text-4">Sin instructor asignado aún</p>
+						{/if}
 					</div>
 
 					<div>
-						<p class="label">Cupo: {cursoEnJornada.cupo_maximo}</p>
-						<p>
-							{cursoEnJornada.cupo_maximo - cursoEnJornada.asistentes.length} restantes
+						<p class="label">
+							Cupo: {cursoEnJornada.invitaciones.filter(
+								(i) => i.estado_invitacion == 1
+							).length} / {cursoEnJornada.cupo_maximo}
+						</p>
+						<p>{cursoEnJornada.invitaciones.length} invitaciones enviadas</p>
+						<p class="text-status-danger">
+							{cursoEnJornada.invitaciones.filter(
+								(i) => i.estado_invitacion == 2
+							).length} invitaciones rechazadas
 						</p>
 					</div>
 
@@ -78,4 +97,4 @@
 	{/if}
 {:else}
 	No hay jornada activa
-{/if} -->
+{/if}

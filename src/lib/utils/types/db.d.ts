@@ -13,7 +13,7 @@ export interface Diplomado {
 export interface Curso {
 	id: id_curso;
 	nombre: string;
-	id_diplomado: id_diplomado | undefined;
+	id_diplomado: id_diplomado | null;
 }
 
 export interface TipoCompetencia {
@@ -24,7 +24,7 @@ export interface TipoCompetencia {
 export interface Competencia {
 	id: id_competencia;
 	nombre: string;
-	id_tipo: id_competencia | undefined;
+	id_tipo: id_competencia | null;
 }
 
 //REGISTROS
@@ -39,7 +39,7 @@ export interface RegistroDiplomado {
 	id_acreditor: id_docente;
 	id_expeditor: id_coordinador;
 	fecha_expedicion: Date;
-	documento: string | undefined;
+	documento: string | null;
 }
 
 export interface RegistroCurso {
@@ -48,7 +48,7 @@ export interface RegistroCurso {
 	id_acreditor: id_docente;
 	id_expeditor: id_coordinador;
 	fecha_expedicion: Date;
-	documento: string | undefined;
+	documento: string | null;
 }
 
 export interface RegistroCompetencia {
@@ -57,7 +57,7 @@ export interface RegistroCompetencia {
 	id_acreditor: id_docente;
 	id_expeditor: id_coordinador;
 	fecha_expedicion: Date;
-	documento: string | undefined;
+	documento: string | null;
 }
 
 // USUARIOS
@@ -139,7 +139,7 @@ export interface CursoEnJornada {
 	id: id_cursoEnJornada;
 	id_curso: id_curso;
 	cupo_maximo: number;
-	id_instructor: id_instructor | undefined;
+	id_instructor: id_instructor | null;
 	id_jornada: id_jornada;
 	estado: 0 | 1;
 }
