@@ -18,6 +18,9 @@
 	import { docentesComoUsuarios } from '$lib/stores/lists/docentesComoUsuario';
 	import { usuariosConRoles } from '$lib/stores/lists/usuariosConRoles';
 	import { toasts } from '$lib/stores/toasts';
+	import { capitalizeString } from '$lib/utils/capitalizeString';
+	import { getErrorMsg } from '$lib/utils/getErrorMsg';
+	import { handleError } from '$lib/utils/handleError';
 	import { writable } from 'svelte/store';
 
 	let isEditing = false;
@@ -34,10 +37,6 @@
 		(c) => c.id == $session.user.id
 	)?.id;
 
-	$: console.log('id coord:', coordinadorID);
-
-	$: console.log(docenteSeleccionado);
-
 	const handleSubmit = async () => {
 		if (
 			docenteSeleccionado &&
@@ -50,7 +49,7 @@
 					await db_registrosCursos.addItem({
 						id_curso: acreditacionSeleccionada,
 						id_acreditor: docenteSeleccionado,
-						documento: undefined,
+						documento: null,
 						fecha_expedicion: new Date(),
 						id_expeditor: coordinadorID,
 					});
@@ -58,7 +57,7 @@
 					await db_registrosDiplomados.addItem({
 						id_diplomado: acreditacionSeleccionada,
 						id_acreditor: docenteSeleccionado,
-						documento: undefined,
+						documento: null,
 						fecha_expedicion: new Date(),
 						id_expeditor: coordinadorID,
 					});
@@ -66,18 +65,17 @@
 					await db_registrosCompetencias.addItem({
 						id_competencia: acreditacionSeleccionada,
 						id_acreditor: docenteSeleccionado,
-						documento: undefined,
+						documento: null,
 						fecha_expedicion: new Date(),
 						id_expeditor: coordinadorID,
 					});
 				}
-				toasts.success();
-			} catch (e) {
-				console.error(e);
-				toasts.error();
-			} finally {
+
 				docenteSeleccionado = undefined;
 				acreditacionSeleccionada = undefined;
+				toasts.success();
+			} catch (e) {
+				handleError(e);
 			}
 		}
 	};

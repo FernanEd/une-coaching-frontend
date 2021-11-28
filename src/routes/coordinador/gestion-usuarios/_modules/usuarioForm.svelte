@@ -15,6 +15,7 @@
 	import { toasts } from '$lib/stores/toasts';
 	import { clearForm } from '$lib/utils/clearForm';
 	import { getErrorMsg } from '$lib/utils/getErrorMsg';
+	import { handleError } from '$lib/utils/handleError';
 	import { noUndefinedValues } from '$lib/utils/noUndefinedValues';
 	import type { Usuario } from '$lib/utils/types/db';
 	import type { MayBeUndefined } from '$lib/utils/types/forms';
@@ -91,7 +92,7 @@
 											throw Error('No puedes quitarte el cargo de coordinador');
 										await roles[rol].deleteItem(userHasRol.id);
 									} catch (e: any) {
-										toasts.error(e);
+										handleError(e);
 									}
 								}
 							}
@@ -100,10 +101,7 @@
 
 					toasts.success();
 				} catch (e) {
-					console.error(e);
-					toasts.error(
-						'Ha habido un error. Asegurese que la matricula es única'
-					);
+					handleError(e);
 				}
 
 				rolesIniciales = rolesSeleccionados;
@@ -120,18 +118,11 @@
 						}
 					}
 
-					toasts.success();
 					form = clearForm(form);
 					rolesSeleccionados = [];
+					toasts.success();
 				} catch (e: any) {
-					let msg = getErrorMsg(e);
-					if (msg) {
-						toasts.error(msg);
-					} else {
-						toasts.error(
-							'Ha habido un error. Compruebe que no es una matricula duplicada'
-						);
-					}
+					handleError(e);
 				}
 			}
 		}

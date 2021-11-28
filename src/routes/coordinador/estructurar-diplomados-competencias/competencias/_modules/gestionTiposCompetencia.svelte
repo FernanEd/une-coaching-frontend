@@ -3,6 +3,7 @@
 	import { prompts } from '$lib/stores/prompts';
 	import { toasts } from '$lib/stores/toasts';
 	import { clearForm } from '$lib/utils/clearForm';
+	import { handleError } from '$lib/utils/handleError';
 
 	import { noUndefinedValues } from '$lib/utils/noUndefinedValues';
 
@@ -24,23 +25,21 @@
 
 					toasts.success();
 				} catch (e) {
-					console.error(e);
-					toasts.error();
+					handleError(e);
 				}
 			} else {
 				try {
 					await db_tiposCompetencias.addItem({
 						nombre: form.nombre,
 					});
+
+					currentID = undefined;
+					form = clearForm(form);
 					toasts.success();
 				} catch (e) {
-					console.error(e);
-					toasts.error();
+					handleError(e);
 				}
 			}
-
-			currentID = undefined;
-			form = clearForm(form);
 		}
 	};
 

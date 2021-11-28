@@ -3,6 +3,8 @@
 	import { prompts } from '$lib/stores/prompts';
 	import { toasts } from '$lib/stores/toasts';
 	import { clearForm } from '$lib/utils/clearForm';
+	import { getErrorMsg } from '$lib/utils/getErrorMsg';
+	import { handleError } from '$lib/utils/handleError';
 	import type { Curso } from '$lib/utils/types/db';
 	import type { MayBeUndefined } from '$lib/utils/types/forms';
 
@@ -12,8 +14,6 @@
 		id_diplomado: undefined,
 	};
 	export let selectedDiplomadoID: number | null = null;
-
-	$: console.log(selectedDiplomadoID);
 
 	const handleSubmit = async () => {
 		const formData = { ...form };
@@ -28,8 +28,7 @@
 
 					toasts.success();
 				} catch (e) {
-					console.error(e);
-					toasts.error();
+					handleError(e);
 				}
 			} else {
 				try {
@@ -38,14 +37,12 @@
 						id_diplomado: selectedDiplomadoID,
 					});
 
+					selectedDiplomadoID = null;
+					form = clearForm(form);
 					toasts.success();
 				} catch (e) {
-					console.error(e);
-					toasts.error();
+					handleError(e);
 				}
-
-				selectedDiplomadoID = null;
-				form = clearForm(form);
 			}
 		}
 	};

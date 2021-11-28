@@ -3,6 +3,7 @@
 	import { prompts } from '$lib/stores/prompts';
 	import { toasts } from '$lib/stores/toasts';
 	import { clearForm } from '$lib/utils/clearForm';
+	import { handleError } from '$lib/utils/handleError';
 	import type { Competencia } from '$lib/utils/types/db';
 	import type { MayBeUndefined } from '$lib/utils/types/forms';
 
@@ -26,8 +27,7 @@
 
 					toasts.success();
 				} catch (e) {
-					console.error(e);
-					toasts.error();
+					handleError(e);
 				}
 			} else {
 				try {
@@ -36,14 +36,12 @@
 						id_tipo: selectedTipoID,
 					});
 
+					selectedTipoID = null;
+					form = clearForm(form);
 					toasts.success();
 				} catch (e) {
-					console.error(e);
-					toasts.error();
+					handleError(e);
 				}
-
-				selectedTipoID = null;
-				form = clearForm(form);
 			}
 		}
 	};

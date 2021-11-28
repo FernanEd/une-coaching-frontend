@@ -3,6 +3,7 @@
 	import type { DocenteComoUsuarioEnCoach } from '$lib/stores/lists/coachesConDocentes';
 	import { docentesComoUsuarios } from '$lib/stores/lists/docentesComoUsuario';
 	import { toasts } from '$lib/stores/toasts';
+	import { handleError } from '$lib/utils/handleError';
 	import { makeArraySearchable } from '$lib/utils/makeArraySearchable';
 
 	let filterText: string;
@@ -47,8 +48,7 @@
 
 			toasts.success();
 		} catch (e) {
-			console.error(e);
-			toasts.error();
+			handleError(e);
 		}
 
 		docentesIniciales = docentesSeleccionados;
