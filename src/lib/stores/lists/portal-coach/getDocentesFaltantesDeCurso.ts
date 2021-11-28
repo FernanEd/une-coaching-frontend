@@ -1,33 +1,37 @@
-import {
-	db_asistentesEnCurso,
-	db_cursos,
-	db_cursosEnJornada,
-} from '$lib/stores/db';
+import { db_asistentesEnCurso, db_cursos } from '$lib/stores/db';
 import { derived } from 'svelte/store';
 import { docentesComoUsuarios } from '../docentesComoUsuario';
-import type {
-	AsistenteEnCurso,
-	CursoEnJornada,
-	Curso,
-} from '$lib/utils/types/db';
-
-interface CursoEnJornadaConCurso extends CursoEnJornada {
-	curso: Curso;
-}
+import type { AsistenteEnCurso } from '$lib/utils/types/db';
+import { cursosEnJornadaConInvitaciones } from '../jornada/cursosEnJornadaConInvitaciones';
+import type { CursoEnJornadaConInvitaciones } from '../jornada/cursosEnJornadaConInvitaciones';
 
 interface AsistenciaDeDocente extends AsistenteEnCurso {
-	cursoJornada: CursoEnJornadaConCurso;
+	cursoJornada: CursoEnJornadaConInvitaciones;
 }
 
-export const getDocentesFaltantesDeCurso = (cursoID: number) =>
+export const getDocentesFaltantesDeCurso = (cursoJornadaID: number) =>
 	derived(
-		[docentesComoUsuarios, db_asistentesEnCurso, db_cursosEnJornada, db_cursos],
-		([docentes, asistentes, cursosEnJornada, cursos]) =>
-			docentes.filter((d) => {
+		[
+			docentesComoUsuarios,
+			cursosEnJornadaConInvitaciones,
+			db_asistentesEnCurso,
+			db_cursos,
+		],
+		([docentes, cursosJornada, asistentes, cursos]) => {
+			const cursoJornada = cursosJornada.find((cJ) => cJ.id == cursoJornadaID);
+
+			if (!cursoJornada) return;
+
+			const cursoABuscar = cursoJornada.curso;
+
+			return docentes.filter((d) => {
+				if (cursoJornada.invitaciones.find((i) => i.id_docente == d.id_docente))
+					return false;
+
 				const asistenciasDeDocente: AsistenciaDeDocente[] = asistentes
 					.filter((a) => a.id_docente == d.id_docente)
 					.map((a) => {
-						const cursoJornadaDeLaAsistencia = cursosEnJornada.find(
+						const cursoJornadaDeLaAsistencia = cursosJornada.find(
 							(cJ) => cJ.id == a.id_cursojornada
 						);
 
@@ -50,11 +54,12 @@ export const getDocentesFaltantesDeCurso = (cursoID: number) =>
 					.filter((a): a is AsistenciaDeDocente => a != undefined);
 
 				const docenteHaAsistido = asistenciasDeDocente.find(
-					(a) => a.cursoJornada.curso.id == cursoID
+					(a) => a.cursoJornada.curso.id == cursoABuscar.id
 				);
 
 				if (!docenteHaAsistido) return true;
 
 				return docenteHaAsistido.aprobado ? false : true;
-			})
+			});
+		}
 	);

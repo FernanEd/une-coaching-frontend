@@ -20,7 +20,7 @@
 	<button class="link mb-4" on:click={inscribirModal.closeModal}
 		>← Volver atrás</button
 	>
-	<InscribirDocentes curso={currentCursoEnJornada?.curso} />
+	<InscribirDocentes cursoEnJornada={currentCursoEnJornada} />
 {/if}
 
 {#if !$inscribirModal}
