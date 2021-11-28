@@ -149,7 +149,10 @@
 					<tr>
 						<td>{cursoJornada.curso.nombre}</td>
 						<td
-							><p class:text-status-danger={cursoJornada.estado == 1}>
+							><p
+								class="font-bold"
+								class:text-status-danger={cursoJornada.estado == 1}
+							>
 								{cursoJornada.estado == 0
 									? 'En progreso'
 									: cursoJornada.estado == 1
@@ -179,8 +182,14 @@
 									on:click={() => {
 										asistentesModal.openModal();
 										listaAsistentes = cursoJornada.asistentes;
-									}}>Ver asistentes</button
+									}}
 								>
+									{#if cursoJornada.estado == 0}
+										Ver asistentes
+									{:else if cursoJornada.estado == 1}
+										Ver resultados
+									{/if}
+								</button>
 							</p>
 						</td>
 						<td>

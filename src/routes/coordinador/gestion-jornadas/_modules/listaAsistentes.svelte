@@ -25,7 +25,11 @@
 			{#each makeArraySearchable( asistentes.map( ({ aprobado, cursado, docente }) => ({ ...docente, cursado, aprobado }) ), ['nombre', 'apellido_paterno', 'apellido_materno'], filterText ) as asistente (asistente.id)}
 				<div class="p-2 bg-neutral-100 rounded">
 					{#if asistente.cursado}
-						<p class="label" class:text-status-success={asistente.aprobado}>
+						<p
+							class="label"
+							class:text-status-success={asistente.aprobado}
+							class:text-status-danger={!asistente.aprobado}
+						>
 							{asistente.aprobado ? 'Aprobado' : 'Reprobado'}
 						</p>
 					{/if}

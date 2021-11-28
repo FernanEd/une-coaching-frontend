@@ -48,15 +48,35 @@
 	};
 
 	const openCurso = async () => {
-		if (cursoEnJornadaID) {
+		if (cursoEnJornadaID && alumnos) {
+			let progress = 0;
+			loading = true;
+
 			try {
 				await db_cursosEnJornada.updateItem(cursoEnJornadaID, {
 					estado: 0,
 				});
+				progress = 1;
+				for (let alumno of alumnos) {
+					await db_asistentesEnCurso.updateItem(alumno.id, {
+						cursado: false,
+					});
+				}
+				progress = 2;
 				toasts.success();
 			} catch (e) {
-				console.log(e);
-				toasts.error();
+				handleError(e);
+			} finally {
+				if (progress == 1) {
+					try {
+						await db_cursosEnJornada.updateItem(cursoEnJornadaID, {
+							estado: 1,
+						});
+					} catch (e) {
+						handleError(e);
+					}
+				}
+				loading = false;
 			}
 		}
 	};
