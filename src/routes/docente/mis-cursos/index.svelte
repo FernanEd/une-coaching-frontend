@@ -88,6 +88,7 @@
 						<div>
 							<p class="label">Calificación</p>
 							<p
+								class="font-bold"
 								class:text-status-success={cursoJornada.aprobado}
 								class:text-status-danger={!cursoJornada.aprobado}
 							>
