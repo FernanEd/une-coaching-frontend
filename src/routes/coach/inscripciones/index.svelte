@@ -36,6 +36,7 @@
 		{:else if $cursosParaInscribir.length == 0}
 			<p>Aún no hay cursos en esta jornada.</p>
 		{:else}
+			<p class="label">Cursos de la jornada</p>
 			<section class="flex flex-col gap-8 mt-4">
 				{#each $cursosParaInscribir as cursoEnJornada (cursoEnJornada.id)}
 					<article
@@ -84,13 +85,13 @@
 							on:click={() => {
 								currentCursoEnJornadaID = cursoEnJornada.id;
 								inscribirModal.openModal();
-							}}>Inscribir docentes</button
+							}}>Invitar docentes</button
 						>
 					</article>
 				{/each}
 			</section>
 		{/if}
 	{:else}
-		No hay jornada activa
+		No hay jornada activa.
 	{/if}
 {/if}

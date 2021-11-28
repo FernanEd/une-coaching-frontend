@@ -25,10 +25,10 @@ gap-20"
 
 	<section class="flex flex-col gap-8 mb-auto">
 		<nav>
-			<p class="leyenda text-gray-300 text-sm">Principal</p>
+			<p class="leyenda text-gray-300 text-sm">ENLACES</p>
 			<ul class="flex flex-col gap-4 font-bold">
 				<li>
-					<a class="text-white" href="/">Inicio</a>
+					<a class="text-white" href="/">Menú principal</a>
 				</li>
 				<li>
 					<a href="/newpassword" class="text-white">Cambiar contraseña</a>

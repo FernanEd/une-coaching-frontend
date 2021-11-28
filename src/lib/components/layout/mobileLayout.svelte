@@ -31,35 +31,34 @@
 		<aside
 			class="{bgColor} fixed left-0 top-0 bottom-0 py-8 px-4 flex flex-col gap-20"
 		>
-			<section class="flex flex-col gap-8 items-start">
-				<section
-					class="flex flex-col 
+			<section
+				class="flex flex-col 
 			gap-4 items-center 
 			text-center"
-				>
-					<section class="flex flex-col gap-4 items-center">
-						<img
-							class="object-contain"
-							src="../../../static/une white logo.png"
-							alt="Une logo"
-							id="logo"
-						/>
-					</section>
-					<p class="text-gray-100">
-						Conectado como {$session.user.nombre}
-						{$session.user.apellido_paterno}
-						{$session.user.apellido_materno}
-					</p>
-					<LogoutButton />
+			>
+				<section class="flex flex-col gap-4 items-center">
+					<img
+						class="object-contain"
+						src="../../../static/une white logo.png"
+						alt="Une logo"
+						id="logo"
+					/>
 				</section>
-
-				<nav class="flex flex-col gap-4">
-					<a href="/" class="text-white font-bold">Menú principal</a>
-					<a href="/newpassword" class="text-white font-bold"
-						>Cambiar contraseña</a
-					>
-				</nav>
+				<p class="text-gray-100">
+					Conectado como {$session.user.nombre}
+					{$session.user.apellido_paterno}
+					{$session.user.apellido_materno}
+				</p>
+				<LogoutButton />
 			</section>
+
+			<nav class="flex flex-col gap-4">
+				<p class="leyenda text-gray-300 text-sm">ENLACES</p>
+				<a href="/" class="text-white font-bold">Menú principal</a>
+				<a href="/newpassword" class="text-white font-bold"
+					>Cambiar contraseña</a
+				>
+			</nav>
 		</aside>
 	</section>
 {/if}

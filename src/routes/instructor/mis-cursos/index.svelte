@@ -2,6 +2,7 @@
 	import { session } from '$app/stores';
 	import { instructoresComoUsuario } from '$lib/stores/lists/instructoresComoUsuario';
 	import type { CursoEnJornadaConAsistentes } from '$lib/stores/lists/jornada/cursosEnJornadaConAsistentes';
+	import { jornadaActual } from '$lib/stores/lists/jornada/jornadaActual';
 	import { getCursosParaInstructor } from '$lib/stores/lists/portal-instructor/getCursosParaInstructor';
 
 	import { useModal } from '$lib/stores/useModal';
@@ -53,11 +54,12 @@
 
 {#if cursosJornada && !$calificarAlumnosModal && !$estatusCursoModal}
 	<h2 class="heading">Cursos ({$cursosJornada.length})</h2>
+	<p class="label">De la jornada {$jornadaActual.titulo}</p>
 
 	<hr class="my-2 border-none" />
 
 	{#if $cursosJornada.length == 0}
-		<p>No tiene cursos en esta jornada aún</p>
+		<p>No tiene cursos en esta jornada aún.</p>
 	{:else}
 		<section class="flex flex-col gap-8">
 			{#each $cursosJornada as cursoJornada (cursoJornada.id)}
