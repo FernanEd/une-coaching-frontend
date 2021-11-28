@@ -3,6 +3,7 @@
 
 	import type { AsistenteEnCursoConfirmado } from '$lib/stores/lists/jornada/asistentesEnCursoConfirmados';
 	import { toasts } from '$lib/stores/toasts';
+	import { handleError } from '$lib/utils/handleError';
 
 	export let alumno: AsistenteEnCursoConfirmado;
 	export let estaAprobado = alumno.aprobado ? 1 : 0;
@@ -15,7 +16,7 @@
 			});
 			toasts.success();
 		} catch (e) {
-			toasts.error();
+			handleError(e);
 		}
 	};
 </script>

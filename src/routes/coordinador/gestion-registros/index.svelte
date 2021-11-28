@@ -59,8 +59,6 @@
 						.map((l) => parseAccents(l).toLowerCase())
 						.join('');
 
-				console.log(filterText, acreditorNombre, expeditorNombre);
-
 				let searchWords = filterText.split(/\s/);
 
 				return searchWords.every(

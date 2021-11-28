@@ -8,5 +8,5 @@ import { cursosEnJornadaConInvitaciones } from '../jornada/cursosEnJornadaConInv
 export const cursosParaInscribir = derived(
 	[cursosEnJornadaConInvitaciones, jornadaActual],
 	([cursos, jornadaActual]) =>
-		cursos.filter((c) => c.id_jornada == jornadaActual.id)
+		jornadaActual ? cursos.filter((c) => c.id_jornada == jornadaActual.id) : []
 );

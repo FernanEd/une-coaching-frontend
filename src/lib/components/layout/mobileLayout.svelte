@@ -101,11 +101,13 @@
 			"
 		>
 			<p>
-				Sí es primera vez que ingresas, cambia tu contraseña para proteger tu
+				Sí es la primera vez que ingresas, cambia tu contraseña para proteger tu
 				cuenta.
 			</p>
 			<p>
-				Accede desde el menú o da clic <a href="/newpassword">aqui</a>.
+				Para cambiarla accede desde el menú o da clic <a href="/newpassword"
+					>aquí</a
+				>.
 			</p>
 			<button
 				class="btn primary"

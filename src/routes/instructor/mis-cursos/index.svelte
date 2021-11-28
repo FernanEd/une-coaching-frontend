@@ -34,7 +34,10 @@
 	<button class="link mb-4" on:click={calificarAlumnosModal.closeModal}
 		>← Volver atrás</button
 	>
-	<CalificarAlumnos />
+	<h2 class="heading">
+		Alumnos del curso {selectedCursoJornada?.curso.nombre}
+	</h2>
+	<CalificarAlumnos alumnos={selectedCursoJornada?.asistentes} />
 {/if}
 
 {#if $estatusCursoModal}
@@ -54,12 +57,14 @@
 
 {#if cursosJornada && !$calificarAlumnosModal && !$estatusCursoModal}
 	<h2 class="heading">Cursos ({$cursosJornada.length})</h2>
-	<p class="label">De la jornada {$jornadaActual.titulo}</p>
+	{#if $jornadaActual}
+		<p class="label">De la jornada {$jornadaActual.titulo}</p>
+	{/if}
 
 	<hr class="my-2 border-none" />
 
 	{#if $cursosJornada.length == 0}
-		<p>No tiene cursos en esta jornada aún.</p>
+		<p>No tienes cursos en esta jornada aún.</p>
 	{:else}
 		<section class="flex flex-col gap-8">
 			{#each $cursosJornada as cursoJornada (cursoJornada.id)}

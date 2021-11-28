@@ -10,10 +10,13 @@ export const getCursosParaInstructor = (instructorID: number) => {
 	> = derived(
 		[cursosEnJornadaConAsistentes, jornadaActual],
 		([cursos, jornadaActual]) =>
-			cursos.filter(
-				(c) =>
-					c.id_jornada == jornadaActual.id && c.id_instructor == instructorID
-			)
+			jornadaActual
+				? cursos.filter(
+						(c) =>
+							c.id_jornada == jornadaActual.id &&
+							c.id_instructor == instructorID
+				  )
+				: []
 	);
 
 	return cursosDeLaJornadaActualParaInstructor;

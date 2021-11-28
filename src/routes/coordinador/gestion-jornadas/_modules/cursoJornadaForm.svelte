@@ -26,6 +26,7 @@
 	import type { MayBeUndefined } from '$lib/utils/types/forms';
 	import { noUndefinedValues } from '$lib/utils/noUndefinedValues';
 	import { clearForm } from '$lib/utils/clearForm';
+	import { handleError } from '$lib/utils/handleError';
 
 	export let editingCursoJornada: CursoEnJornada | undefined = undefined;
 	export let jornadaPertenecienteID: number | undefined;
@@ -54,8 +55,7 @@
 
 					toasts.success();
 				} catch (e) {
-					console.error(e);
-					toasts.error();
+					handleError(e);
 				}
 			} else {
 				try {
@@ -67,13 +67,12 @@
 						id_jornada: jornadaPertenecienteID,
 					});
 
+					form = clearForm(form);
+					instructorSeleccionado = null;
 					toasts.success();
 				} catch (e) {
-					console.error(e);
-					toasts.error();
+					handleError(e);
 				}
-
-				form = clearForm(form);
 			}
 		}
 	};

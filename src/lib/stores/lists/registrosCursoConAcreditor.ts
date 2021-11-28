@@ -34,17 +34,6 @@ export const registrosCursoConAcreditor: Readable<RegistroCursoConAcreditor[]> =
 						(c) => c.id == r.id_expeditor
 					);
 
-					console.log(
-						'registro de curso:',
-						r,
-						'curso:',
-						cursoDelRegistro,
-						'acreditor:',
-						acreditorDelRegistro,
-						'expeditor:',
-						expeditorDelRegistro
-					);
-
 					if (
 						!(cursoDelRegistro && acreditorDelRegistro && expeditorDelRegistro)
 					)

@@ -1,15 +1,19 @@
 <script lang="ts">
+	export let isPopUp = false;
+
 	export let handleClose: () => void;
 </script>
 
 <div class="modal-bg">
 	<div class="modal">
-		<header class="modal-header">
-			<button class="font-bold text-text-4" on:click={handleClose}
-				>Cerrar ventana</button
-			>
-		</header>
-		<hr class="my-4 border-none" />
+		{#if !isPopUp}
+			<header class="modal-header">
+				<button class="font-bold text-text-4" on:click={handleClose}
+					>Cerrar ventana</button
+				>
+			</header>
+			<hr class="my-4 border-none" />
+		{/if}
 		<slot />
 	</div>
 </div>

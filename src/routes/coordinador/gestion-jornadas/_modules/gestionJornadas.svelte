@@ -8,6 +8,7 @@
 	import { formatDate } from '$lib/utils/formatDate';
 	import { prompts } from '$lib/stores/prompts';
 	import DateInput from '$lib/components/common/dateInput.svelte';
+	import { handleError } from '$lib/utils/handleError';
 
 	let form: MayBeUndefined<Omit<Jornada, 'id'>> = {
 		titulo: undefined,
@@ -32,12 +33,13 @@
 						fecha_inscripcion_fin: formData.fecha_inscripcion_fin,
 						fecha_inscripcion_inicio: formData.fecha_inscripcion_inicio,
 					});
+
+					currentID = undefined;
+					form = clearForm(form);
 					toasts.success();
 				} catch (e) {
-					console.error(e);
-					toasts.error();
+					handleError(e);
 				}
-				currentID = undefined;
 			} else {
 				try {
 					await db_jornadas.addItem({
@@ -47,13 +49,13 @@
 						fecha_inscripcion_fin: formData.fecha_inscripcion_fin,
 						fecha_inscripcion_inicio: formData.fecha_inscripcion_inicio,
 					});
+
+					form = clearForm(form);
 					toasts.success();
 				} catch (e) {
-					console.error(e);
-					toasts.error();
+					handleError(e);
 				}
 			}
-			form = clearForm(form);
 		}
 	};
 
@@ -73,8 +75,6 @@
 			fecha_inscripcion_inicio,
 			fecha_inscripcion_fin,
 		};
-
-		console.log;
 	};
 </script>
 

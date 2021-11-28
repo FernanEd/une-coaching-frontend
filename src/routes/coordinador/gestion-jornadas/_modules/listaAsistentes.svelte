@@ -22,11 +22,13 @@
 		<p class="text-text-4">No hay asistentes aún.</p>
 	{:else}
 		<div class="flex flex-col gap-2">
-			{#each makeArraySearchable( asistentes.map( ({ aprobado, docente }) => ({ ...docente, aprobado }) ), ['nombre', 'apellido_paterno', 'apellido_materno'], filterText ) as asistente (asistente.id)}
+			{#each makeArraySearchable( asistentes.map( ({ aprobado, cursado, docente }) => ({ ...docente, cursado, aprobado }) ), ['nombre', 'apellido_paterno', 'apellido_materno'], filterText ) as asistente (asistente.id)}
 				<div class="p-2 bg-neutral-100 rounded">
-					<p class="label" class:text-status-success={asistente.aprobado}>
-						{asistente.aprobado ? 'Aprobado' : 'Reprobado'}
-					</p>
+					{#if asistente.cursado}
+						<p class="label" class:text-status-success={asistente.aprobado}>
+							{asistente.aprobado ? 'Aprobado' : 'Reprobado'}
+						</p>
+					{/if}
 					<p>
 						{asistente.nombre}
 						{asistente.apellido_paterno}

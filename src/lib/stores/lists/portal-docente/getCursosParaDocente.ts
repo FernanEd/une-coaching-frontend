@@ -16,11 +16,11 @@ export const getCursosParaDocente = (docenteID: number) => {
 	> = derived(
 		[cursosEnJornadaConInstructorConCurso, db_asistentesEnCurso, jornadaActual],
 		([cursos, asistentes, jornadaActual]) => {
+			if (!jornadaActual) return [];
+
 			let asistenciasDelDocente = asistentes.filter(
 				(a) => a.id_docente == docenteID
 			);
-
-			console.log(asistenciasDelDocente);
 
 			let cursosDeLaJornadaActual = cursos
 				.filter((c) => c.id_jornada == jornadaActual.id)

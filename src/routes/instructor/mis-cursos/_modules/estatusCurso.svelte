@@ -1,23 +1,48 @@
 <script lang="ts">
-	import { db_cursosEnJornada } from '$lib/stores/db';
+	import LoadingSpinner from '$lib/components/common/loadingSpinner.svelte';
+
+	import Modal from '$lib/components/common/modal.svelte';
+	import { db_asistentesEnCurso, db_cursosEnJornada } from '$lib/stores/db';
 	import type { AsistenteEnCursoConfirmado } from '$lib/stores/lists/jornada/asistentesEnCursoConfirmados';
 	import { prompts } from '$lib/stores/prompts';
 	import { toasts } from '$lib/stores/toasts';
+	import { handleError } from '$lib/utils/handleError';
 
 	export let cursoEnJornadaID: number | undefined;
 	export let alumnos: AsistenteEnCursoConfirmado[] | undefined = undefined;
 	export let isCompleted: boolean;
+	export let loading = false;
 
 	const closeCurso = async () => {
-		if (cursoEnJornadaID) {
+		if (cursoEnJornadaID && alumnos) {
+			let progress = 0;
+			loading = true;
+
 			try {
 				await db_cursosEnJornada.updateItem(cursoEnJornadaID, {
 					estado: 1,
 				});
+				progress = 1;
+				for (let alumno of alumnos) {
+					await db_asistentesEnCurso.updateItem(alumno.id, {
+						cursado: true,
+					});
+				}
+				progress = 2;
 				toasts.success();
 			} catch (e) {
-				console.log(e);
-				toasts.error();
+				handleError(e);
+			} finally {
+				if (progress == 1) {
+					try {
+						await db_cursosEnJornada.updateItem(cursoEnJornadaID, {
+							estado: 0,
+						});
+					} catch (e) {
+						handleError(e);
+					}
+				}
+				loading = false;
 			}
 		}
 	};
@@ -36,6 +61,15 @@
 		}
 	};
 </script>
+
+{#if loading}
+	<Modal isPopUp handleClose={() => {}}>
+		<dib class="p-4 flex flex-col gap-8 justify-center items-center">
+			Subiendo registros de docentes...
+			<LoadingSpinner />
+		</dib>
+	</Modal>
+{/if}
 
 <h2 class="heading mt-4">Estatus del curso</h2>
 

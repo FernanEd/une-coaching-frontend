@@ -18,7 +18,7 @@ const config = {
 			colors: {
 				une: {
 					red: '#A22E3E',
-					gold: '#D5AB43',
+					gold: '#B7833A',
 					green: '#207B5B',
 					purple: '#9862B1',
 					black: '#202020',

@@ -38,7 +38,9 @@
 
 {#if cursosJornada && $cursosJornada}
 	<h2 class="heading">Cursos ({$cursosJornada.length})</h2>
-	<p class="label">De la jornada {$jornadaActual.titulo}</p>
+	{#if $jornadaActual}
+		<p class="label">De la jornada {$jornadaActual.titulo}</p>
+	{/if}
 
 	<hr class="my-2 border-none" />
 

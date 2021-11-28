@@ -25,7 +25,6 @@
 		if (docentesSeleccionados.length > 0 && cursoEnJornada) {
 			try {
 				for (let docenteID of docentesSeleccionados) {
-					console.log('wooo');
 					await db_invitacionesCurso.addItem({
 						id_docente: docenteID,
 						id_cursojornada: cursoEnJornada.id,
