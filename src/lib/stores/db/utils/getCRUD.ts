@@ -4,6 +4,13 @@ import type { Writable } from 'svelte/store';
 import { getFakeID } from './getFakeID';
 import { tick } from 'svelte';
 
+export class ApiError extends Error {
+	constructor(message: string) {
+		super(message); // (1)
+		this.name = 'ApiError'; // (2)
+	}
+}
+
 export const getCRUD = <T extends { id: number }>(
 	store: Writable<T[]>,
 	route: string
@@ -19,9 +26,10 @@ export const getCRUD = <T extends { id: number }>(
 				credentials: 'include',
 			});
 
-			if (res.status >= 400) throw Error('Sin autorización');
-
 			let data: T[] = await res.json();
+			//@ts-ignore
+			if (!res.ok) throw new ApiError(data.error);
+
 			store.set(data);
 			return data;
 		} catch (e) {
@@ -62,14 +70,15 @@ export const getCRUD = <T extends { id: number }>(
 				body: JSON.stringify(itemContents),
 			});
 
-			if (res.status >= 400) throw Error('Sin autorización');
+			let data: T = await res.json();
+			//@ts-ignore
+			if (!res.ok) throw new ApiError(data.error);
 
-			let newItem: T = await res.json();
 			store.update((prev) =>
-				prev.map((item) => (item.id == fakeItemID ? newItem : item))
+				prev.map((item) => (item.id == fakeItemID ? data : item))
 			);
 
-			return newItem;
+			return data;
 		} catch (e) {
 			store.update((prev) => prev.filter((item) => item.id != fakeItemID));
 			throw e;
@@ -94,10 +103,12 @@ export const getCRUD = <T extends { id: number }>(
 				method: 'PUT',
 				body: JSON.stringify(itemContents),
 			});
-			if (res.status >= 400) throw Error('Sin autorización');
 
-			let updatedItem: T = await res.json();
-			return updatedItem;
+			let data: T = await res.json();
+			//@ts-ignore
+			if (!res.ok) throw new ApiError(data.error);
+
+			return data;
 		} catch (e) {
 			store.update((prev) =>
 				prev.map((item) => (item.id == id ? oldItem || item : item))
@@ -115,10 +126,11 @@ export const getCRUD = <T extends { id: number }>(
 				credentials: 'include',
 				method: 'DELETE',
 			});
-			if (res.status >= 400) throw Error('Sin autorización');
+			let data: T = await res.json();
+			//@ts-ignore
+			if (!res.ok) throw new ApiError(data.error);
 
-			let deletedItem: T = await res.json();
-			return deletedItem;
+			return data;
 		} catch (e) {
 			store.set(oldStore);
 			throw e;

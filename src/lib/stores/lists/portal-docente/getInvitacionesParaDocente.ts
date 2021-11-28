@@ -1,5 +1,5 @@
 import { db_cursosEnJornada, db_invitacionesCurso } from '$lib/stores/db';
-import type { InvitacionCurso } from '$lib/utils/types/db';
+import type { CursoEnJornada, InvitacionCurso } from '$lib/utils/types/db';
 import { derived } from 'svelte/store';
 import type { CursoConDiplomado } from '../cursosConDiplomado';
 import { cursosConDiplomado } from '../cursosConDiplomado';
@@ -7,6 +7,7 @@ import { instructoresComoUsuario } from '../instructoresComoUsuario';
 import type { InstructorComoUsuario } from '../instructoresComoUsuario';
 
 export interface InvitacionCursoConInstructorConCurso extends InvitacionCurso {
+	cursoJornada: CursoEnJornada;
 	curso: CursoConDiplomado;
 	instructor: InstructorComoUsuario | undefined;
 }
@@ -21,7 +22,7 @@ export const getInvitacionesParaDocente = (docenteID: number) =>
 		],
 		([invitaciones, cursos, instructores, cursosJornada]) =>
 			invitaciones
-				.filter((i) => i.id_docente == docenteID)
+				.filter((i) => i.id_docente == docenteID && i.estado_invitacion == 0)
 				.map((i) => {
 					const cursoJornadaDeLaInvitacion = cursosJornada.find(
 						(cJ) => cJ.id == i.id_cursojornada
@@ -43,6 +44,7 @@ export const getInvitacionesParaDocente = (docenteID: number) =>
 						...i,
 						curso: cursoDeLaInvitacion,
 						instructor: instructorDeLaInvitacion,
+						cursoJornada: cursoJornadaDeLaInvitacion,
 					};
 				})
 				.filter(

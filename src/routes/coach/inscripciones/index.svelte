@@ -26,7 +26,7 @@
 {#if !$inscribirModal}
 	{#if $jornadaActual}
 		<h2 class="heading">
-			{$jornadaActual.titulo}
+			Jornada {$jornadaActual.titulo}
 		</h2>
 
 		{#if dayjs(Date()).isAfter($jornadaActual.fecha_inscripcion_fin)}

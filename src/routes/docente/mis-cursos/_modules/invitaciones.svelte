@@ -1,20 +1,59 @@
 <script lang="ts">
-	import { db_invitacionesCurso } from '$lib/stores/db';
+	import { db_asistentesEnCurso, db_invitacionesCurso } from '$lib/stores/db';
 	import type { InvitacionCursoConInstructorConCurso } from '$lib/stores/lists/portal-docente/getInvitacionesParaDocente';
 	import { toasts } from '$lib/stores/toasts';
 
 	export let invitaciones: InvitacionCursoConInstructorConCurso[] | undefined;
+	export let docenteID: number | undefined;
 
-	const handleInvite = async (inviteID: number, accept: boolean) => {
-		try {
-			await db_invitacionesCurso.updateItem(inviteID, {
-				estado_invitacion: accept ? 1 : 2,
-			});
+	const handleInvite = async (
+		inviteID: number,
+		cursoJornadaID: number,
+		accept: boolean
+	) => {
+		if (docenteID) {
+			if (accept) {
+				let progress = 0;
+				try {
+					await db_invitacionesCurso.updateItem(inviteID, {
+						estado_invitacion: 1,
+					});
+					progress = 1;
+					await db_asistentesEnCurso.addItem({
+						id_docente: docenteID,
+						id_cursojornada: cursoJornadaID,
+						aprobado: false,
+						cursado: false,
+					});
+					progress = 2;
+					toasts.success();
+				} catch (e) {
+					console.error(e);
+					toasts.error();
+				} finally {
+					if (progress == 1) {
+						try {
+							await db_invitacionesCurso.updateItem(inviteID, {
+								estado_invitacion: 0,
+							});
+						} catch (e) {
+							console.error(e);
+							toasts.error();
+						}
+					}
+				}
+			} else {
+				try {
+					await db_invitacionesCurso.updateItem(inviteID, {
+						estado_invitacion: 2,
+					});
 
-			toasts.success();
-		} catch (e) {
-			console.error(e);
-			toasts.error();
+					toasts.success();
+				} catch (e) {
+					console.error(e);
+					toasts.error();
+				}
+			}
 		}
 	};
 </script>
@@ -59,13 +98,13 @@
 					<button
 						class="btn primary"
 						on:click={() => {
-							handleInvite(invitacion.id, true);
+							handleInvite(invitacion.id, invitacion.cursoJornada.id, true);
 						}}>Aceptar</button
 					>
 					<button
 						class="link"
 						on:click={() => {
-							handleInvite(invitacion.id, false);
+							handleInvite(invitacion.id, invitacion.cursoJornada.id, false);
 						}}>Rechazar</button
 					>
 				</div>

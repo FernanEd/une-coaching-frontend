@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { session } from '$app/stores';
 	import { docentesComoUsuarios } from '$lib/stores/lists/docentesComoUsuario';
+	import { jornadaActual } from '$lib/stores/lists/jornada/jornadaActual';
 	import {
 		CursoEnJornadaConCalificacion,
 		getCursosParaDocente,
@@ -30,14 +31,14 @@
 
 {#if invitaciones && $invitaciones}
 	{#if $invitaciones.length > 0}
-		<Invitaciones invitaciones={$invitaciones} />
+		<Invitaciones {docenteID} invitaciones={$invitaciones} />
+		<hr class="my-4 border-none" />
 	{/if}
 {/if}
 
-<hr class="my-4 border-none" />
-
 {#if cursosJornada && $cursosJornada}
 	<h2 class="heading">Cursos ({$cursosJornada.length})</h2>
+	<p class="label">De la jornada {$jornadaActual.titulo}</p>
 
 	<hr class="my-2 border-none" />
 

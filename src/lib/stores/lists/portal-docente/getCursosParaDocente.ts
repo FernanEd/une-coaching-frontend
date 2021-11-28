@@ -20,11 +20,13 @@ export const getCursosParaDocente = (docenteID: number) => {
 				(a) => a.id_docente == docenteID
 			);
 
+			console.log(asistenciasDelDocente);
+
 			let cursosDeLaJornadaActual = cursos
 				.filter((c) => c.id_jornada == jornadaActual.id)
 				.map((c) => {
 					const asisteACurso = asistenciasDelDocente.find(
-						(a) => a.id_cursojornada == c.id_jornada
+						(a) => a.id_cursojornada == c.id
 					);
 
 					if (!asisteACurso) return;

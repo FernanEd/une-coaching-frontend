@@ -9,10 +9,12 @@
 		db_instructores,
 		db_usuarios,
 	} from '$lib/stores/db';
+	import { ApiError } from '$lib/stores/db/utils/getCRUD';
 	import type { UsuarioConRoles } from '$lib/stores/lists/usuariosConRoles';
 	import { prompts } from '$lib/stores/prompts';
 	import { toasts } from '$lib/stores/toasts';
 	import { clearForm } from '$lib/utils/clearForm';
+	import { getErrorMsg } from '$lib/utils/getErrorMsg';
 	import { noUndefinedValues } from '$lib/utils/noUndefinedValues';
 	import type { Usuario } from '$lib/utils/types/db';
 	import type { MayBeUndefined } from '$lib/utils/types/forms';
@@ -119,15 +121,18 @@
 					}
 
 					toasts.success();
-				} catch (e) {
-					console.error(e);
-					toasts.error(
-						'Ha habido un error. Compruebe que no es una matricula duplicada'
-					);
+					form = clearForm(form);
+					rolesSeleccionados = [];
+				} catch (e: any) {
+					let msg = getErrorMsg(e);
+					if (msg) {
+						toasts.error(msg);
+					} else {
+						toasts.error(
+							'Ha habido un error. Compruebe que no es una matricula duplicada'
+						);
+					}
 				}
-
-				form = clearForm(form);
-				rolesSeleccionados = [];
 			}
 		}
 	};
