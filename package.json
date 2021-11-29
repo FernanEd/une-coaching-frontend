@@ -26,7 +26,6 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"@sveltejs/adapter-netlify": "^1.0.0-next.35",
 		"cookie": "^0.4.1",
 		"dayjs": "^1.10.7",
 		"svelte-icons": "^2.1.0"
