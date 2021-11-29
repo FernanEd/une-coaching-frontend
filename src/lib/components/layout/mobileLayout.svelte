@@ -39,7 +39,7 @@
 				<section class="flex flex-col gap-4 items-center">
 					<img
 						class="object-contain"
-						src="../../../static/une white logo.png"
+						src="/static/une-white-logo.png"
 						alt="Une logo"
 						id="logo"
 					/>
