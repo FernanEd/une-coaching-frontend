@@ -7,29 +7,27 @@ import {
 } from '$lib/stores/db';
 import type { Diplomado } from '$lib/utils/types/db';
 import { derived } from 'svelte/store';
-import type { Readable } from 'svelte/store';
-import {
-	CompetenciaConTipo,
-	competenciasConTipo,
-} from '../competenciasConTipo';
-import { CursoConDiplomado, cursosConDiplomado } from '../cursosConDiplomado';
+import type { CompetenciaConTipo } from '../competenciasConTipo';
+import { competenciasConTipo } from '../competenciasConTipo';
+import { cursosConDiplomado } from '../cursosConDiplomado';
+import type { CursoConDiplomado } from '../cursosConDiplomado';
 import { docentesComoUsuarios } from '../docentesComoUsuario';
 import { asistentesEnCursoConfirmados } from '../jornada/asistentesEnCursoConfirmados';
 import { cursosEnJornadaConInstructorConCurso } from '../jornada/cursosEnJornadaConInstructorConCurso';
 
-interface AcreditacionCurso extends CursoConDiplomado {
+export interface AcreditacionCurso extends CursoConDiplomado {
 	documento: string | undefined;
 }
 
-interface AcreditacionDiplomado extends Diplomado {
+export interface AcreditacionDiplomado extends Diplomado {
 	documento: string | undefined;
 }
 
-interface AcreditacionCompetencia extends CompetenciaConTipo {
+export interface AcreditacionCompetencia extends CompetenciaConTipo {
 	documento: string | undefined;
 }
 
-interface Acreditaciones {
+export interface Acreditaciones {
 	cursos: AcreditacionCurso[];
 	diplomados: AcreditacionDiplomado[];
 	competencias: AcreditacionCompetencia[];
@@ -129,11 +127,13 @@ export const getAcreditacionesParaDocente = (docenteID: number) =>
 							})
 							.filter((c): c is AcreditacionCompetencia => c != undefined);
 
-					return {
+					let acreditacionesDelDocente: Acreditaciones = {
 						cursos: cursosAcreditados,
 						diplomados: diplomadosAcreditados,
 						competencias: competenciasAcreditadas,
 					};
+
+					return acreditacionesDelDocente;
 				}
 		  )
 		: undefined;

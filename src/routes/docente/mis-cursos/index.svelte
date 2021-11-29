@@ -32,7 +32,7 @@
 {#if invitaciones && $invitaciones}
 	{#if $invitaciones.length > 0}
 		<Invitaciones {docenteID} invitaciones={$invitaciones} />
-		<hr class="my-4 border-none" />
+		<hr class="border my-12" />
 	{/if}
 {/if}
 
