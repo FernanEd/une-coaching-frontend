@@ -65,6 +65,12 @@
 
 	export let loading = true;
 
+	// console.log(
+	// 	import.meta.env.MODE == 'development'
+	// 		? 'http://localhost:8000'
+	// 		: 'https://pacific-brushlands-15935.herokuapp.com'
+	// );
+
 	onMount(async () => {
 		await db_usuarios.getItems();
 		await db_docentes.getItems();

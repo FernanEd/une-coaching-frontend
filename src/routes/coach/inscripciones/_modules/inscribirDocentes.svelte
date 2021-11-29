@@ -46,15 +46,15 @@
 <hr class="border-none my-2" />
 
 <form on:submit|preventDefault={handleSubmit}>
-	<span class="flex justify-between gap-8">
+	<span class="flex flex-col gap-4">
+		<button class="btn primary flex-1" on:click={() => {}}
+			>Invitar docentes
+		</button>
+
 		<div>
 			<p class="label">Busca un docente en particular</p>
 			<input type="text" bind:value={filterText} />
 		</div>
-
-		<button class="btn primary flex-1" on:click={() => {}}
-			>Invitar docentes
-		</button>
 	</span>
 
 	<hr class="border-none my-4" />

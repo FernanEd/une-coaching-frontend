@@ -34,7 +34,7 @@
 
 	let coordinadorID: number | undefined;
 	$: coordinadorID = $db_coordinadores.find(
-		(c) => c.id == $session.user.id
+		(c) => c.id_usuario == $session.user.id
 	)?.id;
 
 	const handleSubmit = async () => {
