@@ -4,10 +4,6 @@
 	import { capitalizeString } from '$lib/utils/capitalizeString';
 </script>
 
-<svelte:head>
-	<title>Home</title>
-</svelte:head>
-
 <section
 	class="absolute top-0 left-0 right-0 bottom-0
 	flex flex-col justify-center items-center
