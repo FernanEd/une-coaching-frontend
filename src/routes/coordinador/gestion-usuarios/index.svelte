@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { session } from '$app/stores';
-	import AcreditacionesDocente from '$lib/components/acreditacionesDocente/index.svelte';
+	import AcreditacionesDocente from '$lib/components/acreditaciones/acreditacionesDocente.svelte';
 	import Modal from '$lib/components/common/modal.svelte';
 	import { db_usuarios } from '$lib/stores/db';
 	import {

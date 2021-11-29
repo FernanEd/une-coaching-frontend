@@ -1,14 +1,10 @@
 <script lang="ts">
-	import type { AcreditacionCurso } from '$lib/stores/lists/portal-docente/getAcreditacionesParaDocente';
 	import type { Acreditaciones } from '$lib/stores/lists/portal-docente/getAcreditacionesParaDocente';
 	import { getAcreditacionesParaDocente } from '$lib/stores/lists/portal-docente/getAcreditacionesParaDocente';
 	import type { Readable } from 'svelte/store';
-	import { useModal } from '$lib/stores/useModal';
-	import { db_competencias, db_cursos, db_diplomados } from '$lib/stores/db';
-	import type { Curso, Diplomado } from '$lib/utils/types/db';
-	import Diplomados from './diplomados.svelte';
 	import Competencias from './competencias.svelte';
 	import Cursos from './cursos.svelte';
+	import Diplomados from './diplomados.svelte';
 
 	export let docenteID: number | undefined;
 	let acreditaciones: Readable<Acreditaciones | undefined> | undefined;

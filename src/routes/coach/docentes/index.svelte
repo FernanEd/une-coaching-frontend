@@ -8,7 +8,7 @@
 	import type { Readable } from 'svelte/store';
 	import { derived } from 'svelte/store';
 	import { db_docentesEnCoaches } from '$lib/stores/db';
-	import AcreditacionesDocente from '$lib/components/acreditacionesDocente/index.svelte';
+	import AcreditacionesDocente from '$lib/components/acreditaciones/acreditacionesDocente.svelte';
 	import { makeArraySearchable } from '$lib/utils/makeArraySearchable';
 
 	let docenteAcreditacionesDetalles = useModal();

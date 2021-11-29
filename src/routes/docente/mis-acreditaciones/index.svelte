@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { session } from '$app/stores';
-	import AcreditacionesDocente from '$lib/components/acreditacionesDocente/index.svelte';
-
+	import AcreditacionesDocente from '$lib/components/acreditaciones/acreditacionesDocente.svelte';
 	import { docentesComoUsuarios } from '$lib/stores/lists/docentesComoUsuario';
 
 	let docenteID: number | undefined;
