@@ -135,7 +135,7 @@
 										({ rol }) => rol == 'docente'
 									)?.id;
 									acreditacionesUsuarioModal.openModal();
-								}}>Ver acreditaciones</button
+								}}>Ver acreditaciones de docente</button
 							>
 						</p>
 					{/if}
