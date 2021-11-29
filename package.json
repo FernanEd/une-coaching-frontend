@@ -11,7 +11,7 @@
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-auto": "next",
-		"@sveltejs/adapter-netlify": "^1.0.0-next.35",
+		"@sveltejs/adapter-netlify": "1.0.0-next.19",
 		"@sveltejs/kit": "next",
 		"@types/cookie": "^0.4.1",
 		"autoprefixer": "^10.3.4",
