@@ -73,15 +73,7 @@
   dependencies:
     esbuild "^0.13.4"
 
-"@sveltejs/adapter-netlify@1.0.0-next.19":
-  version "1.0.0-next.19"
-  resolved "https://registry.yarnpkg.com/@sveltejs/adapter-netlify/-/adapter-netlify-1.0.0-next.19.tgz#be0a066518316cb732f59d644502d3e88e3fab89"
-  integrity sha512-MryVO+TT3xExspsvxcdpPjrzVwK3cCvRSC2y/Rd92HHheRO67qRVQ5ZzALkX5CP1wFBEFq+WntaA8pDVE+6rwg==
-  dependencies:
-    "@iarna/toml" "^2.2.5"
-    esbuild "^0.12.5"
-
-"@sveltejs/adapter-netlify@1.0.0-next.35":
+"@sveltejs/adapter-netlify@1.0.0-next.35", "@sveltejs/adapter-netlify@^1.0.0-next.35":
   version "1.0.0-next.35"
   resolved "https://registry.yarnpkg.com/@sveltejs/adapter-netlify/-/adapter-netlify-1.0.0-next.35.tgz#26302dc312d32702a7356d5152a2d21dc3f23389"
   integrity sha512-3PC1RaRReu652ot+LC9EOjkebnZehdwvUm0zhPC8OFPJJccQwq6Y1kbHDeACIIFRTaKLIRBpuYh3idP6ffUGdw==
@@ -682,11 +674,6 @@ esbuild-windows-arm64@0.13.15:
   version "0.13.15"
   resolved "https://registry.yarnpkg.com/esbuild-windows-arm64/-/esbuild-windows-arm64-0.13.15.tgz#482173070810df22a752c686509c370c3be3b3c3"
   integrity sha512-zzvyCVVpbwQQATaf3IG8mu1IwGEiDxKkYUdA4FpoCHi1KtPa13jeScYDjlW0Qh+ebWzpKfR2ZwvqAQkSWNcKjA==
-
-esbuild@^0.12.5:
-  version "0.12.29"
-  resolved "https://registry.yarnpkg.com/esbuild/-/esbuild-0.12.29.tgz#be602db7c4dc78944a9dbde0d1ea19d36c1f882d"
-  integrity sha512-w/XuoBCSwepyiZtIRsKsetiLDUVGPVw1E/R3VTFSecIy8UR7Cq3SOtwKHJMFoVqqVG36aGkzh4e8BvpO1Fdc7g==
 
 esbuild@^0.13.2, esbuild@^0.13.4:
   version "0.13.15"
