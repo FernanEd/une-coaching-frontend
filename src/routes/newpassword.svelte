@@ -1,10 +1,8 @@
 <script lang="ts">
 	import { session } from '$app/stores';
-
 	import Spinner from '$lib/components/common/spinner.svelte';
 	import { db_usuarios } from '$lib/stores/db';
 	import { toasts } from '$lib/stores/toasts';
-
 	import { writable } from 'svelte/store';
 
 	let loading = false;

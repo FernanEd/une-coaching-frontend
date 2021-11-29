@@ -1,5 +1,5 @@
-const preprocess = require('svelte-preprocess');
-const netlify = require('@sveltejs/adapter-netlify');
+import preprocess from 'svelte-preprocess';
+import netlify from '@sveltejs/adapter-netlify';
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
