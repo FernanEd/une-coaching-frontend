@@ -16,14 +16,14 @@
 	{#each $cursosConDiplomado as curso (curso.id)}
 		<article class="rounded-2xl shadow-fix text-center p-4 flex flex-col gap-8">
 			<div>
-				<span class="flex flex-gap4">
+				<span class="flex gap-1 justify-center">
 					{#if (cursoAcreditado = acreditaciones.cursos.find((c) => c.id == curso.id))}
 						{#if cursoAcreditado.cursado}
 							<p class="label text-status-success">Completado</p>
 						{:else}
 							<p class="label">No completado</p>
 						{/if}
-						y
+						<p class="label">y</p>
 						{#if cursoAcreditado.acreditado}
 							<p class="label text-status-success">Acreditado</p>
 						{:else}
