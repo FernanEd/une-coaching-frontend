@@ -4811,12 +4811,12 @@ var require_cookie = __commonJS({
   }
 });
 
-// .svelte-kit/output/server/chunks/stores-bc5c9a0c.js
+// .svelte-kit/output/server/chunks/stores-2ab46620.js
 var getStores, page, error, session;
-var init_stores_bc5c9a0c = __esm({
-  ".svelte-kit/output/server/chunks/stores-bc5c9a0c.js"() {
+var init_stores_2ab46620 = __esm({
+  ".svelte-kit/output/server/chunks/stores-2ab46620.js"() {
     init_shims();
-    init_app_648d86f1();
+    init_app_98a99c49();
     getStores = () => {
       const stores = getContext("__svelte__");
       return {
@@ -4855,19 +4855,19 @@ var init_stores_bc5c9a0c = __esm({
   }
 });
 
-// .svelte-kit/output/server/chunks/loadingSpinner-a3f71e99.js
+// .svelte-kit/output/server/chunks/loadingSpinner-280084c3.js
 var LoadingSpinner;
-var init_loadingSpinner_a3f71e99 = __esm({
-  ".svelte-kit/output/server/chunks/loadingSpinner-a3f71e99.js"() {
+var init_loadingSpinner_280084c3 = __esm({
+  ".svelte-kit/output/server/chunks/loadingSpinner-280084c3.js"() {
     init_shims();
-    init_app_648d86f1();
+    init_app_98a99c49();
     LoadingSpinner = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       return `<svg class="${"animate-spin -ml-1 mr-3 h-20 w-20 text-accent"}" xmlns="${"http://www.w3.org/2000/svg"}" fill="${"none"}" viewBox="${"0 0 24 24"}"><circle class="${"opacity-25"}" cx="${"12"}" cy="${"12"}" r="${"10"}" stroke="${"currentColor"}" stroke-width="${"4"}"></circle><path class="${"opacity-75"}" fill="${"currentColor"}" d="${"M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"}"></path></svg>`;
     });
   }
 });
 
-// .svelte-kit/output/server/chunks/index-91f839fc.js
+// .svelte-kit/output/server/chunks/index-7d160006.js
 function readable(value, start) {
   return {
     subscribe: writable(value, start).subscribe
@@ -4953,20 +4953,20 @@ function derived(stores, fn, initial_value) {
   });
 }
 var subscriber_queue;
-var init_index_91f839fc = __esm({
-  ".svelte-kit/output/server/chunks/index-91f839fc.js"() {
+var init_index_7d160006 = __esm({
+  ".svelte-kit/output/server/chunks/index-7d160006.js"() {
     init_shims();
-    init_app_648d86f1();
+    init_app_98a99c49();
     subscriber_queue = [];
   }
 });
 
-// .svelte-kit/output/server/chunks/prompts-dc3f6318.js
+// .svelte-kit/output/server/chunks/prompts-5bf8792b.js
 var prompts;
-var init_prompts_dc3f6318 = __esm({
-  ".svelte-kit/output/server/chunks/prompts-dc3f6318.js"() {
+var init_prompts_5bf8792b = __esm({
+  ".svelte-kit/output/server/chunks/prompts-5bf8792b.js"() {
     init_shims();
-    init_index_91f839fc();
+    init_index_7d160006();
     prompts = (() => {
       let store = writable();
       const showPrompt = (params) => {
@@ -4989,12 +4989,12 @@ var init_prompts_dc3f6318 = __esm({
   }
 });
 
-// .svelte-kit/output/server/chunks/toasts-62f37240.js
+// .svelte-kit/output/server/chunks/toasts-f6fa13c5.js
 var toasts;
-var init_toasts_62f37240 = __esm({
-  ".svelte-kit/output/server/chunks/toasts-62f37240.js"() {
+var init_toasts_f6fa13c5 = __esm({
+  ".svelte-kit/output/server/chunks/toasts-f6fa13c5.js"() {
     init_shims();
-    init_index_91f839fc();
+    init_index_7d160006();
     toasts = (() => {
       let id = 0;
       let store = writable([]);
@@ -5023,14 +5023,14 @@ var init_toasts_62f37240 = __esm({
   }
 });
 
-// .svelte-kit/output/server/chunks/toastArea-b7785619.js
+// .svelte-kit/output/server/chunks/toastArea-52f75dc6.js
 var css$1, IconBase, MdWarning, css, PromptArea, ToastArea;
-var init_toastArea_b7785619 = __esm({
-  ".svelte-kit/output/server/chunks/toastArea-b7785619.js"() {
+var init_toastArea_52f75dc6 = __esm({
+  ".svelte-kit/output/server/chunks/toastArea-52f75dc6.js"() {
     init_shims();
-    init_app_648d86f1();
-    init_prompts_dc3f6318();
-    init_toasts_62f37240();
+    init_app_98a99c49();
+    init_prompts_5bf8792b();
+    init_toasts_f6fa13c5();
     css$1 = {
       code: "svg.svelte-heylkm{stroke:currentColor;fill:currentColor;stroke-width:0;height:auto;max-height:100%;width:100%}",
       map: null
@@ -5082,7 +5082,7 @@ var init_toastArea_b7785619 = __esm({
   }
 });
 
-// .svelte-kit/output/server/chunks/index-9d95a6a7.js
+// .svelte-kit/output/server/chunks/index-168d5d68.js
 function makeDBStore(route) {
   let store = writable([]);
   let crud = getCRUD(store, route);
@@ -5092,11 +5092,11 @@ function makeDBStore(route) {
   };
 }
 var serverURL, getFakeID, ApiError, getCRUD, db_usuarios, db_docentes, db_coaches, db_instructores, db_administrativos, db_coordinadores, db_docentesEnCoaches, db_jornadas, db_cursosEnJornada, db_asistentesEnCurso, db_invitacionesCurso, db_registrosCompetencias, db_registrosCursos, db_registrosDiplomados, db_cursos, db_diplomados, db_competencias, db_tiposCompetencias;
-var init_index_9d95a6a7 = __esm({
-  ".svelte-kit/output/server/chunks/index-9d95a6a7.js"() {
+var init_index_168d5d68 = __esm({
+  ".svelte-kit/output/server/chunks/index-168d5d68.js"() {
     init_shims();
-    init_index_91f839fc();
-    init_app_648d86f1();
+    init_index_7d160006();
+    init_app_98a99c49();
     serverURL = "https://pacific-brushlands-15935.herokuapp.com";
     getFakeID = (() => {
       let currentID = 0.1;
@@ -5238,9 +5238,9 @@ var init_index_9d95a6a7 = __esm({
   }
 });
 
-// .svelte-kit/output/server/chunks/__layout-753ddf4d.js
-var layout_753ddf4d_exports = {};
-__export(layout_753ddf4d_exports, {
+// .svelte-kit/output/server/chunks/__layout-d124c969.js
+var layout_d124c969_exports = {};
+__export(layout_d124c969_exports, {
   default: () => _layout,
   load: () => load
 });
@@ -5260,18 +5260,18 @@ async function load({ page: page2, fetch: fetch2, session: session2, stuff }) {
   return goThrough;
 }
 var import_cookie, _layout;
-var init_layout_753ddf4d = __esm({
-  ".svelte-kit/output/server/chunks/__layout-753ddf4d.js"() {
+var init_layout_d124c969 = __esm({
+  ".svelte-kit/output/server/chunks/__layout-d124c969.js"() {
     init_shims();
-    init_app_648d86f1();
-    init_stores_bc5c9a0c();
-    init_loadingSpinner_a3f71e99();
-    init_toastArea_b7785619();
-    init_index_9d95a6a7();
+    init_app_98a99c49();
+    init_stores_2ab46620();
+    init_loadingSpinner_280084c3();
+    init_toastArea_52f75dc6();
+    init_index_168d5d68();
     import_cookie = __toModule(require_cookie());
-    init_prompts_dc3f6318();
-    init_index_91f839fc();
-    init_toasts_62f37240();
+    init_prompts_5bf8792b();
+    init_index_7d160006();
+    init_toasts_f6fa13c5();
     _layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let $session, $$unsubscribe_session;
       $$unsubscribe_session = subscribe(session, (value) => $session = value);
@@ -5290,9 +5290,9 @@ ${validate_component(PromptArea, "PromptArea").$$render($$result, {}, {}, {})}`;
   }
 });
 
-// .svelte-kit/output/server/chunks/error-d8b9c7da.js
-var error_d8b9c7da_exports = {};
-__export(error_d8b9c7da_exports, {
+// .svelte-kit/output/server/chunks/error-43e05216.js
+var error_43e05216_exports = {};
+__export(error_43e05216_exports, {
   default: () => Error2,
   load: () => load2
 });
@@ -5300,10 +5300,10 @@ function load2({ error: error3, status }) {
   return { props: { error: error3, status } };
 }
 var import_cookie2, Error2;
-var init_error_d8b9c7da = __esm({
-  ".svelte-kit/output/server/chunks/error-d8b9c7da.js"() {
+var init_error_43e05216 = __esm({
+  ".svelte-kit/output/server/chunks/error-43e05216.js"() {
     init_shims();
-    init_app_648d86f1();
+    init_app_98a99c49();
     import_cookie2 = __toModule(require_cookie());
     Error2 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let { status } = $$props;
@@ -5324,12 +5324,12 @@ ${error3.stack ? `<pre>${escape(error3.stack)}</pre>` : ``}`;
   }
 });
 
-// .svelte-kit/output/server/chunks/logoutButton-fc8dccce.js
+// .svelte-kit/output/server/chunks/logoutButton-f388af0b.js
 var LogoutButton;
-var init_logoutButton_fc8dccce = __esm({
-  ".svelte-kit/output/server/chunks/logoutButton-fc8dccce.js"() {
+var init_logoutButton_f388af0b = __esm({
+  ".svelte-kit/output/server/chunks/logoutButton-f388af0b.js"() {
     init_shims();
-    init_app_648d86f1();
+    init_app_98a99c49();
     LogoutButton = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       return `<button class="${"btn bg-white"}">Cerrar sesi\xF3n </button>`;
     });
@@ -5345,18 +5345,18 @@ var init_capitalizeString_bffa0771 = __esm({
   }
 });
 
-// .svelte-kit/output/server/chunks/index-34e5a335.js
-var index_34e5a335_exports = {};
-__export(index_34e5a335_exports, {
+// .svelte-kit/output/server/chunks/index-28ab3ff1.js
+var index_28ab3ff1_exports = {};
+__export(index_28ab3ff1_exports, {
   default: () => Routes
 });
 var import_cookie3, Routes;
-var init_index_34e5a335 = __esm({
-  ".svelte-kit/output/server/chunks/index-34e5a335.js"() {
+var init_index_28ab3ff1 = __esm({
+  ".svelte-kit/output/server/chunks/index-28ab3ff1.js"() {
     init_shims();
-    init_app_648d86f1();
-    init_stores_bc5c9a0c();
-    init_logoutButton_fc8dccce();
+    init_app_98a99c49();
+    init_stores_2ab46620();
+    init_logoutButton_f388af0b();
     init_capitalizeString_bffa0771();
     import_cookie3 = __toModule(require_cookie());
     Routes = create_ssr_component(($$result, $$props, $$bindings, slots) => {
@@ -5381,12 +5381,12 @@ var init_index_34e5a335 = __esm({
   }
 });
 
-// .svelte-kit/output/server/chunks/useModal-0f7e070e.js
+// .svelte-kit/output/server/chunks/useModal-93d55db3.js
 var useModal;
-var init_useModal_0f7e070e = __esm({
-  ".svelte-kit/output/server/chunks/useModal-0f7e070e.js"() {
+var init_useModal_93d55db3 = __esm({
+  ".svelte-kit/output/server/chunks/useModal-93d55db3.js"() {
     init_shims();
-    init_index_91f839fc();
+    init_index_7d160006();
     useModal = () => {
       let store = writable(false);
       return {
@@ -5405,15 +5405,15 @@ var init_useModal_0f7e070e = __esm({
   }
 });
 
-// .svelte-kit/output/server/chunks/mobileLayout-e45d2d82.js
+// .svelte-kit/output/server/chunks/mobileLayout-68fe5eba.js
 var css2, MobileLayout;
-var init_mobileLayout_e45d2d82 = __esm({
-  ".svelte-kit/output/server/chunks/mobileLayout-e45d2d82.js"() {
+var init_mobileLayout_68fe5eba = __esm({
+  ".svelte-kit/output/server/chunks/mobileLayout-68fe5eba.js"() {
     init_shims();
-    init_app_648d86f1();
-    init_stores_bc5c9a0c();
-    init_useModal_0f7e070e();
-    init_logoutButton_fc8dccce();
+    init_app_98a99c49();
+    init_stores_2ab46620();
+    init_useModal_93d55db3();
+    init_logoutButton_f388af0b();
     css2 = {
       code: ".menu-bg.svelte-q1q317{background:#00000040}#logo.svelte-q1q317{width:100px}aside.svelte-q1q317{width:250px}.menu-icon.svelte-q1q317{fill:#fff;height:40px;left:1rem;position:absolute;top:50%;transform:translateY(-50%);width:40px;z-index:0}.notch.svelte-q1q317{background:#00000040}.container.svelte-q1q317{margin-left:auto;margin-right:auto;max-width:28rem}.tab.svelte-q1q317{--tw-bg-opacity:1;--tw-text-opacity:1;align-items:center;background-color:rgba(234,234,234,var(--tw-bg-opacity));color:rgba(136,136,136,var(--tw-text-opacity));display:flex;flex:1 1 0%;font-weight:700;justify-content:center;padding:.5rem;text-align:center}.selected.svelte-q1q317{--tw-border-opacity:1;--tw-bg-opacity:1;--tw-text-opacity:1;background-color:rgba(255,255,255,var(--tw-bg-opacity));border-bottom-width:4px;border-color:rgba(70,118,211,var(--tw-border-opacity));color:rgba(70,118,211,var(--tw-text-opacity))}",
       map: null
@@ -5445,7 +5445,7 @@ var init_mobileLayout_e45d2d82 = __esm({
       $$unsubscribe_menuModal();
       $$unsubscribe_session();
       $$unsubscribe_page();
-      return `${$menuModal ? `<section class="${"fixed menu-bg w-screen h-screen z-10 svelte-q1q317"}"><aside class="${escape(bgColor) + " fixed left-0 top-0 bottom-0 py-8 px-4 flex flex-col gap-20 svelte-q1q317"}"><section class="${"flex flex-col gap-4 items-center text-center"}"><section class="${"flex flex-col gap-4 items-center"}"><img class="${"object-contain svelte-q1q317"}" src="${"../../../static/une white logo.png"}" alt="${"Une logo"}" id="${"logo"}"></section>
+      return `${$menuModal ? `<section class="${"fixed menu-bg w-screen h-screen z-10 svelte-q1q317"}"><aside class="${escape(bgColor) + " fixed left-0 top-0 bottom-0 py-8 px-4 flex flex-col gap-20 svelte-q1q317"}"><section class="${"flex flex-col gap-4 items-center text-center"}"><section class="${"flex flex-col gap-4 items-center"}"><img class="${"object-contain svelte-q1q317"}" src="${"/static/une-white-logo.png"}" alt="${"Une logo"}" id="${"logo"}"></section>
 				<p class="${"text-gray-100"}">Conectado como ${escape($session.user.nombre)}
 					${escape($session.user.apellido_paterno)}
 					${escape($session.user.apellido_materno)}</p>
@@ -5472,22 +5472,22 @@ var init_mobileLayout_e45d2d82 = __esm({
   }
 });
 
-// .svelte-kit/output/server/chunks/__layout-0e5aaf68.js
-var layout_0e5aaf68_exports = {};
-__export(layout_0e5aaf68_exports, {
+// .svelte-kit/output/server/chunks/__layout-573788f1.js
+var layout_573788f1_exports = {};
+__export(layout_573788f1_exports, {
   default: () => _layout2
 });
 var import_cookie4, _layout2;
-var init_layout_0e5aaf68 = __esm({
-  ".svelte-kit/output/server/chunks/__layout-0e5aaf68.js"() {
+var init_layout_573788f1 = __esm({
+  ".svelte-kit/output/server/chunks/__layout-573788f1.js"() {
     init_shims();
-    init_app_648d86f1();
-    init_mobileLayout_e45d2d82();
+    init_app_98a99c49();
+    init_mobileLayout_68fe5eba();
     import_cookie4 = __toModule(require_cookie());
-    init_stores_bc5c9a0c();
-    init_useModal_0f7e070e();
-    init_index_91f839fc();
-    init_logoutButton_fc8dccce();
+    init_stores_2ab46620();
+    init_useModal_93d55db3();
+    init_index_7d160006();
+    init_logoutButton_f388af0b();
     _layout2 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       return `${validate_component(MobileLayout, "MobileLayout").$$render($$result, {
         layoutHeading: "Portal Administrativo",
@@ -5500,16 +5500,16 @@ var init_layout_0e5aaf68 = __esm({
   }
 });
 
-// .svelte-kit/output/server/chunks/index-062dcc89.js
-var index_062dcc89_exports = {};
-__export(index_062dcc89_exports, {
+// .svelte-kit/output/server/chunks/index-289dd8c6.js
+var index_289dd8c6_exports = {};
+__export(index_289dd8c6_exports, {
   default: () => Administrativo
 });
 var import_cookie5, Administrativo;
-var init_index_062dcc89 = __esm({
-  ".svelte-kit/output/server/chunks/index-062dcc89.js"() {
+var init_index_289dd8c6 = __esm({
+  ".svelte-kit/output/server/chunks/index-289dd8c6.js"() {
     init_shims();
-    init_app_648d86f1();
+    init_app_98a99c49();
     import_cookie5 = __toModule(require_cookie());
     Administrativo = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       return `<p>hola</p>`;
@@ -5517,18 +5517,18 @@ var init_index_062dcc89 = __esm({
   }
 });
 
-// .svelte-kit/output/server/chunks/__layout-e34548b7.js
-var layout_e34548b7_exports = {};
-__export(layout_e34548b7_exports, {
+// .svelte-kit/output/server/chunks/__layout-e85482bd.js
+var layout_e85482bd_exports = {};
+__export(layout_e85482bd_exports, {
   default: () => _layout3
 });
 var import_cookie6, css3, _layout3;
-var init_layout_e34548b7 = __esm({
-  ".svelte-kit/output/server/chunks/__layout-e34548b7.js"() {
+var init_layout_e85482bd = __esm({
+  ".svelte-kit/output/server/chunks/__layout-e85482bd.js"() {
     init_shims();
-    init_app_648d86f1();
-    init_stores_bc5c9a0c();
-    init_logoutButton_fc8dccce();
+    init_app_98a99c49();
+    init_stores_2ab46620();
+    init_logoutButton_f388af0b();
     import_cookie6 = __toModule(require_cookie());
     css3 = {
       code: "#logo.svelte-1tc6c2v{width:100px}aside.svelte-1tc6c2v{width:250px}main.svelte-1tc6c2v{margin-left:250px}",
@@ -5574,7 +5574,7 @@ var init_layout_e34548b7 = __esm({
         $page.path.includes("/coordinador/gestion-registros") ? "text-neutral-300" : ""
       ].join(" ").trim()}" href="${"/coordinador/gestion-registros"}">Registros de acreditaciones</a></li></ul></nav></section>
 
-	<section class="${"flex flex-col gap-4 items-center"}"><img class="${"object-contain svelte-1tc6c2v"}" src="${"../../../static/une white logo.png"}" alt="${"Une logo"}" id="${"logo"}"></section></aside>
+	<section class="${"flex flex-col gap-4 items-center"}"><img class="${"object-contain svelte-1tc6c2v"}" src="${"/static/une-white-logo.png"}" alt="${"Une logo"}" id="${"logo"}"></section></aside>
 
 <main class="${"py-8 px-4 svelte-1tc6c2v"}">${slots.default ? slots.default({}) : ``}
 </main>`;
@@ -5596,16 +5596,16 @@ var init_navigation_0a4806ec = __esm({
   }
 });
 
-// .svelte-kit/output/server/chunks/index-9e9716a5.js
-var index_9e9716a5_exports = {};
-__export(index_9e9716a5_exports, {
+// .svelte-kit/output/server/chunks/index-0479f95f.js
+var index_0479f95f_exports = {};
+__export(index_0479f95f_exports, {
   default: () => Coordinador
 });
 var import_cookie7, Coordinador;
-var init_index_9e9716a5 = __esm({
-  ".svelte-kit/output/server/chunks/index-9e9716a5.js"() {
+var init_index_0479f95f = __esm({
+  ".svelte-kit/output/server/chunks/index-0479f95f.js"() {
     init_shims();
-    init_app_648d86f1();
+    init_app_98a99c49();
     init_navigation_0a4806ec();
     import_cookie7 = __toModule(require_cookie());
     Coordinador = create_ssr_component(($$result, $$props, $$bindings, slots) => {
@@ -5615,17 +5615,17 @@ var init_index_9e9716a5 = __esm({
   }
 });
 
-// .svelte-kit/output/server/chunks/__layout-99075d10.js
-var layout_99075d10_exports = {};
-__export(layout_99075d10_exports, {
+// .svelte-kit/output/server/chunks/__layout-38b304b7.js
+var layout_38b304b7_exports = {};
+__export(layout_38b304b7_exports, {
   default: () => _layout4
 });
 var import_cookie8, _layout4;
-var init_layout_99075d10 = __esm({
-  ".svelte-kit/output/server/chunks/__layout-99075d10.js"() {
+var init_layout_38b304b7 = __esm({
+  ".svelte-kit/output/server/chunks/__layout-38b304b7.js"() {
     init_shims();
-    init_app_648d86f1();
-    init_stores_bc5c9a0c();
+    init_app_98a99c49();
+    init_stores_2ab46620();
     import_cookie8 = __toModule(require_cookie());
     _layout4 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let $page, $$unsubscribe_page;
@@ -5649,16 +5649,16 @@ ${slots.default ? slots.default({}) : ``}`;
   }
 });
 
-// .svelte-kit/output/server/chunks/index-a5c764ad.js
-var index_a5c764ad_exports = {};
-__export(index_a5c764ad_exports, {
+// .svelte-kit/output/server/chunks/index-795688c6.js
+var index_795688c6_exports = {};
+__export(index_795688c6_exports, {
   default: () => Estructurar_diplomados_competencias
 });
 var import_cookie9, Estructurar_diplomados_competencias;
-var init_index_a5c764ad = __esm({
-  ".svelte-kit/output/server/chunks/index-a5c764ad.js"() {
+var init_index_795688c6 = __esm({
+  ".svelte-kit/output/server/chunks/index-795688c6.js"() {
     init_shims();
-    init_app_648d86f1();
+    init_app_98a99c49();
     init_navigation_0a4806ec();
     import_cookie9 = __toModule(require_cookie());
     Estructurar_diplomados_competencias = create_ssr_component(($$result, $$props, $$bindings, slots) => {
@@ -5668,12 +5668,12 @@ var init_index_a5c764ad = __esm({
   }
 });
 
-// .svelte-kit/output/server/chunks/modal-8e58b549.js
+// .svelte-kit/output/server/chunks/modal-00427b46.js
 var css4, Modal;
-var init_modal_8e58b549 = __esm({
-  ".svelte-kit/output/server/chunks/modal-8e58b549.js"() {
+var init_modal_00427b46 = __esm({
+  ".svelte-kit/output/server/chunks/modal-00427b46.js"() {
     init_shims();
-    init_app_648d86f1();
+    init_app_98a99c49();
     css4 = {
       code: ".modal-bg.svelte-d8kk8b{align-items:center;background:#00000088;bottom:0;display:flex;justify-content:center;left:0;position:fixed;right:0;top:0;z-index:10}.modal.svelte-d8kk8b{--tw-bg-opacity:1;--tw-shadow:0 10px 15px -3px rgba(0,0,0,.1),0 4px 6px -2px rgba(0,0,0,.05);background-color:rgba(255,255,255,var(--tw-bg-opacity));border-radius:.25rem;box-shadow:var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow);margin-top:-8rem;max-height:70vh;min-width:24rem;overflow:auto;padding:1rem}.modal-header.svelte-d8kk8b{display:flex;justify-content:flex-end}",
       map: null
@@ -5694,13 +5694,13 @@ var init_modal_8e58b549 = __esm({
   }
 });
 
-// .svelte-kit/output/server/chunks/competenciasConTipo-85cbff0e.js
+// .svelte-kit/output/server/chunks/competenciasConTipo-8197e59f.js
 var competenciasConTipo;
-var init_competenciasConTipo_85cbff0e = __esm({
-  ".svelte-kit/output/server/chunks/competenciasConTipo-85cbff0e.js"() {
+var init_competenciasConTipo_8197e59f = __esm({
+  ".svelte-kit/output/server/chunks/competenciasConTipo-8197e59f.js"() {
     init_shims();
-    init_index_91f839fc();
-    init_index_9d95a6a7();
+    init_index_7d160006();
+    init_index_168d5d68();
     competenciasConTipo = derived([db_competencias, db_tiposCompetencias], ([competencias, tipoCompetencias]) => competencias.map((c) => {
       const tipoDeLaCompetencia = tipoCompetencias.find((t) => t.id == c.id_tipo);
       return {
@@ -5725,25 +5725,25 @@ var init_makeArraySearchable_f17ce08a = __esm({
   }
 });
 
-// .svelte-kit/output/server/chunks/index-fb667e80.js
-var index_fb667e80_exports = {};
-__export(index_fb667e80_exports, {
+// .svelte-kit/output/server/chunks/index-54d549ec.js
+var index_54d549ec_exports = {};
+__export(index_54d549ec_exports, {
   default: () => Competencias
 });
 var import_cookie10, CompetenciaForm, GestionTiposCompetencia, Competencias;
-var init_index_fb667e80 = __esm({
-  ".svelte-kit/output/server/chunks/index-fb667e80.js"() {
+var init_index_54d549ec = __esm({
+  ".svelte-kit/output/server/chunks/index-54d549ec.js"() {
     init_shims();
-    init_app_648d86f1();
-    init_modal_8e58b549();
-    init_index_9d95a6a7();
-    init_competenciasConTipo_85cbff0e();
-    init_prompts_dc3f6318();
-    init_toasts_62f37240();
-    init_useModal_0f7e070e();
+    init_app_98a99c49();
+    init_modal_00427b46();
+    init_index_168d5d68();
+    init_competenciasConTipo_8197e59f();
+    init_prompts_5bf8792b();
+    init_toasts_f6fa13c5();
+    init_useModal_93d55db3();
     init_makeArraySearchable_f17ce08a();
     import_cookie10 = __toModule(require_cookie());
-    init_index_91f839fc();
+    init_index_7d160006();
     CompetenciaForm = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let $db_tiposCompetencias, $$unsubscribe_db_tiposCompetencias;
       $$unsubscribe_db_tiposCompetencias = subscribe(db_tiposCompetencias, (value) => $db_tiposCompetencias = value);
@@ -5857,13 +5857,13 @@ ${$competenciasConTipo.length == 0 ? `<p>No hay competencias registradas a\xFAn.
   }
 });
 
-// .svelte-kit/output/server/chunks/cursosConDiplomado-92710756.js
+// .svelte-kit/output/server/chunks/cursosConDiplomado-8194bc31.js
 var cursosConDiplomado;
-var init_cursosConDiplomado_92710756 = __esm({
-  ".svelte-kit/output/server/chunks/cursosConDiplomado-92710756.js"() {
+var init_cursosConDiplomado_8194bc31 = __esm({
+  ".svelte-kit/output/server/chunks/cursosConDiplomado-8194bc31.js"() {
     init_shims();
-    init_index_91f839fc();
-    init_index_9d95a6a7();
+    init_index_7d160006();
+    init_index_168d5d68();
     cursosConDiplomado = derived([db_cursos, db_diplomados], ([cursos, diplomados]) => cursos.map((c) => {
       const diplomadoDelCurso = diplomados.find((d) => d.id == c.id_diplomado);
       return {
@@ -5874,25 +5874,25 @@ var init_cursosConDiplomado_92710756 = __esm({
   }
 });
 
-// .svelte-kit/output/server/chunks/index-33d0aa71.js
-var index_33d0aa71_exports = {};
-__export(index_33d0aa71_exports, {
+// .svelte-kit/output/server/chunks/index-0b13e240.js
+var index_0b13e240_exports = {};
+__export(index_0b13e240_exports, {
   default: () => Cursos
 });
 var import_cookie11, CursoForm, GestionDiplomados, Cursos;
-var init_index_33d0aa71 = __esm({
-  ".svelte-kit/output/server/chunks/index-33d0aa71.js"() {
+var init_index_0b13e240 = __esm({
+  ".svelte-kit/output/server/chunks/index-0b13e240.js"() {
     init_shims();
-    init_app_648d86f1();
-    init_modal_8e58b549();
-    init_index_9d95a6a7();
-    init_cursosConDiplomado_92710756();
-    init_prompts_dc3f6318();
-    init_toasts_62f37240();
-    init_useModal_0f7e070e();
+    init_app_98a99c49();
+    init_modal_00427b46();
+    init_index_168d5d68();
+    init_cursosConDiplomado_8194bc31();
+    init_prompts_5bf8792b();
+    init_toasts_f6fa13c5();
+    init_useModal_93d55db3();
     init_makeArraySearchable_f17ce08a();
     import_cookie11 = __toModule(require_cookie());
-    init_index_91f839fc();
+    init_index_7d160006();
     CursoForm = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let $db_diplomados, $$unsubscribe_db_diplomados;
       $$unsubscribe_db_diplomados = subscribe(db_diplomados, (value) => $db_diplomados = value);
@@ -6008,13 +6008,13 @@ ${$cursosConDiplomado.length == 0 ? `<p>No hay cursos registrados a\xFAn.</p>` :
   }
 });
 
-// .svelte-kit/output/server/chunks/coachesComoUsuario-f500f2a9.js
+// .svelte-kit/output/server/chunks/coachesComoUsuario-e69e8594.js
 var coachesComoUsuarios;
-var init_coachesComoUsuario_f500f2a9 = __esm({
-  ".svelte-kit/output/server/chunks/coachesComoUsuario-f500f2a9.js"() {
+var init_coachesComoUsuario_e69e8594 = __esm({
+  ".svelte-kit/output/server/chunks/coachesComoUsuario-e69e8594.js"() {
     init_shims();
-    init_index_91f839fc();
-    init_index_9d95a6a7();
+    init_index_7d160006();
+    init_index_168d5d68();
     coachesComoUsuarios = derived([db_usuarios, db_coaches], ([usuarios, coaches]) => coaches.map((c) => {
       const usuario = usuarios.find((u) => u.id == c.id_usuario);
       if (!usuario)
@@ -6027,13 +6027,13 @@ var init_coachesComoUsuario_f500f2a9 = __esm({
   }
 });
 
-// .svelte-kit/output/server/chunks/docentesComoUsuario-dbf52d99.js
+// .svelte-kit/output/server/chunks/docentesComoUsuario-aced7377.js
 var docentesComoUsuarios;
-var init_docentesComoUsuario_dbf52d99 = __esm({
-  ".svelte-kit/output/server/chunks/docentesComoUsuario-dbf52d99.js"() {
+var init_docentesComoUsuario_aced7377 = __esm({
+  ".svelte-kit/output/server/chunks/docentesComoUsuario-aced7377.js"() {
     init_shims();
-    init_index_91f839fc();
-    init_index_9d95a6a7();
+    init_index_7d160006();
+    init_index_168d5d68();
     docentesComoUsuarios = derived([db_usuarios, db_docentes], ([usuarios, docentes]) => docentes.map((c) => {
       const usuario = usuarios.find((u) => u.id == c.id_usuario);
       if (!usuario)
@@ -6046,24 +6046,24 @@ var init_docentesComoUsuario_dbf52d99 = __esm({
   }
 });
 
-// .svelte-kit/output/server/chunks/index-d5283307.js
-var index_d5283307_exports = {};
-__export(index_d5283307_exports, {
+// .svelte-kit/output/server/chunks/index-43de6d26.js
+var index_43de6d26_exports = {};
+__export(index_43de6d26_exports, {
   default: () => Coordinar_coaches
 });
 var import_cookie12, coachesConDocentes, GestionarDocentesEnCoaches, ListaDocentesAsignadosACoach, Coordinar_coaches;
-var init_index_d5283307 = __esm({
-  ".svelte-kit/output/server/chunks/index-d5283307.js"() {
+var init_index_43de6d26 = __esm({
+  ".svelte-kit/output/server/chunks/index-43de6d26.js"() {
     init_shims();
-    init_app_648d86f1();
-    init_modal_8e58b549();
-    init_index_91f839fc();
-    init_index_9d95a6a7();
-    init_coachesComoUsuario_f500f2a9();
-    init_docentesComoUsuario_dbf52d99();
-    init_useModal_0f7e070e();
+    init_app_98a99c49();
+    init_modal_00427b46();
+    init_index_7d160006();
+    init_index_168d5d68();
+    init_coachesComoUsuario_e69e8594();
+    init_docentesComoUsuario_aced7377();
+    init_useModal_93d55db3();
     init_makeArraySearchable_f17ce08a();
-    init_toasts_62f37240();
+    init_toasts_f6fa13c5();
     import_cookie12 = __toModule(require_cookie());
     coachesConDocentes = derived([coachesComoUsuarios, docentesComoUsuarios, db_docentesEnCoaches], ([coaches, docentes, docentesEnCoaches]) => coaches.map((c) => {
       const docentesEnEsteCoach = docentesEnCoaches.filter((r) => r.id_coach == c.id_coach);
@@ -6395,12 +6395,12 @@ var require_dayjs_min = __commonJS({
   }
 });
 
-// .svelte-kit/output/server/chunks/formatDate-799184b4.js
+// .svelte-kit/output/server/chunks/formatDate-f421f43f.js
 var import_dayjs, SearchableInput, formatDate;
-var init_formatDate_799184b4 = __esm({
-  ".svelte-kit/output/server/chunks/formatDate-799184b4.js"() {
+var init_formatDate_f421f43f = __esm({
+  ".svelte-kit/output/server/chunks/formatDate-f421f43f.js"() {
     init_shims();
-    init_app_648d86f1();
+    init_app_98a99c49();
     import_dayjs = __toModule(require_dayjs_min());
     SearchableInput = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let { selected = null } = $$props;
@@ -6438,13 +6438,13 @@ ${``}
   }
 });
 
-// .svelte-kit/output/server/chunks/usuariosConRoles-0654214b.js
+// .svelte-kit/output/server/chunks/usuariosConRoles-37d6f775.js
 var usuariosConRoles;
-var init_usuariosConRoles_0654214b = __esm({
-  ".svelte-kit/output/server/chunks/usuariosConRoles-0654214b.js"() {
+var init_usuariosConRoles_37d6f775 = __esm({
+  ".svelte-kit/output/server/chunks/usuariosConRoles-37d6f775.js"() {
     init_shims();
-    init_index_91f839fc();
-    init_index_9d95a6a7();
+    init_index_7d160006();
+    init_index_168d5d68();
     usuariosConRoles = derived([
       db_usuarios,
       db_docentes,
@@ -6499,28 +6499,28 @@ var init_usuariosConRoles_0654214b = __esm({
   }
 });
 
-// .svelte-kit/output/server/chunks/index-388a53b1.js
-var index_388a53b1_exports = {};
-__export(index_388a53b1_exports, {
+// .svelte-kit/output/server/chunks/index-de1fe1bd.js
+var index_de1fe1bd_exports = {};
+__export(index_de1fe1bd_exports, {
   default: () => Gestion_registros
 });
 var import_dayjs2, import_cookie13, coordinadoresComoUsuario, registrosCompetenciaConAcreditor, registrosCursoConAcreditor, registrosDiplomadoConAcreditor, registrosAcreditaciones, RegistroForm, Gestion_registros;
-var init_index_388a53b1 = __esm({
-  ".svelte-kit/output/server/chunks/index-388a53b1.js"() {
+var init_index_de1fe1bd = __esm({
+  ".svelte-kit/output/server/chunks/index-de1fe1bd.js"() {
     init_shims();
-    init_app_648d86f1();
-    init_modal_8e58b549();
-    init_index_9d95a6a7();
-    init_index_91f839fc();
-    init_docentesComoUsuario_dbf52d99();
-    init_competenciasConTipo_85cbff0e();
-    init_cursosConDiplomado_92710756();
-    init_prompts_dc3f6318();
-    init_useModal_0f7e070e();
-    init_stores_bc5c9a0c();
-    init_formatDate_799184b4();
-    init_usuariosConRoles_0654214b();
-    init_toasts_62f37240();
+    init_app_98a99c49();
+    init_modal_00427b46();
+    init_index_168d5d68();
+    init_index_7d160006();
+    init_docentesComoUsuario_aced7377();
+    init_competenciasConTipo_8197e59f();
+    init_cursosConDiplomado_8194bc31();
+    init_prompts_5bf8792b();
+    init_useModal_93d55db3();
+    init_stores_2ab46620();
+    init_formatDate_f421f43f();
+    init_usuariosConRoles_37d6f775();
+    init_toasts_f6fa13c5();
     import_dayjs2 = __toModule(require_dayjs_min());
     import_cookie13 = __toModule(require_cookie());
     coordinadoresComoUsuario = derived([db_usuarios, db_coordinadores], ([usuarios, coordinadores]) => coordinadores.map((c) => {
@@ -6745,14 +6745,14 @@ ${$editarRegistroForm ? `${validate_component(Modal, "Modal").$$render($$result,
   }
 });
 
-// .svelte-kit/output/server/chunks/cursosEnJornadaConInstructorConCurso-cb560969.js
+// .svelte-kit/output/server/chunks/cursosEnJornadaConInstructorConCurso-eef56ccb.js
 var instructoresComoUsuario, cursosEnJornadaConInstructorConCurso;
-var init_cursosEnJornadaConInstructorConCurso_cb560969 = __esm({
-  ".svelte-kit/output/server/chunks/cursosEnJornadaConInstructorConCurso-cb560969.js"() {
+var init_cursosEnJornadaConInstructorConCurso_eef56ccb = __esm({
+  ".svelte-kit/output/server/chunks/cursosEnJornadaConInstructorConCurso-eef56ccb.js"() {
     init_shims();
-    init_index_9d95a6a7();
-    init_index_91f839fc();
-    init_cursosConDiplomado_92710756();
+    init_index_168d5d68();
+    init_index_7d160006();
+    init_cursosConDiplomado_8194bc31();
     instructoresComoUsuario = derived([db_usuarios, db_instructores], ([usuarios, instructores]) => instructores.map((c) => {
       const usuario = usuarios.find((u) => u.id == c.id_usuario);
       if (!usuario)
@@ -6783,14 +6783,14 @@ var init_cursosEnJornadaConInstructorConCurso_cb560969 = __esm({
   }
 });
 
-// .svelte-kit/output/server/chunks/asistentesEnCursoConfirmados-099159a6.js
+// .svelte-kit/output/server/chunks/asistentesEnCursoConfirmados-fdb9bf69.js
 var asistentesEnCursoConfirmados;
-var init_asistentesEnCursoConfirmados_099159a6 = __esm({
-  ".svelte-kit/output/server/chunks/asistentesEnCursoConfirmados-099159a6.js"() {
+var init_asistentesEnCursoConfirmados_fdb9bf69 = __esm({
+  ".svelte-kit/output/server/chunks/asistentesEnCursoConfirmados-fdb9bf69.js"() {
     init_shims();
-    init_index_91f839fc();
-    init_docentesComoUsuario_dbf52d99();
-    init_index_9d95a6a7();
+    init_index_7d160006();
+    init_docentesComoUsuario_aced7377();
+    init_index_168d5d68();
     asistentesEnCursoConfirmados = derived([db_asistentesEnCurso, docentesComoUsuarios], ([asistentes, docentes]) => asistentes.map((a) => {
       const docenteAsistente = docentes.find((d) => d.id_docente == a.id_docente);
       if (!docenteAsistente)
@@ -6803,15 +6803,15 @@ var init_asistentesEnCursoConfirmados_099159a6 = __esm({
   }
 });
 
-// .svelte-kit/output/server/chunks/cursosEnJornadaConAsistentes-c73643ab.js
+// .svelte-kit/output/server/chunks/cursosEnJornadaConAsistentes-8cd3f57e.js
 var cursosEnJornadaConAsistentes;
-var init_cursosEnJornadaConAsistentes_c73643ab = __esm({
-  ".svelte-kit/output/server/chunks/cursosEnJornadaConAsistentes-c73643ab.js"() {
+var init_cursosEnJornadaConAsistentes_8cd3f57e = __esm({
+  ".svelte-kit/output/server/chunks/cursosEnJornadaConAsistentes-8cd3f57e.js"() {
     init_shims();
-    init_index_91f839fc();
-    init_cursosEnJornadaConInstructorConCurso_cb560969();
-    init_docentesComoUsuario_dbf52d99();
-    init_asistentesEnCursoConfirmados_099159a6();
+    init_index_7d160006();
+    init_cursosEnJornadaConInstructorConCurso_eef56ccb();
+    init_docentesComoUsuario_aced7377();
+    init_asistentesEnCursoConfirmados_fdb9bf69();
     cursosEnJornadaConAsistentes = derived([cursosEnJornadaConInstructorConCurso, asistentesEnCursoConfirmados], ([cursosJornada, asistentes]) => cursosJornada.map((cJ) => {
       return {
         ...cJ,
@@ -6821,33 +6821,33 @@ var init_cursosEnJornadaConAsistentes_c73643ab = __esm({
   }
 });
 
-// .svelte-kit/output/server/chunks/index-520f7598.js
-var index_520f7598_exports = {};
-__export(index_520f7598_exports, {
+// .svelte-kit/output/server/chunks/index-ec980982.js
+var index_ec980982_exports = {};
+__export(index_ec980982_exports, {
   default: () => Gestion_jornadas
 });
 var import_dayjs3, import_cookie14, CursoJornadaForm, format2, DateInput, GestionJornadas, jornadaSeleccionada, ListaAsistentes, Gestion_jornadas;
-var init_index_520f7598 = __esm({
-  ".svelte-kit/output/server/chunks/index-520f7598.js"() {
+var init_index_ec980982 = __esm({
+  ".svelte-kit/output/server/chunks/index-ec980982.js"() {
     init_shims();
-    init_app_648d86f1();
-    init_modal_8e58b549();
-    init_index_9d95a6a7();
-    init_cursosEnJornadaConAsistentes_c73643ab();
-    init_prompts_dc3f6318();
-    init_toasts_62f37240();
-    init_useModal_0f7e070e();
-    init_formatDate_799184b4();
-    init_competenciasConTipo_85cbff0e();
-    init_cursosConDiplomado_92710756();
-    init_docentesComoUsuario_dbf52d99();
-    init_cursosEnJornadaConInstructorConCurso_cb560969();
-    init_usuariosConRoles_0654214b();
+    init_app_98a99c49();
+    init_modal_00427b46();
+    init_index_168d5d68();
+    init_cursosEnJornadaConAsistentes_8cd3f57e();
+    init_prompts_5bf8792b();
+    init_toasts_f6fa13c5();
+    init_useModal_93d55db3();
+    init_formatDate_f421f43f();
+    init_competenciasConTipo_8197e59f();
+    init_cursosConDiplomado_8194bc31();
+    init_docentesComoUsuario_aced7377();
+    init_cursosEnJornadaConInstructorConCurso_eef56ccb();
+    init_usuariosConRoles_37d6f775();
     import_dayjs3 = __toModule(require_dayjs_min());
-    init_index_91f839fc();
+    init_index_7d160006();
     init_makeArraySearchable_f17ce08a();
     import_cookie14 = __toModule(require_cookie());
-    init_asistentesEnCursoConfirmados_099159a6();
+    init_asistentesEnCursoConfirmados_fdb9bf69();
     CursoJornadaForm = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let $cursosConDiplomado, $$unsubscribe_cursosConDiplomado;
       let $instructoresComoUsuario, $$unsubscribe_instructoresComoUsuario;
@@ -7154,20 +7154,20 @@ ${!currentJornada ? `<p>No hay jornada seleccionada a\xFAn.</p>` : `${cursosJorn
   }
 });
 
-// .svelte-kit/output/server/chunks/index-812c53f9.js
+// .svelte-kit/output/server/chunks/index-85a65997.js
 var getAcreditacionesParaDocente, Diplomados, AcreditacionesDocente;
-var init_index_812c53f9 = __esm({
-  ".svelte-kit/output/server/chunks/index-812c53f9.js"() {
+var init_index_85a65997 = __esm({
+  ".svelte-kit/output/server/chunks/index-85a65997.js"() {
     init_shims();
-    init_app_648d86f1();
-    init_index_9d95a6a7();
-    init_index_91f839fc();
-    init_competenciasConTipo_85cbff0e();
-    init_cursosConDiplomado_92710756();
-    init_docentesComoUsuario_dbf52d99();
-    init_asistentesEnCursoConfirmados_099159a6();
-    init_cursosEnJornadaConInstructorConCurso_cb560969();
-    init_useModal_0f7e070e();
+    init_app_98a99c49();
+    init_index_168d5d68();
+    init_index_7d160006();
+    init_competenciasConTipo_8197e59f();
+    init_cursosConDiplomado_8194bc31();
+    init_docentesComoUsuario_aced7377();
+    init_asistentesEnCursoConfirmados_fdb9bf69();
+    init_cursosEnJornadaConInstructorConCurso_eef56ccb();
+    init_useModal_93d55db3();
     getAcreditacionesParaDocente = (docenteID) => docenteID ? derived([
       cursosConDiplomado,
       db_diplomados,
@@ -7319,33 +7319,33 @@ ${!$cursosDeDiplomadoModal ? `<h2 class="${"heading"}">Diplomados</h2>
   }
 });
 
-// .svelte-kit/output/server/chunks/index-eec71471.js
-var index_eec71471_exports = {};
-__export(index_eec71471_exports, {
+// .svelte-kit/output/server/chunks/index-1663b660.js
+var index_1663b660_exports = {};
+__export(index_1663b660_exports, {
   default: () => Gestion_usuarios
 });
 var import_cookie15, UsuarioForm, Gestion_usuarios;
-var init_index_eec71471 = __esm({
-  ".svelte-kit/output/server/chunks/index-eec71471.js"() {
+var init_index_1663b660 = __esm({
+  ".svelte-kit/output/server/chunks/index-1663b660.js"() {
     init_shims();
-    init_app_648d86f1();
-    init_stores_bc5c9a0c();
-    init_index_812c53f9();
-    init_modal_8e58b549();
-    init_index_9d95a6a7();
-    init_usuariosConRoles_0654214b();
-    init_prompts_dc3f6318();
-    init_toasts_62f37240();
-    init_useModal_0f7e070e();
+    init_app_98a99c49();
+    init_stores_2ab46620();
+    init_index_85a65997();
+    init_modal_00427b46();
+    init_index_168d5d68();
+    init_usuariosConRoles_37d6f775();
+    init_prompts_5bf8792b();
+    init_toasts_f6fa13c5();
+    init_useModal_93d55db3();
     init_capitalizeString_bffa0771();
     init_makeArraySearchable_f17ce08a();
     import_cookie15 = __toModule(require_cookie());
-    init_index_91f839fc();
-    init_competenciasConTipo_85cbff0e();
-    init_cursosConDiplomado_92710756();
-    init_docentesComoUsuario_dbf52d99();
-    init_asistentesEnCursoConfirmados_099159a6();
-    init_cursosEnJornadaConInstructorConCurso_cb560969();
+    init_index_7d160006();
+    init_competenciasConTipo_8197e59f();
+    init_cursosConDiplomado_8194bc31();
+    init_docentesComoUsuario_aced7377();
+    init_asistentesEnCursoConfirmados_fdb9bf69();
+    init_cursosEnJornadaConInstructorConCurso_eef56ccb();
     UsuarioForm = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let $$unsubscribe_session;
       $$unsubscribe_session = subscribe(session, (value) => value);
@@ -7519,20 +7519,20 @@ ${$acreditacionesUsuarioModal && acreditacionesDocenteID ? `${validate_component
   }
 });
 
-// .svelte-kit/output/server/chunks/newpassword-74616ea9.js
-var newpassword_74616ea9_exports = {};
-__export(newpassword_74616ea9_exports, {
+// .svelte-kit/output/server/chunks/newpassword-e7fa920a.js
+var newpassword_e7fa920a_exports = {};
+__export(newpassword_e7fa920a_exports, {
   default: () => Newpassword
 });
 var import_cookie16, Newpassword;
-var init_newpassword_74616ea9 = __esm({
-  ".svelte-kit/output/server/chunks/newpassword-74616ea9.js"() {
+var init_newpassword_e7fa920a = __esm({
+  ".svelte-kit/output/server/chunks/newpassword-e7fa920a.js"() {
     init_shims();
-    init_app_648d86f1();
-    init_stores_bc5c9a0c();
-    init_index_9d95a6a7();
-    init_toasts_62f37240();
-    init_index_91f839fc();
+    init_app_98a99c49();
+    init_stores_2ab46620();
+    init_index_168d5d68();
+    init_toasts_f6fa13c5();
+    init_index_7d160006();
     import_cookie16 = __toModule(require_cookie());
     Newpassword = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let $$unsubscribe_session;
@@ -7543,7 +7543,7 @@ var init_newpassword_74616ea9 = __esm({
       let passwordInput;
       $$unsubscribe_session();
       $$unsubscribe_errors();
-      return `<main class="${"absolute top-0 left-0 right-0 bottom-0 flex flex-col justify-center items-center bg-une-red gap-8 "}"><section class="${"w-40"}"><img class="${"object-contain"}" src="${"../../../static/une white logo.png"}" alt="${"Une logo"}" id="${"logo"}"></section>
+      return `<main class="${"absolute top-0 left-0 right-0 bottom-0 flex flex-col justify-center items-center bg-une-red gap-8 "}"><section class="${"w-40"}"><img class="${"object-contain"}" src="${"/static/une-white-logo.png"}" alt="${"Une logo"}" id="${"logo"}"></section>
 	<h1 class="${"text-4xl font-bold text-white"}">Sistema coaching</h1>
 
 	<form class="${"shadow-lg bg-white p-4 rounded-md flex flex-col max-w-sm w-screen gap-4"}"><a href="${"/"}" class="${"link"}">Volver al men\xFA principal</a>
@@ -7562,22 +7562,22 @@ var init_newpassword_74616ea9 = __esm({
   }
 });
 
-// .svelte-kit/output/server/chunks/__layout-12417190.js
-var layout_12417190_exports = {};
-__export(layout_12417190_exports, {
+// .svelte-kit/output/server/chunks/__layout-b0c08595.js
+var layout_b0c08595_exports = {};
+__export(layout_b0c08595_exports, {
   default: () => _layout5
 });
 var import_cookie17, _layout5;
-var init_layout_12417190 = __esm({
-  ".svelte-kit/output/server/chunks/__layout-12417190.js"() {
+var init_layout_b0c08595 = __esm({
+  ".svelte-kit/output/server/chunks/__layout-b0c08595.js"() {
     init_shims();
-    init_app_648d86f1();
-    init_mobileLayout_e45d2d82();
+    init_app_98a99c49();
+    init_mobileLayout_68fe5eba();
     import_cookie17 = __toModule(require_cookie());
-    init_stores_bc5c9a0c();
-    init_useModal_0f7e070e();
-    init_index_91f839fc();
-    init_logoutButton_fc8dccce();
+    init_stores_2ab46620();
+    init_useModal_93d55db3();
+    init_index_7d160006();
+    init_logoutButton_f388af0b();
     _layout5 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       return `${validate_component(MobileLayout, "MobileLayout").$$render($$result, {
         layoutHeading: "Portal Instructor",
@@ -7590,16 +7590,16 @@ var init_layout_12417190 = __esm({
   }
 });
 
-// .svelte-kit/output/server/chunks/index-10eab8e7.js
-var index_10eab8e7_exports = {};
-__export(index_10eab8e7_exports, {
+// .svelte-kit/output/server/chunks/index-4af616c7.js
+var index_4af616c7_exports = {};
+__export(index_4af616c7_exports, {
   default: () => Instructor
 });
 var import_cookie18, Instructor;
-var init_index_10eab8e7 = __esm({
-  ".svelte-kit/output/server/chunks/index-10eab8e7.js"() {
+var init_index_4af616c7 = __esm({
+  ".svelte-kit/output/server/chunks/index-4af616c7.js"() {
     init_shims();
-    init_app_648d86f1();
+    init_app_98a99c49();
     init_navigation_0a4806ec();
     import_cookie18 = __toModule(require_cookie());
     Instructor = create_ssr_component(($$result, $$props, $$bindings, slots) => {
@@ -7609,14 +7609,14 @@ var init_index_10eab8e7 = __esm({
   }
 });
 
-// .svelte-kit/output/server/chunks/jornadaActual-3949e904.js
+// .svelte-kit/output/server/chunks/jornadaActual-c87eb73f.js
 var import_dayjs4, jornadaActual;
-var init_jornadaActual_3949e904 = __esm({
-  ".svelte-kit/output/server/chunks/jornadaActual-3949e904.js"() {
+var init_jornadaActual_c87eb73f = __esm({
+  ".svelte-kit/output/server/chunks/jornadaActual-c87eb73f.js"() {
     init_shims();
-    init_index_91f839fc();
+    init_index_7d160006();
     import_dayjs4 = __toModule(require_dayjs_min());
-    init_index_9d95a6a7();
+    init_index_168d5d68();
     jornadaActual = derived([db_jornadas], ([jornadas]) => {
       if (jornadas.length == 0)
         return void 0;
@@ -7627,32 +7627,32 @@ var init_jornadaActual_3949e904 = __esm({
   }
 });
 
-// .svelte-kit/output/server/chunks/index-81c96711.js
-var index_81c96711_exports = {};
-__export(index_81c96711_exports, {
+// .svelte-kit/output/server/chunks/index-711aaa90.js
+var index_711aaa90_exports = {};
+__export(index_711aaa90_exports, {
   default: () => Mis_cursos
 });
 var import_cookie19, import_dayjs5, getCursosParaInstructor, AlumnoDetalles, CalificarAlumnos, EstatusCurso, Mis_cursos;
-var init_index_81c96711 = __esm({
-  ".svelte-kit/output/server/chunks/index-81c96711.js"() {
+var init_index_711aaa90 = __esm({
+  ".svelte-kit/output/server/chunks/index-711aaa90.js"() {
     init_shims();
-    init_app_648d86f1();
-    init_stores_bc5c9a0c();
-    init_cursosEnJornadaConInstructorConCurso_cb560969();
-    init_jornadaActual_3949e904();
-    init_index_91f839fc();
-    init_cursosEnJornadaConAsistentes_c73643ab();
-    init_useModal_0f7e070e();
-    init_index_9d95a6a7();
-    init_toasts_62f37240();
-    init_loadingSpinner_a3f71e99();
-    init_modal_8e58b549();
-    init_prompts_dc3f6318();
+    init_app_98a99c49();
+    init_stores_2ab46620();
+    init_cursosEnJornadaConInstructorConCurso_eef56ccb();
+    init_jornadaActual_c87eb73f();
+    init_index_7d160006();
+    init_cursosEnJornadaConAsistentes_8cd3f57e();
+    init_useModal_93d55db3();
+    init_index_168d5d68();
+    init_toasts_f6fa13c5();
+    init_loadingSpinner_280084c3();
+    init_modal_00427b46();
+    init_prompts_5bf8792b();
     import_cookie19 = __toModule(require_cookie());
-    init_cursosConDiplomado_92710756();
+    init_cursosConDiplomado_8194bc31();
     import_dayjs5 = __toModule(require_dayjs_min());
-    init_docentesComoUsuario_dbf52d99();
-    init_asistentesEnCursoConfirmados_099159a6();
+    init_docentesComoUsuario_aced7377();
+    init_asistentesEnCursoConfirmados_fdb9bf69();
     getCursosParaInstructor = (instructorID) => {
       const cursosDeLaJornadaActualParaInstructor = derived([cursosEnJornadaConAsistentes, jornadaActual], ([cursos, jornadaActual2]) => jornadaActual2 ? cursos.filter((c) => c.id_jornada == jornadaActual2.id && c.id_instructor == instructorID) : []);
       return cursosDeLaJornadaActualParaInstructor;
@@ -7782,22 +7782,22 @@ ${cursosJornada && !$calificarAlumnosModal && !$estatusCursoModal ? `<h2 class="
   }
 });
 
-// .svelte-kit/output/server/chunks/__layout-ab0d2b33.js
-var layout_ab0d2b33_exports = {};
-__export(layout_ab0d2b33_exports, {
+// .svelte-kit/output/server/chunks/__layout-223705a7.js
+var layout_223705a7_exports = {};
+__export(layout_223705a7_exports, {
   default: () => _layout6
 });
 var import_cookie20, _layout6;
-var init_layout_ab0d2b33 = __esm({
-  ".svelte-kit/output/server/chunks/__layout-ab0d2b33.js"() {
+var init_layout_223705a7 = __esm({
+  ".svelte-kit/output/server/chunks/__layout-223705a7.js"() {
     init_shims();
-    init_app_648d86f1();
-    init_mobileLayout_e45d2d82();
+    init_app_98a99c49();
+    init_mobileLayout_68fe5eba();
     import_cookie20 = __toModule(require_cookie());
-    init_stores_bc5c9a0c();
-    init_useModal_0f7e070e();
-    init_index_91f839fc();
-    init_logoutButton_fc8dccce();
+    init_stores_2ab46620();
+    init_useModal_93d55db3();
+    init_index_7d160006();
+    init_logoutButton_f388af0b();
     _layout6 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       return `${validate_component(MobileLayout, "MobileLayout").$$render($$result, {
         layoutHeading: "Portal Docente",
@@ -7815,16 +7815,16 @@ var init_layout_ab0d2b33 = __esm({
   }
 });
 
-// .svelte-kit/output/server/chunks/index-d8a18eea.js
-var index_d8a18eea_exports = {};
-__export(index_d8a18eea_exports, {
+// .svelte-kit/output/server/chunks/index-e64647f3.js
+var index_e64647f3_exports = {};
+__export(index_e64647f3_exports, {
   default: () => Docente
 });
 var import_cookie21, Docente;
-var init_index_d8a18eea = __esm({
-  ".svelte-kit/output/server/chunks/index-d8a18eea.js"() {
+var init_index_e64647f3 = __esm({
+  ".svelte-kit/output/server/chunks/index-e64647f3.js"() {
     init_shims();
-    init_app_648d86f1();
+    init_app_98a99c49();
     init_navigation_0a4806ec();
     import_cookie21 = __toModule(require_cookie());
     Docente = create_ssr_component(($$result, $$props, $$bindings, slots) => {
@@ -7834,27 +7834,27 @@ var init_index_d8a18eea = __esm({
   }
 });
 
-// .svelte-kit/output/server/chunks/index-ec56bd95.js
-var index_ec56bd95_exports = {};
-__export(index_ec56bd95_exports, {
+// .svelte-kit/output/server/chunks/index-50fd8e3a.js
+var index_50fd8e3a_exports = {};
+__export(index_50fd8e3a_exports, {
   default: () => Mis_acreditaciones
 });
 var import_cookie22, Mis_acreditaciones;
-var init_index_ec56bd95 = __esm({
-  ".svelte-kit/output/server/chunks/index-ec56bd95.js"() {
+var init_index_50fd8e3a = __esm({
+  ".svelte-kit/output/server/chunks/index-50fd8e3a.js"() {
     init_shims();
-    init_app_648d86f1();
-    init_stores_bc5c9a0c();
-    init_index_812c53f9();
-    init_docentesComoUsuario_dbf52d99();
+    init_app_98a99c49();
+    init_stores_2ab46620();
+    init_index_85a65997();
+    init_docentesComoUsuario_aced7377();
     import_cookie22 = __toModule(require_cookie());
-    init_index_9d95a6a7();
-    init_index_91f839fc();
-    init_competenciasConTipo_85cbff0e();
-    init_cursosConDiplomado_92710756();
-    init_asistentesEnCursoConfirmados_099159a6();
-    init_cursosEnJornadaConInstructorConCurso_cb560969();
-    init_useModal_0f7e070e();
+    init_index_168d5d68();
+    init_index_7d160006();
+    init_competenciasConTipo_8197e59f();
+    init_cursosConDiplomado_8194bc31();
+    init_asistentesEnCursoConfirmados_fdb9bf69();
+    init_cursosEnJornadaConInstructorConCurso_eef56ccb();
+    init_useModal_93d55db3();
     Mis_acreditaciones = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let $session, $$unsubscribe_session;
       let $docentesComoUsuarios, $$unsubscribe_docentesComoUsuarios;
@@ -7869,24 +7869,24 @@ var init_index_ec56bd95 = __esm({
   }
 });
 
-// .svelte-kit/output/server/chunks/index-fcbd752b.js
-var index_fcbd752b_exports = {};
-__export(index_fcbd752b_exports, {
+// .svelte-kit/output/server/chunks/index-2f487bd8.js
+var index_2f487bd8_exports = {};
+__export(index_2f487bd8_exports, {
   default: () => Mis_cursos2
 });
 var import_cookie23, import_dayjs6, getCursosParaDocente, getInvitacionesParaDocente, Invitaciones, Mis_cursos2;
-var init_index_fcbd752b = __esm({
-  ".svelte-kit/output/server/chunks/index-fcbd752b.js"() {
+var init_index_2f487bd8 = __esm({
+  ".svelte-kit/output/server/chunks/index-2f487bd8.js"() {
     init_shims();
-    init_app_648d86f1();
-    init_stores_bc5c9a0c();
-    init_docentesComoUsuario_dbf52d99();
-    init_jornadaActual_3949e904();
-    init_index_91f839fc();
-    init_cursosEnJornadaConInstructorConCurso_cb560969();
-    init_index_9d95a6a7();
-    init_cursosConDiplomado_92710756();
-    init_toasts_62f37240();
+    init_app_98a99c49();
+    init_stores_2ab46620();
+    init_docentesComoUsuario_aced7377();
+    init_jornadaActual_c87eb73f();
+    init_index_7d160006();
+    init_cursosEnJornadaConInstructorConCurso_eef56ccb();
+    init_index_168d5d68();
+    init_cursosConDiplomado_8194bc31();
+    init_toasts_f6fa13c5();
     import_cookie23 = __toModule(require_cookie());
     import_dayjs6 = __toModule(require_dayjs_min());
     getCursosParaDocente = (docenteID) => {
@@ -8002,22 +8002,22 @@ ${cursosJornada && $cursosJornada ? `<h2 class="${"heading"}">Cursos (${escape($
   }
 });
 
-// .svelte-kit/output/server/chunks/__layout-652a32cd.js
-var layout_652a32cd_exports = {};
-__export(layout_652a32cd_exports, {
+// .svelte-kit/output/server/chunks/__layout-764c41a6.js
+var layout_764c41a6_exports = {};
+__export(layout_764c41a6_exports, {
   default: () => _layout7
 });
 var import_cookie24, _layout7;
-var init_layout_652a32cd = __esm({
-  ".svelte-kit/output/server/chunks/__layout-652a32cd.js"() {
+var init_layout_764c41a6 = __esm({
+  ".svelte-kit/output/server/chunks/__layout-764c41a6.js"() {
     init_shims();
-    init_app_648d86f1();
-    init_mobileLayout_e45d2d82();
+    init_app_98a99c49();
+    init_mobileLayout_68fe5eba();
     import_cookie24 = __toModule(require_cookie());
-    init_stores_bc5c9a0c();
-    init_useModal_0f7e070e();
-    init_index_91f839fc();
-    init_logoutButton_fc8dccce();
+    init_stores_2ab46620();
+    init_useModal_93d55db3();
+    init_index_7d160006();
+    init_logoutButton_f388af0b();
     _layout7 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       return `${validate_component(MobileLayout, "MobileLayout").$$render($$result, {
         layoutHeading: "Portal coach",
@@ -8030,16 +8030,16 @@ var init_layout_652a32cd = __esm({
   }
 });
 
-// .svelte-kit/output/server/chunks/index-b5bf7e3d.js
-var index_b5bf7e3d_exports = {};
-__export(index_b5bf7e3d_exports, {
+// .svelte-kit/output/server/chunks/index-9cae9127.js
+var index_9cae9127_exports = {};
+__export(index_9cae9127_exports, {
   default: () => Coach
 });
 var import_cookie25, Coach;
-var init_index_b5bf7e3d = __esm({
-  ".svelte-kit/output/server/chunks/index-b5bf7e3d.js"() {
+var init_index_9cae9127 = __esm({
+  ".svelte-kit/output/server/chunks/index-9cae9127.js"() {
     init_shims();
-    init_app_648d86f1();
+    init_app_98a99c49();
     init_navigation_0a4806ec();
     import_cookie25 = __toModule(require_cookie());
     Coach = create_ssr_component(($$result, $$props, $$bindings, slots) => {
@@ -8049,29 +8049,29 @@ var init_index_b5bf7e3d = __esm({
   }
 });
 
-// .svelte-kit/output/server/chunks/index-8a629440.js
-var index_8a629440_exports = {};
-__export(index_8a629440_exports, {
+// .svelte-kit/output/server/chunks/index-487d210d.js
+var index_487d210d_exports = {};
+__export(index_487d210d_exports, {
   default: () => Inscripciones
 });
 var import_dayjs7, import_cookie26, invitacionesCursoConDocente, cursosEnJornadaConInvitaciones, cursosParaInscribir, getDocentesFaltantesDeCurso, InscribirDocentes, Inscripciones;
-var init_index_8a629440 = __esm({
-  ".svelte-kit/output/server/chunks/index-8a629440.js"() {
+var init_index_487d210d = __esm({
+  ".svelte-kit/output/server/chunks/index-487d210d.js"() {
     init_shims();
-    init_app_648d86f1();
-    init_jornadaActual_3949e904();
-    init_index_91f839fc();
-    init_cursosEnJornadaConAsistentes_c73643ab();
-    init_cursosEnJornadaConInstructorConCurso_cb560969();
-    init_docentesComoUsuario_dbf52d99();
-    init_index_9d95a6a7();
-    init_useModal_0f7e070e();
+    init_app_98a99c49();
+    init_jornadaActual_c87eb73f();
+    init_index_7d160006();
+    init_cursosEnJornadaConAsistentes_8cd3f57e();
+    init_cursosEnJornadaConInstructorConCurso_eef56ccb();
+    init_docentesComoUsuario_aced7377();
+    init_index_168d5d68();
+    init_useModal_93d55db3();
     import_dayjs7 = __toModule(require_dayjs_min());
-    init_toasts_62f37240();
+    init_toasts_f6fa13c5();
     init_makeArraySearchable_f17ce08a();
     import_cookie26 = __toModule(require_cookie());
-    init_asistentesEnCursoConfirmados_099159a6();
-    init_cursosConDiplomado_92710756();
+    init_asistentesEnCursoConfirmados_fdb9bf69();
+    init_cursosConDiplomado_8194bc31();
     invitacionesCursoConDocente = derived([db_invitacionesCurso, docentesComoUsuarios], ([invitaciones, docentes]) => invitaciones.map((i) => {
       const docenteInvitado = docentes.find((d) => d.id_docente == i.id_docente);
       if (!docenteInvitado)
@@ -8196,29 +8196,29 @@ ${!$inscribirModal ? `${$jornadaActual ? `<h2 class="${"heading"}">Jornada ${esc
   }
 });
 
-// .svelte-kit/output/server/chunks/index-22fc459a.js
-var index_22fc459a_exports = {};
-__export(index_22fc459a_exports, {
+// .svelte-kit/output/server/chunks/index-03554484.js
+var index_03554484_exports = {};
+__export(index_03554484_exports, {
   default: () => Docentes
 });
 var import_cookie27, Docentes;
-var init_index_22fc459a = __esm({
-  ".svelte-kit/output/server/chunks/index-22fc459a.js"() {
+var init_index_03554484 = __esm({
+  ".svelte-kit/output/server/chunks/index-03554484.js"() {
     init_shims();
-    init_app_648d86f1();
-    init_stores_bc5c9a0c();
-    init_coachesComoUsuario_f500f2a9();
-    init_docentesComoUsuario_dbf52d99();
-    init_useModal_0f7e070e();
-    init_index_91f839fc();
-    init_index_9d95a6a7();
-    init_index_812c53f9();
+    init_app_98a99c49();
+    init_stores_2ab46620();
+    init_coachesComoUsuario_e69e8594();
+    init_docentesComoUsuario_aced7377();
+    init_useModal_93d55db3();
+    init_index_7d160006();
+    init_index_168d5d68();
+    init_index_85a65997();
     init_makeArraySearchable_f17ce08a();
     import_cookie27 = __toModule(require_cookie());
-    init_competenciasConTipo_85cbff0e();
-    init_cursosConDiplomado_92710756();
-    init_asistentesEnCursoConfirmados_099159a6();
-    init_cursosEnJornadaConInstructorConCurso_cb560969();
+    init_competenciasConTipo_8197e59f();
+    init_cursosConDiplomado_8194bc31();
+    init_asistentesEnCursoConfirmados_fdb9bf69();
+    init_cursosEnJornadaConInstructorConCurso_eef56ccb();
     Docentes = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let $session, $$unsubscribe_session;
       let $coachesComoUsuarios, $$unsubscribe_coachesComoUsuarios;
@@ -8267,21 +8267,21 @@ var init_index_22fc459a = __esm({
   }
 });
 
-// .svelte-kit/output/server/chunks/__layout.reset-bff6669e.js
-var layout_reset_bff6669e_exports = {};
-__export(layout_reset_bff6669e_exports, {
+// .svelte-kit/output/server/chunks/__layout.reset-ab0364c4.js
+var layout_reset_ab0364c4_exports = {};
+__export(layout_reset_ab0364c4_exports, {
   default: () => _layout_reset
 });
 var import_cookie28, _layout_reset;
-var init_layout_reset_bff6669e = __esm({
-  ".svelte-kit/output/server/chunks/__layout.reset-bff6669e.js"() {
+var init_layout_reset_ab0364c4 = __esm({
+  ".svelte-kit/output/server/chunks/__layout.reset-ab0364c4.js"() {
     init_shims();
-    init_app_648d86f1();
-    init_toastArea_b7785619();
+    init_app_98a99c49();
+    init_toastArea_52f75dc6();
     import_cookie28 = __toModule(require_cookie());
-    init_prompts_dc3f6318();
-    init_index_91f839fc();
-    init_toasts_62f37240();
+    init_prompts_5bf8792b();
+    init_index_7d160006();
+    init_toasts_f6fa13c5();
     _layout_reset = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       return `${slots.default ? slots.default({}) : ``}
 
@@ -8291,28 +8291,28 @@ ${validate_component(PromptArea, "PromptArea").$$render($$result, {}, {}, {})}`;
   }
 });
 
-// .svelte-kit/output/server/chunks/index-02c205ff.js
-var index_02c205ff_exports = {};
-__export(index_02c205ff_exports, {
+// .svelte-kit/output/server/chunks/index-d2d5e60a.js
+var index_d2d5e60a_exports = {};
+__export(index_d2d5e60a_exports, {
   default: () => Login
 });
 var import_cookie29, Login;
-var init_index_02c205ff = __esm({
-  ".svelte-kit/output/server/chunks/index-02c205ff.js"() {
+var init_index_d2d5e60a = __esm({
+  ".svelte-kit/output/server/chunks/index-d2d5e60a.js"() {
     init_shims();
-    init_app_648d86f1();
-    init_stores_bc5c9a0c();
-    init_prompts_dc3f6318();
-    init_toasts_62f37240();
+    init_app_98a99c49();
+    init_stores_2ab46620();
+    init_prompts_5bf8792b();
+    init_toasts_f6fa13c5();
     import_cookie29 = __toModule(require_cookie());
-    init_index_91f839fc();
+    init_index_7d160006();
     Login = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let $$unsubscribe_session;
       $$unsubscribe_session = subscribe(session, (value) => value);
       let matriculaInput = "";
       let passwordInput = "";
       $$unsubscribe_session();
-      return `<main class="${"absolute top-0 left-0 right-0 bottom-0 flex flex-col justify-center items-center bg-une-red gap-8 "}"><section class="${"w-40"}"><img class="${"object-contain"}" src="${"../../../static/une white logo.png"}" alt="${"Une logo"}" id="${"logo"}"></section>
+      return `<main class="${"absolute top-0 left-0 right-0 bottom-0 flex flex-col justify-center items-center bg-une-red gap-8 "}"><section class="${"w-40"}"><img class="${"object-contain"}" src="${"/static/une-white-logo.png"}" alt="${"Une logo"}" id="${"logo"}"></section>
 	<h1 class="${"text-4xl font-bold text-white"}">Sistema coaching</h1>
 
 	<form class="${"shadow-lg bg-white p-4 rounded-md flex flex-col max-w-sm w-screen gap-4"}"><header><h2 class="${"heading"}">Iniciar sesi\xF3n</h2></header>
@@ -8332,7 +8332,7 @@ var init_index_02c205ff = __esm({
   }
 });
 
-// .svelte-kit/output/server/chunks/app-648d86f1.js
+// .svelte-kit/output/server/chunks/app-98a99c49.js
 function get_single_valued_header(headers, key) {
   const value = headers[key];
   if (Array.isArray(value)) {
@@ -9646,9 +9646,9 @@ function init(settings = default_settings) {
     amp: false,
     dev: false,
     entry: {
-      file: assets + "/_app/start-052244ee.js",
+      file: assets + "/_app/start-ea511cd2.js",
       css: [assets + "/_app/assets/start-464e9d0a.css", assets + "/_app/assets/vendor-15d9d811.css"],
-      js: [assets + "/_app/start-052244ee.js", assets + "/_app/chunks/vendor-0b4b0cdb.js", assets + "/_app/chunks/singletons-12a22614.js"]
+      js: [assets + "/_app/start-ea511cd2.js", assets + "/_app/chunks/vendor-0b4b0cdb.js", assets + "/_app/chunks/singletons-12a22614.js"]
     },
     fetched: void 0,
     floc: false,
@@ -9692,8 +9692,8 @@ function render(request, {
   return respond({ ...request, host }, options, { prerender });
 }
 var import_cookie30, __accessCheck, __privateGet, __privateAdd, __privateSet, _map, absolute, scheme, chars, unsafeChars, reserved, escaped$1, objectProtoOwnPropertyNames, subscriber_queue2, escape_json_string_in_html_dict, escape_html_attr_dict, s$1, s, ReadOnlyFormData, current_component, escaped, missing_component, on_destroy, css5, Root, base, assets, getSession, getCookie, user_hooks, template, options, default_settings, empty, manifest, get_hooks, module_lookup, metadata_lookup;
-var init_app_648d86f1 = __esm({
-  ".svelte-kit/output/server/chunks/app-648d86f1.js"() {
+var init_app_98a99c49 = __esm({
+  ".svelte-kit/output/server/chunks/app-98a99c49.js"() {
     init_shims();
     import_cookie30 = __toModule(require_cookie());
     __accessCheck = (obj, member, msg) => {
@@ -9893,7 +9893,7 @@ ${``}`;
     default_settings = { paths: { "base": "", "assets": "" } };
     empty = () => ({});
     manifest = {
-      assets: [{ "file": "favicon.ico", "size": 15406, "type": "image/vnd.microsoft.icon" }, { "file": "menu_black_24dp.svg", "size": 204, "type": "image/svg+xml" }, { "file": "une white logo.png", "size": 33476, "type": "image/png" }],
+      assets: [{ "file": "favicon.ico", "size": 15406, "type": "image/vnd.microsoft.icon" }, { "file": "menu_black_24dp.svg", "size": 204, "type": "image/svg+xml" }, { "file": "une-white-logo.png", "size": 33476, "type": "image/png" }],
       layout: "src/routes/__layout.svelte",
       error: ".svelte-kit/build/components/error.svelte",
       routes: [
@@ -10046,37 +10046,37 @@ ${``}`;
       externalFetch: hooks.externalFetch || fetch
     });
     module_lookup = {
-      "src/routes/__layout.svelte": () => Promise.resolve().then(() => (init_layout_753ddf4d(), layout_753ddf4d_exports)),
-      ".svelte-kit/build/components/error.svelte": () => Promise.resolve().then(() => (init_error_d8b9c7da(), error_d8b9c7da_exports)),
-      "src/routes/index.svelte": () => Promise.resolve().then(() => (init_index_34e5a335(), index_34e5a335_exports)),
-      "src/routes/administrativo/__layout.svelte": () => Promise.resolve().then(() => (init_layout_0e5aaf68(), layout_0e5aaf68_exports)),
-      "src/routes/administrativo/index.svelte": () => Promise.resolve().then(() => (init_index_062dcc89(), index_062dcc89_exports)),
-      "src/routes/coordinador/__layout.svelte": () => Promise.resolve().then(() => (init_layout_e34548b7(), layout_e34548b7_exports)),
-      "src/routes/coordinador/index.svelte": () => Promise.resolve().then(() => (init_index_9e9716a5(), index_9e9716a5_exports)),
-      "src/routes/coordinador/estructurar-diplomados-competencias/__layout.svelte": () => Promise.resolve().then(() => (init_layout_99075d10(), layout_99075d10_exports)),
-      "src/routes/coordinador/estructurar-diplomados-competencias/index.svelte": () => Promise.resolve().then(() => (init_index_a5c764ad(), index_a5c764ad_exports)),
-      "src/routes/coordinador/estructurar-diplomados-competencias/competencias/index.svelte": () => Promise.resolve().then(() => (init_index_fb667e80(), index_fb667e80_exports)),
-      "src/routes/coordinador/estructurar-diplomados-competencias/cursos/index.svelte": () => Promise.resolve().then(() => (init_index_33d0aa71(), index_33d0aa71_exports)),
-      "src/routes/coordinador/coordinar-coaches/index.svelte": () => Promise.resolve().then(() => (init_index_d5283307(), index_d5283307_exports)),
-      "src/routes/coordinador/gestion-registros/index.svelte": () => Promise.resolve().then(() => (init_index_388a53b1(), index_388a53b1_exports)),
-      "src/routes/coordinador/gestion-jornadas/index.svelte": () => Promise.resolve().then(() => (init_index_520f7598(), index_520f7598_exports)),
-      "src/routes/coordinador/gestion-usuarios/index.svelte": () => Promise.resolve().then(() => (init_index_eec71471(), index_eec71471_exports)),
-      "src/routes/newpassword.svelte": () => Promise.resolve().then(() => (init_newpassword_74616ea9(), newpassword_74616ea9_exports)),
-      "src/routes/instructor/__layout.svelte": () => Promise.resolve().then(() => (init_layout_12417190(), layout_12417190_exports)),
-      "src/routes/instructor/index.svelte": () => Promise.resolve().then(() => (init_index_10eab8e7(), index_10eab8e7_exports)),
-      "src/routes/instructor/mis-cursos/index.svelte": () => Promise.resolve().then(() => (init_index_81c96711(), index_81c96711_exports)),
-      "src/routes/docente/__layout.svelte": () => Promise.resolve().then(() => (init_layout_ab0d2b33(), layout_ab0d2b33_exports)),
-      "src/routes/docente/index.svelte": () => Promise.resolve().then(() => (init_index_d8a18eea(), index_d8a18eea_exports)),
-      "src/routes/docente/mis-acreditaciones/index.svelte": () => Promise.resolve().then(() => (init_index_ec56bd95(), index_ec56bd95_exports)),
-      "src/routes/docente/mis-cursos/index.svelte": () => Promise.resolve().then(() => (init_index_fcbd752b(), index_fcbd752b_exports)),
-      "src/routes/coach/__layout.svelte": () => Promise.resolve().then(() => (init_layout_652a32cd(), layout_652a32cd_exports)),
-      "src/routes/coach/index.svelte": () => Promise.resolve().then(() => (init_index_b5bf7e3d(), index_b5bf7e3d_exports)),
-      "src/routes/coach/inscripciones/index.svelte": () => Promise.resolve().then(() => (init_index_8a629440(), index_8a629440_exports)),
-      "src/routes/coach/docentes/index.svelte": () => Promise.resolve().then(() => (init_index_22fc459a(), index_22fc459a_exports)),
-      "src/routes/login/__layout.reset.svelte": () => Promise.resolve().then(() => (init_layout_reset_bff6669e(), layout_reset_bff6669e_exports)),
-      "src/routes/login/index.svelte": () => Promise.resolve().then(() => (init_index_02c205ff(), index_02c205ff_exports))
+      "src/routes/__layout.svelte": () => Promise.resolve().then(() => (init_layout_d124c969(), layout_d124c969_exports)),
+      ".svelte-kit/build/components/error.svelte": () => Promise.resolve().then(() => (init_error_43e05216(), error_43e05216_exports)),
+      "src/routes/index.svelte": () => Promise.resolve().then(() => (init_index_28ab3ff1(), index_28ab3ff1_exports)),
+      "src/routes/administrativo/__layout.svelte": () => Promise.resolve().then(() => (init_layout_573788f1(), layout_573788f1_exports)),
+      "src/routes/administrativo/index.svelte": () => Promise.resolve().then(() => (init_index_289dd8c6(), index_289dd8c6_exports)),
+      "src/routes/coordinador/__layout.svelte": () => Promise.resolve().then(() => (init_layout_e85482bd(), layout_e85482bd_exports)),
+      "src/routes/coordinador/index.svelte": () => Promise.resolve().then(() => (init_index_0479f95f(), index_0479f95f_exports)),
+      "src/routes/coordinador/estructurar-diplomados-competencias/__layout.svelte": () => Promise.resolve().then(() => (init_layout_38b304b7(), layout_38b304b7_exports)),
+      "src/routes/coordinador/estructurar-diplomados-competencias/index.svelte": () => Promise.resolve().then(() => (init_index_795688c6(), index_795688c6_exports)),
+      "src/routes/coordinador/estructurar-diplomados-competencias/competencias/index.svelte": () => Promise.resolve().then(() => (init_index_54d549ec(), index_54d549ec_exports)),
+      "src/routes/coordinador/estructurar-diplomados-competencias/cursos/index.svelte": () => Promise.resolve().then(() => (init_index_0b13e240(), index_0b13e240_exports)),
+      "src/routes/coordinador/coordinar-coaches/index.svelte": () => Promise.resolve().then(() => (init_index_43de6d26(), index_43de6d26_exports)),
+      "src/routes/coordinador/gestion-registros/index.svelte": () => Promise.resolve().then(() => (init_index_de1fe1bd(), index_de1fe1bd_exports)),
+      "src/routes/coordinador/gestion-jornadas/index.svelte": () => Promise.resolve().then(() => (init_index_ec980982(), index_ec980982_exports)),
+      "src/routes/coordinador/gestion-usuarios/index.svelte": () => Promise.resolve().then(() => (init_index_1663b660(), index_1663b660_exports)),
+      "src/routes/newpassword.svelte": () => Promise.resolve().then(() => (init_newpassword_e7fa920a(), newpassword_e7fa920a_exports)),
+      "src/routes/instructor/__layout.svelte": () => Promise.resolve().then(() => (init_layout_b0c08595(), layout_b0c08595_exports)),
+      "src/routes/instructor/index.svelte": () => Promise.resolve().then(() => (init_index_4af616c7(), index_4af616c7_exports)),
+      "src/routes/instructor/mis-cursos/index.svelte": () => Promise.resolve().then(() => (init_index_711aaa90(), index_711aaa90_exports)),
+      "src/routes/docente/__layout.svelte": () => Promise.resolve().then(() => (init_layout_223705a7(), layout_223705a7_exports)),
+      "src/routes/docente/index.svelte": () => Promise.resolve().then(() => (init_index_e64647f3(), index_e64647f3_exports)),
+      "src/routes/docente/mis-acreditaciones/index.svelte": () => Promise.resolve().then(() => (init_index_50fd8e3a(), index_50fd8e3a_exports)),
+      "src/routes/docente/mis-cursos/index.svelte": () => Promise.resolve().then(() => (init_index_2f487bd8(), index_2f487bd8_exports)),
+      "src/routes/coach/__layout.svelte": () => Promise.resolve().then(() => (init_layout_764c41a6(), layout_764c41a6_exports)),
+      "src/routes/coach/index.svelte": () => Promise.resolve().then(() => (init_index_9cae9127(), index_9cae9127_exports)),
+      "src/routes/coach/inscripciones/index.svelte": () => Promise.resolve().then(() => (init_index_487d210d(), index_487d210d_exports)),
+      "src/routes/coach/docentes/index.svelte": () => Promise.resolve().then(() => (init_index_03554484(), index_03554484_exports)),
+      "src/routes/login/__layout.reset.svelte": () => Promise.resolve().then(() => (init_layout_reset_ab0364c4(), layout_reset_ab0364c4_exports)),
+      "src/routes/login/index.svelte": () => Promise.resolve().then(() => (init_index_d2d5e60a(), index_d2d5e60a_exports))
     };
-    metadata_lookup = { "src/routes/__layout.svelte": { "entry": "pages/__layout.svelte-5ba64ce6.js", "css": ["assets/pages/__layout.svelte-55892ec5.css", "assets/vendor-15d9d811.css", "assets/toastArea-56d70290.css"], "js": ["pages/__layout.svelte-5ba64ce6.js", "chunks/vendor-0b4b0cdb.js", "chunks/stores-166c9dbe.js", "chunks/loadingSpinner-c13a4766.js", "chunks/toastArea-57856682.js", "chunks/prompts-f6e18b65.js", "chunks/toasts-b7bacc0f.js", "chunks/index-57452749.js", "chunks/serverURL-d16f5684.js"], "styles": [] }, ".svelte-kit/build/components/error.svelte": { "entry": "error.svelte-dc1a4c81.js", "css": ["assets/vendor-15d9d811.css"], "js": ["error.svelte-dc1a4c81.js", "chunks/vendor-0b4b0cdb.js"], "styles": [] }, "src/routes/index.svelte": { "entry": "pages/index.svelte-4bf035d8.js", "css": ["assets/vendor-15d9d811.css"], "js": ["pages/index.svelte-4bf035d8.js", "chunks/vendor-0b4b0cdb.js", "chunks/stores-166c9dbe.js", "chunks/logoutButton-8b996539.js", "chunks/serverURL-d16f5684.js", "chunks/capitalizeString-bffa0771.js"], "styles": [] }, "src/routes/administrativo/__layout.svelte": { "entry": "pages/administrativo/__layout.svelte-75a508b9.js", "css": ["assets/vendor-15d9d811.css", "assets/mobileLayout-3c7291fc.css"], "js": ["pages/administrativo/__layout.svelte-75a508b9.js", "chunks/vendor-0b4b0cdb.js", "chunks/mobileLayout-121ba740.js", "chunks/stores-166c9dbe.js", "chunks/useModal-16043ad5.js", "chunks/logoutButton-8b996539.js", "chunks/serverURL-d16f5684.js"], "styles": [] }, "src/routes/administrativo/index.svelte": { "entry": "pages/administrativo/index.svelte-98887475.js", "css": ["assets/vendor-15d9d811.css"], "js": ["pages/administrativo/index.svelte-98887475.js", "chunks/vendor-0b4b0cdb.js"], "styles": [] }, "src/routes/coordinador/__layout.svelte": { "entry": "pages/coordinador/__layout.svelte-33428351.js", "css": ["assets/pages/coordinador/__layout.svelte-e86784fa.css", "assets/vendor-15d9d811.css"], "js": ["pages/coordinador/__layout.svelte-33428351.js", "chunks/vendor-0b4b0cdb.js", "chunks/stores-166c9dbe.js", "chunks/logoutButton-8b996539.js", "chunks/serverURL-d16f5684.js"], "styles": [] }, "src/routes/coordinador/index.svelte": { "entry": "pages/coordinador/index.svelte-35fbafdb.js", "css": ["assets/vendor-15d9d811.css"], "js": ["pages/coordinador/index.svelte-35fbafdb.js", "chunks/vendor-0b4b0cdb.js", "chunks/navigation-51f4a605.js", "chunks/singletons-12a22614.js"], "styles": [] }, "src/routes/coordinador/estructurar-diplomados-competencias/__layout.svelte": { "entry": "pages/coordinador/estructurar-diplomados-competencias/__layout.svelte-138d8498.js", "css": ["assets/vendor-15d9d811.css"], "js": ["pages/coordinador/estructurar-diplomados-competencias/__layout.svelte-138d8498.js", "chunks/vendor-0b4b0cdb.js", "chunks/stores-166c9dbe.js"], "styles": [] }, "src/routes/coordinador/estructurar-diplomados-competencias/index.svelte": { "entry": "pages/coordinador/estructurar-diplomados-competencias/index.svelte-4ea82867.js", "css": ["assets/vendor-15d9d811.css"], "js": ["pages/coordinador/estructurar-diplomados-competencias/index.svelte-4ea82867.js", "chunks/vendor-0b4b0cdb.js", "chunks/navigation-51f4a605.js", "chunks/singletons-12a22614.js"], "styles": [] }, "src/routes/coordinador/estructurar-diplomados-competencias/competencias/index.svelte": { "entry": "pages/coordinador/estructurar-diplomados-competencias/competencias/index.svelte-ca23144d.js", "css": ["assets/modal.svelte_svelte_type_style_lang-5db5270b.css", "assets/vendor-15d9d811.css"], "js": ["pages/coordinador/estructurar-diplomados-competencias/competencias/index.svelte-ca23144d.js", "chunks/vendor-0b4b0cdb.js", "chunks/handleError-b3179747.js", "chunks/toasts-b7bacc0f.js", "chunks/capitalizeString-bffa0771.js", "chunks/index-57452749.js", "chunks/serverURL-d16f5684.js", "chunks/competenciasConTipo-581daa1d.js", "chunks/prompts-f6e18b65.js", "chunks/useModal-16043ad5.js", "chunks/makeArraySearchable-01ec942f.js", "chunks/noUndefinedValues-bf4bff28.js"], "styles": [] }, "src/routes/coordinador/estructurar-diplomados-competencias/cursos/index.svelte": { "entry": "pages/coordinador/estructurar-diplomados-competencias/cursos/index.svelte-c02b8aff.js", "css": ["assets/modal.svelte_svelte_type_style_lang-5db5270b.css", "assets/vendor-15d9d811.css"], "js": ["pages/coordinador/estructurar-diplomados-competencias/cursos/index.svelte-c02b8aff.js", "chunks/vendor-0b4b0cdb.js", "chunks/handleError-b3179747.js", "chunks/toasts-b7bacc0f.js", "chunks/capitalizeString-bffa0771.js", "chunks/index-57452749.js", "chunks/serverURL-d16f5684.js", "chunks/cursosConDiplomado-1e8fc1ea.js", "chunks/prompts-f6e18b65.js", "chunks/useModal-16043ad5.js", "chunks/makeArraySearchable-01ec942f.js", "chunks/noUndefinedValues-bf4bff28.js"], "styles": [] }, "src/routes/coordinador/coordinar-coaches/index.svelte": { "entry": "pages/coordinador/coordinar-coaches/index.svelte-b29247ef.js", "css": ["assets/modal.svelte_svelte_type_style_lang-5db5270b.css", "assets/vendor-15d9d811.css"], "js": ["pages/coordinador/coordinar-coaches/index.svelte-b29247ef.js", "chunks/vendor-0b4b0cdb.js", "chunks/handleError-b3179747.js", "chunks/toasts-b7bacc0f.js", "chunks/capitalizeString-bffa0771.js", "chunks/index-57452749.js", "chunks/serverURL-d16f5684.js", "chunks/coachesComoUsuario-e3afe54d.js", "chunks/docentesComoUsuario-996e6954.js", "chunks/useModal-16043ad5.js", "chunks/makeArraySearchable-01ec942f.js"], "styles": [] }, "src/routes/coordinador/gestion-registros/index.svelte": { "entry": "pages/coordinador/gestion-registros/index.svelte-48249ab7.js", "css": ["assets/modal.svelte_svelte_type_style_lang-5db5270b.css", "assets/vendor-15d9d811.css"], "js": ["pages/coordinador/gestion-registros/index.svelte-48249ab7.js", "chunks/vendor-0b4b0cdb.js", "chunks/handleError-b3179747.js", "chunks/toasts-b7bacc0f.js", "chunks/capitalizeString-bffa0771.js", "chunks/index-57452749.js", "chunks/serverURL-d16f5684.js", "chunks/docentesComoUsuario-996e6954.js", "chunks/competenciasConTipo-581daa1d.js", "chunks/cursosConDiplomado-1e8fc1ea.js", "chunks/prompts-f6e18b65.js", "chunks/useModal-16043ad5.js", "chunks/makeArraySearchable-01ec942f.js", "chunks/stores-166c9dbe.js", "chunks/formatDate-2f20d9da.js", "chunks/usuariosConRoles-6c685d82.js"], "styles": [] }, "src/routes/coordinador/gestion-jornadas/index.svelte": { "entry": "pages/coordinador/gestion-jornadas/index.svelte-652f0344.js", "css": ["assets/modal.svelte_svelte_type_style_lang-5db5270b.css", "assets/vendor-15d9d811.css"], "js": ["pages/coordinador/gestion-jornadas/index.svelte-652f0344.js", "chunks/vendor-0b4b0cdb.js", "chunks/handleError-b3179747.js", "chunks/toasts-b7bacc0f.js", "chunks/capitalizeString-bffa0771.js", "chunks/index-57452749.js", "chunks/serverURL-d16f5684.js", "chunks/cursosEnJornadaConAsistentes-c8c5f4de.js", "chunks/cursosEnJornadaConInstructorConCurso-6d0e043b.js", "chunks/cursosConDiplomado-1e8fc1ea.js", "chunks/docentesComoUsuario-996e6954.js", "chunks/asistentesEnCursoConfirmados-1f73ad4b.js", "chunks/prompts-f6e18b65.js", "chunks/useModal-16043ad5.js", "chunks/formatDate-2f20d9da.js", "chunks/makeArraySearchable-01ec942f.js", "chunks/competenciasConTipo-581daa1d.js", "chunks/usuariosConRoles-6c685d82.js", "chunks/noUndefinedValues-bf4bff28.js"], "styles": [] }, "src/routes/coordinador/gestion-usuarios/index.svelte": { "entry": "pages/coordinador/gestion-usuarios/index.svelte-1cd8d310.js", "css": ["assets/modal.svelte_svelte_type_style_lang-5db5270b.css", "assets/vendor-15d9d811.css"], "js": ["pages/coordinador/gestion-usuarios/index.svelte-1cd8d310.js", "chunks/vendor-0b4b0cdb.js", "chunks/stores-166c9dbe.js", "chunks/index-f48b41d2.js", "chunks/index-57452749.js", "chunks/serverURL-d16f5684.js", "chunks/competenciasConTipo-581daa1d.js", "chunks/cursosConDiplomado-1e8fc1ea.js", "chunks/docentesComoUsuario-996e6954.js", "chunks/asistentesEnCursoConfirmados-1f73ad4b.js", "chunks/cursosEnJornadaConInstructorConCurso-6d0e043b.js", "chunks/useModal-16043ad5.js", "chunks/handleError-b3179747.js", "chunks/toasts-b7bacc0f.js", "chunks/capitalizeString-bffa0771.js", "chunks/usuariosConRoles-6c685d82.js", "chunks/prompts-f6e18b65.js", "chunks/makeArraySearchable-01ec942f.js", "chunks/noUndefinedValues-bf4bff28.js"], "styles": [] }, "src/routes/newpassword.svelte": { "entry": "pages/newpassword.svelte-c5ca1a63.js", "css": ["assets/vendor-15d9d811.css"], "js": ["pages/newpassword.svelte-c5ca1a63.js", "chunks/vendor-0b4b0cdb.js", "chunks/stores-166c9dbe.js", "chunks/spinner-167f60b4.js", "chunks/index-57452749.js", "chunks/serverURL-d16f5684.js", "chunks/toasts-b7bacc0f.js"], "styles": [] }, "src/routes/instructor/__layout.svelte": { "entry": "pages/instructor/__layout.svelte-886c0cae.js", "css": ["assets/vendor-15d9d811.css", "assets/mobileLayout-3c7291fc.css"], "js": ["pages/instructor/__layout.svelte-886c0cae.js", "chunks/vendor-0b4b0cdb.js", "chunks/mobileLayout-121ba740.js", "chunks/stores-166c9dbe.js", "chunks/useModal-16043ad5.js", "chunks/logoutButton-8b996539.js", "chunks/serverURL-d16f5684.js"], "styles": [] }, "src/routes/instructor/index.svelte": { "entry": "pages/instructor/index.svelte-2c2b276f.js", "css": ["assets/vendor-15d9d811.css"], "js": ["pages/instructor/index.svelte-2c2b276f.js", "chunks/vendor-0b4b0cdb.js", "chunks/navigation-51f4a605.js", "chunks/singletons-12a22614.js"], "styles": [] }, "src/routes/instructor/mis-cursos/index.svelte": { "entry": "pages/instructor/mis-cursos/index.svelte-c9d8bc32.js", "css": ["assets/modal.svelte_svelte_type_style_lang-5db5270b.css", "assets/vendor-15d9d811.css"], "js": ["pages/instructor/mis-cursos/index.svelte-c9d8bc32.js", "chunks/vendor-0b4b0cdb.js", "chunks/stores-166c9dbe.js", "chunks/cursosEnJornadaConInstructorConCurso-6d0e043b.js", "chunks/index-57452749.js", "chunks/serverURL-d16f5684.js", "chunks/cursosConDiplomado-1e8fc1ea.js", "chunks/jornadaActual-4e08460c.js", "chunks/cursosEnJornadaConAsistentes-c8c5f4de.js", "chunks/docentesComoUsuario-996e6954.js", "chunks/asistentesEnCursoConfirmados-1f73ad4b.js", "chunks/useModal-16043ad5.js", "chunks/toasts-b7bacc0f.js", "chunks/handleError-b3179747.js", "chunks/capitalizeString-bffa0771.js", "chunks/loadingSpinner-c13a4766.js", "chunks/prompts-f6e18b65.js"], "styles": [] }, "src/routes/docente/__layout.svelte": { "entry": "pages/docente/__layout.svelte-c28726e8.js", "css": ["assets/vendor-15d9d811.css", "assets/mobileLayout-3c7291fc.css"], "js": ["pages/docente/__layout.svelte-c28726e8.js", "chunks/vendor-0b4b0cdb.js", "chunks/mobileLayout-121ba740.js", "chunks/stores-166c9dbe.js", "chunks/useModal-16043ad5.js", "chunks/logoutButton-8b996539.js", "chunks/serverURL-d16f5684.js"], "styles": [] }, "src/routes/docente/index.svelte": { "entry": "pages/docente/index.svelte-e24c47ef.js", "css": ["assets/vendor-15d9d811.css"], "js": ["pages/docente/index.svelte-e24c47ef.js", "chunks/vendor-0b4b0cdb.js", "chunks/navigation-51f4a605.js", "chunks/singletons-12a22614.js"], "styles": [] }, "src/routes/docente/mis-acreditaciones/index.svelte": { "entry": "pages/docente/mis-acreditaciones/index.svelte-4163d587.js", "css": ["assets/vendor-15d9d811.css"], "js": ["pages/docente/mis-acreditaciones/index.svelte-4163d587.js", "chunks/vendor-0b4b0cdb.js", "chunks/stores-166c9dbe.js", "chunks/index-f48b41d2.js", "chunks/index-57452749.js", "chunks/serverURL-d16f5684.js", "chunks/competenciasConTipo-581daa1d.js", "chunks/cursosConDiplomado-1e8fc1ea.js", "chunks/docentesComoUsuario-996e6954.js", "chunks/asistentesEnCursoConfirmados-1f73ad4b.js", "chunks/cursosEnJornadaConInstructorConCurso-6d0e043b.js", "chunks/useModal-16043ad5.js"], "styles": [] }, "src/routes/docente/mis-cursos/index.svelte": { "entry": "pages/docente/mis-cursos/index.svelte-5ccad419.js", "css": ["assets/vendor-15d9d811.css"], "js": ["pages/docente/mis-cursos/index.svelte-5ccad419.js", "chunks/vendor-0b4b0cdb.js", "chunks/stores-166c9dbe.js", "chunks/docentesComoUsuario-996e6954.js", "chunks/index-57452749.js", "chunks/serverURL-d16f5684.js", "chunks/jornadaActual-4e08460c.js", "chunks/cursosEnJornadaConInstructorConCurso-6d0e043b.js", "chunks/cursosConDiplomado-1e8fc1ea.js", "chunks/toasts-b7bacc0f.js"], "styles": [] }, "src/routes/coach/__layout.svelte": { "entry": "pages/coach/__layout.svelte-b70ee6f4.js", "css": ["assets/vendor-15d9d811.css", "assets/mobileLayout-3c7291fc.css"], "js": ["pages/coach/__layout.svelte-b70ee6f4.js", "chunks/vendor-0b4b0cdb.js", "chunks/mobileLayout-121ba740.js", "chunks/stores-166c9dbe.js", "chunks/useModal-16043ad5.js", "chunks/logoutButton-8b996539.js", "chunks/serverURL-d16f5684.js"], "styles": [] }, "src/routes/coach/index.svelte": { "entry": "pages/coach/index.svelte-1a0fdbf0.js", "css": ["assets/vendor-15d9d811.css"], "js": ["pages/coach/index.svelte-1a0fdbf0.js", "chunks/vendor-0b4b0cdb.js", "chunks/navigation-51f4a605.js", "chunks/singletons-12a22614.js"], "styles": [] }, "src/routes/coach/inscripciones/index.svelte": { "entry": "pages/coach/inscripciones/index.svelte-fcf79e98.js", "css": ["assets/modal.svelte_svelte_type_style_lang-5db5270b.css", "assets/vendor-15d9d811.css"], "js": ["pages/coach/inscripciones/index.svelte-fcf79e98.js", "chunks/vendor-0b4b0cdb.js", "chunks/jornadaActual-4e08460c.js", "chunks/index-57452749.js", "chunks/serverURL-d16f5684.js", "chunks/cursosEnJornadaConAsistentes-c8c5f4de.js", "chunks/cursosEnJornadaConInstructorConCurso-6d0e043b.js", "chunks/cursosConDiplomado-1e8fc1ea.js", "chunks/docentesComoUsuario-996e6954.js", "chunks/asistentesEnCursoConfirmados-1f73ad4b.js", "chunks/useModal-16043ad5.js", "chunks/toasts-b7bacc0f.js", "chunks/makeArraySearchable-01ec942f.js"], "styles": [] }, "src/routes/coach/docentes/index.svelte": { "entry": "pages/coach/docentes/index.svelte-094ff033.js", "css": ["assets/vendor-15d9d811.css"], "js": ["pages/coach/docentes/index.svelte-094ff033.js", "chunks/vendor-0b4b0cdb.js", "chunks/stores-166c9dbe.js", "chunks/coachesComoUsuario-e3afe54d.js", "chunks/index-57452749.js", "chunks/serverURL-d16f5684.js", "chunks/docentesComoUsuario-996e6954.js", "chunks/useModal-16043ad5.js", "chunks/index-f48b41d2.js", "chunks/competenciasConTipo-581daa1d.js", "chunks/cursosConDiplomado-1e8fc1ea.js", "chunks/asistentesEnCursoConfirmados-1f73ad4b.js", "chunks/cursosEnJornadaConInstructorConCurso-6d0e043b.js", "chunks/makeArraySearchable-01ec942f.js"], "styles": [] }, "src/routes/login/__layout.reset.svelte": { "entry": "pages/login/__layout.reset.svelte-b4455b8e.js", "css": ["assets/vendor-15d9d811.css", "assets/toastArea-56d70290.css"], "js": ["pages/login/__layout.reset.svelte-b4455b8e.js", "chunks/vendor-0b4b0cdb.js", "chunks/toastArea-57856682.js", "chunks/prompts-f6e18b65.js", "chunks/toasts-b7bacc0f.js"], "styles": [] }, "src/routes/login/index.svelte": { "entry": "pages/login/index.svelte-bb8e09f8.js", "css": ["assets/vendor-15d9d811.css"], "js": ["pages/login/index.svelte-bb8e09f8.js", "chunks/vendor-0b4b0cdb.js", "chunks/navigation-51f4a605.js", "chunks/singletons-12a22614.js", "chunks/stores-166c9dbe.js", "chunks/spinner-167f60b4.js", "chunks/serverURL-d16f5684.js", "chunks/prompts-f6e18b65.js", "chunks/toasts-b7bacc0f.js"], "styles": [] } };
+    metadata_lookup = { "src/routes/__layout.svelte": { "entry": "pages/__layout.svelte-5ba64ce6.js", "css": ["assets/pages/__layout.svelte-55892ec5.css", "assets/vendor-15d9d811.css", "assets/toastArea-56d70290.css"], "js": ["pages/__layout.svelte-5ba64ce6.js", "chunks/vendor-0b4b0cdb.js", "chunks/stores-166c9dbe.js", "chunks/loadingSpinner-c13a4766.js", "chunks/toastArea-57856682.js", "chunks/prompts-f6e18b65.js", "chunks/toasts-b7bacc0f.js", "chunks/index-57452749.js", "chunks/serverURL-d16f5684.js"], "styles": [] }, ".svelte-kit/build/components/error.svelte": { "entry": "error.svelte-dc1a4c81.js", "css": ["assets/vendor-15d9d811.css"], "js": ["error.svelte-dc1a4c81.js", "chunks/vendor-0b4b0cdb.js"], "styles": [] }, "src/routes/index.svelte": { "entry": "pages/index.svelte-4bf035d8.js", "css": ["assets/vendor-15d9d811.css"], "js": ["pages/index.svelte-4bf035d8.js", "chunks/vendor-0b4b0cdb.js", "chunks/stores-166c9dbe.js", "chunks/logoutButton-8b996539.js", "chunks/serverURL-d16f5684.js", "chunks/capitalizeString-bffa0771.js"], "styles": [] }, "src/routes/administrativo/__layout.svelte": { "entry": "pages/administrativo/__layout.svelte-f6c2aca3.js", "css": ["assets/vendor-15d9d811.css", "assets/mobileLayout-3c7291fc.css"], "js": ["pages/administrativo/__layout.svelte-f6c2aca3.js", "chunks/vendor-0b4b0cdb.js", "chunks/mobileLayout-931208a1.js", "chunks/stores-166c9dbe.js", "chunks/useModal-16043ad5.js", "chunks/logoutButton-8b996539.js", "chunks/serverURL-d16f5684.js"], "styles": [] }, "src/routes/administrativo/index.svelte": { "entry": "pages/administrativo/index.svelte-98887475.js", "css": ["assets/vendor-15d9d811.css"], "js": ["pages/administrativo/index.svelte-98887475.js", "chunks/vendor-0b4b0cdb.js"], "styles": [] }, "src/routes/coordinador/__layout.svelte": { "entry": "pages/coordinador/__layout.svelte-951dc10c.js", "css": ["assets/pages/coordinador/__layout.svelte-e86784fa.css", "assets/vendor-15d9d811.css"], "js": ["pages/coordinador/__layout.svelte-951dc10c.js", "chunks/vendor-0b4b0cdb.js", "chunks/stores-166c9dbe.js", "chunks/logoutButton-8b996539.js", "chunks/serverURL-d16f5684.js"], "styles": [] }, "src/routes/coordinador/index.svelte": { "entry": "pages/coordinador/index.svelte-35fbafdb.js", "css": ["assets/vendor-15d9d811.css"], "js": ["pages/coordinador/index.svelte-35fbafdb.js", "chunks/vendor-0b4b0cdb.js", "chunks/navigation-51f4a605.js", "chunks/singletons-12a22614.js"], "styles": [] }, "src/routes/coordinador/estructurar-diplomados-competencias/__layout.svelte": { "entry": "pages/coordinador/estructurar-diplomados-competencias/__layout.svelte-138d8498.js", "css": ["assets/vendor-15d9d811.css"], "js": ["pages/coordinador/estructurar-diplomados-competencias/__layout.svelte-138d8498.js", "chunks/vendor-0b4b0cdb.js", "chunks/stores-166c9dbe.js"], "styles": [] }, "src/routes/coordinador/estructurar-diplomados-competencias/index.svelte": { "entry": "pages/coordinador/estructurar-diplomados-competencias/index.svelte-4ea82867.js", "css": ["assets/vendor-15d9d811.css"], "js": ["pages/coordinador/estructurar-diplomados-competencias/index.svelte-4ea82867.js", "chunks/vendor-0b4b0cdb.js", "chunks/navigation-51f4a605.js", "chunks/singletons-12a22614.js"], "styles": [] }, "src/routes/coordinador/estructurar-diplomados-competencias/competencias/index.svelte": { "entry": "pages/coordinador/estructurar-diplomados-competencias/competencias/index.svelte-ca23144d.js", "css": ["assets/modal.svelte_svelte_type_style_lang-5db5270b.css", "assets/vendor-15d9d811.css"], "js": ["pages/coordinador/estructurar-diplomados-competencias/competencias/index.svelte-ca23144d.js", "chunks/vendor-0b4b0cdb.js", "chunks/handleError-b3179747.js", "chunks/toasts-b7bacc0f.js", "chunks/capitalizeString-bffa0771.js", "chunks/index-57452749.js", "chunks/serverURL-d16f5684.js", "chunks/competenciasConTipo-581daa1d.js", "chunks/prompts-f6e18b65.js", "chunks/useModal-16043ad5.js", "chunks/makeArraySearchable-01ec942f.js", "chunks/noUndefinedValues-bf4bff28.js"], "styles": [] }, "src/routes/coordinador/estructurar-diplomados-competencias/cursos/index.svelte": { "entry": "pages/coordinador/estructurar-diplomados-competencias/cursos/index.svelte-c02b8aff.js", "css": ["assets/modal.svelte_svelte_type_style_lang-5db5270b.css", "assets/vendor-15d9d811.css"], "js": ["pages/coordinador/estructurar-diplomados-competencias/cursos/index.svelte-c02b8aff.js", "chunks/vendor-0b4b0cdb.js", "chunks/handleError-b3179747.js", "chunks/toasts-b7bacc0f.js", "chunks/capitalizeString-bffa0771.js", "chunks/index-57452749.js", "chunks/serverURL-d16f5684.js", "chunks/cursosConDiplomado-1e8fc1ea.js", "chunks/prompts-f6e18b65.js", "chunks/useModal-16043ad5.js", "chunks/makeArraySearchable-01ec942f.js", "chunks/noUndefinedValues-bf4bff28.js"], "styles": [] }, "src/routes/coordinador/coordinar-coaches/index.svelte": { "entry": "pages/coordinador/coordinar-coaches/index.svelte-b29247ef.js", "css": ["assets/modal.svelte_svelte_type_style_lang-5db5270b.css", "assets/vendor-15d9d811.css"], "js": ["pages/coordinador/coordinar-coaches/index.svelte-b29247ef.js", "chunks/vendor-0b4b0cdb.js", "chunks/handleError-b3179747.js", "chunks/toasts-b7bacc0f.js", "chunks/capitalizeString-bffa0771.js", "chunks/index-57452749.js", "chunks/serverURL-d16f5684.js", "chunks/coachesComoUsuario-e3afe54d.js", "chunks/docentesComoUsuario-996e6954.js", "chunks/useModal-16043ad5.js", "chunks/makeArraySearchable-01ec942f.js"], "styles": [] }, "src/routes/coordinador/gestion-registros/index.svelte": { "entry": "pages/coordinador/gestion-registros/index.svelte-48249ab7.js", "css": ["assets/modal.svelte_svelte_type_style_lang-5db5270b.css", "assets/vendor-15d9d811.css"], "js": ["pages/coordinador/gestion-registros/index.svelte-48249ab7.js", "chunks/vendor-0b4b0cdb.js", "chunks/handleError-b3179747.js", "chunks/toasts-b7bacc0f.js", "chunks/capitalizeString-bffa0771.js", "chunks/index-57452749.js", "chunks/serverURL-d16f5684.js", "chunks/docentesComoUsuario-996e6954.js", "chunks/competenciasConTipo-581daa1d.js", "chunks/cursosConDiplomado-1e8fc1ea.js", "chunks/prompts-f6e18b65.js", "chunks/useModal-16043ad5.js", "chunks/makeArraySearchable-01ec942f.js", "chunks/stores-166c9dbe.js", "chunks/formatDate-2f20d9da.js", "chunks/usuariosConRoles-6c685d82.js"], "styles": [] }, "src/routes/coordinador/gestion-jornadas/index.svelte": { "entry": "pages/coordinador/gestion-jornadas/index.svelte-652f0344.js", "css": ["assets/modal.svelte_svelte_type_style_lang-5db5270b.css", "assets/vendor-15d9d811.css"], "js": ["pages/coordinador/gestion-jornadas/index.svelte-652f0344.js", "chunks/vendor-0b4b0cdb.js", "chunks/handleError-b3179747.js", "chunks/toasts-b7bacc0f.js", "chunks/capitalizeString-bffa0771.js", "chunks/index-57452749.js", "chunks/serverURL-d16f5684.js", "chunks/cursosEnJornadaConAsistentes-c8c5f4de.js", "chunks/cursosEnJornadaConInstructorConCurso-6d0e043b.js", "chunks/cursosConDiplomado-1e8fc1ea.js", "chunks/docentesComoUsuario-996e6954.js", "chunks/asistentesEnCursoConfirmados-1f73ad4b.js", "chunks/prompts-f6e18b65.js", "chunks/useModal-16043ad5.js", "chunks/formatDate-2f20d9da.js", "chunks/makeArraySearchable-01ec942f.js", "chunks/competenciasConTipo-581daa1d.js", "chunks/usuariosConRoles-6c685d82.js", "chunks/noUndefinedValues-bf4bff28.js"], "styles": [] }, "src/routes/coordinador/gestion-usuarios/index.svelte": { "entry": "pages/coordinador/gestion-usuarios/index.svelte-1cd8d310.js", "css": ["assets/modal.svelte_svelte_type_style_lang-5db5270b.css", "assets/vendor-15d9d811.css"], "js": ["pages/coordinador/gestion-usuarios/index.svelte-1cd8d310.js", "chunks/vendor-0b4b0cdb.js", "chunks/stores-166c9dbe.js", "chunks/index-f48b41d2.js", "chunks/index-57452749.js", "chunks/serverURL-d16f5684.js", "chunks/competenciasConTipo-581daa1d.js", "chunks/cursosConDiplomado-1e8fc1ea.js", "chunks/docentesComoUsuario-996e6954.js", "chunks/asistentesEnCursoConfirmados-1f73ad4b.js", "chunks/cursosEnJornadaConInstructorConCurso-6d0e043b.js", "chunks/useModal-16043ad5.js", "chunks/handleError-b3179747.js", "chunks/toasts-b7bacc0f.js", "chunks/capitalizeString-bffa0771.js", "chunks/usuariosConRoles-6c685d82.js", "chunks/prompts-f6e18b65.js", "chunks/makeArraySearchable-01ec942f.js", "chunks/noUndefinedValues-bf4bff28.js"], "styles": [] }, "src/routes/newpassword.svelte": { "entry": "pages/newpassword.svelte-cc84d691.js", "css": ["assets/vendor-15d9d811.css"], "js": ["pages/newpassword.svelte-cc84d691.js", "chunks/vendor-0b4b0cdb.js", "chunks/stores-166c9dbe.js", "chunks/spinner-167f60b4.js", "chunks/index-57452749.js", "chunks/serverURL-d16f5684.js", "chunks/toasts-b7bacc0f.js"], "styles": [] }, "src/routes/instructor/__layout.svelte": { "entry": "pages/instructor/__layout.svelte-f2eb6edb.js", "css": ["assets/vendor-15d9d811.css", "assets/mobileLayout-3c7291fc.css"], "js": ["pages/instructor/__layout.svelte-f2eb6edb.js", "chunks/vendor-0b4b0cdb.js", "chunks/mobileLayout-931208a1.js", "chunks/stores-166c9dbe.js", "chunks/useModal-16043ad5.js", "chunks/logoutButton-8b996539.js", "chunks/serverURL-d16f5684.js"], "styles": [] }, "src/routes/instructor/index.svelte": { "entry": "pages/instructor/index.svelte-2c2b276f.js", "css": ["assets/vendor-15d9d811.css"], "js": ["pages/instructor/index.svelte-2c2b276f.js", "chunks/vendor-0b4b0cdb.js", "chunks/navigation-51f4a605.js", "chunks/singletons-12a22614.js"], "styles": [] }, "src/routes/instructor/mis-cursos/index.svelte": { "entry": "pages/instructor/mis-cursos/index.svelte-c9d8bc32.js", "css": ["assets/modal.svelte_svelte_type_style_lang-5db5270b.css", "assets/vendor-15d9d811.css"], "js": ["pages/instructor/mis-cursos/index.svelte-c9d8bc32.js", "chunks/vendor-0b4b0cdb.js", "chunks/stores-166c9dbe.js", "chunks/cursosEnJornadaConInstructorConCurso-6d0e043b.js", "chunks/index-57452749.js", "chunks/serverURL-d16f5684.js", "chunks/cursosConDiplomado-1e8fc1ea.js", "chunks/jornadaActual-4e08460c.js", "chunks/cursosEnJornadaConAsistentes-c8c5f4de.js", "chunks/docentesComoUsuario-996e6954.js", "chunks/asistentesEnCursoConfirmados-1f73ad4b.js", "chunks/useModal-16043ad5.js", "chunks/toasts-b7bacc0f.js", "chunks/handleError-b3179747.js", "chunks/capitalizeString-bffa0771.js", "chunks/loadingSpinner-c13a4766.js", "chunks/prompts-f6e18b65.js"], "styles": [] }, "src/routes/docente/__layout.svelte": { "entry": "pages/docente/__layout.svelte-1bae988f.js", "css": ["assets/vendor-15d9d811.css", "assets/mobileLayout-3c7291fc.css"], "js": ["pages/docente/__layout.svelte-1bae988f.js", "chunks/vendor-0b4b0cdb.js", "chunks/mobileLayout-931208a1.js", "chunks/stores-166c9dbe.js", "chunks/useModal-16043ad5.js", "chunks/logoutButton-8b996539.js", "chunks/serverURL-d16f5684.js"], "styles": [] }, "src/routes/docente/index.svelte": { "entry": "pages/docente/index.svelte-e24c47ef.js", "css": ["assets/vendor-15d9d811.css"], "js": ["pages/docente/index.svelte-e24c47ef.js", "chunks/vendor-0b4b0cdb.js", "chunks/navigation-51f4a605.js", "chunks/singletons-12a22614.js"], "styles": [] }, "src/routes/docente/mis-acreditaciones/index.svelte": { "entry": "pages/docente/mis-acreditaciones/index.svelte-4163d587.js", "css": ["assets/vendor-15d9d811.css"], "js": ["pages/docente/mis-acreditaciones/index.svelte-4163d587.js", "chunks/vendor-0b4b0cdb.js", "chunks/stores-166c9dbe.js", "chunks/index-f48b41d2.js", "chunks/index-57452749.js", "chunks/serverURL-d16f5684.js", "chunks/competenciasConTipo-581daa1d.js", "chunks/cursosConDiplomado-1e8fc1ea.js", "chunks/docentesComoUsuario-996e6954.js", "chunks/asistentesEnCursoConfirmados-1f73ad4b.js", "chunks/cursosEnJornadaConInstructorConCurso-6d0e043b.js", "chunks/useModal-16043ad5.js"], "styles": [] }, "src/routes/docente/mis-cursos/index.svelte": { "entry": "pages/docente/mis-cursos/index.svelte-5ccad419.js", "css": ["assets/vendor-15d9d811.css"], "js": ["pages/docente/mis-cursos/index.svelte-5ccad419.js", "chunks/vendor-0b4b0cdb.js", "chunks/stores-166c9dbe.js", "chunks/docentesComoUsuario-996e6954.js", "chunks/index-57452749.js", "chunks/serverURL-d16f5684.js", "chunks/jornadaActual-4e08460c.js", "chunks/cursosEnJornadaConInstructorConCurso-6d0e043b.js", "chunks/cursosConDiplomado-1e8fc1ea.js", "chunks/toasts-b7bacc0f.js"], "styles": [] }, "src/routes/coach/__layout.svelte": { "entry": "pages/coach/__layout.svelte-bb8cbec4.js", "css": ["assets/vendor-15d9d811.css", "assets/mobileLayout-3c7291fc.css"], "js": ["pages/coach/__layout.svelte-bb8cbec4.js", "chunks/vendor-0b4b0cdb.js", "chunks/mobileLayout-931208a1.js", "chunks/stores-166c9dbe.js", "chunks/useModal-16043ad5.js", "chunks/logoutButton-8b996539.js", "chunks/serverURL-d16f5684.js"], "styles": [] }, "src/routes/coach/index.svelte": { "entry": "pages/coach/index.svelte-1a0fdbf0.js", "css": ["assets/vendor-15d9d811.css"], "js": ["pages/coach/index.svelte-1a0fdbf0.js", "chunks/vendor-0b4b0cdb.js", "chunks/navigation-51f4a605.js", "chunks/singletons-12a22614.js"], "styles": [] }, "src/routes/coach/inscripciones/index.svelte": { "entry": "pages/coach/inscripciones/index.svelte-fcf79e98.js", "css": ["assets/modal.svelte_svelte_type_style_lang-5db5270b.css", "assets/vendor-15d9d811.css"], "js": ["pages/coach/inscripciones/index.svelte-fcf79e98.js", "chunks/vendor-0b4b0cdb.js", "chunks/jornadaActual-4e08460c.js", "chunks/index-57452749.js", "chunks/serverURL-d16f5684.js", "chunks/cursosEnJornadaConAsistentes-c8c5f4de.js", "chunks/cursosEnJornadaConInstructorConCurso-6d0e043b.js", "chunks/cursosConDiplomado-1e8fc1ea.js", "chunks/docentesComoUsuario-996e6954.js", "chunks/asistentesEnCursoConfirmados-1f73ad4b.js", "chunks/useModal-16043ad5.js", "chunks/toasts-b7bacc0f.js", "chunks/makeArraySearchable-01ec942f.js"], "styles": [] }, "src/routes/coach/docentes/index.svelte": { "entry": "pages/coach/docentes/index.svelte-094ff033.js", "css": ["assets/vendor-15d9d811.css"], "js": ["pages/coach/docentes/index.svelte-094ff033.js", "chunks/vendor-0b4b0cdb.js", "chunks/stores-166c9dbe.js", "chunks/coachesComoUsuario-e3afe54d.js", "chunks/index-57452749.js", "chunks/serverURL-d16f5684.js", "chunks/docentesComoUsuario-996e6954.js", "chunks/useModal-16043ad5.js", "chunks/index-f48b41d2.js", "chunks/competenciasConTipo-581daa1d.js", "chunks/cursosConDiplomado-1e8fc1ea.js", "chunks/asistentesEnCursoConfirmados-1f73ad4b.js", "chunks/cursosEnJornadaConInstructorConCurso-6d0e043b.js", "chunks/makeArraySearchable-01ec942f.js"], "styles": [] }, "src/routes/login/__layout.reset.svelte": { "entry": "pages/login/__layout.reset.svelte-b4455b8e.js", "css": ["assets/vendor-15d9d811.css", "assets/toastArea-56d70290.css"], "js": ["pages/login/__layout.reset.svelte-b4455b8e.js", "chunks/vendor-0b4b0cdb.js", "chunks/toastArea-57856682.js", "chunks/prompts-f6e18b65.js", "chunks/toasts-b7bacc0f.js"], "styles": [] }, "src/routes/login/index.svelte": { "entry": "pages/login/index.svelte-992a6acb.js", "css": ["assets/vendor-15d9d811.css"], "js": ["pages/login/index.svelte-992a6acb.js", "chunks/vendor-0b4b0cdb.js", "chunks/navigation-51f4a605.js", "chunks/singletons-12a22614.js", "chunks/stores-166c9dbe.js", "chunks/spinner-167f60b4.js", "chunks/serverURL-d16f5684.js", "chunks/prompts-f6e18b65.js", "chunks/toasts-b7bacc0f.js"], "styles": [] } };
   }
 });
 
@@ -10088,7 +10088,7 @@ init_shims();
 
 // .svelte-kit/output/server/app.js
 init_shims();
-init_app_648d86f1();
+init_app_98a99c49();
 var import_cookie31 = __toModule(require_cookie());
 
 // .svelte-kit/netlify/entry.js
