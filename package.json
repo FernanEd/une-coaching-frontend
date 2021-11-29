@@ -12,7 +12,6 @@
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-auto": "next",
-		"@sveltejs/adapter-netlify": "^1.0.0-next.35",
 		"@types/cookie": "^0.4.1",
 		"autoprefixer": "^10.3.4",
 		"cssnano": "^5.0.8",
@@ -27,6 +26,7 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@sveltejs/adapter-netlify": "^1.0.0-next.35",
 		"@sveltejs/kit": "next",
 		"cookie": "^0.4.1",
 		"dayjs": "^1.10.7",
