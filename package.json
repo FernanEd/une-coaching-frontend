@@ -1,6 +1,7 @@
 {
 	"name": "frontend",
 	"version": "1.0.0",
+	"main": "[functions/server.js]",
 	"scripts": {
 		"dev": "svelte-kit dev",
 		"build": "svelte-kit build",
