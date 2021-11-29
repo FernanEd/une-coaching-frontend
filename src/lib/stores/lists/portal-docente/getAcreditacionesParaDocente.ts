@@ -17,6 +17,7 @@ import { cursosEnJornadaConInstructorConCurso } from '../jornada/cursosEnJornada
 
 export interface AcreditacionCurso extends CursoConDiplomado {
 	documento: string | undefined;
+	acreditado: boolean;
 }
 
 export interface AcreditacionDiplomado extends Diplomado {
@@ -85,6 +86,7 @@ export const getAcreditacionesParaDocente = (docenteID: number) =>
 
 							return {
 								...c,
+								acreditado: registroCursoExistente ? true : false,
 								documento: registroCursoExistente?.documento,
 							};
 						})

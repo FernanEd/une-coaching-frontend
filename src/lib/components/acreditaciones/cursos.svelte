@@ -18,10 +18,15 @@
 			<div>
 				{#if (cursoAcreditado = acreditaciones.cursos.find((c) => c.id == curso.id))}
 					{#if cursoAcreditado}
-						<p class="label text-status-success">Acreditado</p>
+						<p class="label text-status-success">Completado</p>
+						{#if cursoAcreditado.acreditado}
+							<p class="label text-status-success">y Acreditado</p>
+						{:else}
+							<p class="label">y no Acreditado</p>
+						{/if}
+					{:else}
+						<p class="label">No completado y no Acreditado</p>
 					{/if}
-				{:else}
-					<p class="label">No acreditado</p>
 				{/if}
 
 				<p>{curso.nombre}</p>
