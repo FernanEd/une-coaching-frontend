@@ -153,35 +153,41 @@
 	</header>
 
 	<div class="input-group">
-		<label class="label">Matricula</label>
-		<input type="number" bind:value={form.matricula} required />
+		<p class="label">Matricula</p>
+		<input
+			type="number"
+			min={1}
+			maxlength={8}
+			bind:value={form.matricula}
+			required
+		/>
 	</div>
 
 	<div class="input-group">
-		<label class="label">Nombre(s)</label>
+		<p class="label">Nombre(s)</p>
 		<input type="text" bind:value={form.nombre} required />
 	</div>
 
 	<div class="form-row">
 		<div class="input-group">
-			<label class="label">Apellido paterno</label>
+			<p class="label">Apellido paterno</p>
 			<input type="text" bind:value={form.apellido_paterno} required />
 		</div>
 
 		<div class="input-group">
-			<label class="label">Apellido materno</label>
+			<p class="label">Apellido materno</p>
 			<input type="text" bind:value={form.apellido_materno} required />
 		</div>
 	</div>
 
 	<div class="input-group">
-		<label class="label">Correo</label>
+		<p class="label">Correo</p>
 		<input type="email" bind:value={form.correo} required />
 	</div>
 
 	{#if !editingUsuario}
 		<div class="input-group">
-			<label class="label">Contraseña por defecto</label>
+			<p class="label">Contraseña por defecto</p>
 			<input type="text" bind:value={form.password} required />
 			<p class="helper">
 				El usuario podrá cambiar su contraseña una vez dentro

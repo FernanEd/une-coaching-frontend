@@ -31,7 +31,7 @@ export const registrosCursoConAcreditor: Readable<RegistroCursoConAcreditor[]> =
 						(d) => d.id_docente == r.id_acreditor
 					);
 					let expeditorDelRegistro = coordinadores.find(
-						(c) => c.id == r.id_expeditor
+						(c) => c.id_coordinador == r.id_expeditor
 					);
 
 					if (
