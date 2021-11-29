@@ -1,0 +1,60 @@
+Arguments: 
+  /usr/bin/node /usr/bin/yarn add -D @sveltejs/adapter-static@next
+
+PATH: 
+  /usr/lib/jvm/java-8-openjdk/bin:/usr/lib/jvm/java-8-openjdk/bin:/home/fernaned/.local/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/opt/android-sdk/platform-tools:/opt/android-sdk/tools:/opt/android-sdk/tools/bin:/opt/flutter/bin:/usr/lib/jvm/default/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/var/lib/snapd/snap/bin:/opt/android-sdk/platform-tools/:/opt/android-sdk/tools/bin/:/emulator:/opt/android-sdk/tools/:/opt/android-sdk/platform-tools/:/opt/android-sdk/tools/bin/:/emulator:/opt/android-sdk/tools/
+
+Yarn version: 
+  1.22.15
+
+Node version: 
+  16.11.0
+
+Platform: 
+  linux x64
+
+Trace: 
+  Error: EACCES: permission denied, unlink '/home/fernaned/Documentos/une_coach/frontend/node_modules/.yarn-integrity'
+
+npm manifest: 
+  {
+  	"name": "frontend",
+  	"version": "1.0.0",
+  	"main": "[functions/server.js]",
+  	"scripts": {
+  		"dev": "svelte-kit dev",
+  		"build": "svelte-kit build",
+  		"package": "svelte-kit package",
+  		"preview": "svelte-kit preview",
+  		"check": "svelte-check --tsconfig ./tsconfig.json",
+  		"check:watch": "svelte-check --tsconfig ./tsconfig.json --watch"
+  	},
+  	"devDependencies": {
+  		"@sveltejs/adapter-netlify": "^1.0.0-next.35",
+  		"@sveltejs/kit": "next",
+  		"@sveltejs/adapter-auto": "next",
+  		"@types/cookie": "^0.4.1",
+  		"autoprefixer": "^10.3.4",
+  		"cssnano": "^5.0.8",
+  		"postcss": "^8.3.6",
+  		"postcss-load-config": "^3.1.0",
+  		"svelte": "^3.44.0",
+  		"svelte-check": "^2.2.6",
+  		"svelte-preprocess": "^4.9.4",
+  		"tailwindcss": "^2.2.15",
+  		"tslib": "^2.3.1",
+  		"typescript": "^4.4.3"
+  	},
+  	"type": "module",
+  	"dependencies": {
+  		"cookie": "^0.4.1",
+  		"dayjs": "^1.10.7",
+  		"svelte-icons": "^2.1.0"
+  	}
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
