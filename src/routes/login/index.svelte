@@ -60,7 +60,7 @@
 	<section class="w-40">
 		<img
 			class="object-contain"
-			src="/static/une-white-logo.png"
+			src="/une-white-logo.png"
 			alt="Une logo"
 			id="logo"
 		/>

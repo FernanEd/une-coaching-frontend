@@ -92,7 +92,7 @@ gap-20"
 	<section class="flex flex-col gap-4 items-center">
 		<img
 			class="object-contain"
-			src="/static/une-white-logo.png"
+			src="/une-white-logo.png"
 			alt="Une logo"
 			id="logo"
 		/>
