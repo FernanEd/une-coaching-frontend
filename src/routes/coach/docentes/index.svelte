@@ -9,6 +9,7 @@
 	import { derived } from 'svelte/store';
 	import { db_docentesEnCoaches } from '$lib/stores/db';
 	import AcreditacionesDocente from '$lib/components/acreditacionesDocente/index.svelte';
+	import { makeArraySearchable } from '$lib/utils/makeArraySearchable';
 
 	let docenteAcreditacionesDetalles = useModal();
 	let currentDocenteUsuarioID: number;
@@ -40,6 +41,8 @@
 				}
 		  )
 		: undefined;
+
+	let filterText = '';
 </script>
 
 {#if $docenteAcreditacionesDetalles}
@@ -51,11 +54,16 @@
 	<h2 class="heading">Docentes ({$docentes.length})</h2>
 	<hr class="my-2 border-none" />
 
+	<p class="label">Busca un docente en particular</p>
+	<input type="text" class="w-full" bind:value={filterText} />
+
+	<hr class="my-2 border-none" />
+
 	{#if $docentes.length == 0}
 		<p>No tienes docentes asignados aún.</p>
 	{:else}
 		<section class="flex flex-col gap-8">
-			{#each $docentes as docente (docente.id)}
+			{#each makeArraySearchable($docentes, ['nombre', 'apellido_paterno', 'apellido_materno'], filterText) as docente (docente.id)}
 				<article
 					class="flex flex-col p-4 gap-8 text-center rounded-2xl shadow-fix items-center"
 				>

@@ -6,6 +6,7 @@
 	export let searchFields: string[];
 	export let isRequired: boolean = false;
 	export let valueKey: string = 'id';
+	export let displayRelative = false;
 
 	let showList = false;
 	let filterText: string | undefined = selected
@@ -53,7 +54,9 @@
 <!-- <div class="relative"> -->
 {#if showList}
 	<div
-		class="absolute bg-white border z-10 max-h-60 overflow-y-scroll translate-y-12 w-[576px]"
+		class={displayRelative
+			? 'relative bg-white border z-10 max-h-60 overflow-y-scroll '
+			: `absolute bg-white border z-10 max-h-60 overflow-y-scroll translate-y-12 w-[576px]`}
 	>
 		{#each makeArraySearchable(listToSearch, searchFields, filterText) as item, i (i)}
 			<p

@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { session } from '$app/stores';
+	import AcreditacionesDocente from '$lib/components/acreditacionesDocente/index.svelte';
 	import Modal from '$lib/components/common/modal.svelte';
 	import { db_usuarios } from '$lib/stores/db';
 	import {
@@ -31,6 +32,9 @@
 
 	const agregarUsuarioForm = useModal();
 	const editarUsuarioForm = useModal();
+
+	let acreditacionesDocenteID: number | undefined;
+	const acreditacionesUsuarioModal = useModal();
 </script>
 
 {#if $agregarUsuarioForm}
@@ -53,6 +57,12 @@
 			}}
 			rolesSeleccionados={editingUser?.roles.map(({ rol }) => rol)}
 		/>
+	</Modal>
+{/if}
+
+{#if $acreditacionesUsuarioModal && acreditacionesDocenteID}
+	<Modal handleClose={acreditacionesUsuarioModal.closeModal}>
+		<AcreditacionesDocente docenteID={acreditacionesDocenteID} />
 	</Modal>
 {/if}
 
@@ -110,11 +120,26 @@
 		{#each makeArraySearchable($usuariosConRoles, ['matricula', 'nombre', 'apellido_paterno', 'apellido_materno', 'correo'], filterText).filter(filterFunction) as usuario (usuario.id)}
 			<tr>
 				<td><a href="">{usuario.matricula}</a></td>
-				<td
-					>{usuario.nombre}
-					{usuario.apellido_paterno}
-					{usuario.apellido_materno}</td
-				>
+				<td>
+					<p>
+						{usuario.nombre}
+						{usuario.apellido_paterno}
+						{usuario.apellido_materno}
+					</p>
+					{#if usuario.roles.map(({ rol }) => rol).includes('docente')}
+						<p>
+							<button
+								class="link primary"
+								on:click={() => {
+									acreditacionesDocenteID = usuario.roles.find(
+										({ rol }) => rol == 'docente'
+									)?.id;
+									acreditacionesUsuarioModal.openModal();
+								}}>Ver acreditaciones</button
+							>
+						</p>
+					{/if}
+				</td>
 				<td>{usuario.correo}</td>
 				<td>
 					{#if usuario.roles.length == 0}

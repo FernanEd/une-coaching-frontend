@@ -13,6 +13,7 @@
 	import { jornadaSeleccionada } from './_modules/jornadaSeleccionada';
 	import ListaAsistentes from './_modules/listaAsistentes.svelte';
 	import type { AsistenteEnCursoConfirmado } from '$lib/stores/lists/jornada/asistentesEnCursoConfirmados';
+	import SearchableInput from '$lib/components/common/searchableInput.svelte';
 
 	let currentJornadaID: number | undefined;
 	$: currentJornadaID = $jornadaSeleccionada;
