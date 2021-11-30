@@ -1,13 +1,14 @@
 <script lang="ts">
-	import Modal from '$lib/components/common/modal.svelte';
 	import type { CursoEnJornadaConInvitaciones } from '$lib/stores/lists/jornada/cursosEnJornadaConInvitaciones';
 	import { jornadaActual } from '$lib/stores/lists/jornada/jornadaActual';
 	import { cursosParaInscribir } from '$lib/stores/lists/portal-coach/cursosParaInscribir';
 	import { useModal } from '$lib/stores/useModal';
 	import dayjs from 'dayjs';
 	import InscribirDocentes from './_modules/inscribirDocentes.svelte';
+	import ListaInvitaciones from './_modules/listaInvitaciones.svelte';
 
 	let inscribirModal = useModal();
+	let invitacionesModal = useModal();
 
 	let currentCursoEnJornadaID: number | undefined;
 	let currentCursoEnJornada: CursoEnJornadaConInvitaciones | undefined;
@@ -23,7 +24,14 @@
 	<InscribirDocentes cursoEnJornada={currentCursoEnJornada} />
 {/if}
 
-{#if !$inscribirModal}
+{#if $invitacionesModal}
+	<button class="link mb-4" on:click={invitacionesModal.closeModal}
+		>← Volver atrás</button
+	>
+	<ListaInvitaciones invitaciones={currentCursoEnJornada?.invitaciones} />
+{/if}
+
+{#if !$inscribirModal && !$invitacionesModal}
 	{#if $jornadaActual}
 		<h2 class="heading">
 			Jornada {$jornadaActual.titulo}
@@ -80,13 +88,23 @@
 							</p>
 						</div>
 
-						<button
-							class="link primary"
-							on:click={() => {
-								currentCursoEnJornadaID = cursoEnJornada.id;
-								inscribirModal.openModal();
-							}}>Invitar docentes</button
-						>
+						{#if cursoEnJornada.invitaciones.length >= cursoEnJornada.cupo_maximo}
+							<button
+								class="link primary"
+								on:click={() => {
+									currentCursoEnJornadaID = cursoEnJornada.id;
+									invitacionesModal.openModal();
+								}}>Ver respuestas de los docentes</button
+							>
+						{:else}
+							<button
+								class="link primary"
+								on:click={() => {
+									currentCursoEnJornadaID = cursoEnJornada.id;
+									inscribirModal.openModal();
+								}}>Invitar docentes</button
+							>
+						{/if}
 					</article>
 				{/each}
 			</section>
