@@ -3,6 +3,7 @@ import { capitalizeString } from './capitalizeString';
 
 export const getErrorMsg = (e: unknown): string | undefined => {
 	if (e instanceof ApiError) {
+		if (!e.message.includes('Unique constraint')) return e.message;
 		let campos = e.message
 			.split('Unique constraint failed on the fields: ')
 			.slice(-1)[0]

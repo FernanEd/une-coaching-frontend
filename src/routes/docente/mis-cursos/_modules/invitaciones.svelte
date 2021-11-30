@@ -2,6 +2,7 @@
 	import { db_asistentesEnCurso, db_invitacionesCurso } from '$lib/stores/db';
 	import type { InvitacionCursoConInstructorConCurso } from '$lib/stores/lists/portal-docente/getInvitacionesParaDocente';
 	import { toasts } from '$lib/stores/toasts';
+	import { handleError } from '$lib/utils/handleError';
 
 	export let invitaciones: InvitacionCursoConInstructorConCurso[] | undefined;
 	export let docenteID: number | undefined;
@@ -29,7 +30,7 @@
 					toasts.success();
 				} catch (e) {
 					console.error(e);
-					toasts.error();
+					handleError(e);
 				} finally {
 					if (progress == 1) {
 						try {
@@ -37,8 +38,7 @@
 								estado_invitacion: 0,
 							});
 						} catch (e) {
-							console.error(e);
-							toasts.error();
+							handleError(e);
 						}
 					}
 				}
@@ -50,8 +50,7 @@
 
 					toasts.success();
 				} catch (e) {
-					console.error(e);
-					toasts.error();
+					handleError(e);
 				}
 			}
 		}
