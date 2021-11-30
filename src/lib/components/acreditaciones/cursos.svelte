@@ -8,7 +8,7 @@
 
 <h2 class="heading">Cursos</h2>
 <p class="label">
-	{acreditaciones.cursos.length} de {$cursosConDiplomado.length}
+	{acreditaciones.cursos.filter((c) => c.acreditado || c.cursado).length} de {$cursosConDiplomado.length}
 	completados
 </p>
 

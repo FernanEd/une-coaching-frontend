@@ -44,13 +44,21 @@
 					class="rounded-2xl shadow-fix text-center p-4 flex flex-col gap-8"
 				>
 					<div>
-						{#if (cursoAcreditado = acreditaciones.cursos.find((c) => c.id == curso.id))}
-							{#if cursoAcreditado}
-								<p class="label text-status-success">Acreditado</p>
+						<span class="flex gap-1 justify-center">
+							{#if (cursoAcreditado = acreditaciones.cursos.find((c) => c.id == curso.id))}
+								{#if cursoAcreditado.cursado}
+									<p class="label text-status-success">Completado</p>
+								{:else}
+									<p class="label">No completado</p>
+								{/if}
+								<p class="label">y</p>
+								{#if cursoAcreditado.acreditado}
+									<p class="label text-status-success">Acreditado</p>
+								{:else}
+									<p class="label">no Acreditado</p>
+								{/if}
 							{/if}
-						{:else}
-							<p class="label">No acreditado</p>
-						{/if}
+						</span>
 
 						<p>{curso.nombre}</p>
 
@@ -103,7 +111,8 @@
 						<p>{diplomado.nombre}</p>
 						<p class="label">
 							{acreditaciones.cursos.filter(
-								(c) => c.id_diplomado == diplomado.id
+								(c) =>
+									c.id_diplomado == diplomado.id && (c.acreditado || c.cursado)
 							).length} de {diplomado.cursos.length} cursos completados
 						</p>
 					</div>
